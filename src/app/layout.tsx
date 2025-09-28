@@ -11,6 +11,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://sagdi.com"),
   title: "Sagdi Formanov - Product Manager | Bay Area",
   description:
     "Experienced Product Manager specializing in cross-functional team leadership and product strategy in the travel tech industry.",
@@ -22,6 +23,9 @@ export const metadata: Metadata = {
     description:
       "Product Manager specializing in cross-functional team leadership and product strategy",
     type: "website",
+  },
+  alternates: {
+    canonical: "/",
   },
 }
 
