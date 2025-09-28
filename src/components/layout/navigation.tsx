@@ -28,9 +28,9 @@ export function Navigation() {
   }, [])
 
   return (
-    <nav aria-label="Primary" className="">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+    <nav aria-label="Primary">
+      <div className="px-3 sm:px-4 lg:px-6">
+        <div className="flex h-14 items-center justify-between">
           {/* Brand */}
           <Link href="/" className="text-base sm:text-lg font-semibold">
             Sagdi Formanov
@@ -92,19 +92,21 @@ export function Navigation() {
         id="mobile-nav"
         className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-200 ${mobileOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
       >
-        <div className="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
-          <nav className="flex flex-col gap-3" aria-label="Mobile">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-sm text-foreground/90 hover:text-foreground"
-                onClick={() => setMobileOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
+        <div className="px-3 sm:px-4 lg:px-6 pb-3">
+          <div className="mx-1 rounded-lg border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70 shadow-sm">
+            <nav className="flex flex-col gap-2 p-3" aria-label="Mobile">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="text-sm text-foreground/90 hover:text-foreground"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
+          </div>
         </div>
       </div>
     </nav>
