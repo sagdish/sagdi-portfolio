@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { ContactForm } from "@/components/forms/contact-form"
 
 export const metadata: Metadata = {
   title: "Contact | Sagdi Formanov",
@@ -12,6 +13,7 @@ export default function ContactPage() {
       <p className="mt-3 text-foreground/80">
         Get in touch via email or social links.
       </p>
+      <ContactForm />
     </div>
   )
 }
