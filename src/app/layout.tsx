@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   keywords:
     "product manager, Bay Area, cross-functional teams, product strategy, travel tech",
   authors: [{ name: "Sagdi Formanov" }],
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/chrome.png",
+  },
   openGraph: {
     title: "Sagdi Formanov - Product Manager",
     description:

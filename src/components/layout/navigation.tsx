@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { useTheme } from "next-themes"
 import { Menu, Moon, Sun, X } from "lucide-react"
 
@@ -29,11 +30,19 @@ export function Navigation() {
 
   return (
     <nav aria-label="Primary">
-      <div className="px-3 sm:px-4 lg:px-6">
+      <div className="pl-3 pr-3 sm:pr-4 lg:pr-6">
         <div className="flex h-14 items-center justify-between">
           {/* Brand */}
-          <Link href="/" className="text-base sm:text-lg font-semibold">
-            Sagdi Formanov
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/chrome.png"
+              alt="Sagdi logo"
+              width={32}
+              height={32}
+              className="rounded"
+              priority
+            />
+            <span className="sr-only">Home</span>
           </Link>
 
           {/* Desktop nav */}

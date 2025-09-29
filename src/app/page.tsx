@@ -16,9 +16,6 @@ export default function Home() {
           <Button asChild size="lg">
             <Link href="/projects">View Projects</Link>
           </Button>
-          <Button variant="outline" size="lg">
-            View Resume
-          </Button>
         </div>
       </div>
     </div>
