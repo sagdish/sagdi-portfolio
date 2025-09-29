@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { ProjectCard } from "@/components/project/project-card"
+import { FeaturedProjectCard } from "@/components/project/featured-project-card"
 
 export const metadata: Metadata = {
   title: "Projects | Sagdi Formanov",
@@ -33,7 +34,15 @@ export default function ProjectsPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold">Projects</h1>
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div className="mt-6">
+        <FeaturedProjectCard
+          title="PilotYourself.com - Featured"
+          description="A lightweight self-serve platform that helps people plan, track, and reflect on personal growth—built around simple goals and weekly cadence."
+          href="https://pilotyourself.com"
+        />
+      </div>
+
+      <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
         {items.map((p) => (
           <ProjectCard
             key={p.title}

@@ -30,55 +30,13 @@ export function Navigation() {
 
   return (
     <nav aria-label="Primary">
-      <div className="pl-3 pr-3 sm:pr-4 lg:pr-6">
-        <div className="flex h-14 items-center justify-between">
-          {/* Brand */}
-          <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/chrome.png"
-              alt="Sagdi logo"
-              width={32}
-              height={32}
-              className="rounded"
-              priority
-            />
-            <span className="sr-only">Home</span>
-          </Link>
-
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-6">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-sm text-foreground/80 hover:text-foreground transition-colors"
-              >
-                {item.name}
-              </Link>
-            ))}
+      <div className="pl-2 md:pl-4 lg:pl-6 pr-3 sm:pr-4 lg:pr-6">
+        <div className="flex h-14 items-center justify-between relative">
+          {/* Left cluster: mobile menu + brand */}
+          <div className="flex items-center gap-2">
+            {/* Mobile hamburger (left) */}
             <Button
-              aria-label="Toggle theme"
-              variant="ghost"
-              size="sm"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            </Button>
-          </div>
-
-          {/* Mobile toggle */}
-          <div className="md:hidden flex items-center gap-2">
-            <Button
-              aria-label="Toggle theme"
-              variant="ghost"
-              size="sm"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            </Button>
-            <Button
+              className="md:hidden"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
               aria-controls="mobile-nav"
@@ -91,6 +49,76 @@ export function Navigation() {
               ) : (
                 <Menu className="h-5 w-5" />
               )}
+            </Button>
+
+            {/* Brand */}
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/chrome.png"
+                alt="Sagdi logo"
+                width={32}
+                height={32}
+                className="rounded"
+                priority
+              />
+              <span className="sr-only">Home</span>
+            </Link>
+          </div>
+
+          {/* Desktop nav (left of bar) */}
+          <div className="hidden md:flex items-center gap-6">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="text-sm text-foreground/80 hover:text-foreground transition-colors"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* Desktop right side: CTA + theme */}
+          <div className="hidden md:flex items-center gap-4">
+            <Button
+              aria-label="Toggle theme"
+              variant="ghost"
+              size="sm"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            </Button>
+            <Button asChild size="sm">
+              <Link
+                href="https://pilotyourself.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                pilotyourself - <span className="text-red-500">live</span>
+              </Link>
+            </Button>
+          </div>
+
+          {/* Mobile right: CTA + theme */}
+          <div className="md:hidden flex items-center gap-3">
+            <Button
+              aria-label="Toggle theme"
+              variant="ghost"
+              size="sm"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            </Button>
+            <Button asChild size="sm">
+              <Link
+                href="https://pilotyourself.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                pilotyourself - <span className="text-red-500">live</span>
+              </Link>
             </Button>
           </div>
         </div>
