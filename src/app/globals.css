@@ -45,11 +45,13 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  /* Light theme base (page background) */
+  --background: #f4f5f7;
   --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
+  /* Light theme elevated surfaces (navbar, footer, cards, popovers) */
+  --card: #fdfdfe;
   --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
+  --popover: #fdfdfe;
   --popover-foreground: oklch(0.145 0 0);
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
@@ -79,11 +81,13 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  /* Dark theme base (page background) */
+  --background: #121315;
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
+  /* Dark theme elevated surfaces (navbar, footer, cards, popovers) */
+  --card: #181818;
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
+  --popover: #181818;
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);

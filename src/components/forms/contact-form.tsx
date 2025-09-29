@@ -52,7 +52,7 @@ export function ContactForm() {
             name="name"
             type="text"
             required
-            className="mt-1 w-full rounded-md border bg-background px-3 py-2"
+            className="mt-1 w-full rounded-md border bg-card px-3 py-2"
           />
         </div>
         <div>
@@ -64,7 +64,7 @@ export function ContactForm() {
             name="email"
             type="email"
             required
-            className="mt-1 w-full rounded-md border bg-background px-3 py-2"
+            className="mt-1 w-full rounded-md border bg-card px-3 py-2"
           />
         </div>
       </div>
@@ -78,7 +78,7 @@ export function ContactForm() {
           name="message"
           rows={5}
           required
-          className="mt-1 w-full rounded-md border bg-background px-3 py-2"
+          className="mt-1 w-full rounded-md border bg-card px-3 py-2"
         />
       </div>
 
