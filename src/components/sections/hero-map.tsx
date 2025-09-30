@@ -2,6 +2,8 @@
 
 import * as React from "react"
 import dynamic from "next/dynamic"
+import clsx from "clsx"
+import type { DottedMapProps } from "@/components/ui/dotted-map"
 
 // Dynamically import the DottedMap so it doesn't run on the server
 const DynamicDottedMap = dynamic(
@@ -12,7 +14,13 @@ const DynamicDottedMap = dynamic(
   { ssr: false }
 )
 
-export function HeroMap({ className }: { className?: string }) {
+export function HeroMap({
+  className,
+  markers,
+}: {
+  className?: string
+  markers?: DottedMapProps["markers"]
+}) {
   const [isMdUp, setIsMdUp] = React.useState<boolean | null>(null)
 
   React.useEffect(() => {
@@ -43,9 +51,17 @@ export function HeroMap({ className }: { className?: string }) {
   // Avoid hydration mismatches by rendering only on client after first effect
   if (isMdUp === null) return null
 
-  const props = isMdUp
+  const mapProps = isMdUp
     ? { dotRadius: 0.12, mapSamples: 7500 }
     : { dotRadius: 0.2, mapSamples: 5500 }
 
-  return <DynamicDottedMap className={className} {...props} />
+  return (
+    <div className={clsx("relative h-full w-full", className)}>
+      <DynamicDottedMap
+        className="map-fade h-full w-full"
+        markers={markers}
+        {...mapProps}
+      />
+    </div>
+  )
 }

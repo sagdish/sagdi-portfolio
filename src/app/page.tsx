@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { HeroMap } from "@/components/sections/hero-map"
+import { heroMarkers } from "@/components/sections/map-markers"
 import Link from "next/link"
 
 export default function Home() {
@@ -8,11 +9,10 @@ export default function Home() {
       {/* Background dotted map (client-only, no SSR) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 origin-center scale-[1.4]"
+        className="pointer-events-none absolute inset-0 -z-10 origin-center scale-[1.40]"
       >
-        {/* Demo-style radial gradient behind the map */}
-        <div className="to-background absolute inset-0 bg-radial from-transparent to-65%" />
-        <HeroMap />
+        <HeroMap markers={heroMarkers} />
+        <div className="to-background absolute inset-0 bg-radial from-transparent to-80%" />
       </div>
       <div className="relative z-10 text-center">
         <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
