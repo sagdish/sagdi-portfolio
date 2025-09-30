@@ -10,7 +10,9 @@ export default function Home() {
         </h1>
         <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
           Product Manager & Product Owner (PSPO I) specializing in
-          cross-functional team leadership and product strategy
+          cross-functional team leadership and product strategy.
+          <br /> Beyond job titles, I see myself as someone constantly exploring
+          products, places, and even my own perspective.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
           <Button asChild size="lg">
