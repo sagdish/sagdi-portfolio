@@ -3,7 +3,6 @@ import { Github, Instagram, Linkedin } from "lucide-react"
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
   { name: "Projects", href: "/projects" },
   { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
@@ -71,9 +70,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
-              About
-            </h3>
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-white"></h3>
             <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
               Product Manager specializing in cross-functional team leadership
               and product strategy in the travel tech industry.
