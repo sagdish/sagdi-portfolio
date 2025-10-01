@@ -15,7 +15,7 @@ export function ProjectCard({ title, description }: Props) {
         </div>
       </div>
       <div className="p-4">
-        <h3 className="text-base font-semibold leading-tight">{title}</h3>
+        <h4 className="text-base font-semibold leading-tight">{title}</h4>
         <p className="mt-2 text-sm text-foreground/80 leading-relaxed">
           {description}
         </p>

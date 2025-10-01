@@ -28,9 +28,9 @@ export function FeaturedProjectCard({ title, description, href }: Props) {
           <span className="inline-flex w-fit items-center rounded-full border px-2 py-0.5 text-xs text-foreground/70">
             Live
           </span>
-          <h2 className="mt-3 text-2xl font-semibold leading-tight md:text-3xl">
+          <h3 className="mt-3 text-2xl font-semibold leading-tight md:text-3xl">
             {title}
-          </h2>
+          </h3>
           <p className="mt-3 text-foreground/80 leading-relaxed">
             {description}
           </p>

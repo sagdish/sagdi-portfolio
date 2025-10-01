@@ -23,9 +23,9 @@ export const metadata: Metadata = {
     apple: "/chrome.png",
   },
   openGraph: {
-    title: "Sagdi Formanov - Product Manager",
+    title: "Sagdi Formanov - Product Manager | Bay Area",
     description:
-      "Product Manager specializing in cross-functional team leadership and product strategy",
+      "Experienced Product Manager specializing in cross-functional team leadership and product strategy in the travel tech industry.",
     type: "website",
   },
   alternates: {

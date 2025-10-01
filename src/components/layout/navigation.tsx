@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 
 const navigation = [
   { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
   { name: "Projects", href: "/projects" },
   { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
@@ -40,13 +41,12 @@ export function Navigation() {
               aria-expanded={mobileOpen}
               aria-controls="mobile-nav"
               variant="ghost"
-              size="sm"
               onClick={() => setMobileOpen((v) => !v)}
             >
               {mobileOpen ? (
-                <X className="h-5 w-5" />
+                <X className="h-6 w-6" />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu className="h-6 w-6" />
               )}
             </Button>
 
@@ -55,8 +55,8 @@ export function Navigation() {
               <Image
                 src="/chrome.png"
                 alt="Sagdi logo"
-                width={32}
-                height={32}
+                width={38}
+                height={38}
                 className="rounded"
                 priority
               />
@@ -70,7 +70,7 @@ export function Navigation() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-sm text-foreground/80 hover:text-foreground transition-colors"
+                className="text-base text-foreground/80 hover:text-foreground transition-colors"
               >
                 {item.name}
               </Link>
@@ -126,7 +126,9 @@ export function Navigation() {
       {/* Mobile dropdown */}
       <div
         id="mobile-nav"
-        className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-200 ${mobileOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
+        className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-200 ${
+          mobileOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
       >
         <div className="px-3 sm:px-4 lg:px-6 pb-3">
           <div className="mx-1 rounded-lg border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70 shadow-sm">
@@ -135,7 +137,7 @@ export function Navigation() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-sm text-foreground/90 hover:text-foreground"
+                  className="text-base text-foreground/90 hover:text-foreground"
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.name}
