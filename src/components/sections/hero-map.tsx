@@ -17,13 +17,17 @@ const DynamicDottedMap = dynamic(
 export function HeroMap({
   className,
   markers,
+  responsive = true,
 }: {
   className?: string
   markers?: DottedMapProps["markers"]
+  /** When true (default), picks props by viewport; when false, uses fixed defaults. */
+  responsive?: boolean
 }) {
   const [isMdUp, setIsMdUp] = React.useState<boolean | null>(null)
 
   React.useEffect(() => {
+    if (!responsive) return
     const query = "(min-width: 768px)"
     const mql = window.matchMedia(query)
     const handler = (e: MediaQueryListEvent | MediaQueryList) => {
@@ -46,9 +50,23 @@ export function HeroMap({
           handler as (this: MediaQueryList, ev: MediaQueryListEvent) => void
         )
     }
-  }, [])
+  }, [responsive])
 
-  // Avoid hydration mismatches by rendering only on client after first effect
+  // If not responsive, render immediately with fixed defaults
+  if (!responsive) {
+    const fixedProps = { dotRadius: 0.19, mapSamples: 6500 }
+    return (
+      <div className={clsx("relative h-full w-full", className)}>
+        <DynamicDottedMap
+          className="map-fade h-full w-full"
+          markers={markers}
+          {...fixedProps}
+        />
+      </div>
+    )
+  }
+
+  // Responsive path: avoid hydration mismatches by rendering only on client after first effect
   if (isMdUp === null) return null
 
   const mapProps = isMdUp
