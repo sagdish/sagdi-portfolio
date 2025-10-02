@@ -81,10 +81,10 @@ export function PMPortfolioSection() {
   }, [])
 
   return (
-    <section className="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-5xl px-4 pt-10 pb-14 sm:px-6 lg:px-8">
       {/* Header */}
       <div className="mb-8 text-center">
-        <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+        <h2 className="text-lg font-bold tracking-tight sm:text-2xl">
           Highlights
         </h2>
       </div>
@@ -103,14 +103,14 @@ export function PMPortfolioSection() {
           {/* Marquee Content */}
           <div
             className={clsx(
-              "flex gap-6 w-fit animate-marquee-scroll",
+              "flex gap-4 w-fit animate-marquee-scroll",
               isPaused && "paused"
             )}
           >
             {createCardSets.map((card) => (
               <Card
                 key={card.id}
-                className="group relative overflow-hidden transition-all duration-200 w-80 shrink-0 hover:border-primary/30 hover:shadow-sm hover:ring-1 hover:ring-primary/10"
+                className="group relative overflow-hidden transition-all duration-200 w-80 shrink-0 hover:border-primary/30 hover:shadow-sm hover:ring-1 hover:ring-primary/10 scale-[0.9]"
               >
                 <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100 bg-gradient-to-br from-primary/5 to-primary/10" />
                 <CardHeader>

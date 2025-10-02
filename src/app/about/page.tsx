@@ -24,7 +24,7 @@ export default function AboutPage() {
             />
             <div className="absolute -top-4 left-2 md:-top-6 md:-left-3">
               <div className="rounded-2xl bg-blue-600 text-white dark:bg-blue-500 px-4 py-2 text-sm md:text-base font-semibold shadow-lg">
-                Hey,
+                Hey!
               </div>
             </div>
           </div>

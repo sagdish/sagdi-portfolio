@@ -13,7 +13,7 @@ export default function Home() {
         {/* Background dotted map behind about section */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 origin-center scale-[1.40]"
+          className="pointer-events-none absolute inset-0 -z-10 origin-center scale-[1.40] -translate-y-[15%] sm:translate-y-0"
         >
           <HeroMap markers={heroMarkers} />
         </div>
@@ -21,9 +21,9 @@ export default function Home() {
         <div className="relative grid grid-cols-1 gap-4 md:gap-6 lg:gap-8 items-start">
           {/* Centered content */}
           <div className="col-span-1 flex flex-col items-center text-center animate-[fade-up_500ms_ease-out_60ms_both]">
-            {/* H1 in blue bubble */}
-            <div className="mt-4 inline-block rounded-2xl bg-[#4686EB] px-3 py-1.5 text-white shadow-lg relative z-10">
-              <h1 className="whitespace-wrap text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight">
+            {/* H1 with blue text instead of blue background */}
+            <div className="mt-4 relative z-10">
+              <h1 className="whitespace-wrap text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-[#4686EB]">
                 Sagdi Formanov
               </h1>
             </div>
