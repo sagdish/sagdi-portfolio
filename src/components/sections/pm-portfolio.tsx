@@ -38,42 +38,97 @@ export const PM_CARDS = [
   },
 ]
 
+interface CardWithId {
+  id: string
+  title: string
+  description: string
+}
+
 export function PMPortfolioSection() {
-  const [hovered, setHovered] = React.useState<number | null>(null)
-  const cards = PM_CARDS
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null)
+  const [isPaused, setIsPaused] = React.useState(false)
+
+  // Create multiple sets of cards with unique IDs for seamless infinite scroll
+  const createCardSets = React.useMemo(() => {
+    const sets: CardWithId[] = []
+    for (let setIndex = 0; setIndex < 3; setIndex++) {
+      PM_CARDS.forEach((card, cardIndex) => {
+        sets.push({
+          id: `${setIndex}-${cardIndex}-${card.title}`,
+          title: card.title,
+          description: card.description,
+        })
+      })
+    }
+    return sets
+  }, [])
+
+  // Handle mouse wheel horizontal scroll
+  const handleWheel = React.useCallback((e: React.WheelEvent) => {
+    if (scrollContainerRef.current) {
+      e.preventDefault()
+      scrollContainerRef.current.scrollLeft += e.deltaY
+    }
+  }, [])
+
+  // Handle pause/resume events
+  const handlePause = React.useCallback(() => {
+    setIsPaused(true)
+  }, [])
+
+  const handleResume = React.useCallback(() => {
+    setIsPaused(false)
+  }, [])
 
   return (
     <section className="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
       {/* Header */}
-      <div className="mb-8 text-center md:text-left">
+      <div className="mb-8 text-center">
         <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
           Highlights
         </h2>
       </div>
 
-      {/* Cards Grid */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:gap-8">
-        {cards.map((card, i) => (
-          <Card
-            key={card.title}
-            onMouseEnter={() => setHovered(i)}
-            onMouseLeave={() => setHovered(null)}
+      {/* Horizontal Scrolling Container */}
+      <div className="relative">
+        <div
+          ref={scrollContainerRef}
+          onWheel={handleWheel}
+          onMouseEnter={handlePause}
+          onMouseLeave={handleResume}
+          onTouchStart={handlePause}
+          onTouchEnd={handleResume}
+          className="overflow-x-auto scrollbar-hide overscroll-x-contain"
+        >
+          {/* Marquee Content */}
+          <div
             className={clsx(
-              "group relative overflow-hidden transition-all duration-200",
-              hovered === i
-                ? "border-primary/40 shadow-md ring-1 ring-primary/10"
-                : "hover:border-primary/30 hover:shadow-sm"
+              "flex gap-6 w-fit animate-marquee-scroll",
+              isPaused && "paused"
             )}
           >
-            <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100 bg-gradient-to-br from-primary/5 to-primary/10" />
-            <CardHeader>
-              <CardTitle className="text-base font-semibold">
-                {card.title}
-              </CardTitle>
-              <CardDescription>{card.description}</CardDescription>
-            </CardHeader>
-          </Card>
-        ))}
+            {createCardSets.map((card) => (
+              <Card
+                key={card.id}
+                className="group relative overflow-hidden transition-all duration-200 w-80 shrink-0 hover:border-primary/30 hover:shadow-sm hover:ring-1 hover:ring-primary/10"
+              >
+                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100 bg-gradient-to-br from-primary/5 to-primary/10" />
+                <CardHeader>
+                  <CardTitle className="text-base font-semibold">
+                    {card.title}
+                  </CardTitle>
+                  <CardDescription>{card.description}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Left fade gradient */}
+        <div className="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-background to-transparent z-10" />
+
+        {/* Right fade gradient */}
+        <div className="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-background to-transparent z-10" />
       </div>
     </section>
   )
