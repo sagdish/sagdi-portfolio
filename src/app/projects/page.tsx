@@ -37,7 +37,7 @@ export default function ProjectsPage() {
       <div className="mt-6">
         <FeaturedProjectCard
           title="PilotYourself.com - Featured"
-          description="A lightweight self-serve platform that helps people plan, track, and reflect on personal growth—built around simple goals and weekly cadence."
+          description="AI-powered momentum tracker for ambitious professionals struggling with cognitive overload. Uses Claude AI to analyze your goals and create personalized 4-week tracking cycles focused on energy and momentum over time-based productivity. Full-stack Next.js app with Supabase database."
           href="https://pilotyourself.com"
         />
       </div>
