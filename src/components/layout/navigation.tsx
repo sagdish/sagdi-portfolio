@@ -7,6 +7,7 @@ import { useTheme } from "next-themes"
 import { Menu, Moon, Sun, X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { BorderBeam } from "@/components/ui/border-beam"
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -88,15 +89,18 @@ export function Navigation() {
               <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             </Button>
-            <Button asChild size="sm">
-              <Link
-                href="https://pilotyourself.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                pilotyourself - <span className="text-red-500">live</span>
-              </Link>
-            </Button>
+            <div className="relative rounded-md">
+              <Button asChild size="sm">
+                <Link
+                  href="https://pilotyourself.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  pilotyourself - <span className="text-red-500">live</span>
+                </Link>
+              </Button>
+              <BorderBeam size={50} duration={8} borderWidth={1} />
+            </div>
           </div>
 
           {/* Mobile right: CTA + theme */}
@@ -110,15 +114,18 @@ export function Navigation() {
               <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             </Button>
-            <Button asChild size="sm">
-              <Link
-                href="https://pilotyourself.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                pilotyourself - <span className="text-red-500">live</span>
-              </Link>
-            </Button>
+            <div className="relative rounded-md">
+              <Button asChild size="sm">
+                <Link
+                  href="https://pilotyourself.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  pilotyourself - <span className="text-red-500">live</span>
+                </Link>
+              </Button>
+              <BorderBeam size={70} duration={8} borderWidth={2} />
+            </div>
           </div>
         </div>
       </div>
