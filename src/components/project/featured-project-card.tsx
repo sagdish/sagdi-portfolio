@@ -1,26 +1,45 @@
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import Image from "next/image"
 
 type Props = {
   title: string
   description: string
   href?: string
+  image?: string
+  imageAlt?: string
 }
 
-export function FeaturedProjectCard({ title, description, href }: Props) {
+export function FeaturedProjectCard({
+  title,
+  description,
+  href,
+  image,
+  imageAlt,
+}: Props) {
   return (
     <section className="rounded-xl border bg-card text-card-foreground shadow-md overflow-hidden">
       {/* md+: split layout */}
       <div className="md:grid md:grid-cols-5">
-        {/* Image placeholder - 4:3 on mobile, full height on md */}
+        {/* Image placeholder - 4.5:3 on mobile, full height on md */}
         <div className="bg-muted/50 md:col-span-3">
           <div
             className="relative w-full md:h-full"
-            style={{ paddingTop: "75%" }}
+            style={{ paddingTop: "66.67%" }}
           >
-            <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/60 text-sm">
-              Featured image
-            </div>
+            {image ? (
+              <Image
+                src={image}
+                alt={imageAlt || title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 60vw"
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/60 text-sm">
+                Featured image
+              </div>
+            )}
           </div>
         </div>
         {/* Content */}

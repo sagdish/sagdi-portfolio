@@ -39,6 +39,8 @@ export default function ProjectsPage() {
           title="PilotYourself.com - Featured"
           description="AI-powered momentum tracker for ambitious professionals struggling with cognitive overload. Uses Claude AI to analyze your goals and create personalized 4-week tracking cycles focused on energy and momentum over time-based productivity. Full-stack Next.js app with Supabase database."
           href="https://pilotyourself.com"
+          image="/pilotyourself-frame.png"
+          imageAlt="PilotYourself app interface showing AI-powered goal analysis and tracking features"
         />
       </div>
 
