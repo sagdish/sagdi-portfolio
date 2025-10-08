@@ -22,9 +22,9 @@ export function FeaturedProjectCard({
       {/* md+: split layout */}
       <div className="md:grid md:grid-cols-5">
         {/* Image placeholder - 4.5:3 on mobile, full height on md */}
-        <div className="bg-muted/50 md:col-span-3">
+        <div className="bg-muted/50 md:col-span-3 p-[3%]">
           <div
-            className="relative w-full md:h-full"
+            className="relative w-full md:h-full rounded-lg overflow-hidden"
             style={{ paddingTop: "66.67%" }}
           >
             {image ? (

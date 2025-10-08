@@ -10,24 +10,21 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   const items = [
     {
-      title: "TripLens",
+      title: "The Ultimate Guide to Product Management",
       description:
-        "AI-assisted travel planner that builds day-by-day itineraries from your preferences.",
+        "A comprehensive, practical resource for aspiring and experienced product managers. Curated by Sagdi Formanov.",
+      href: "https://pm-guide.vercel.app/",
+      image: "/pm-guide.png",
+      imageAlt: "The Ultimate Guide to Product Management resource preview",
     },
     {
-      title: "Feedback Hub",
+      title: "Context Collapse",
       description:
-        "Lightweight feedback widget for product teams to collect, triage, and act on insights.",
-    },
-    {
-      title: "Churn Watch",
-      description:
-        "Dashboard that highlights at-risk cohorts and suggests retention experiments.",
-    },
-    {
-      title: "Content Pilot",
-      description:
-        "Editorial calendar with AI draft assistance and simple approval workflows.",
+        "Your AI-powered knowledge graph that discovers surprising connections between ideas. Currently in active development with new graph visualizations shipping weekly.",
+      href: "https://ctx-collapse.vercel.app/",
+      image: "/cxt-collapse.png",
+      imageAlt: "Context Collapse knowledge graph interface preview",
+      status: "In development",
     },
   ]
 
@@ -50,6 +47,9 @@ export default function ProjectsPage() {
             key={p.title}
             title={p.title}
             description={p.description}
+            href={p.href}
+            image={p.image}
+            imageAlt={p.imageAlt}
           />
         ))}
       </div>
