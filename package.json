@@ -14,6 +14,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@notionhq/client": "^5.3.0",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-navigation-menu": "^1.2.13",
     "@radix-ui/react-slot": "^1.2.3",
@@ -25,8 +26,10 @@
     "motion": "^12.23.22",
     "next": "15.4.5",
     "next-themes": "^0.4.6",
+    "notion-to-md": "^3.1.9",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-markdown": "^10.1.0",
     "svg-dotted-map": "^2.0.1",
     "tailwind-merge": "^3.3.1"
   },
@@ -48,8 +51,8 @@
     "typescript": "^5"
   },
   "optionalDependencies": {
-    "lightningcss-linux-x64-gnu": "^1.25.1",
-    "@tailwindcss/oxide-linux-x64-gnu": "4.1.11"
+    "@tailwindcss/oxide-linux-x64-gnu": "4.1.11",
+    "lightningcss-linux-x64-gnu": "^1.25.1"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
