@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Image from "next/image"
+import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "About | Sagdi Formanov",
@@ -38,6 +39,12 @@ export default function AboutPage() {
             management. That mix of backgrounds shaped how I work today: I like
             to experiment, create, and learn by doing. Nothing is ever constant,
             so I’ve come to favor action over perfection.
+            <br />
+            If you want to get a better sense of who I am beyond the
+            professional part,{" "}
+            <Link href="/blog/more-of-me">
+              <u>read this entry.</u>
+            </Link>
           </p>
         </div>
       </div>
