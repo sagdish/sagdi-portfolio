@@ -3,6 +3,9 @@ import { notFound } from "next/navigation"
 import { getPostBySlug, getPublishedPosts } from "@/lib/notion"
 import { Calendar } from "lucide-react"
 import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
+import remarkBreaks from "remark-breaks"
+import rehypeRaw from "rehype-raw"
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -90,6 +93,8 @@ export default async function BlogPostPage({ params }: Props) {
       {/* Content */}
       <div className="prose prose-gray dark:prose-invert max-w-none">
         <ReactMarkdown
+          remarkPlugins={[remarkGfm, remarkBreaks]}
+          rehypePlugins={[rehypeRaw]}
           components={{
             // Style headings
             h1: ({ ...props }) => (
