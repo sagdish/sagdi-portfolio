@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/layout/theme-provider"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { Analytics } from "@vercel/analytics/react"
+import NextTopLoader from "nextjs-toploader"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -42,6 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
+        <NextTopLoader color="#2563EB" height={2} showSpinner={false} />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
