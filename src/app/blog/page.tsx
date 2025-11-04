@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { getPublishedPosts, getAllTags } from "@/lib/notion"
-import { BlogPostCard } from "@/components/blog/blog-post-card"
+import { BlogFeed } from "@/components/blog/blog-feed"
 
 export const metadata: Metadata = {
   title: "Blog | Sagdi Formanov",
@@ -28,38 +28,14 @@ export default async function BlogIndexPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mb-8">
+      <div className="mb-6">
         <h1 className="text-3xl font-bold mb-2">Blog</h1>
         <p className="text-muted-foreground">
           Insights on product management, strategy, and leadership
         </p>
       </div>
 
-      {/* Tags filter (optional - can be enhanced with client-side filtering) */}
-      {tags.length > 0 && (
-        <div className="mb-8">
-          <h2 className="text-sm font-medium text-muted-foreground mb-3">
-            Topics
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {tags.map((tag) => (
-              <span
-                key={tag}
-                className="inline-flex items-center rounded-full bg-muted px-3 py-1 text-sm font-medium text-foreground/70 hover:bg-muted/80 transition-colors"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Posts grid */}
-      <div className="grid gap-6">
-        {posts.map((post) => (
-          <BlogPostCard key={post.id} post={post} />
-        ))}
-      </div>
+      <BlogFeed posts={posts} tags={tags} />
     </div>
   )
 }
