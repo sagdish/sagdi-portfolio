@@ -34,7 +34,7 @@ export const PM_CARDS = [
   {
     title: "Values",
     description:
-      "AI technology evolves faster than we can adapt. My way of dealing with that is to stay comfortable with discomfort, keep learning, and keep building.",
+      "AI evolves faster than we can adapt. Embracing the discomfort, keep learning, and keep building.",
   },
 ]
 
@@ -81,10 +81,10 @@ export function PMPortfolioSection() {
   }, [])
 
   return (
-    <section className="mx-auto max-w-5xl px-4 pt-10 pb-14 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-4xl px-4 pt-8 pb-10 sm:px-6 sm:pt-10 sm:pb-14 lg:px-6">
       {/* Header */}
-      <div className="mb-8 text-center">
-        <h2 className="text-lg font-bold tracking-tight sm:text-2xl">
+      <div className="mb-[0.9rem] text-center sm:mb-[1.2rem] lg:mb-[0.9rem]">
+        <h2 className="text-base font-bold tracking-tight text-muted-foreground sm:text-2xl">
           Highlights
         </h2>
       </div>
@@ -103,21 +103,23 @@ export function PMPortfolioSection() {
           {/* Marquee Content */}
           <div
             className={clsx(
-              "flex gap-4 w-fit animate-marquee-scroll",
+              "flex w-fit animate-marquee-scroll gap-2 sm:gap-3 lg:gap-2",
               isPaused && "paused"
             )}
           >
             {createCardSets.map((card) => (
               <Card
                 key={card.id}
-                className="group relative overflow-hidden transition-all duration-200 w-80 shrink-0 hover:border-primary/30 hover:shadow-sm hover:ring-1 hover:ring-primary/10 scale-[0.9]"
+                className="group relative w-64 shrink-0 overflow-hidden py-5 transition-transform duration-200 scale-[0.88] hover:border-primary/30 hover:shadow-sm hover:ring-1 hover:ring-primary/10 sm:w-72 sm:scale-90 md:w-72 md:scale-95 lg:w-72 lg:scale-95 lg:py-4"
               >
                 <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100 bg-gradient-to-br from-primary/5 to-primary/10" />
-                <CardHeader>
-                  <CardTitle className="text-base font-semibold">
+                <CardHeader className="px-5 lg:px-4">
+                  <CardTitle className="text-sm font-semibold sm:text-base lg:text-sm">
                     {card.title}
                   </CardTitle>
-                  <CardDescription>{card.description}</CardDescription>
+                  <CardDescription className="text-sm sm:text-sm lg:text-xs">
+                    {card.description}
+                  </CardDescription>
                 </CardHeader>
               </Card>
             ))}

@@ -3,22 +3,34 @@
 import * as React from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 import { useTheme } from "next-themes"
-import { Menu, Moon, Sun, X } from "lucide-react"
+import {
+  Menu,
+  Moon,
+  Sun,
+  X,
+  Home,
+  User,
+  Settings,
+  PenLine,
+  Mail,
+} from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { BorderBeam } from "@/components/ui/border-beam"
 
 const navigation = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Projects", href: "/projects" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
+  { name: "Home", href: "/", icon: Home },
+  { name: "About", href: "/about", icon: User },
+  { name: "Projects", href: "/projects", icon: Settings },
+  { name: "Blog", href: "/blog", icon: PenLine },
+  { name: "Contact", href: "/contact", icon: Mail },
 ]
 
 export function Navigation() {
   const { theme, setTheme } = useTheme()
+  const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
   React.useEffect(() => {
@@ -67,15 +79,22 @@ export function Navigation() {
 
           {/* Desktop nav (left of bar) */}
           <div className="hidden md:flex items-center gap-6">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-base text-foreground/80 hover:text-foreground transition-colors"
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navigation.map((item) => {
+              const isActive = pathname === item.href
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`text-base transition-colors ${
+                    isActive
+                      ? "text-blue-600 dark:text-blue-400 font-semibold"
+                      : "text-foreground/80 hover:text-foreground"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              )
+            })}
           </div>
 
           {/* Desktop right side: CTA + theme */}
@@ -139,17 +158,26 @@ export function Navigation() {
       >
         <div className="px-3 sm:px-4 lg:px-6 pb-3">
           <div className="mx-1 rounded-lg border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70 shadow-sm">
-            <nav className="flex flex-col gap-2 p-3" aria-label="Mobile">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="text-base text-foreground/90 hover:text-foreground"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
+            <nav className="flex flex-col gap-[0.8rem] p-3" aria-label="Mobile">
+              {navigation.map((item) => {
+                const Icon = item.icon
+                const isActive = pathname === item.href
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`flex items-center gap-2 text-base ${
+                      isActive
+                        ? "text-blue-600 dark:text-blue-400 font-semibold"
+                        : "text-foreground/90 hover:text-foreground"
+                    }`}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <Icon className="h-5 w-5" />
+                    {item.name}
+                  </Link>
+                )
+              })}
             </nav>
           </div>
         </div>

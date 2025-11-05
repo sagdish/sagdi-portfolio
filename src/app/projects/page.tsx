@@ -10,9 +10,18 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   const items = [
     {
+      title: "PilotYourself.com",
+      description:
+        "AI-powered momentum tracker for professionals struggling with cognitive overload. Uses AI to analyze your goals and create personalized 4-week tracking cycles focused on energy and momentum over time-based productivity. Full-stack Next.js app.",
+      href: "https://pilotyourself.com",
+      image: "/pilotyourself-frame.png",
+      imageAlt:
+        "PilotYourself app interface showing AI-powered goal analysis and tracking features",
+    },
+    {
       title: "The Ultimate Guide to Product Management",
       description:
-        "A comprehensive, practical resource for aspiring and experienced product managers. Curated by Sagdi Formanov.",
+        "A comprehensive, practical resource for aspiring and experienced product managers. Covers core PM concepts, frameworks, and real-world applications to help you excel in product management roles.",
       href: "https://pm-guide.vercel.app/",
       image: "/pm-guide.png",
       imageAlt: "The Ultimate Guide to Product Management resource preview",
@@ -31,15 +40,6 @@ export default function ProjectsPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold">Projects</h1>
-      <div className="mt-6">
-        <FeaturedProjectCard
-          title="PilotYourself.com - Featured"
-          description="AI-powered momentum tracker for ambitious professionals struggling with cognitive overload. Uses Claude AI to analyze your goals and create personalized 4-week tracking cycles focused on energy and momentum over time-based productivity. Full-stack Next.js app with Supabase database."
-          href="https://pilotyourself.com"
-          image="/pilotyourself-frame.png"
-          imageAlt="PilotYourself app interface showing AI-powered goal analysis and tracking features"
-        />
-      </div>
 
       <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
         {items.map((p) => (
@@ -50,6 +50,7 @@ export default function ProjectsPage() {
             href={p.href}
             image={p.image}
             imageAlt={p.imageAlt}
+            status={p.status}
           />
         ))}
       </div>
