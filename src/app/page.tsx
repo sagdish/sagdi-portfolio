@@ -48,10 +48,10 @@ export default function Home() {
             <h2 className="mt-6 max-w-2xl px-3 text-[1.1rem] font-medium leading-7 text-gray-800 dark:text-gray-300 md:px-0 md:text-xl md:leading-8">
               Product Manager & PO (PSPO I)
               <br />
-              I build products, and sometimes write about it.
+              🔧 I build products, and sometimes write about it.
               <br />
-              I photograph moments, read about psychology, and try to make sense
-              of things.
+              📸 I photograph moments, read about psychology, and try to make
+              sense of things.
               <br />
             </h2>
             {/* CTA back in-column (center mobile, left md+) */}
