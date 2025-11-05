@@ -31,7 +31,7 @@ export default async function BlogIndexPage() {
       <div className="mb-6">
         <h1 className="text-3xl font-bold mb-2">Blog</h1>
         <p className="text-muted-foreground">
-          I build things that make sense; I write to make sense of things.
+          Sometimes I write to make sense of things.
         </p>
       </div>
 

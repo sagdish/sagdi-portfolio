@@ -37,8 +37,16 @@ export default function AboutPage() {
             Hey, I’m Sagdi. I started out in Automobile Engineering, then moved
             through development and design before finding my place in product
             management. That mix of backgrounds shaped how I work today: I like
-            to experiment, create, and learn by doing. Nothing is ever constant,
-            so I’ve come to favor action over perfection.
+            to experiment, create, and learn by doing.
+            <br />
+            This space collects what I build, think, and notice, a mix of:
+            <br />
+            Philosophical clarity: figuring myself out, going deep, questioning
+            the world
+            <br />
+            Professional craft: product management, systems thinking, leadership
+            <br />
+            Human rawness: writing, photography, reflection
             <br />
             If you want to get a better sense of who I am beyond the
             professional part,{" "}
