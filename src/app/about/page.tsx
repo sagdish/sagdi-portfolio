@@ -47,7 +47,7 @@ export default function AboutPage() {
             leadership & empathy.
             <br />
             <em>Self reflection:</em> journaling, photography, reflection and
-            sports.
+            physical training.
             <br />
             <br />
             If you want to get a better sense of who I am beyond the
