@@ -1,6 +1,5 @@
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
 import Image from "next/image"
+import { ArrowUpRight } from "lucide-react"
 
 type Props = {
   title: string
@@ -8,6 +7,7 @@ type Props = {
   href?: string
   image?: string
   imageAlt?: string
+  status?: string
 }
 
 export function FeaturedProjectCard({
@@ -16,56 +16,55 @@ export function FeaturedProjectCard({
   href,
   image,
   imageAlt,
+  status,
 }: Props) {
   return (
-    <section className="rounded-xl border bg-card text-card-foreground shadow-md overflow-hidden">
-      {/* md+: split layout */}
-      <div className="md:grid md:grid-cols-5">
-        {/* Image placeholder - 4.5:3 on mobile, full height on md */}
-        <div className="bg-muted/50 md:col-span-3 p-[3%]">
-          <div
-            className="relative w-full md:h-full rounded-lg overflow-hidden"
-            style={{ paddingTop: "66.67%" }}
-          >
-            {image ? (
-              <Image
-                src={image}
-                alt={imageAlt || title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 60vw"
-              />
-            ) : (
-              <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/60 text-sm">
-                Featured image
-              </div>
-            )}
-          </div>
+    <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
+      {/* 16:9 placeholder */}
+      <div className="bg-muted/50 p-[3%]">
+        <div
+          className="relative w-full rounded-lg overflow-hidden"
+          style={{ paddingTop: "56.25%" }}
+        >
+          {image ? (
+            <Image
+              src={image}
+              alt={imageAlt || title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 40vw"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/60 text-sm">
+              Image placeholder
+            </div>
+          )}
         </div>
-        {/* Content */}
-        <div className="p-5 md:p-6 md:col-span-2 flex flex-col">
-          <span className="inline-flex w-fit items-center rounded-full border px-2 py-0.5 text-xs text-foreground/70">
-            Live
+        {status ? (
+          <span className="mt-3 inline-flex items-center gap-1 rounded-full bg-background/90 px-2.5 py-1 text-xs font-medium text-foreground/70 shadow-sm ring-1 ring-border/70">
+            {status}
           </span>
-          <h3 className="mt-3 text-2xl font-semibold leading-tight md:text-3xl">
-            {title}
-          </h3>
-          <p className="mt-3 text-foreground/80 leading-relaxed">
-            {description}
-          </p>
-          <div className="mt-5">
-            {href ? (
-              <Button asChild>
-                <Link href={href} target="_blank" rel="noopener noreferrer">
-                  View project
-                </Link>
-              </Button>
-            ) : (
-              <Button>View project</Button>
-            )}
-          </div>
-        </div>
+        ) : null}
       </div>
-    </section>
+      <div className="p-4">
+        {href ? (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-base font-semibold leading-tight text-primary hover:underline"
+          >
+            {title}
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            <span className="sr-only">(opens in a new tab)</span>
+          </a>
+        ) : (
+          <h4 className="text-base font-semibold leading-tight">{title}</h4>
+        )}
+        <p className="mt-2 text-sm text-foreground/80 leading-relaxed">
+          {description}
+        </p>
+      </div>
+    </div>
   )
 }

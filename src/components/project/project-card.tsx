@@ -19,7 +19,7 @@ export function ProjectCard({
   status,
 }: Props) {
   return (
-    <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
+    <div className="rounded-lg border-2 border-border bg-card text-card-foreground shadow-sm overflow-hidden">
       {/* 16:9 placeholder */}
       <div className="bg-muted/50 p-[3%]">
         <div
@@ -46,7 +46,7 @@ export function ProjectCard({
           </span>
         ) : null}
       </div>
-      <div className="p-4">
+      <div className="p-4 flex flex-col">
         {href ? (
           <a
             href={href}
@@ -64,6 +64,19 @@ export function ProjectCard({
         <p className="mt-2 text-sm text-foreground/80 leading-relaxed">
           {description}
         </p>
+        {href && (
+          <div className="mt-4 flex justify-end">
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 px-3 py-1.5 text-base font-medium bg-muted hover:bg-muted/80 rounded-md"
+            >
+              View
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
+        )}
       </div>
     </div>
   )
