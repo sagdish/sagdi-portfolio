@@ -34,19 +34,21 @@ export default function AboutPage() {
         <div className="md:col-span-2">
           <h1 className="text-3xl font-bold">About Me</h1>
           <p className="mt-3 text-foreground/80">
-            Hey, I’m Sagdi. I started out in Automobile Engineering, then moved
-            through development and design before finding my place in product
-            management. That mix of backgrounds shaped how I work today: I like
-            to experiment, create, and learn by doing.
+            Hey, I&apos;m Sagdi. I went from Automobile Engineering through Dev
+            & Design to Product Management. That weird path is why I build
+            things to learn.
             <br />
-            This space collects what I build, think, and notice, a mix of:
+            This space collects what I build, think and notice, a mix of:
             <br />
-            Philosophical clarity: figuring myself out, going deep, questioning
-            the world
+            <em>Philosophical clarity:</em> figuring myself out, going deep,
+            questioning the world
             <br />
-            Professional craft: product management, systems thinking, leadership
+            <em>Professional craft:</em> product management, systems thinking,
+            leadership & empathy.
             <br />
-            Human rawness: writing, photography, reflection
+            <em>Self reflection:</em> journaling, photography, reflection and
+            sports.
+            <br />
             <br />
             If you want to get a better sense of who I am beyond the
             professional part,{" "}

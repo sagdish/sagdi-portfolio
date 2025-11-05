@@ -3,6 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 import { useTheme } from "next-themes"
 import {
   Menu,
@@ -29,6 +30,7 @@ const navigation = [
 
 export function Navigation() {
   const { theme, setTheme } = useTheme()
+  const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
   React.useEffect(() => {
@@ -77,15 +79,22 @@ export function Navigation() {
 
           {/* Desktop nav (left of bar) */}
           <div className="hidden md:flex items-center gap-6">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-base text-foreground/80 hover:text-foreground transition-colors"
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navigation.map((item) => {
+              const isActive = pathname === item.href
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`text-base transition-colors ${
+                    isActive
+                      ? "text-blue-600 dark:text-blue-400 font-semibold"
+                      : "text-foreground/80 hover:text-foreground"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              )
+            })}
           </div>
 
           {/* Desktop right side: CTA + theme */}
@@ -152,11 +161,16 @@ export function Navigation() {
             <nav className="flex flex-col gap-[0.8rem] p-3" aria-label="Mobile">
               {navigation.map((item) => {
                 const Icon = item.icon
+                const isActive = pathname === item.href
                 return (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="flex items-center gap-2 text-base text-foreground/90 hover:text-foreground"
+                    className={`flex items-center gap-2 text-base ${
+                      isActive
+                        ? "text-blue-600 dark:text-blue-400 font-semibold"
+                        : "text-foreground/90 hover:text-foreground"
+                    }`}
                     onClick={() => setMobileOpen(false)}
                   >
                     <Icon className="h-5 w-5" />
