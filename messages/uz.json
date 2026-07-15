@@ -22,7 +22,7 @@
   "home": {
     "role": "Product Manager va PO (PSPO I)",
     "build": "🔧 Productlar yarataman va ba'zan bu haqda yozaman.",
-    "photograph": "📸 Lahzalarni suratga olaman, psixologiya haqida o‘qiyman va narsalarni anglashga harakat qilaman."
+    "photograph": "📸 Lahzalarni suratga olaman, psixologiya haqida o‘qib narsalarni anglashga harakat qilaman."
   },
   "pmCards": {
     "heading": "Malakalar",
@@ -50,14 +50,14 @@
   "about": {
     "badge": "Salom!",
     "title": "Men haqimda",
-    "intro": "Salom, ismim Sagdi. Men avtomobil muhandisligidan dasturlash va dizayn orqali Product Managementga o‘tdim. Aynan shu noodatiy yo‘l meni o‘rganish uchun narsalar yaratishga undaydi.",
-    "collects": "Bu yerda men yaratgan, o‘ylagan va sezgan narsalarimni to‘playman – aralashmasi:",
-    "philosophicalLabel": "Falsafiy oydinlik:",
-    "philosophical": "o‘zimni anglash, chuqur ketish, dunyoni savol ostiga qo‘yish",
+    "intro": "Avtomobil muhandisligidan Dasturlash va Dizayn orqali Product Management sohasiga keldim. Aynan shu noodatiy yo’l meni o’rganishning eng yaxshi usuli yaratish ekaniga ishontirdi. Shuning uchun doim nimadir yarataman.",
+    "collects": "Bu yerda yaratganlarimni, o’ylaganlarimni va kuzatganlarimni jamlayman. Asosan uch yo’nalishda yozaman:",
+    "philosophicalLabel": "Falsafiy mushohadalar:",
+    "philosophical": "o’zimni anglash, chuqurroq fikrlash va dunyoni savol ostiga qo’yish",
     "craftLabel": "Kasbiy mahorat:",
     "craft": "Product Management, tizimli fikrlash, yetakchilik va empatiya.",
-    "reflectionLabel": "O‘z-o‘zini tahlil:",
-    "reflection": "kundalik yuritish, fotografiya, mulohaza va jismoniy mashqlar.",
+    "reflectionLabel": "Shaxsiy mulohazalar:",
+    "reflection": "kundalik yozuvlar, fotografiya, jismoniy mashg’ulotlar va yo’l davomida o’rgangan saboqlarim.",
     "moreIntro": "Agar meni kasbdan tashqarida ham yaxshiroq bilishni istasangiz,",
     "moreLink": "ushbu yozuvni o‘qing."
   },
