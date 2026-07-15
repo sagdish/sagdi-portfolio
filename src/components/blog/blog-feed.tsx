@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
+import { useTranslations } from "next-intl"
 import type { BlogPost } from "@/types/blog"
 import { cn } from "@/lib/utils"
 import { BlogPostCard } from "./blog-post-card"
@@ -14,6 +15,7 @@ const BASE_TAG_CLASSES =
   "inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium transition-colors cursor-pointer"
 
 export function BlogFeed({ posts, tags }: Props) {
+  const t = useTranslations("blog")
   const [activeTag, setActiveTag] = useState<string | null>(null)
 
   const sortedTags = useMemo(() => [...tags], [tags])
@@ -34,7 +36,9 @@ export function BlogFeed({ posts, tags }: Props) {
     <div className="space-y-6">
       {sortedTags.length > 0 && (
         <div className="space-y-3">
-          <h2 className="text-sm font-medium text-muted-foreground">Topics</h2>
+          <h2 className="text-sm font-medium text-muted-foreground">
+            {t("topics")}
+          </h2>
           <div className="flex flex-wrap gap-2">
             <button
               type="button"
@@ -47,7 +51,7 @@ export function BlogFeed({ posts, tags }: Props) {
                   "border-primary/40 bg-primary/10 text-primary dark:border-primary/50"
               )}
             >
-              All
+              {t("all")}
             </button>
             {sortedTags.map((tag) => (
               <button
@@ -68,8 +72,7 @@ export function BlogFeed({ posts, tags }: Props) {
           </div>
           {activeTag && filteredPosts.length === 0 && (
             <p className="text-sm text-muted-foreground">
-              No posts tagged with{" "}
-              <span className="font-medium">{activeTag}</span> yet.
+              {t("noPostsTagged", { tag: activeTag })}
             </p>
           )}
         </div>

@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 type Props = {
   title: string
@@ -18,6 +19,7 @@ export function ProjectCard({
   imageAlt,
   status,
 }: Props) {
+  const t = useTranslations("projectCard")
   return (
     <div className="rounded-lg border-2 border-border bg-card text-card-foreground shadow-sm overflow-hidden">
       {/* 16:9 placeholder */}
@@ -36,7 +38,7 @@ export function ProjectCard({
             />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/60 text-sm">
-              Image placeholder
+              {t("imagePlaceholder")}
             </div>
           )}
         </div>
@@ -56,7 +58,7 @@ export function ProjectCard({
           >
             {title}
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            <span className="sr-only">(opens in a new tab)</span>
+            <span className="sr-only">{t("opensNewTab")}</span>
           </a>
         ) : (
           <h4 className="text-base font-semibold leading-tight">{title}</h4>
@@ -72,7 +74,7 @@ export function ProjectCard({
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 px-3 py-1.5 text-base font-medium bg-muted hover:bg-muted/80 rounded-md"
             >
-              View
+              {t("view")}
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>

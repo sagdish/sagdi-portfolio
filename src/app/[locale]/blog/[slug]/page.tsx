@@ -1,6 +1,9 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
+import { setRequestLocale, getTranslations } from "next-intl/server"
 import { getPostBySlug, getPublishedPosts } from "@/lib/notion"
+import { SITE_URL, OG_LOCALE, OG_IMAGE_ALT, absoluteUrl } from "@/lib/seo"
+import { JsonLd } from "@/components/seo/json-ld"
 import { Calendar } from "lucide-react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
@@ -8,7 +11,7 @@ import remarkBreaks from "remark-breaks"
 import rehypeRaw from "rehype-raw"
 
 type Props = {
-  params: Promise<{ slug: string }>
+  params: Promise<{ locale: string; slug: string }>
 }
 
 // Generate static paths for all published posts
@@ -21,7 +24,7 @@ export async function generateStaticParams() {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params
+  const { locale, slug } = await params
   const post = await getPostBySlug(slug)
 
   if (!post) {
@@ -30,15 +33,39 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
+  const t = await getTranslations({ locale, namespace: "meta" })
+  const description = post.description || undefined
+
+  // All locale variants of a post share identical content, so canonicalize every
+  // one to the unprefixed URL to avoid duplicate-content dilution.
+  const canonical = `/blog/${slug}`
+
   return {
-    title: `${post.title} | Sagdi Formanov`,
-    description: post.description || `Read about ${post.title}`,
+    title: post.title,
+    description: description ?? post.title,
+    alternates: { canonical },
     openGraph: {
-      title: post.title,
-      description: post.description,
       type: "article",
+      siteName: t("siteName"),
+      title: post.title,
+      description,
+      url: `${SITE_URL}${canonical}`,
+      locale: OG_LOCALE[locale],
       publishedTime: post.publishedDate,
       tags: post.tags,
+      images: [
+        {
+          url: absoluteUrl(locale, "/opengraph-image"),
+          width: 1200,
+          height: 630,
+          alt: OG_IMAGE_ALT,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description,
     },
   }
 }
@@ -47,7 +74,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export const revalidate = 60
 
 export default async function BlogPostPage({ params }: Props) {
-  const { slug } = await params
+  const { locale, slug } = await params
+  setRequestLocale(locale)
   const post = await getPostBySlug(slug)
 
   if (!post) {
@@ -55,7 +83,7 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   const formattedDate = new Date(post.publishedDate).toLocaleDateString(
-    "en-US",
+    locale,
     {
       year: "numeric",
       month: "long",
@@ -63,8 +91,27 @@ export default async function BlogPostPage({ params }: Props) {
     }
   )
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description || undefined,
+    datePublished: post.publishedDate,
+    dateModified: post.publishedDate,
+    author: {
+      "@type": "Person",
+      name: "Sagdi Formanov",
+      url: SITE_URL,
+    },
+    keywords: post.tags?.length ? post.tags.join(", ") : undefined,
+    inLanguage: locale,
+    url: `${SITE_URL}/blog/${slug}`,
+    mainEntityOfPage: `${SITE_URL}/blog/${slug}`,
+  }
+
   return (
     <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+      <JsonLd data={structuredData} />
       {/* Header */}
       <header className="mb-8">
         <h1 className="text-4xl font-bold tracking-tight mb-4">{post.title}</h1>

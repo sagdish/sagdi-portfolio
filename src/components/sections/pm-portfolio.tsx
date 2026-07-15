@@ -2,49 +2,30 @@
 
 import * as React from "react"
 import clsx from "clsx"
+import { useTranslations } from "next-intl"
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
 
-export const PM_CARDS = [
-  {
-    title: "Product Leadership",
-    description:
-      "Led teams to launch customer-facing features and improve engagement through full product lifecycle management",
-  },
-  {
-    title: "Technical Foundation",
-    description:
-      "Software development background enabling effective collaboration with engineering teams",
-  },
-  {
-    title: "User & Business Focus",
-    description:
-      "Building products that balance user needs with business objectives and measurable outcomes",
-  },
-  {
-    title: "Cross-Functional",
-    description:
-      "Transparent collaboration across design, engineering, and stakeholders from research to Agile delivery",
-  },
-  {
-    title: "Values",
-    description:
-      "AI evolves faster than we can adapt. Embracing the discomfort, keep learning, and keep building.",
-  },
-]
+// Order of the highlight cards; copy lives in messages under `pmCards.<key>`.
+const CARD_KEYS = [
+  "leadership",
+  "technical",
+  "focus",
+  "crossFunctional",
+  "values",
+] as const
 
 interface CardWithId {
   id: string
-  title: string
-  description: string
+  key: (typeof CARD_KEYS)[number]
 }
 
 export function PMPortfolioSection() {
+  const t = useTranslations("pmCards")
   const scrollContainerRef = React.useRef<HTMLDivElement>(null)
   const [isPaused, setIsPaused] = React.useState(false)
 
@@ -52,11 +33,10 @@ export function PMPortfolioSection() {
   const createCardSets = React.useMemo(() => {
     const sets: CardWithId[] = []
     for (let setIndex = 0; setIndex < 3; setIndex++) {
-      PM_CARDS.forEach((card, cardIndex) => {
+      CARD_KEYS.forEach((key, cardIndex) => {
         sets.push({
-          id: `${setIndex}-${cardIndex}-${card.title}`,
-          title: card.title,
-          description: card.description,
+          id: `${setIndex}-${cardIndex}-${key}`,
+          key,
         })
       })
     }
@@ -85,7 +65,7 @@ export function PMPortfolioSection() {
       {/* Header */}
       <div className="mb-[0.9rem] text-center sm:mb-[1.2rem] lg:mb-[0.9rem]">
         <h2 className="text-base font-bold tracking-tight text-muted-foreground sm:text-2xl">
-          Highlights
+          {t("heading")}
         </h2>
       </div>
 
@@ -115,10 +95,10 @@ export function PMPortfolioSection() {
                 <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100 bg-gradient-to-br from-primary/5 to-primary/10" />
                 <CardHeader className="px-5 lg:px-4">
                   <CardTitle className="text-sm font-semibold sm:text-base lg:text-sm">
-                    {card.title}
+                    {t(`${card.key}.title`)}
                   </CardTitle>
                   <CardDescription className="text-sm sm:text-sm lg:text-xs">
-                    {card.description}
+                    {t(`${card.key}.description`)}
                   </CardDescription>
                 </CardHeader>
               </Card>

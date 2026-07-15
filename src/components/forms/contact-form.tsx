@@ -1,9 +1,11 @@
 "use client"
 
 import * as React from "react"
+import { useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 
 export function ContactForm() {
+  const t = useTranslations("contactForm")
   const [status, setStatus] = React.useState<
     "idle" | "submitting" | "success" | "error"
   >("idle")
@@ -29,13 +31,13 @@ export function ContactForm() {
       })
       if (!res.ok) {
         const data = await res.json().catch(() => ({}))
-        throw new Error(data?.error || "Failed to send")
+        throw new Error(data?.error || t("failedToSend"))
       }
       setStatus("success")
       form.reset()
     } catch (err: unknown) {
       setStatus("error")
-      const msg = err instanceof Error ? err.message : "Something went wrong"
+      const msg = err instanceof Error ? err.message : t("genericError")
       setError(msg)
     }
   }
@@ -45,7 +47,7 @@ export function ContactForm() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="block text-sm font-medium">
-            Name
+            {t("name")}
           </label>
           <input
             id="name"
@@ -57,7 +59,7 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="email" className="block text-sm font-medium">
-            Email
+            {t("email")}
           </label>
           <input
             id="email"
@@ -71,7 +73,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="message" className="block text-sm font-medium">
-          Message
+          {t("message")}
         </label>
         <textarea
           id="message"
@@ -94,11 +96,11 @@ export function ContactForm() {
 
       <div className="flex items-center gap-3">
         <Button type="submit" disabled={status === "submitting"}>
-          {status === "submitting" ? "Sending..." : "Send message"}
+          {status === "submitting" ? t("sending") : t("send")}
         </Button>
         {status === "success" && (
           <span className="text-sm text-green-600 dark:text-green-400">
-            Sent!
+            {t("sent")}
           </span>
         )}
         {status === "error" && (

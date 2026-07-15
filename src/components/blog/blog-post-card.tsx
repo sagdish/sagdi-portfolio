@@ -1,5 +1,6 @@
-import Link from "next/link"
 import { Calendar, Tag } from "lucide-react"
+import { useLocale } from "next-intl"
+import { Link } from "@/i18n/navigation"
 import type { BlogPost } from "@/types/blog"
 
 type Props = {
@@ -7,8 +8,9 @@ type Props = {
 }
 
 export function BlogPostCard({ post }: Props) {
+  const locale = useLocale()
   const formattedDate = new Date(post.publishedDate).toLocaleDateString(
-    "en-US",
+    locale,
     {
       year: "numeric",
       month: "long",

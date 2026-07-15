@@ -1,13 +1,14 @@
-import Link from "next/link"
+import { useTranslations } from "next-intl"
+import { Link } from "@/i18n/navigation"
 import { Github, Instagram, Linkedin } from "lucide-react"
 
 const navigation = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Projects", href: "/projects" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
-]
+  { key: "home", href: "/" },
+  { key: "about", href: "/about" },
+  { key: "projects", href: "/projects" },
+  { key: "blog", href: "/blog" },
+  { key: "contact", href: "/contact" },
+] as const
 
 const socialLinks = [
   {
@@ -28,22 +29,23 @@ const socialLinks = [
 ]
 
 export function Footer() {
+  const t = useTranslations()
   return (
     <footer className="border-t">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
-              Navigation
+              {t("footer.navHeading")}
             </h3>
             <ul className="mt-4 space-y-2">
               {navigation.map((item) => (
-                <li key={item.name}>
+                <li key={item.key}>
                   <Link
                     href={item.href}
                     className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                   >
-                    {item.name}
+                    {t(`nav.${item.key}`)}
                   </Link>
                 </li>
               ))}
@@ -52,7 +54,7 @@ export function Footer() {
 
           <div>
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
-              Connect
+              {t("footer.connect")}
             </h3>
             <div className="mt-4 flex space-x-4">
               {socialLinks.map((item) => (
@@ -73,15 +75,15 @@ export function Footer() {
           <div>
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white"></h3>
             <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
-              Product Manager specializing in cross-functional team leadership
-              and product strategy in the travel tech industry.
+              {t("footer.bio")}
             </p>
           </div>
         </div>
 
         <div className="mt-8 border-t pt-8">
           <p className="text-center text-sm text-gray-600 dark:text-gray-400">
-            © {new Date().getFullYear()} Sagdi Formanov. All rights reserved.
+            © {new Date().getFullYear()} {t("common.fullName")}.{" "}
+            {t("footer.rights")}
           </p>
         </div>
       </div>

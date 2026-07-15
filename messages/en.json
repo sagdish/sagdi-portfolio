@@ -1,0 +1,143 @@
+{
+  "common": {
+    "fullName": "Sagdi Formanov",
+    "localeName": "English"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "blog": "Blog",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "toggleTheme": "Toggle theme",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeAuto": "Auto",
+    "changeLanguage": "Change language",
+    "logoAlt": "Sagdi logo",
+    "homeSr": "Home"
+  },
+  "home": {
+    "role": "Product Manager & PO (PSPO I)",
+    "build": "🔧 I build products, and sometimes write about it.",
+    "photograph": "📸 I photograph moments, read about psychology, and try to make sense of things."
+  },
+  "pmCards": {
+    "heading": "Highlights",
+    "leadership": {
+      "title": "Product Leadership",
+      "description": "Led teams to launch customer-facing features and improve engagement through full product lifecycle management"
+    },
+    "technical": {
+      "title": "Technical Foundation",
+      "description": "Software development background enabling effective collaboration with engineering teams"
+    },
+    "focus": {
+      "title": "User & Business Focus",
+      "description": "Building products that balance user needs with business objectives and measurable outcomes"
+    },
+    "crossFunctional": {
+      "title": "Cross-Functional",
+      "description": "Transparent collaboration across design, engineering, and stakeholders from research to Agile delivery"
+    },
+    "values": {
+      "title": "Values",
+      "description": "AI evolves faster than we can adapt. Embracing the discomfort, keep learning, and keep building."
+    }
+  },
+  "about": {
+    "badge": "Hey!",
+    "title": "About Me",
+    "intro": "Hey, I'm Sagdi. I went from Automobile Engineering through Dev & Design to Product Management. That weird path is why I build things to learn.",
+    "collects": "This space collects what I build, think and notice, a mix of:",
+    "philosophicalLabel": "Philosophical clarity:",
+    "philosophical": "figuring myself out, going deep, questioning the world",
+    "craftLabel": "Professional craft:",
+    "craft": "product management, systems thinking, leadership & empathy.",
+    "reflectionLabel": "Self reflection:",
+    "reflection": "journaling, photography, reflection and physical training.",
+    "moreIntro": "If you want to get a better sense of who I am beyond the professional part,",
+    "moreLink": "read this entry."
+  },
+  "projects": {
+    "title": "Projects",
+    "pilot": {
+      "description": "AI-powered momentum tracker for professionals struggling with cognitive overload. Uses AI to analyze your goals and create personalized 4-week tracking cycles focused on energy and momentum over time-based productivity. Full-stack Next.js app.",
+      "imageAlt": "ReguSelf app interface showing AI-powered goal analysis and tracking features"
+    },
+    "guide": {
+      "description": "A comprehensive, practical resource for aspiring and experienced product managers. Covers core PM concepts, frameworks, and real-world applications to help you excel in product management roles.",
+      "imageAlt": "The Ultimate Guide to Product Management resource preview"
+    },
+    "context": {
+      "description": "Your AI-powered knowledge graph that discovers surprising connections between ideas. Currently in active development with new graph visualizations shipping weekly.",
+      "imageAlt": "Context Collapse knowledge graph interface preview",
+      "status": "In development"
+    }
+  },
+  "projectCard": {
+    "view": "View",
+    "opensNewTab": "(opens in a new tab)",
+    "imagePlaceholder": "Image placeholder"
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "Get in touch via email or social links."
+  },
+  "contactForm": {
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send message",
+    "sending": "Sending...",
+    "sent": "Sent!",
+    "genericError": "Something went wrong",
+    "failedToSend": "Failed to send"
+  },
+  "blog": {
+    "title": "Blog",
+    "intro": "Sometimes I write to make sense of things.",
+    "empty": "Posts will appear here once published.",
+    "topics": "Topics",
+    "all": "All",
+    "noPostsTagged": "No posts tagged with {tag} yet."
+  },
+  "footer": {
+    "navHeading": "Navigation",
+    "connect": "Connect",
+    "bio": "Product Manager specializing in cross-functional team leadership and product strategy.",
+    "rights": "All rights reserved."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you are looking for doesn’t exist or has been moved.",
+    "back": "Go back home"
+  },
+  "meta": {
+    "siteName": "Sagdi Formanov",
+    "jobTitle": "Product Manager",
+    "default": {
+      "title": "Sagdi Formanov — Product Manager | Bay Area",
+      "description": "Experienced Product Manager specializing in cross-functional team leadership and product strategy.",
+      "keywords": "product manager, Bay Area, cross-functional teams, product strategy"
+    },
+    "about": {
+      "title": "About",
+      "description": "About Sagdi Formanov, a Product Manager based in the Bay Area."
+    },
+    "projects": {
+      "title": "Projects",
+      "description": "Portfolio projects by Sagdi Formanov."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Get in touch with Sagdi Formanov."
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Articles and insights on product management, strategy, and leadership or random thoughts by Sagdi Formanov."
+    }
+  }
+}

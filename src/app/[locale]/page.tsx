@@ -2,14 +2,15 @@
 
 import * as React from "react"
 import { useTheme } from "next-themes"
+import { useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import { Particles } from "@/components/ui/particles"
-import Link from "next/link"
-import Image from "next/image"
+import { Link } from "@/i18n/navigation"
 import { PMPortfolioSection } from "@/components/sections/pm-portfolio"
 import { Settings, Mail } from "lucide-react"
 
 export default function Home() {
+  const t = useTranslations()
   const { resolvedTheme } = useTheme()
   const [color, setColor] = React.useState("#ffffff")
 
@@ -42,16 +43,15 @@ export default function Home() {
             {/* H1 with blue text instead of blue background */}
             <div className="mt-4 relative z-10">
               <h1 className="whitespace-wrap text-center text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-[#4686EB]">
-                Sagdi Formanov
+                {t("common.fullName")}
               </h1>
             </div>
             <h2 className="mt-6 max-w-2xl px-3 text-[1.1rem] font-medium leading-7 text-gray-800 dark:text-gray-300 md:px-0 md:text-xl md:leading-8">
-              Product Manager & PO (PSPO I)
+              {t("home.role")}
               <br />
-              🔧 I build products, and sometimes write about it.
+              {t("home.build")}
               <br />
-              📸 I photograph moments, read about psychology, and try to make
-              sense of things.
+              {t("home.photograph")}
               <br />
             </h2>
             {/* CTA back in-column (center mobile, left md+) */}
@@ -64,7 +64,7 @@ export default function Home() {
               >
                 <Link href="/projects" className="flex items-center gap-2">
                   <Settings className="h-5 w-5" />
-                  Projects
+                  {t("nav.projects")}
                 </Link>
               </Button>
               <Button
@@ -75,7 +75,7 @@ export default function Home() {
               >
                 <Link href="/contact" className="flex items-center gap-2">
                   <Mail className="h-5 w-5" />
-                  Contact
+                  {t("nav.contact")}
                 </Link>
               </Button>
             </div>

@@ -1,0 +1,143 @@
+{
+  "common": {
+    "fullName": "Sagdi Formanov",
+    "localeName": "O‘zbek"
+  },
+  "nav": {
+    "home": "Bosh sahifa",
+    "about": "Men haqimda",
+    "projects": "Loyihalar",
+    "blog": "Blog",
+    "contact": "Aloqa",
+    "openMenu": "Menyuni ochish",
+    "closeMenu": "Menyuni yopish",
+    "toggleTheme": "Mavzuni almashtirish",
+    "themeLight": "Yorugʻ",
+    "themeDark": "Qorongʻi",
+    "themeAuto": "Avto",
+    "changeLanguage": "Tilni almashtirish",
+    "logoAlt": "Sagdi logotipi",
+    "homeSr": "Bosh sahifa"
+  },
+  "home": {
+    "role": "Product Manager va PO (PSPO I)",
+    "build": "🔧 Productlar yarataman va ba'zan bu haqda yozaman.",
+    "photograph": "📸 Lahzalarni suratga olaman, psixologiya haqida o‘qiyman va narsalarni anglashga harakat qilaman."
+  },
+  "pmCards": {
+    "heading": "Malakalar",
+    "leadership": {
+      "title": "Product yetakchiligi",
+      "description": "Mijozlarga yo‘naltirilgan funksiyalarni ishga tushirishda jamoalarni boshqarib, Productning to‘liq hayotiy siklini boshqarish orqali jalb qilinishni oshirdim"
+    },
+    "technical": {
+      "title": "Texnik poydevor",
+      "description": "Muhandislik jamoalari bilan samarali hamkorlik qilishga imkon beruvchi dasturiy ta'minot ishlab chiqish tajribasi"
+    },
+    "focus": {
+      "title": "Foydalanuvchi va biznesga e'tibor",
+      "description": "Foydalanuvchi ehtiyojlarini biznes maqsadlari va o‘lchanadigan natijalar bilan muvozanatlaydigan Productlar yaratish"
+    },
+    "crossFunctional": {
+      "title": "Kross-funksionallik",
+      "description": "Tadqiqotdan Agile yetkazib berishgacha dizayn, muhandislik va manfaatdor tomonlar o‘rtasida shaffof hamkorlik"
+    },
+    "values": {
+      "title": "Qadriyatlar",
+      "description": "Sun'iy intellekt biz moslasha oladigandan tezroq rivojlanmoqda. Noqulaylikni qabul qilib, o‘rganishda va yaratishda davom etaman."
+    }
+  },
+  "about": {
+    "badge": "Salom!",
+    "title": "Men haqimda",
+    "intro": "Salom, ismim Sagdi. Men avtomobil muhandisligidan dasturlash va dizayn orqali Product Managementga o‘tdim. Aynan shu noodatiy yo‘l meni o‘rganish uchun narsalar yaratishga undaydi.",
+    "collects": "Bu yerda men yaratgan, o‘ylagan va sezgan narsalarimni to‘playman – aralashmasi:",
+    "philosophicalLabel": "Falsafiy oydinlik:",
+    "philosophical": "o‘zimni anglash, chuqur ketish, dunyoni savol ostiga qo‘yish",
+    "craftLabel": "Kasbiy mahorat:",
+    "craft": "Product Management, tizimli fikrlash, yetakchilik va empatiya.",
+    "reflectionLabel": "O‘z-o‘zini tahlil:",
+    "reflection": "kundalik yuritish, fotografiya, mulohaza va jismoniy mashqlar.",
+    "moreIntro": "Agar meni kasbdan tashqarida ham yaxshiroq bilishni istasangiz,",
+    "moreLink": "ushbu yozuvni o‘qing."
+  },
+  "projects": {
+    "title": "Loyihalar",
+    "pilot": {
+      "description": "Kognitiv yuklamadan aziyat chekayotgan mutaxassislar uchun sun'iy intellektga asoslangan sur'at kuzatuvchisi. Maqsadlaringizni tahlil qilib, vaqtga asoslangan samaradorlik o‘rniga energiya va sur'atga qaratilgan shaxsiy 4 haftalik kuzatuv sikllarini yaratadi. To‘liq Next.js ilovasi.",
+      "imageAlt": "ReguSelf ilovasi interfeysi: sun'iy intellekt yordamida maqsad tahlili va kuzatuv funksiyalari"
+    },
+    "guide": {
+      "description": "Boshlovchi va tajribali Product Managerlar uchun to‘liq, amaliy manba. Product Management rolida muvaffaqiyat qozonishga yordam beruvchi asosiy tushunchalar, freymvorklar va real misollarni qamrab oladi.",
+      "imageAlt": "«Product Management bo‘yicha to‘liq qo‘llanma» resursining ko‘rinishi"
+    },
+    "context": {
+      "description": "G‘oyalar o‘rtasidagi kutilmagan bog‘lanishlarni topadigan, sun'iy intellektga asoslangan bilim grafingiz. Hozir faol ishlab chiqilmoqda — yangi graf vizualizatsiyalari har hafta chiqmoqda.",
+      "imageAlt": "Context Collapse bilim grafi interfeysi ko‘rinishi",
+      "status": "Ishlab chiqilmoqda"
+    }
+  },
+  "projectCard": {
+    "view": "Ochish",
+    "opensNewTab": "(yangi oynada ochiladi)",
+    "imagePlaceholder": "Rasm o‘rni"
+  },
+  "contact": {
+    "title": "Aloqa",
+    "intro": "Elektron pochta yoki ijtimoiy tarmoqlar orqali bog‘laning."
+  },
+  "contactForm": {
+    "name": "Ism",
+    "email": "Elektron pochta",
+    "message": "Xabar",
+    "send": "Xabar yuborish",
+    "sending": "Yuborilmoqda...",
+    "sent": "Yuborildi!",
+    "genericError": "Nimadir noto‘g‘ri ketdi",
+    "failedToSend": "Yuborib bo‘lmadi"
+  },
+  "blog": {
+    "title": "Blog",
+    "intro": "Ba'zan narsalarni anglash uchun yozaman.",
+    "empty": "Yozuvlar chop etilgach shu yerda paydo bo‘ladi.",
+    "topics": "Mavzular",
+    "all": "Barchasi",
+    "noPostsTagged": "Hozircha {tag} tegli yozuvlar yo‘q."
+  },
+  "footer": {
+    "navHeading": "Navigatsiya",
+    "connect": "Bog‘lanish",
+    "bio": "Kross-funksional jamoalarni boshqarish va Product strategiyasiga ixtisoslashgan Product Manager.",
+    "rights": "Barcha huquqlar himoyalangan."
+  },
+  "notFound": {
+    "title": "Sahifa topilmadi",
+    "body": "Siz qidirayotgan sahifa mavjud emas yoki ko‘chirilgan.",
+    "back": "Bosh sahifaga qaytish"
+  },
+  "meta": {
+    "siteName": "Sagdi Formanov",
+    "jobTitle": "Product Manager",
+    "default": {
+      "title": "Sagdi Formanov — Product Manager | Bay Area",
+      "description": "Kross-funksional jamoalarni boshqarish va Product strategiyasiga ixtisoslashgan tajribali Product Manager.",
+      "keywords": "product manager, Bay Area, kross-funksional jamoalar, Product strategiyasi"
+    },
+    "about": {
+      "title": "Men haqimda",
+      "description": "Sagdi Formanov haqida — Bay Area'dagi Product Manager."
+    },
+    "projects": {
+      "title": "Loyihalar",
+      "description": "Sagdi Formanovning portfolio loyihalari."
+    },
+    "contact": {
+      "title": "Aloqa",
+      "description": "Sagdi Formanov bilan bog‘laning."
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Sagdi Formanovdan Product Management, strategiya va yetakchilik haqida maqolalar yoki tasodifiy fikrlar."
+    }
+  }
+}

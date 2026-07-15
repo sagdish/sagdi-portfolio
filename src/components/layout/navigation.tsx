@@ -1,35 +1,26 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
 import Image from "next/image"
-import { usePathname } from "next/navigation"
-import { useTheme } from "next-themes"
-import {
-  Menu,
-  Moon,
-  Sun,
-  X,
-  Home,
-  User,
-  Settings,
-  PenLine,
-  Mail,
-} from "lucide-react"
+import { useTranslations } from "next-intl"
+import { Link, usePathname } from "@/i18n/navigation"
+import { Menu, X, Home, User, Settings, PenLine, Mail } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { BorderBeam } from "@/components/ui/border-beam"
+import { LanguageSwitcher } from "./language-switcher"
+import { ThemeToggle } from "./theme-toggle"
 
 const navigation = [
-  { name: "Home", href: "/", icon: Home },
-  { name: "About", href: "/about", icon: User },
-  { name: "Projects", href: "/projects", icon: Settings },
-  { name: "Blog", href: "/blog", icon: PenLine },
-  { name: "Contact", href: "/contact", icon: Mail },
-]
+  { key: "home", href: "/", icon: Home },
+  { key: "about", href: "/about", icon: User },
+  { key: "projects", href: "/projects", icon: Settings },
+  { key: "blog", href: "/blog", icon: PenLine },
+  { key: "contact", href: "/contact", icon: Mail },
+] as const
 
 export function Navigation() {
-  const { theme, setTheme } = useTheme()
+  const t = useTranslations("nav")
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
@@ -50,7 +41,7 @@ export function Navigation() {
             {/* Mobile hamburger (left) */}
             <Button
               className="md:hidden"
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-label={mobileOpen ? t("closeMenu") : t("openMenu")}
               aria-expanded={mobileOpen}
               aria-controls="mobile-nav"
               variant="ghost"
@@ -67,13 +58,13 @@ export function Navigation() {
             <Link href="/" className="flex items-center gap-2">
               <Image
                 src="/chrome.png"
-                alt="Sagdi logo"
+                alt={t("logoAlt")}
                 width={38}
                 height={38}
                 className="rounded"
                 priority
               />
-              <span className="sr-only">Home</span>
+              <span className="sr-only">{t("homeSr")}</span>
             </Link>
           </div>
 
@@ -83,7 +74,7 @@ export function Navigation() {
               const isActive = pathname === item.href
               return (
                 <Link
-                  key={item.name}
+                  key={item.key}
                   href={item.href}
                   className={`text-base transition-colors ${
                     isActive
@@ -91,57 +82,42 @@ export function Navigation() {
                       : "text-foreground/80 hover:text-foreground"
                   }`}
                 >
-                  {item.name}
+                  {t(item.key)}
                 </Link>
               )
             })}
           </div>
 
-          {/* Desktop right side: CTA + theme */}
-          <div className="hidden md:flex items-center gap-4">
-            <Button
-              aria-label="Toggle theme"
-              variant="ghost"
-              size="sm"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            </Button>
+          {/* Desktop right side: language + theme + CTA */}
+          <div className="hidden md:flex items-center gap-3">
+            <LanguageSwitcher />
+            <ThemeToggle mode="cycle" />
             <div className="relative rounded-md">
               <Button asChild size="sm">
-                <Link
+                <a
                   href="https://pilotyourself.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  pilotyourself - <span className="text-red-500">live</span>
-                </Link>
+                  ReguSelf - <span className="text-red-500">live</span>
+                </a>
               </Button>
               <BorderBeam size={50} duration={8} borderWidth={1} />
             </div>
           </div>
 
-          {/* Mobile right: CTA + theme */}
+          {/* Mobile right: language switcher (replaces theme) + CTA */}
           <div className="md:hidden flex items-center gap-3">
-            <Button
-              aria-label="Toggle theme"
-              variant="ghost"
-              size="sm"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            </Button>
+            <LanguageSwitcher />
             <div className="relative rounded-md">
               <Button asChild size="sm">
-                <Link
+                <a
                   href="https://pilotyourself.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  pilotyourself - <span className="text-red-500">live</span>
-                </Link>
+                  ReguSelf - <span className="text-red-500">live</span>
+                </a>
               </Button>
               <BorderBeam size={70} duration={8} borderWidth={2} />
             </div>
@@ -164,7 +140,7 @@ export function Navigation() {
                 const isActive = pathname === item.href
                 return (
                   <Link
-                    key={item.name}
+                    key={item.key}
                     href={item.href}
                     className={`flex items-center gap-2 text-base ${
                       isActive
@@ -174,10 +150,13 @@ export function Navigation() {
                     onClick={() => setMobileOpen(false)}
                   >
                     <Icon className="h-5 w-5" />
-                    {item.name}
+                    {t(item.key)}
                   </Link>
                 )
               })}
+
+              {/* Theme controls live here on mobile (top bar holds the language switcher) */}
+              <ThemeToggle mode="options" />
             </nav>
           </div>
         </div>
