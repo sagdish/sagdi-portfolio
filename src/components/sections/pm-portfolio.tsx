@@ -43,12 +43,19 @@ export function PMPortfolioSection() {
     return sets
   }, [])
 
-  // Handle mouse wheel horizontal scroll
-  const handleWheel = React.useCallback((e: React.WheelEvent) => {
-    if (scrollContainerRef.current) {
+  // Handle mouse wheel horizontal scroll.
+  // Registered as a native, non-passive listener so preventDefault() is honored —
+  // React's synthetic onWheel is passive, which no-ops preventDefault and floods
+  // the console with "Unable to preventDefault inside passive event listener".
+  React.useEffect(() => {
+    const el = scrollContainerRef.current
+    if (!el) return
+    const onWheel = (e: WheelEvent) => {
       e.preventDefault()
-      scrollContainerRef.current.scrollLeft += e.deltaY
+      el.scrollLeft += e.deltaY
     }
+    el.addEventListener("wheel", onWheel, { passive: false })
+    return () => el.removeEventListener("wheel", onWheel)
   }, [])
 
   // Handle pause/resume events
@@ -73,7 +80,6 @@ export function PMPortfolioSection() {
       <div className="relative">
         <div
           ref={scrollContainerRef}
-          onWheel={handleWheel}
           onMouseEnter={handlePause}
           onMouseLeave={handleResume}
           onTouchStart={handlePause}
