@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "siteName": "Sagdi Formanov",
+    "jobTitle": "Builder — design, full-stack, product",
+    "default": {
+      "title": "Sagdi Formanov — building in public",
+      "description": "I build small, honest software and write about building it. Live products, works in progress, and notes from the build.",
+      "keywords": "Sagdi Formanov, builder, product, full-stack, indie software, building in public, ReguSelf"
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "building": "Building",
+    "writing": "Writing",
+    "work": "Work with me",
+    "workShort": "Work",
+    "changeLanguage": "Change language"
+  },
+  "shell": {
+    "subscribe": "Subscribe",
+    "theme": "Theme",
+    "themeLight": "Light",
+    "themeAuto": "Auto",
+    "themeDark": "Dark",
+    "brandTag": "building in public",
+    "menu": "Menu",
+    "language": "Language"
+  },
+  "home": {
+    "name": "Sagdi Formanov",
+    "titleLine1": "I build things,",
+    "titleLine2": "and write about building them.",
+    "lede": "Design → full-stack → product. I make small, honest software and think out loud while I do it.",
+    "ctaPrimary": "See what I'm building",
+    "ctaSecondary": "Read the writing",
+    "nowLabel": "Building now",
+    "nowText": "Shipping a public hub, keeping <reguself>ReguSelf</reguself> moving, and running my life out of a personal OS.",
+    "cards": {
+      "building": {
+        "k": "01 — Building",
+        "title": "The things I ship",
+        "text": "Live products and works in progress. Proof, not a portfolio grid.",
+        "cta": "Explore"
+      },
+      "writing": {
+        "k": "02 — Writing",
+        "title": "Notes from the build",
+        "text": "Essays on product, AI, and building a life like a codebase.",
+        "cta": "Read"
+      },
+      "work": {
+        "k": "03 — Work with me",
+        "title": "Let's talk",
+        "text": "Open to product roles and the right collaborations.",
+        "cta": "Get in touch"
+      }
+    },
+    "subscribe": {
+      "heading": "Get the next thing I make.",
+      "text": "New builds and essays, straight to your inbox. No noise, no schedule I can't keep.",
+      "hint": "prototype — not wired to a backend yet",
+      "button": "Subscribe",
+      "ok": "You're on the list ✓  (prototype — nothing was actually sent)"
+    }
+  },
+  "building": {
+    "eyebrow": "Building",
+    "title": "Proof I build, not a portfolio.",
+    "lede": "Live products up top, works-in-progress below. Statuses are the real ones from my own system.",
+    "readMore": "read more",
+    "visit": "Visit",
+    "statusLive": "Live · in-progress",
+    "statusProgress": "In-progress",
+    "statusPreStart": "Pre-start",
+    "statusParked": "Parked",
+    "back": "Back to Building"
+  },
+  "writing": {
+    "eyebrow": "Writing",
+    "title": "Notes from the build.",
+    "lede": "Product, AI, and running a life like a codebase.",
+    "all": "All",
+    "sampleNote": "sample posts — real ones connect from Notion",
+    "back": "Back to Writing",
+    "subscribe": {
+      "heading": "Subscribe.",
+      "text": "Get new essays and builds in your inbox. That's the whole pitch.",
+      "hint": "prototype — not wired to a backend yet",
+      "button": "Subscribe",
+      "ok": "You're on the list ✓  (prototype — nothing was actually sent)"
+    },
+    "elsewhere": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "x": "X / Twitter"
+    }
+  },
+  "work": {
+    "eyebrow": "Work with me",
+    "title": "Let's build something.",
+    "prose1": "I'm Sagdi — I started in design, learned to ship full-stack, and moved into product. I like small teams, honest software, and problems where taste and engineering both matter.",
+    "prose2": "Right now I'm looking for a product role where I can build, not just manage. If that's the kind of person you're after, I'd like to talk.",
+    "ctaReach": "Reach out",
+    "ctaSite": "sagdi.com",
+    "footerCopyright": "© 2026 Sagdi Formanov"
+  }
+}
