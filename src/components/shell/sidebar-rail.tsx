@@ -5,6 +5,7 @@ import { Link, usePathname } from "@/i18n/navigation"
 import { LanguageSwitcher } from "@/components/layout/language-switcher"
 import { cn } from "@/lib/utils"
 import { NAV_ITEMS, isActivePath } from "./nav"
+import { RailPet } from "./rail-pet"
 import { SubscribeButton } from "./subscribe-button"
 import { ThemeControl } from "./theme-control"
 
@@ -46,6 +47,8 @@ export function SidebarRail() {
           )
         })}
       </nav>
+
+      <RailPet />
 
       <div className="rail-foot">
         <div className="rail-foot-top">
