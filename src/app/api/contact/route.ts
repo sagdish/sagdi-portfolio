@@ -51,7 +51,7 @@ export async function POST(req: Request) {
 
     const subject = `New message from ${name}`
     const html = `
-      <div style="font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6;color:#111">
+      <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6;color:#111">
         <h2 style="margin:0 0 8px 0">Portfolio Contact</h2>
         <p style="margin:0 0 8px 0"><strong>Name:</strong> ${escapeHtml(name)}</p>
         <p style="margin:0 0 8px 0"><strong>Email:</strong> ${escapeHtml(email)}</p>

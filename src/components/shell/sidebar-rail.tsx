@@ -28,19 +28,23 @@ export function SidebarRail() {
       </Link>
 
       <nav className="nav">
-        {NAV_ITEMS.map(({ href, key, icon: Icon }) => (
-          <Link
-            key={key}
-            href={href}
-            title={tn(key)}
-            className={cn(isActivePath(pathname, href) && "active")}
-          >
-            <span className="ic">
-              <Icon size={16} strokeWidth={2} />
-            </span>
-            <span className="lbl">{tn(key)}</span>
-          </Link>
-        ))}
+        {NAV_ITEMS.map(({ href, key, icon: Icon }) => {
+          const active = isActivePath(pathname, href)
+          return (
+            <Link
+              key={key}
+              href={href}
+              title={tn(key)}
+              aria-current={active ? "page" : undefined}
+              className={cn(active && "active")}
+            >
+              <span className="ic">
+                <Icon size={16} strokeWidth={2} />
+              </span>
+              <span className="lbl">{tn(key)}</span>
+            </Link>
+          )
+        })}
       </nav>
 
       <div className="rail-foot">

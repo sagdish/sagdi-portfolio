@@ -48,7 +48,6 @@ export async function generateMetadata({
     keywords: t("default.keywords"),
     authors: [{ name: "Sagdi Formanov" }],
     alternates,
-    icons: { icon: "/favicon.ico", apple: "/chrome.png" },
     openGraph: {
       type: "website",
       siteName: t("siteName"),
@@ -173,12 +172,12 @@ export default async function LocaleLayout({
               <SidebarRail />
               <div className="main">
                 <TopPill />
-                <div className="content" id="scroller">
+                <main className="content" id="scroller">
                   <div className="wrap">
                     <UtilBar />
                     {children}
                   </div>
-                </div>
+                </main>
                 <BottomDock />
               </div>
             </div>

@@ -15,18 +15,22 @@ export function BottomDock() {
 
   return (
     <nav className="dock">
-      {NAV_ITEMS.map(({ href, dockKey, icon: Icon }) => (
-        <Link
-          key={dockKey}
-          href={href}
-          className={cn(isActivePath(pathname, href) && "active")}
-        >
-          <span className="ic">
-            <Icon size={18} strokeWidth={2} />
-          </span>
-          {tn(dockKey)}
-        </Link>
-      ))}
+      {NAV_ITEMS.map(({ href, dockKey, icon: Icon }) => {
+        const active = isActivePath(pathname, href)
+        return (
+          <Link
+            key={dockKey}
+            href={href}
+            aria-current={active ? "page" : undefined}
+            className={cn(active && "active")}
+          >
+            <span className="ic">
+              <Icon size={18} strokeWidth={2} />
+            </span>
+            {tn(dockKey)}
+          </Link>
+        )
+      })}
     </nav>
   )
 }

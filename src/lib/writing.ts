@@ -42,7 +42,3 @@ export async function listTags(): Promise<string[]> {
   }
   return Array.from(new Set(SAMPLE_POSTS.flatMap((p) => p.tags))).sort()
 }
-
-export function allSlugs(): string[] {
-  return SAMPLE_POSTS.map((p) => p.slug)
-}

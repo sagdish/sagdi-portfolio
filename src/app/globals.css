@@ -203,6 +203,15 @@
     color: var(--link);
     text-underline-offset: 2px;
   }
+  /* Visible keyboard focus (handoff §4e): accent outline on keyboard nav only.
+     Elements with their own focus (subform input, language switcher) keep theirs. */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
   ::selection {
     background: color-mix(in srgb, var(--accent) 26%, transparent);
   }

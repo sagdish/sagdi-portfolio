@@ -4,6 +4,9 @@ import { Reveal } from "@/components/ui/reveal"
 import { SubscribeBand } from "@/components/ui/subscribe-band"
 import { WritingList } from "@/components/writing/writing-list"
 
+// ISR: pick up new Notion posts without a rebuild (matches the post detail).
+export const revalidate = 60
+
 export default async function WritingPage({
   params,
 }: {
