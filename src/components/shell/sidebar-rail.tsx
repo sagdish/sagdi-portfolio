@@ -49,7 +49,7 @@ export function SidebarRail() {
 
       <div className="rail-foot">
         <div className="rail-foot-top">
-          <LanguageSwitcher />
+          <LanguageSwitcher openUp alignLeft />
           <SubscribeButton />
         </div>
         <div className="rail-foot-row">

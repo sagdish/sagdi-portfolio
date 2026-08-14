@@ -86,7 +86,15 @@ function Flag({ code, className }: { code: Locale; className?: string }) {
   )
 }
 
-export function LanguageSwitcher() {
+export function LanguageSwitcher({
+  openUp = false,
+  alignLeft = false,
+}: {
+  /** open the menu above the trigger (rail foot sits at the viewport bottom) */
+  openUp?: boolean
+  /** align the menu's left edge to the trigger (keeps it inside the narrow rail) */
+  alignLeft?: boolean
+} = {}) {
   const t = useTranslations("nav")
   const locale = useLocale() as Locale
   const pathname = usePathname()
@@ -146,7 +154,11 @@ export function LanguageSwitcher() {
         <div
           role="menu"
           aria-label={t("changeLanguage")}
-          className="absolute right-0 z-50 mt-2 min-w-[10rem] overflow-hidden rounded-[12px] border border-[var(--border)] bg-[var(--elevated)] p-1 shadow-[var(--shadow)]"
+          className={cn(
+            "absolute z-50 min-w-[10rem] overflow-hidden rounded-[12px] border border-[var(--border)] bg-[var(--elevated)] p-1 shadow-[var(--shadow)]",
+            alignLeft ? "left-0" : "right-0",
+            openUp ? "bottom-full mb-2" : "mt-2"
+          )}
         >
           {LANGUAGES.map(({ code, label }) => {
             const active = code === locale

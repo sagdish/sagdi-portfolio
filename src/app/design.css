@@ -24,7 +24,8 @@
   border-right: 1px solid var(--border);
   padding: 16px 12px;
 }
-.rail svg,
+/* Icon-only glyphs (lucide) — NOT the flag SVGs, which carry their own fills. */
+.rail .nav svg,
 .theme svg,
 .dock svg {
   fill: none;
