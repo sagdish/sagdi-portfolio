@@ -222,9 +222,9 @@ export function RailPet() {
       cv.style.width = `${petRect.width}px`
       cv.style.height = `${petRect.height}px`
       ctx.imageSmoothingEnabled = false
-      cat.boxX = 2 // the box lives on the left; the cat hides off the right edge
+      cat.boxX = 0 // box near the left edge; the cat hides off the right edge
       cat.floorY = bh - CAT_H - FLOORPAD
-      cat.x = clamp(cat.x, 0, bw - CAT_W)
+      cat.x = clamp(cat.x, cat.boxX, bw - CAT_W)
     }
 
     // ── cat + particles ──
@@ -269,6 +269,8 @@ export function RailPet() {
         e.clientX <= railRect.right &&
         e.clientY >= railRect.top &&
         e.clientY <= railRect.bottom
+      // cursor MOVEMENT inside the rail keeps it awake (a still cursor does not)
+      if (ptr.inRail) cat.lastActive = performance.now()
     }
     const pet = () => {
       const now = performance.now()
@@ -407,6 +409,19 @@ export function RailPet() {
       ctx.clearRect(0, 0, bw, bh)
       const boxOy = cat.floorY + (CAT_H - BOX_H)
 
+      // Pointer cursor only when hovering the box or the cat — not the empty rail.
+      const overBox =
+        ptr.x >= cat.boxX &&
+        ptr.x <= cat.boxX + CAT_W &&
+        ptr.y >= boxOy &&
+        ptr.y <= boxOy + BOX_H + 1
+      const overCat =
+        ptr.x >= cat.x &&
+        ptr.x <= cat.x + CAT_W &&
+        ptr.y >= cat.floorY &&
+        ptr.y <= cat.floorY + CAT_H
+      wrap.style.cursor = overBox || overCat ? "pointer" : "default"
+
       // ── boxed: just the closed box (its bed) ──
       if (cat.state === "boxed") {
         const jx = now < shakeUntil ? Math.round(Math.sin(now / 22)) : 0
@@ -459,10 +474,11 @@ export function RailPet() {
         cat.leftRail = now
       }
 
-      // Naps ~10s after the last pet (a click). Cursor presence — even following
-      // it around — no longer keeps it awake; only interacting with it does.
+      // Naps after 5s with no cursor movement in the rail — whether the cursor
+      // sits still or is off in the content. Moving it in the rail (or petting)
+      // keeps it awake.
       if (
-        now - cat.lastActive > 10000 &&
+        now - cat.lastActive > 5000 &&
         (cat.state === "idle" ||
           cat.state === "walk" ||
           cat.state === "lick" ||
@@ -613,16 +629,21 @@ export function RailPet() {
             cat.x += ((dir * 34) / 1000) * dt
             cat.bobT += dt
             yoff = -(Math.floor(cat.bobT / 140) % 2)
+            cat.stateT = 0 // reset so the hop-in below starts clean on arrival
             if (inRail && now - cat.lastActive < 300) {
               cat.state = "idle" // changed our mind — someone's back
             }
           } else {
             cat.x = cat.target
-            inBox = true
             cat.stateT += dt
-            const p = Math.min(1, cat.stateT / 420)
-            yoff = p * 8 // climbs down into the box
-            if (p >= 1) {
+            if (cat.stateT < 480) {
+              // a little hop up, then slide down into the open box
+              inBox = true
+              const p = cat.stateT / 480
+              yoff = -Math.sin(p * Math.PI) * 8 + p * 14
+            } else if (cat.stateT < 640) {
+              boxLid = true // the lid closes over it
+            } else {
               cat.state = "boxed"
               cat.stateT = 0
               boxedAt = now // start the ~5s sleep-z window
@@ -653,11 +674,21 @@ export function RailPet() {
         // opening: the shut box shudders side to side, cat still inside
         const jx = Math.round(Math.sin(now / 26))
         stamp(BOX_CLOSED, cat.boxX + jx, boxOy, boxColors())
+      } else if (inBox) {
+        // climbing in/out: box BACK behind, the cat clipped to the box so its
+        // lower half tucks inside, and box FRONT painted on top of the cat.
+        stamp(BOX_BACK, cat.boxX, boxOy, boxColors())
+        ctx.save()
+        ctx.beginPath()
+        ctx.rect(0, 0, bw, boxOy + BOX_H)
+        ctx.clip()
+        stamp(SIT, ox, oy, catColors())
+        drawEyes(ox, oy, lookR, closed)
+        ctx.restore()
+        stamp(BOX_FRONT, cat.boxX, boxOy, boxColors())
       } else {
-        // the open box (bed) sits at home. Complete while the cat roams; split
-        // into back + front only while it climbs in/out (passes through the front).
-        if (inBox) stamp(BOX_BACK, cat.boxX, boxOy, boxColors())
-        else stamp(BOX_OPEN, cat.boxX, boxOy, boxColors())
+        // roaming: the complete open box (bed) sits at home; the cat is in front.
+        stamp(BOX_OPEN, cat.boxX, boxOy, boxColors())
         stamp(SIT, ox, oy, catColors())
         drawEyes(ox, oy, lookR, closed)
 
@@ -674,7 +705,6 @@ export function RailPet() {
           ctx.fillRect(ox + 8, oy - 5, 1, 2)
           ctx.fillRect(ox + 8, oy - 2, 1, 1)
         }
-        if (inBox) stamp(BOX_FRONT, cat.boxX, boxOy, boxColors())
       }
 
       // hearts float up and fade

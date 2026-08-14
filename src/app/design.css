@@ -148,7 +148,7 @@
   padding: 0;
   border: 0;
   background: transparent;
-  cursor: pointer;
+  cursor: default; /* JS sets 'pointer' only over the box/cat */
   overflow: hidden;
 }
 .dark .rail-pet {
