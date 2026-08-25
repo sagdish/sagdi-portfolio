@@ -29,6 +29,7 @@ const CAT_W = 16
 const CAT_H = 16
 const BOX_H = 9
 const FLOORPAD = 4 // lift the whole scene off the footer for breathing room
+const AREA2_FROM = 0.6 // Area 2 (the "active" zone) is the bottom 40% of the column
 
 // Sitting cat, eyes blank (the two eyes are painted separately so they can move).
 const SIT: readonly string[] = [
@@ -269,12 +270,13 @@ export function RailPet() {
         e.clientX <= railRect.right &&
         e.clientY >= railRect.top &&
         e.clientY <= railRect.bottom
-      // cursor MOVEMENT inside the rail keeps it awake (a still cursor does not)
-      if (ptr.inRail) cat.lastActive = performance.now()
+      // Moving the cursor within Area 2 keeps it awake (a still cursor does not).
+      if (ptr.inRail && ptr.y > bh * AREA2_FROM) {
+        cat.lastActive = performance.now()
+      }
     }
     const pet = () => {
       const now = performance.now()
-      cat.lastActive = now
       cat.nextAction = now + rand(700, 1500)
       if (!reduced) {
         const cx = cat.x + CAT_W / 2 - 2
@@ -295,7 +297,6 @@ export function RailPet() {
       cat.state = "hatch"
       cat.stateT = 0
       cat.x = cat.boxX
-      cat.lastActive = performance.now()
     }
 
     const onClick = (e: MouseEvent) => {
@@ -426,8 +427,8 @@ export function RailPet() {
       if (cat.state === "boxed") {
         const jx = now < shakeUntil ? Math.round(Math.sin(now / 22)) : 0
         stamp(BOX_CLOSED, cat.boxX + jx, boxOy, boxColors())
-        // a few sleepy z's for ~5s after it dozes off, then it settles quietly
-        if (!reduced && revealedRef.current && now - boxedAt < 5000) {
+        // a few sleepy z's for ~3s after it dozes off, then it settles quietly
+        if (!reduced && revealedRef.current && now - boxedAt < 3000) {
           if (zeds.length < 1 && now - lastZ > 1400) {
             zeds.push({ x: cat.boxX + 12, y: boxOy - 2, life: 0 })
             lastZ = now
@@ -474,11 +475,13 @@ export function RailPet() {
         cat.leftRail = now
       }
 
-      // Naps after 5s with no cursor movement in the rail — whether the cursor
-      // sits still or is off in the content. Moving it in the rail (or petting)
-      // keeps it awake.
+      // Moving the cursor in Area 2 (lower zone by the box) is the only thing
+      // that keeps it awake — see onMove. It naps 10s after the last move while
+      // the cursor lingers in Area 2, or 5s once the cursor is up in Area 1 or
+      // out in the content.
+      const inArea2 = inRail && ptr.y > bh * AREA2_FROM
       if (
-        now - cat.lastActive > 5000 &&
+        now - cat.lastActive > (inArea2 ? 10000 : 5000) &&
         (cat.state === "idle" ||
           cat.state === "walk" ||
           cat.state === "lick" ||
@@ -498,7 +501,6 @@ export function RailPet() {
         if (Math.abs(dog.x - cat.x) < 9 && cat.state !== "startle") {
           cat.state = "startle"
           cat.startleT = now
-          cat.lastActive = now
         }
         if (dog.x > bw + 4 || dog.x < -DOG_W - 4) dog.active = false
       }
