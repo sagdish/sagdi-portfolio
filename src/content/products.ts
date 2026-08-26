@@ -32,6 +32,18 @@ export const PRODUCTS: Product[] = [
     placeholder: true,
   },
   {
+    slug: "pm-guide",
+    status: "live",
+    url: "https://pm-guide.vercel.app/",
+    title: "The Ultimate Guide to Product Management",
+    tagline: {
+      en: "A comprehensive, practical resource for aspiring and experienced product managers.",
+    },
+    body: {
+      en: "Covers core PM concepts, frameworks, and real-world applications to help you excel in product management roles.",
+    },
+  },
+  {
     slug: "sagdi-os",
     status: "progress",
     title: "Sagdi OS",
