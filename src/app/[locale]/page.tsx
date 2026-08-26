@@ -1,7 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server"
-import { Link } from "@/i18n/navigation"
 import { Reveal } from "@/components/ui/reveal"
-import { SubscribeBand } from "@/components/ui/subscribe-band"
 
 export default async function HomePage({
   params,
@@ -15,24 +13,39 @@ export default async function HomePage({
   const cards = [
     {
       href: "/building",
-      k: t("cards.building.k"),
-      title: t("cards.building.title"),
-      text: t("cards.building.text"),
-      cta: t("cards.building.cta"),
+      k: t("cards.build.k"),
+      title: t("cards.build.title"),
+      text: t("cards.build.text"),
+      cta: t("cards.build.cta"),
     },
     {
       href: "/writing",
-      k: t("cards.writing.k"),
-      title: t("cards.writing.title"),
-      text: t("cards.writing.text"),
-      cta: t("cards.writing.cta"),
+      k: t("cards.think.k"),
+      title: t("cards.think.title"),
+      text: t("cards.think.text"),
+      cta: t("cards.think.cta"),
     },
     {
-      href: "/work",
-      k: t("cards.work.k"),
-      title: t("cards.work.title"),
-      text: t("cards.work.text"),
-      cta: t("cards.work.cta"),
+      href: "/world",
+      k: t("cards.world.k"),
+      title: t("cards.world.title"),
+      text: t("cards.world.text"),
+      cta: t("cards.world.cta"),
+    },
+  ]
+
+  const elsewhere = [
+    {
+      label: t("elsewhere.linkedin"),
+      href: "https://linkedin.com/in/sagdi-formanov",
+    },
+    { label: t("elsewhere.github"), href: "https://github.com/sagdish" },
+    { label: t("elsewhere.instagram"), href: "https://instagram.com/forsi_ph" },
+    { label: t("elsewhere.telegram"), href: "https://t.me", pending: true },
+    {
+      label: t("elsewhere.threads"),
+      href: "https://www.threads.net",
+      pending: true,
     },
   ]
 
@@ -46,30 +59,6 @@ export default async function HomePage({
           {t("titleLine2")}
         </h1>
         <p className="lede">{t("lede")}</p>
-        <div className="cta">
-          <Link className="btn btn-primary" href="/building">
-            {t("ctaPrimary")} <span className="arw">→</span>
-          </Link>
-          <Link className="btn btn-ghost" href="/writing">
-            {t("ctaSecondary")}
-          </Link>
-        </div>
-        <div className="nowcard">
-          <span className="livedot" />
-          <div>
-            <div className="lbl">{t("nowLabel")}</div>
-            <div>
-              {t.rich("nowText", {
-                reguself: (chunks) => (
-                  <a href="https://reguself.com" target="_blank" rel="noopener">
-                    {chunks}
-                  </a>
-                ),
-              })}{" "}
-              <span className="sample">sample</span>
-            </div>
-          </div>
-        </div>
       </Reveal>
 
       <div style={{ height: 44 }} />
@@ -85,14 +74,57 @@ export default async function HomePage({
         ))}
       </div>
 
-      <SubscribeBand
-        style={{ marginTop: 44 }}
-        heading={t("subscribe.heading")}
-        text={t("subscribe.text")}
-        hint={t("subscribe.hint")}
-        buttonLabel={t("subscribe.button")}
-        okLabel={t("subscribe.ok")}
-      />
+      <Reveal className="nowcard currently">
+        <div className="cur-head">
+          <span className="livedot" />
+          <span className="lbl">{t("currently.heading")}</span>
+        </div>
+        <div className="row">
+          <span className="lbl">{t("currently.buildingLabel")}</span>
+          <div>
+            {t.rich("currently.buildingText", {
+              reguself: (chunks) => (
+                <a href="https://reguself.com" target="_blank" rel="noopener">
+                  {chunks}
+                </a>
+              ),
+            })}{" "}
+            <span className="sample">sample</span>
+          </div>
+        </div>
+        <div className="row">
+          <span className="lbl">{t("currently.writingLabel")}</span>
+          <div>
+            {t("currently.writingText")} <span className="sample">sample</span>
+          </div>
+        </div>
+        <div className="row">
+          <span className="lbl">{t("currently.exploringLabel")}</span>
+          <div>
+            {t("currently.exploringText")}{" "}
+            <span className="sample">sample</span>
+          </div>
+        </div>
+      </Reveal>
+
+      <Reveal>
+        <div className="eyebrow" style={{ marginTop: 44 }}>
+          {t("elsewhere.label")}
+        </div>
+        <div className="elsewhere" style={{ marginTop: 12 }}>
+          {elsewhere.map((e) => (
+            <a
+              key={e.label}
+              className="chip"
+              href={e.href}
+              target="_blank"
+              rel="noopener"
+            >
+              {e.label} ↗{e.pending && <span className="sample">link</span>}
+            </a>
+          ))}
+        </div>
+      </Reveal>
     </>
   )
 }

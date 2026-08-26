@@ -3,7 +3,7 @@ import { routing } from "@/i18n/routing"
 
 export const SITE_URL = "https://sagdi.com"
 
-export const OG_IMAGE_ALT = "Sagdi Formanov — building in public"
+export const OG_IMAGE_ALT = "Sagdi Formanov · building in public"
 
 // Social profiles used for JSON-LD `sameAs` (mirror of footer socialLinks).
 export const SOCIAL_LINKS = [

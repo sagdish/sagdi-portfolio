@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og"
 
-export const alt = "Sagdi Formanov — building in public"
+export const alt = "Sagdi Formanov · building in public"
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
 
@@ -49,15 +49,15 @@ export default async function OpengraphImage() {
           style={{
             display: "flex",
             flexDirection: "column",
-            fontSize: 78,
+            fontSize: 62,
             fontWeight: 800,
             color: "#1f2328",
             letterSpacing: -2,
             lineHeight: 1.08,
           }}
         >
-          <span>I build things,</span>
-          <span>and write about it.</span>
+          <span>Technologist and creator</span>
+          <span>trying to understand people.</span>
         </div>
         <div style={{ fontSize: 34, color: "#57606a", marginTop: 34 }}>
           Sagdi Formanov · building in public

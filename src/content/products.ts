@@ -25,9 +25,9 @@ export const PRODUCTS: Product[] = [
     status: "live",
     url: "https://reguself.com",
     title: "ReguSelf",
-    tagline: { en: "Regulate yourself — a tool for staying on track." },
+    tagline: { en: "Regulate yourself: a tool for staying on track." },
     body: {
-      en: "ReguSelf is live and moving — a tool for regulating your own attention and habits, built in public.",
+      en: "ReguSelf is live and moving: a tool for regulating your own attention and habits, built in public.",
     },
     placeholder: true,
   },
@@ -36,7 +36,7 @@ export const PRODUCTS: Product[] = [
     status: "progress",
     title: "Sagdi OS",
     tagline: {
-      en: "A personal life OS — five areas, one ledger, one live session.",
+      en: "A personal life OS: five areas, one ledger, one live session.",
     },
     body: {
       en: "The system running my days: five life areas, a single ledger, and one live working session. The thing this hub is built inside of.",
@@ -49,7 +49,7 @@ export const PRODUCTS: Product[] = [
     title: "OS Manager Blueprint",
     tagline: { en: "The reusable blueprint behind the OS." },
     body: {
-      en: "The blueprint that makes the personal OS reproducible for anyone — not just me.",
+      en: "The blueprint that makes the personal OS reproducible for anyone, not just me.",
     },
     placeholder: true,
   },

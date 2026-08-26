@@ -14,7 +14,7 @@ export const SAMPLE_POSTS: BlogPost[] = [
     published: true,
     publishedDate: "2026-08-01",
     content:
-      "This is a placeholder post — the real essay will be connected from Notion.\n\n## Why a system\n\nI stopped fighting my attention and built a system around it instead of relying on willpower.\n",
+      "This is a placeholder post: the real essay will be connected from Notion.\n\n## Why a system\n\nI stopped fighting my attention and built a system around it instead of relying on willpower.\n",
   },
   {
     id: "sample-one-deep-five-touched",
@@ -25,7 +25,7 @@ export const SAMPLE_POSTS: BlogPost[] = [
     published: true,
     publishedDate: "2026-07-15",
     content:
-      "This is a placeholder post — the real essay will be connected from Notion.\n\nOne area goes deep each season; the other five get *touched*, not dropped.\n",
+      "This is a placeholder post: the real essay will be connected from Notion.\n\nOne area goes deep each season; the other five get *touched*, not dropped.\n",
   },
   {
     id: "sample-design-fullstack-product",
@@ -36,6 +36,6 @@ export const SAMPLE_POSTS: BlogPost[] = [
     published: true,
     publishedDate: "2026-07-01",
     content:
-      "This is a placeholder post — the real essay will be connected from Notion.\n\nDesign taught me taste, full-stack taught me shipping, product tied them together.\n",
+      "This is a placeholder post: the real essay will be connected from Notion.\n\nDesign taught me taste, full-stack taught me shipping, product tied them together.\n",
   },
 ]

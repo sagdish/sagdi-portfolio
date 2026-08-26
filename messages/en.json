@@ -1,17 +1,18 @@
 {
   "meta": {
     "siteName": "Sagdi Formanov",
-    "jobTitle": "Builder — design, full-stack, product",
+    "jobTitle": "Builder · design, full-stack, product",
     "default": {
-      "title": "Sagdi Formanov — building in public",
-      "description": "I build small, honest software and write about building it. Live products, works in progress, and notes from the build.",
+      "title": "Sagdi Formanov · building in public",
+      "description": "Technologist and creator trying to understand people. Build meaningful things, explore the intersection of technology and humanity, and live a life of strength, curiosity, creativity and freedom.",
       "keywords": "Sagdi Formanov, builder, product, full-stack, indie software, building in public, ReguSelf"
     }
   },
   "nav": {
     "home": "Home",
-    "building": "Building",
-    "writing": "Writing",
+    "building": "Build",
+    "writing": "Think",
+    "world": "World",
     "work": "Work with me",
     "workShort": "Work",
     "changeLanguage": "Change language"
@@ -28,66 +29,72 @@
   },
   "home": {
     "name": "Sagdi Formanov",
-    "titleLine1": "I build things,",
-    "titleLine2": "and write about building them.",
-    "lede": "Design → full-stack → product. I make small, honest software and think out loud while I do it.",
-    "ctaPrimary": "See what I'm building",
-    "ctaSecondary": "Read the writing",
-    "nowLabel": "Building now",
-    "nowText": "Shipping a public hub, keeping <reguself>ReguSelf</reguself> moving, and running my life out of a personal OS.",
+    "titleLine1": "Technologist and creator",
+    "titleLine2": "trying to understand people.",
+    "lede": "Build meaningful things, explore the intersection of technology and humanity, and live a life of strength, curiosity, creativity and freedom.",
     "cards": {
-      "building": {
-        "k": "01 — Building",
-        "title": "The things I ship",
-        "text": "Live products and works in progress. Proof, not a portfolio grid.",
-        "cta": "Explore"
+      "build": {
+        "k": "01 · Build",
+        "title": "What I'm making and working on.",
+        "text": "Product, software, AI, experiments, and the work behind them.",
+        "cta": "Explore my work"
       },
-      "writing": {
-        "k": "02 — Writing",
-        "title": "Notes from the build",
-        "text": "Essays on product, AI, and building a life like a codebase.",
-        "cta": "Read"
+      "think": {
+        "k": "02 · Think",
+        "title": "Things I'm trying to understand.",
+        "text": "Psychology, technology, people, culture, and whatever keeps occupying my head long enough to become a thought worth writing down.",
+        "cta": "Read my writing"
       },
-      "work": {
-        "k": "03 — Work with me",
-        "title": "Let's talk",
-        "text": "Open to product roles and the right collaborations.",
-        "cta": "Get in touch"
+      "world": {
+        "k": "03 · World",
+        "title": "Everything else that makes up my world.",
+        "text": "Music, cinema, cars, photography, books, art, travel, nature, martial arts, and the things I'm currently drawn to.",
+        "cta": "Wander around"
       }
     },
-    "subscribe": {
-      "heading": "Get the next thing I make.",
-      "text": "New builds and essays, straight to your inbox. No noise, no schedule I can't keep.",
-      "hint": "prototype — not wired to a backend yet",
-      "button": "Subscribe",
-      "ok": "You're on the list ✓  (prototype — nothing was actually sent)"
+    "currently": {
+      "heading": "Currently",
+      "buildingLabel": "Building",
+      "buildingText": "Shipping a public hub, keeping <reguself>ReguSelf</reguself> moving, and running my life out of a personal OS.",
+      "writingLabel": "Writing",
+      "writingText": "something I've been thinking about",
+      "exploringLabel": "Exploring",
+      "exploringText": "something currently occupying my attention"
+    },
+    "elsewhere": {
+      "label": "Elsewhere",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "instagram": "Instagram",
+      "telegram": "Telegram",
+      "threads": "Threads"
     }
   },
   "building": {
-    "eyebrow": "Building",
-    "title": "Proof I build, not a portfolio.",
-    "lede": "Live products up top, works-in-progress below. Statuses are the real ones from my own system.",
+    "eyebrow": "Build",
+    "title": "What I'm making and working on.",
+    "lede": "Product, software, AI, experiments, and the work behind them.",
     "readMore": "read more",
     "visit": "Visit",
     "statusLive": "Live · in-progress",
     "statusProgress": "In-progress",
     "statusPreStart": "Pre-start",
     "statusParked": "Parked",
-    "back": "Back to Building"
+    "back": "Back to Build"
   },
   "writing": {
-    "eyebrow": "Writing",
-    "title": "Notes from the build.",
-    "lede": "Product, AI, and running a life like a codebase.",
+    "eyebrow": "Think",
+    "title": "Things I'm trying to understand.",
+    "lede": "Psychology, technology, people, culture, and whatever keeps occupying my head long enough to become a thought worth writing down.",
     "all": "All",
-    "sampleNote": "sample posts — real ones connect from Notion",
-    "back": "Back to Writing",
+    "sampleNote": "sample posts · real ones connect from Notion",
+    "back": "Back to Think",
     "subscribe": {
       "heading": "Subscribe.",
       "text": "Get new essays and builds in your inbox. That's the whole pitch.",
-      "hint": "prototype — not wired to a backend yet",
+      "hint": "prototype · not wired to a backend yet",
       "button": "Subscribe",
-      "ok": "You're on the list ✓  (prototype — nothing was actually sent)"
+      "ok": "You're on the list ✓  (prototype, nothing was actually sent)"
     },
     "elsewhere": {
       "github": "GitHub",
@@ -95,10 +102,27 @@
       "x": "X / Twitter"
     }
   },
+  "world": {
+    "eyebrow": "World",
+    "title": "Everything else that makes up my world.",
+    "lede": "Music, cinema, cars, photography, books, art, travel, nature, martial arts, and the things I'm currently drawn to.",
+    "areas": {
+      "music": "Music",
+      "cinema": "Cinema",
+      "cars": "Cars",
+      "books": "Books",
+      "photography": "Photography",
+      "art": "Art",
+      "travel": "Travel",
+      "nature": "Nature",
+      "family": "Family",
+      "martialArts": "Martial arts"
+    }
+  },
   "work": {
     "eyebrow": "Work with me",
     "title": "Let's build something.",
-    "prose1": "I'm Sagdi — I started in design, learned to ship full-stack, and moved into product. I like small teams, honest software, and problems where taste and engineering both matter.",
+    "prose1": "I'm Sagdi. I started in design, learned to ship full-stack, and moved into product. I like small teams, honest software, and problems where taste and engineering both matter.",
     "prose2": "Right now I'm looking for a product role where I can build, not just manage. If that's the kind of person you're after, I'd like to talk.",
     "ctaReach": "Reach out",
     "ctaSite": "sagdi.com",

@@ -683,6 +683,32 @@
   color: var(--faint);
 }
 
+/* Currently card (home): the nowcard pattern extended to a heading + rows. */
+.nowcard.currently {
+  display: block;
+}
+.cur-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.cur-head .livedot {
+  margin-top: 0;
+}
+.nowcard .row {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+.nowcard .row + .row {
+  margin-top: 10px;
+}
+.nowcard .row .lbl {
+  flex-shrink: 0;
+  min-width: 86px;
+}
+
 /* ── Section headers ───────────────────────────────────────────────────────── */
 .sec-head {
   margin: 8px 0 22px;
