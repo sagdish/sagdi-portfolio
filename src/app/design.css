@@ -782,58 +782,6 @@
 }
 
 /* Big CTA cards on the home page */
-.cta-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-  gap: 16px;
-  margin-top: 20px;
-}
-.cta-card {
-  position: relative;
-  overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-  padding: 22px;
-  border-radius: 14px;
-  background: var(--card-40);
-  border: 1px solid var(--border);
-  transition:
-    transform 0.2s cubic-bezier(0.34, 1.5, 0.64, 1),
-    box-shadow 0.2s,
-    border-color 0.2s;
-}
-.cta-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow);
-  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
-}
-.cta-card .k {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.cta-card h3 {
-  margin: 10px 0 6px;
-  font-size: 20px;
-  letter-spacing: -0.01em;
-}
-.cta-card p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-}
-.cta-card .arw {
-  display: inline-block;
-  margin-top: 14px;
-  color: var(--accent);
-  font-weight: 600;
-  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.cta-card:hover .arw {
-  transform: translateX(4px);
-}
 
 /* ── Home photography strip (placeholder frames until real photos land) ───── */
 .photostrip {
@@ -846,6 +794,26 @@
   border: 1px dashed var(--border-strong);
   border-radius: 12px;
   background: var(--card-40);
+}
+
+/* ── 404 road sign (MatrixType) ────────────────────────────────────────────── */
+.nf-code {
+  color: var(--accent);
+  font-size: clamp(44px, 9vw, 76px);
+  font-weight: 700;
+  line-height: 1;
+}
+.nf-road {
+  font-size: clamp(26px, 5vw, 46px);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 14px 0 0;
+}
+.nf-sub {
+  color: var(--muted);
+  font-size: clamp(16px, 2.4vw, 19px);
+  max-width: 46ch;
+  margin: 18px 0 0;
 }
 
 /* ── Status pill ───────────────────────────────────────────────────────────── */

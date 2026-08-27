@@ -35,26 +35,6 @@
     "photography": { "label": "Photography" },
     "listening": { "label": "Currently listening", "telegram": "Telegram" },
     "latest": { "label": "Latest writing" },
-    "cards": {
-      "build": {
-        "k": "01 · Build",
-        "title": "What I'm making and working on.",
-        "text": "Product, software, AI, experiments, and the work behind them.",
-        "cta": "Explore my work"
-      },
-      "think": {
-        "k": "02 · Think",
-        "title": "Things I'm trying to understand.",
-        "text": "Psychology, technology, people, culture, and whatever keeps occupying my head long enough to become a thought worth writing down.",
-        "cta": "Read my writing"
-      },
-      "world": {
-        "k": "03 · World",
-        "title": "Everything else that makes up my world.",
-        "text": "Music, cinema, cars, photography, books, art, travel, nature, martial arts, and the things I'm currently drawn to.",
-        "cta": "Wander around"
-      }
-    },
     "currently": {
       "heading": "Currently",
       "buildingLabel": "Building",
