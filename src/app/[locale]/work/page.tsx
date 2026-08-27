@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Reveal } from "@/components/ui/reveal"
-import { localeAlternates } from "@/lib/seo"
+import { pageMetadata } from "@/lib/seo"
 
 export async function generateMetadata({
   params,
@@ -9,12 +9,12 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>
 }): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "work" })
-  return {
-    title: t("title"),
-    description: t("prose1"),
-    alternates: localeAlternates("/work", locale),
-  }
+  return pageMetadata({
+    locale,
+    path: "/work",
+    namespace: "work",
+    descriptionKey: "prose1",
+  })
 }
 
 export default async function WorkPage({

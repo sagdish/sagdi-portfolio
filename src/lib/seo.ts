@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
 import { routing } from "@/i18n/routing"
 
 export const SITE_URL = "https://sagdi.com"
@@ -50,6 +51,44 @@ export function absoluteUrl(locale: string, path: string): string {
 // Complete OpenGraph object for a page. Page-level `openGraph` REPLACES the
 // parent's (Next doesn't deep-merge), so every page must emit the full set
 // (locale, siteName, alternateLocale, image) — this keeps them consistent.
+// One-call metadata for a top-level page: localized title/description from `namespace`,
+// canonical + hreflang alternates, and the full OpenGraph/Twitter set (page-level
+// `openGraph`/`twitter` REPLACE the layout's, so partial objects would lose fields).
+export async function pageMetadata(opts: {
+  locale: string
+  path: string
+  namespace: string
+  titleKey?: string
+  descriptionKey?: string
+}): Promise<Metadata> {
+  const {
+    locale,
+    path,
+    namespace,
+    titleKey = "title",
+    descriptionKey = "lede",
+  } = opts
+  const [t, meta] = await Promise.all([
+    getTranslations({ locale, namespace }),
+    getTranslations({ locale, namespace: "meta" }),
+  ])
+  const title = t(titleKey)
+  const description = t(descriptionKey)
+  return {
+    title,
+    description,
+    alternates: localeAlternates(path, locale),
+    openGraph: buildOpenGraph({
+      locale,
+      path,
+      title,
+      description,
+      siteName: meta("siteName"),
+    }),
+    twitter: { card: "summary_large_image", title, description },
+  }
+}
+
 export function buildOpenGraph(opts: {
   locale: string
   path: string

@@ -1,4 +1,6 @@
+import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
+import { pageMetadata } from "@/lib/seo"
 import { Reveal } from "@/components/ui/reveal"
 
 // The areas of the World, in the order they appear. Non-clickable for now;
@@ -15,6 +17,15 @@ const AREA_KEYS = [
   "family",
   "martialArts",
 ] as const
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  return pageMetadata({ locale, path: "/world", namespace: "world" })
+}
 
 export default async function WorldPage({
   params,

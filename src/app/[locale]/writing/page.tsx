@@ -1,11 +1,22 @@
+import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { listPosts, listTags } from "@/lib/writing"
+import { pageMetadata } from "@/lib/seo"
 import { Reveal } from "@/components/ui/reveal"
 import { SubscribeBand } from "@/components/ui/subscribe-band"
 import { WritingList } from "@/components/writing/writing-list"
 
 // ISR: pick up new Notion posts without a rebuild (matches the post detail).
 export const revalidate = 60
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  return pageMetadata({ locale, path: "/writing", namespace: "writing" })
+}
 
 export default async function WritingPage({
   params,

@@ -8,7 +8,7 @@ type Localized = Partial<Record<Locale, string>> & { en: string }
 export type Product = {
   slug: string
   status: ProductStatus
-  /** external URL (opens in a new tab) instead of an internal detail route */
+  /** external product site; the detail page renders it as a Visit CTA */
   url?: string
   title: string
   tagline: Localized

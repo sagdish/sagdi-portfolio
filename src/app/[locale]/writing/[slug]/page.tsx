@@ -22,14 +22,28 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>
 }): Promise<Metadata> {
-  const { slug } = await params
+  const { locale, slug } = await params
   const { post } = await getPost(slug)
   if (!post) return { title: "Post not found" }
+  const meta = await getTranslations({ locale, namespace: "meta" })
+  const title = post.title
+  const description = post.description || post.title
+  // Posts are language-agnostic → canonicalize to the unprefixed URL (og:url too,
+  // hence no locale-aware buildOpenGraph here).
+  const url = `${SITE_URL}/writing/${slug}`
   return {
-    title: post.title,
-    description: post.description || post.title,
-    // Posts are language-agnostic → canonicalize to the unprefixed URL.
+    title,
+    description,
     alternates: { canonical: `/writing/${slug}` },
+    openGraph: {
+      type: "article",
+      siteName: meta("siteName"),
+      title,
+      description,
+      url,
+      publishedTime: post.publishedDate,
+    },
+    twitter: { card: "summary_large_image", title, description },
   }
 }
 

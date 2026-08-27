@@ -43,38 +43,9 @@ export default async function HomePage({
 
       <div style={{ height: 44 }} />
 
-      <Reveal>
-        <div className="eyebrow">
-          {t("photography.label")} <span className="sample">photos</span>
-        </div>
-        <div className="photostrip" style={{ marginTop: 12 }}>
-          <div className="photoslot" />
-          <div className="photoslot" />
-          <div className="photoslot" />
-        </div>
-      </Reveal>
-
-      <Reveal>
-        <div className="eyebrow" style={{ marginTop: 44 }}>
-          {t("listening.label")}
-        </div>
-        <div className="elsewhere" style={{ marginTop: 12 }}>
-          <a
-            className="chip"
-            href="https://t.me"
-            target="_blank"
-            rel="noopener"
-          >
-            {t("listening.telegram")} ↗<span className="sample">link</span>
-          </a>
-        </div>
-      </Reveal>
-
       {latest && (
         <Reveal>
-          <div className="eyebrow" style={{ marginTop: 44 }}>
-            {t("latest.label")}
-          </div>
+          <div className="eyebrow">{t("latest.label")}</div>
           <div className="elsewhere" style={{ marginTop: 12 }}>
             <Link className="chip" href={`/writing/${latest.slug}`}>
               {latest.title} →
@@ -114,6 +85,33 @@ export default async function HomePage({
             {t("currently.exploringText")}{" "}
             <span className="sample">sample</span>
           </div>
+        </div>
+      </Reveal>
+
+      <Reveal>
+        <div className="eyebrow" style={{ marginTop: 44 }}>
+          {t("photography.label")} <span className="sample">photos</span>
+        </div>
+        <div className="photostrip" style={{ marginTop: 12 }}>
+          <div className="photoslot" />
+          <div className="photoslot" />
+          <div className="photoslot" />
+        </div>
+      </Reveal>
+
+      <Reveal>
+        <div className="eyebrow" style={{ marginTop: 44 }}>
+          {t("listening.label")}
+        </div>
+        <div className="elsewhere" style={{ marginTop: 12 }}>
+          <a
+            className="chip"
+            href="https://t.me"
+            target="_blank"
+            rel="noopener"
+          >
+            {t("listening.telegram")} ↗<span className="sample">link</span>
+          </a>
         </div>
       </Reveal>
 
