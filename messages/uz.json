@@ -32,6 +32,9 @@
     "titleLine1": "Figuring things out",
     "titleLine2": "",
     "lede": "I'm trying to understand things, build what matters, and use technology without losing sight of the human part. I want to keep learning, creating, and having enough freedom to see where life takes me.",
+    "photography": { "label": "Photography" },
+    "listening": { "label": "Currently listening", "telegram": "Telegram" },
+    "latest": { "label": "Latest writing" },
     "cards": {
       "build": {
         "k": "01 · Build",

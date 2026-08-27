@@ -1,4 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server"
+import { Link } from "@/i18n/navigation"
+import { listPosts } from "@/lib/writing"
 import { Reveal } from "@/components/ui/reveal"
 
 export default async function HomePage({
@@ -9,30 +11,8 @@ export default async function HomePage({
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations("home")
-
-  const cards = [
-    {
-      href: "/building",
-      k: t("cards.build.k"),
-      title: t("cards.build.title"),
-      text: t("cards.build.text"),
-      cta: t("cards.build.cta"),
-    },
-    {
-      href: "/writing",
-      k: t("cards.think.k"),
-      title: t("cards.think.title"),
-      text: t("cards.think.text"),
-      cta: t("cards.think.cta"),
-    },
-    {
-      href: "/world",
-      k: t("cards.world.k"),
-      title: t("cards.world.title"),
-      text: t("cards.world.text"),
-      cta: t("cards.world.cta"),
-    },
-  ]
+  const { posts, sample: postsSample } = await listPosts()
+  const latest = posts[0]
 
   const elsewhere = [
     {
@@ -63,16 +43,46 @@ export default async function HomePage({
 
       <div style={{ height: 44 }} />
 
-      <div className="cta-grid">
-        {cards.map((c) => (
-          <Reveal key={c.href} href={c.href} className="cta-card">
-            <div className="k">{c.k}</div>
-            <h3>{c.title}</h3>
-            <p>{c.text}</p>
-            <span className="arw">{c.cta} →</span>
-          </Reveal>
-        ))}
-      </div>
+      <Reveal>
+        <div className="eyebrow">
+          {t("photography.label")} <span className="sample">photos</span>
+        </div>
+        <div className="photostrip" style={{ marginTop: 12 }}>
+          <div className="photoslot" />
+          <div className="photoslot" />
+          <div className="photoslot" />
+        </div>
+      </Reveal>
+
+      <Reveal>
+        <div className="eyebrow" style={{ marginTop: 44 }}>
+          {t("listening.label")}
+        </div>
+        <div className="elsewhere" style={{ marginTop: 12 }}>
+          <a
+            className="chip"
+            href="https://t.me"
+            target="_blank"
+            rel="noopener"
+          >
+            {t("listening.telegram")} ↗<span className="sample">link</span>
+          </a>
+        </div>
+      </Reveal>
+
+      {latest && (
+        <Reveal>
+          <div className="eyebrow" style={{ marginTop: 44 }}>
+            {t("latest.label")}
+          </div>
+          <div className="elsewhere" style={{ marginTop: 12 }}>
+            <Link className="chip" href={`/writing/${latest.slug}`}>
+              {latest.title} →
+              {postsSample && <span className="sample">sample</span>}
+            </Link>
+          </div>
+        </Reveal>
+      )}
 
       <Reveal className="nowcard currently">
         <div className="cur-head">

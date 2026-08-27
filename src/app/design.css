@@ -835,6 +835,19 @@
   transform: translateX(4px);
 }
 
+/* ── Home photography strip (placeholder frames until real photos land) ───── */
+.photostrip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.photoslot {
+  aspect-ratio: 4 / 3;
+  border: 1px dashed var(--border-strong);
+  border-radius: 12px;
+  background: var(--card-40);
+}
+
 /* ── Status pill ───────────────────────────────────────────────────────────── */
 .pill {
   display: inline-flex;
