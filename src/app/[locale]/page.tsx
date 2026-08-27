@@ -1,6 +1,8 @@
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
+import { listPhotos } from "@/lib/photos"
 import { listPosts } from "@/lib/writing"
+import { PhotoCarousel } from "@/components/ui/photo-carousel"
 import { Reveal } from "@/components/ui/reveal"
 
 export default async function HomePage({
@@ -13,6 +15,7 @@ export default async function HomePage({
   const t = await getTranslations("home")
   const { posts, sample: postsSample } = await listPosts()
   const latest = posts[0]
+  const { photos, sample: photosSample } = await listPhotos()
 
   const elsewhere = [
     {
@@ -90,12 +93,18 @@ export default async function HomePage({
 
       <Reveal>
         <div className="eyebrow" style={{ marginTop: 44 }}>
-          {t("photography.label")} <span className="sample">photos</span>
+          {t("photography.label")}
+          {photosSample && <span className="sample">photos</span>}
         </div>
-        <div className="photostrip" style={{ marginTop: 12 }}>
-          <div className="photoslot" />
-          <div className="photoslot" />
-          <div className="photoslot" />
+        <div style={{ marginTop: 12 }}>
+          <PhotoCarousel
+            photos={photos}
+            label={t("photography.label")}
+            buttonLabels={{
+              prev: t("photography.prev"),
+              next: t("photography.next"),
+            }}
+          />
         </div>
       </Reveal>
 

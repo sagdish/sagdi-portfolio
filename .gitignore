@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# photography source folder (synced to R2 by scripts/photos-sync.mjs)
+/photos-src

@@ -32,9 +32,18 @@
     "titleLine1": "Technologist and creator",
     "titleLine2": "",
     "lede": "Figuring things out. I'm trying to understand things, build what matters, and keep learning",
-    "photography": { "label": "Photography" },
-    "listening": { "label": "Currently listening", "telegram": "Telegram" },
-    "latest": { "label": "Latest writing" },
+    "photography": {
+      "label": "Photography",
+      "prev": "Previous photos",
+      "next": "Next photos"
+    },
+    "listening": {
+      "label": "Currently listening",
+      "telegram": "Telegram"
+    },
+    "latest": {
+      "label": "Latest writing"
+    },
     "currently": {
       "heading": "Currently",
       "buildingLabel": "Building",

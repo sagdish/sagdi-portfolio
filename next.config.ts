@@ -12,7 +12,22 @@ const REDIRECTS: [string, string][] = [
   ["/hub", "/building"],
 ]
 
+// Photography source (Cloudflare R2 public base) — lib/photos.ts fetches
+// manifest.json from here; next/image needs the host allowlisted.
+const photosBase = process.env.PHOTOS_BASE_URL
+
 const nextConfig: NextConfig = {
+  images: photosBase
+    ? {
+        remotePatterns: [
+          {
+            protocol: "https",
+            hostname: new URL(photosBase).hostname,
+            pathname: `${new URL(photosBase).pathname.replace(/\/+$/, "")}/**`,
+          },
+        ],
+      }
+    : undefined,
   async redirects() {
     return REDIRECTS.flatMap(([from, to]) => [
       { source: from, destination: to, permanent: true },

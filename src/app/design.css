@@ -783,17 +783,118 @@
 
 /* Big CTA cards on the home page */
 
-/* ── Home photography strip (placeholder frames until real photos land) ───── */
-.photostrip {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+/* ── Photo carousel (contact-sheet filmstrip) ──────────────────────────────────
+   One fixed row height; frame width follows each photo's aspect ratio (no crop).
+   Native scroll + snap does the interaction; frames clip hard at the container
+   edge — the peeking next frame is the affordance. Below 900px (the .wrap
+   16px-padding breakpoint) the strip bleeds edge-to-edge and the arrows retire. */
+.pcar {
+  --pcar-h: clamp(180px, 26vw, 260px);
 }
-.photoslot {
-  aspect-ratio: 4 / 3;
-  border: 1px dashed var(--border-strong);
+.pcar-scroller {
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.pcar-scroller::-webkit-scrollbar {
+  display: none;
+}
+.pcar-scroller:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+.pcar-track {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pcar-item {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+.pcar-frame {
+  height: var(--pcar-h);
+  border: 1px solid var(--border);
   border-radius: 12px;
   background: var(--card-40);
+  overflow: hidden;
+}
+.pcar-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+.pcar-item:hover .pcar-img {
+  transform: scale(1.02);
+}
+.pcar-cap {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--faint);
+}
+.pcar-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.pcar-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--faint);
+}
+.pcar-btns {
+  display: flex;
+  gap: 8px;
+}
+.pcar-btn {
+  height: 32px;
+  width: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--field);
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background-color 0.15s,
+    color 0.15s,
+    transform 0.15s;
+}
+.pcar-btn:hover:not(:disabled) {
+  border-color: var(--border-strong);
+  background: var(--surface-hover);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+.pcar-btn:disabled {
+  color: var(--faint);
+  opacity: 0.45;
+  cursor: default;
+}
+@media (max-width: 900px) {
+  .pcar-strip {
+    margin-inline: -16px;
+  }
+  .pcar-scroller {
+    padding-inline: 16px;
+    scroll-padding-inline: 16px;
+  }
+  .pcar-btns {
+    display: none;
+  }
 }
 
 /* ── 404 road sign (MatrixType) ────────────────────────────────────────────── */
