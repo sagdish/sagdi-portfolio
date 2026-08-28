@@ -116,8 +116,15 @@
     "title": "Let's build something.",
     "prose1": "I'm Sagdi. I started in design, learned to ship full-stack, and moved into product. I like small teams, honest software, and problems where taste and engineering both matter.",
     "prose2": "Right now I'm looking for a product role where I can build, not just manage. If that's the kind of person you're after, I'd like to talk.",
-    "ctaReach": "Reach out",
-    "ctaSite": "sagdi.com",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send message",
+      "sending": "Sending",
+      "sent": "Thanks. Your message is on its way, I'll reply to the address you gave.",
+      "error": "Something went wrong sending that. Try again, or reach me on LinkedIn."
+    },
     "footerCopyright": "© 2026 Sagdi Formanov"
   }
 }

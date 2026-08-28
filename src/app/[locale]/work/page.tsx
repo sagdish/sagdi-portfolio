@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
+import { ContactForm } from "@/components/ui/contact-form"
 import { Reveal } from "@/components/ui/reveal"
 import { pageMetadata } from "@/lib/seo"
 
@@ -38,24 +39,17 @@ export default async function WorkPage({
         <p className="dim">
           {t("prose2")} <span className="sample">refine copy</span>
         </p>
-        <div className="cta" style={{ marginTop: 22 }}>
-          <a
-            className="btn btn-primary"
-            href="https://linkedin.com/in/sagdi-formanov"
-            target="_blank"
-            rel="noopener"
-          >
-            {t("ctaReach")} <span className="arw">→</span>
-          </a>
-          <a
-            className="btn btn-ghost"
-            href="https://sagdi.com"
-            target="_blank"
-            rel="noopener"
-          >
-            {t("ctaSite")}
-          </a>
-        </div>
+        <ContactForm
+          labels={{
+            name: t("form.name"),
+            email: t("form.email"),
+            message: t("form.message"),
+            send: t("form.send"),
+            sending: t("form.sending"),
+            sent: t("form.sent"),
+            error: t("form.error"),
+          }}
+        />
       </Reveal>
 
       <div className="foot-links">
