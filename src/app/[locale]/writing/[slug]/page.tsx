@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import remarkBreaks from "remark-breaks"
 import rehypeRaw from "rehype-raw"
-import { Link } from "@/i18n/navigation"
+import { BackLink } from "@/components/ui/back-link"
 import { getPost, listPosts } from "@/lib/writing"
 import { SITE_URL } from "@/lib/seo"
 import { JsonLd } from "@/components/seo/json-ld"
@@ -85,6 +85,7 @@ export default async function WritingPostPage({
   return (
     <article className="prose article">
       <JsonLd data={structuredData} />
+      <BackLink href="/writing" label={t("back")} />
       <div className="eyebrow">{t("eyebrow")}</div>
       <h1 className="article-title">{post.title}</h1>
       <div className="article-meta">
@@ -107,11 +108,6 @@ export default async function WritingPostPage({
         >
           {post.content}
         </ReactMarkdown>
-      </div>
-      <div className="cta" style={{ marginTop: 32 }}>
-        <Link className="btn btn-ghost" href="/writing">
-          ← {t("back")}
-        </Link>
       </div>
     </article>
   )

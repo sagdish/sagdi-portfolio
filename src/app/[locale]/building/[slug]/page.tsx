@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getTranslations, setRequestLocale } from "next-intl/server"
-import { Link } from "@/i18n/navigation"
+import { BackLink } from "@/components/ui/back-link"
 import { Reveal } from "@/components/ui/reveal"
 import {
   PRODUCTS,
@@ -90,6 +90,7 @@ export default async function ProductPage({
   return (
     <>
       <JsonLd data={structuredData} />
+      <BackLink href="/building" label={t("back")} />
       <Reveal className="sec-head">
         <div className="eyebrow">{t("eyebrow")}</div>
         <h2>{product.title}</h2>
@@ -107,8 +108,8 @@ export default async function ProductPage({
           {product.placeholder && <span className="sample">sample</span>}
         </p>
         <p className="dim">{loc(product.body, locale as Locale)}</p>
-        <div className="cta" style={{ marginTop: 22 }}>
-          {product.url && (
+        {product.url && (
+          <div className="cta" style={{ marginTop: 22 }}>
             <a
               className="btn btn-primary"
               href={product.url}
@@ -118,11 +119,8 @@ export default async function ProductPage({
               {t("visit")} {new URL(product.url).host}{" "}
               <span className="arw">↗</span>
             </a>
-          )}
-          <Link className="btn btn-ghost" href="/building">
-            ← {t("back")}
-          </Link>
-        </div>
+          </div>
+        )}
       </Reveal>
     </>
   )

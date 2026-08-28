@@ -62,7 +62,12 @@ export function WritingList({
           <Reveal key={p.id} href={`/writing/${p.slug}`} className="post">
             <span className="date">{formatMonth(p.publishedDate, locale)}</span>
             <div>
-              <div className="t">{p.title}</div>
+              <div className="t">
+                {p.title}
+                {p.id.startsWith("sample-") && (
+                  <span className="sample">sample</span>
+                )}
+              </div>
               <div className="x">{p.description}</div>
             </div>
           </Reveal>

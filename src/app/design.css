@@ -573,19 +573,17 @@
   padding: 10px 16px;
   border-radius: 10px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
   cursor: pointer;
   border: 1px solid transparent;
   transition:
-    transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.18s,
     background-color 0.15s,
     border-color 0.15s,
     color 0.15s;
 }
 .btn .arw {
-  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .btn:hover .arw {
   transform: translateX(3px);
@@ -595,9 +593,7 @@
   color: var(--accent-fg);
 }
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px -10px
-    color-mix(in srgb, var(--accent) 60%, transparent);
+  background: color-mix(in srgb, var(--accent) 90%, #000);
 }
 .btn-ghost {
   background: var(--field);
@@ -607,7 +603,11 @@
 .btn-ghost:hover {
   border-color: var(--border-strong);
   background: var(--surface-hover);
-  transform: translateY(-2px);
+}
+
+/* ── Back button: the .chip primitive, pinned top-left of detail pages ─────── */
+.backlink {
+  margin-bottom: 24px;
 }
 
 /* ── Home hero ─────────────────────────────────────────────────────────────── */

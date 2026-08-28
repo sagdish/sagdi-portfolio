@@ -3,9 +3,10 @@ import { getAllTags, getPostBySlug, getPublishedPosts } from "./notion"
 import { SAMPLE_POSTS } from "@/content/sample-posts"
 
 /**
- * Writing data layer with a safe fallback: use real Notion posts when the client is
- * configured (NOTION env present) and returns data; otherwise fall back to the sample
- * posts so the pages always render. `sample` flags placeholder content for the UI.
+ * Writing data layer. Real Notion posts (when configured) render with the sample posts
+ * kept appended after them; if Notion is unconfigured/unreachable the samples render
+ * alone. `sample` is true only when the list is entirely samples (Notion returned
+ * nothing) — individual sample cards are flagged in WritingList regardless.
  */
 export async function listPosts(): Promise<{
   posts: BlogPost[]
@@ -13,9 +14,12 @@ export async function listPosts(): Promise<{
 }> {
   try {
     const posts = await getPublishedPosts()
-    if (posts.length) return { posts, sample: false }
+    // Keep the placeholders as well: real posts first, sample cards trailing. Section
+    // note stays off (sample: false); sample cards are flagged individually instead.
+    if (posts.length)
+      return { posts: [...posts, ...SAMPLE_POSTS], sample: false }
   } catch {
-    // Notion not configured / unreachable — fall through to samples.
+    // Notion not configured / unreachable — fall through to samples only.
   }
   return { posts: SAMPLE_POSTS, sample: true }
 }
@@ -34,11 +38,13 @@ export async function getPost(
 }
 
 export async function listTags(): Promise<string[]> {
+  const sampleTags = SAMPLE_POSTS.flatMap((p) => p.tags)
   try {
     const tags = await getAllTags()
-    if (tags.length) return tags
+    // Merge real + sample tags so the sample cards stay filterable in the tag bar.
+    if (tags.length) return Array.from(new Set([...tags, ...sampleTags])).sort()
   } catch {
     // fall through
   }
-  return Array.from(new Set(SAMPLE_POSTS.flatMap((p) => p.tags))).sort()
+  return Array.from(new Set(sampleTags)).sort()
 }
