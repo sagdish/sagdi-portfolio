@@ -1,0 +1,163 @@
+# Transition: what's left before sagdi.com goes live
+
+Three statuses: PLANNED, IN PROGRESS, DONE. Move things between them, don't delete them.
+
+## Where things stand right now
+
+The build is finished and pushed. Branch `rewamp2026` matches `origin/rewamp2026`, typecheck is clean,
+every page renders. What's left is not code, it's content, keys, translations, and the swap to prod.
+
+One thing to know up front: there is no `.env.local` in this project at all. Nothing is connected.
+Notion, Resend, and the photos are all running on bundled samples right now. That's why you see the
+little grey "sample" chips around the site.
+
+**The finish line is simple: zero sample chips visible on any page, in all three languages.**
+
+---
+
+# PLANNED
+
+## Phase 1. Lock the English copy
+
+Do this first. Translations copy from English, so translating before English is final means doing it twice.
+
+Everything here shows a "sample" chip on the live page.
+
+In `messages/en.json`:
+
+1. `home.titleLine2` is empty. The headline renders line one, a line break, then nothing. Either write
+   the second line or remove the `<br/>` in `src/app/[locale]/page.tsx` (around line 102).
+2. `home.currently.buildingText` needs your real words.
+3. `home.currently.writingText` still says "something I've been thinking about".
+4. `home.currently.exploringText` still says "something currently occupying my attention".
+5. `work.prose2` is marked "refine copy".
+
+In `src/content/products.ts`:
+
+6. Six of the seven products still have `placeholder: true` and need real `tagline` + `body`:
+   ReguSelf, Sagdi OS, OS Manager Blueprint, Pomodoro Focus Dock, Screenshots Processor, AI Job Agent.
+   Only the PM Guide has final copy. Drop the `placeholder: true` line once the words are real.
+
+## Phase 2. Four dead links
+
+Each of these currently points at a generic homepage and wears a "link" chip.
+
+7. Home, "Currently listening": points at `https://t.me`. Needs the real Telegram music channel.
+   `src/app/[locale]/page.tsx` around line 120.
+8. Home, Elsewhere, Telegram: same placeholder. Same file, line 27.
+9. Home, Elsewhere, Threads: points at `https://www.threads.net`. Same file, line 30.
+10. Writing page, Elsewhere, X: points at `https://x.com`. `src/app/[locale]/writing/page.tsx` line 76.
+
+One decision while you're in there:
+
+11. The Work page's second button links to `https://sagdi.com`, which is this site linking to itself.
+    `src/app/[locale]/work/page.tsx` line 52. Probably wants to be something else or gone.
+
+## Phase 3. API keys
+
+Copy `env.local.template` to `.env.local` and fill it in.
+
+12. **Notion** (the blog). Needs `NOTION_API_KEY` and `NOTION_DATABASE_ID`. `NOTION_DATA_SOURCE_ID` is
+    optional, it resolves itself. The database needs these properties: Title or Name (title), Slug (rich
+    text), Tags (multi-select), Published (checkbox), Published Date or Date (date), Description (rich
+    text). Remember to share the database with the integration in Notion, otherwise the key alone does
+    nothing. Once this is live the three fake posts disappear from the home page, /writing, the post
+    pages, and the sitemap.
+
+13. **Photos** (the home carousel). Needs `PHOTOS_BASE_URL` plus `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`,
+    `R2_SECRET_ACCESS_KEY`, `R2_BUCKET`. Then drop your photos into a `photos-src/` folder and run
+    `npm run photos:sync`. Filenames sort into display order, so prefix them 010-, 020-, and so on.
+    Optional `photos-src/meta.json` adds alt text and captions.
+
+14. **Set the same values in Vercel, then trigger a fresh deploy.** This matters more than it sounds.
+    See the trap below.
+
+### The trap that will bite you
+
+`next.config.ts` (line 20) reads `PHOTOS_BASE_URL` when the Next config is *loaded*, which is build time,
+to allowlist the image host. If you add that variable in Vercel after a build has already happened, the
+photos will still load their manifest, the sample chip will vanish, and every single image will fail with
+a 400. It looks like the carousel is broken. It isn't. You just need to redeploy so the config picks up
+the variable.
+
+Two smaller things in the same file, worth fixing while you're there:
+
+- A value without `https://` in front of it (just `photos.sagdi.com`) throws "Invalid URL" and kills the
+  build outright. An empty value is safe, it just falls back to samples.
+- The protocol is hardcoded to `https`, so an `http://` host can never be allowlisted. Fine for R2,
+  annoying if you ever want a local mock.
+
+## Phase 4. Decide what happens with the contact form
+
+15. `src/app/api/contact/route.ts` exists and is fully wired to Resend. Nothing on the site calls it.
+    There is no contact form anywhere on this branch, the Work page just links to LinkedIn instead.
+
+    So: either build the form on /work, in which case you also need `RESEND_API_KEY`, `CONTACT_TO_EMAIL`
+    and `CONTACT_FROM_EMAIL`, or delete the route and those three variables. Right now it's dead code
+    carrying three env vars nobody uses.
+
+## Phase 5. Russian and Uzbek
+
+Only start this once Phase 1 English is frozen.
+
+16. `messages/ru.json` and `messages/uz.json` are 83 of 87 keys still in English. The only genuinely
+    translated strings in either file are the two photo carousel button labels.
+17. Before translating, re-sync. `home.titleLine1` and `home.lede` in both files hold the *old* English
+    text, from before the last headline edit. They have already drifted out of step with `en.json`.
+18. Those 87 keys include `meta.default.title`, `description`, and `keywords`. The per-locale SEO strings
+    are untranslated too, so search results in ru/uz currently read in English.
+19. `src/content/products.ts` needs `ru` and `uz` fields on each `tagline` and `body`. They silently fall
+    back to English today, so nothing looks broken, it just isn't translated.
+20. Blog posts need nothing here. They were locked as language-agnostic on purpose, only the surrounding
+    chrome is localized.
+
+## Phase 6. Make Subscribe real
+
+21. `src/components/ui/subscribe-band.tsx` is visual only. It accepts an email, shows a confirmation, and
+    sends nothing. Pick the provider (Resend Audiences was the leaning, since Resend is already in the
+    stack), wire it up, then delete the honest little disclaimers: `writing.subscribe.hint` says
+    "prototype, not wired to a backend yet" and `writing.subscribe.ok` says "nothing was actually sent".
+
+## Phase 7. Go live
+
+22. Delete the `legacy/` folder. 56 files still tracked in it.
+23. Merge `rewamp2026` into `main`.
+24. Check the six redirects in `next.config.ts` actually fire on the real domain: `/projects`, `/blog`,
+    `/blog/:slug`, `/about`, `/contact`, `/hub`, plus their ru and uz variants.
+25. Confirm `sitemap.xml` and `robots.txt` resolve on sagdi.com.
+
+## Still unverified (not bugs, just things nobody has actually looked at)
+
+26. The photo carousel has never been rendered against a live R2 manifest. The code was read, the data
+    layer was reasoned through, but nobody has watched real photos load in a browser. To close it: set
+    the env vars, sync some photos, load the home page, and confirm the frames show at their true shapes
+    with the counter and arrows tracking correctly.
+27. Mobile and dark mode were never verified on the identity-doc changes. Dark uses only existing tokens,
+    so it's likely fine, but likely is not checked.
+
+---
+
+# IN PROGRESS
+
+Nothing.
+
+---
+
+# DONE
+
+- **The whole site is built.** Home, Build (with a detail page per product), Think, World, Work with me,
+  404s, all three languages, all routes.
+- **Photo carousel.** `src/components/ui/photo-carousel.tsx`. Takes photos and labels as props, does no
+  fetching and no translating, so it can sit on any page over any photo source. Fixed row height, each
+  frame keeps its true shape, native scroll and snap, arrows retire under 900px.
+- **Photo data layer.** `src/lib/photos.ts`. Fetches the R2 manifest, refreshes hourly, skips malformed
+  entries, and falls back to the bundled samples if anything at all goes wrong, so the page never breaks.
+- **Photo sync script.** `npm run photos:sync`. Rotates by EXIF, caps the long side at 3000px, re-encodes,
+  generates blur placeholders, uploads, writes the manifest.
+- **Blog plumbing.** Notion connection with the same safe fallback, in-place tag filtering, post pages.
+- **SEO.** Every page builds its own canonical, hreflang, x-default, OG and Twitter cards. Products carry
+  structured data. Sitemap covers everything.
+- **Contact API.** Wired to Resend, validated, honeypot, HTML-escaped. Just not connected to any UI yet,
+  see Phase 4.
+- **Prod-swap redirects** written and waiting in `next.config.ts`.
+- **Everything is committed and pushed.** Nothing is sitting unsaved on this machine.
