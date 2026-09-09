@@ -11,7 +11,7 @@
   "nav": {
     "home": "Home",
     "building": "Build",
-    "writing": "Think",
+    "writing": "Write",
     "world": "World",
     "work": "Work with me",
     "workShort": "Work",
@@ -75,12 +75,12 @@
     "back": "Back to Build"
   },
   "writing": {
-    "eyebrow": "Think",
+    "eyebrow": "Write",
     "title": "Things I'm trying to understand.",
     "lede": "Psychology, technology, people, culture, and whatever keeps occupying my head long enough to become a thought worth writing down.",
     "all": "All",
     "sampleNote": "sample posts · real ones connect from Notion",
-    "back": "Back to Think",
+    "back": "Back to Write",
     "subscribe": {
       "heading": "Subscribe.",
       "text": "Get new essays and builds in your inbox. That's the whole pitch.",
@@ -114,7 +114,6 @@
   "work": {
     "eyebrow": "Work with me",
     "title": "Let's build something.",
-    "prose1": "I'm Sagdi. I started in design, learned to ship full-stack, and moved into product. I like small teams, honest software, and problems where taste and engineering both matter.",
     "prose2": "Right now I'm looking for a product role where I can build, not just manage. If that's the kind of person you're after, I'd like to talk.",
     "form": {
       "name": "Name",

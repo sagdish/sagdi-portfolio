@@ -14,7 +14,7 @@ export async function generateMetadata({
     locale,
     path: "/work",
     namespace: "work",
-    descriptionKey: "prose1",
+    descriptionKey: "prose2",
   })
 }
 
@@ -35,7 +35,6 @@ export default async function WorkPage({
       </Reveal>
 
       <Reveal className="prose">
-        <p>{t("prose1")}</p>
         <p className="dim">
           {t("prose2")} <span className="sample">refine copy</span>
         </p>
