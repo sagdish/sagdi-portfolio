@@ -19,7 +19,8 @@ const pad = (n: number) => String(n).padStart(2, "0")
 
 /**
  * Contact-sheet filmstrip: one fixed row height, each frame's width follows the
- * photo's true aspect ratio (portrait narrow, pano wide — no cropping). The track
+ * photo's true aspect ratio (portrait narrow, pano wide — no cropping). Video
+ * frames are muted clips that autoplay while mostly inside the strip. The track
  * is a native scroller (touch momentum + snap for free); arrows and the mono
  * counter are progressive chrome on top. Presentational only — data comes from
  * the caller, so it can sit on any page over any photo source.
@@ -85,6 +86,54 @@ export function PhotoCarousel({
       cancelAnimationFrame(tweenRef.current)
     }
   }, [update])
+
+  // Videos autoplay muted only while at least 60% of their frame is inside the
+  // strip AND the strip itself is on screen; paused the moment either stops
+  // being true. Two observers because an element-rooted observer ignores
+  // whether that root is itself visible in the viewport.
+  useEffect(() => {
+    const scroller = scrollerRef.current
+    const videos = Array.from(trackRef.current?.querySelectorAll("video") ?? [])
+    if (!scroller || !videos.length) return
+    const inStrip = new Set<Element>()
+    let stripVisible = false
+    const sync = () => {
+      for (const v of videos) {
+        if (stripVisible && inStrip.has(v)) {
+          if (v.paused) {
+            v.muted = true
+            v.play().catch(() => {})
+          }
+        } else if (!v.paused) {
+          v.pause()
+        }
+      }
+    }
+    const inStripIO = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) inStrip.add(e.target)
+          else inStrip.delete(e.target)
+        }
+        sync()
+      },
+      { root: scroller, threshold: 0.6 }
+    )
+    const viewIO = new IntersectionObserver(
+      ([e]) => {
+        stripVisible = e.isIntersecting
+        sync()
+      },
+      { threshold: 0.5 }
+    )
+    videos.forEach((v) => inStripIO.observe(v))
+    viewIO.observe(scroller)
+    return () => {
+      inStripIO.disconnect()
+      viewIO.disconnect()
+      videos.forEach((v) => v.pause())
+    }
+  }, [photos])
 
   // Self-driven tween instead of scrollTo({behavior: "smooth"}): native smooth
   // scrolling is unreliable on snap containers (and can be disabled browser-wide),
@@ -152,24 +201,44 @@ export function PhotoCarousel({
         >
           <ul ref={trackRef} className="pcar-track">
             {photos.map((p) => {
-              const ar = p.width / p.height
               return (
                 <li key={p.src} className="pcar-item">
                   <div
                     className="pcar-frame"
                     style={{ aspectRatio: `${p.width} / ${p.height}` }}
                   >
-                    <Image
-                      className="pcar-img"
-                      src={p.src}
-                      width={p.width}
-                      height={p.height}
-                      alt={p.alt}
-                      sizes={`(min-width: 900px) ${Math.round(260 * ar)}px, ${Math.round(180 * ar)}px`}
-                      placeholder={p.blurDataURL ? "blur" : "empty"}
-                      blurDataURL={p.blurDataURL}
-                      draggable={false}
-                    />
+                    {p.type === "video" ? (
+                      // Playback is driven by the observer effect above, not
+                      // by autoPlay.
+                      <video
+                        className="pcar-img"
+                        src={p.src}
+                        width={p.width}
+                        height={p.height}
+                        aria-label={p.alt}
+                        muted
+                        playsInline
+                        loop
+                        preload="metadata"
+                        draggable={false}
+                      />
+                    ) : (
+                      // Strip-sized WebP served straight from the bucket:
+                      // no Next optimizer in the path (its 7s upstream fetch
+                      // timeout broke frames on slow links), one size fits the
+                      // fixed-height strip. Lazy by default, blur while loading.
+                      <Image
+                        className="pcar-img"
+                        src={p.src}
+                        width={p.width}
+                        height={p.height}
+                        alt={p.alt}
+                        unoptimized
+                        placeholder={p.blurDataURL ? "blur" : "empty"}
+                        blurDataURL={p.blurDataURL}
+                        draggable={false}
+                      />
+                    )}
                   </div>
                   {p.caption && <div className="pcar-cap">{p.caption}</div>}
                 </li>

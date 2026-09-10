@@ -6,29 +6,40 @@ import { SAMPLE_PHOTOS } from "@/content/sample-photos"
  * otherwise fall back to bundled sample frames so the page always renders
  * (`sample` flags placeholder content for the UI).
  *
- * The source is any static host (currently a public Cloudflare R2 bucket)
- * serving the images plus a manifest.json written by scripts/photos-sync.mjs:
- *   { "photos": [{ "key", "width", "height", "alt", "caption?", "blurDataURL?" }] }
+ * The source is any static host (currently a public Cloudflare R2 bucket).
+ * Photos are grouped in named SETS — one folder each in photos-src/, synced by
+ * scripts/photos-sync.mjs to photos/<set>/manifest.json:
+ *   { "photos": [{ "key", "type?", "width", "height", "alt", "caption?",
+ *                  "blurDataURL?", "full?": { "key", "width", "height" } }] }
+ * `key` is the strip-sized WebP the carousel shows, served straight from the
+ * bucket (no Next optimizer). `type` is "image" (default when absent) or
+ * "video" — a muted clip the carousel autoplays in place. `full` points at the
+ * 3000px original, for any later full-size use.
  */
 export type Photo = {
   src: string
+  type: "image" | "video"
   width: number
   height: number
   alt: string
   caption?: string
   blurDataURL?: string
+  full?: { src: string; width: number; height: number }
 }
 
-type ManifestPhoto = Partial<Omit<Photo, "src">> & { key?: string }
+type ManifestPhoto = Partial<Omit<Photo, "src" | "full">> & {
+  key?: string
+  full?: { key?: string; width?: number; height?: number }
+}
 
-export async function listPhotos(): Promise<{
+export async function listPhotos(set = "home"): Promise<{
   photos: Photo[]
   sample: boolean
 }> {
   const base = process.env.PHOTOS_BASE_URL?.replace(/\/+$/, "")
   if (base) {
     try {
-      const res = await fetch(`${base}/manifest.json`, {
+      const res = await fetch(`${base}/photos/${set}/manifest.json`, {
         next: { revalidate: 3600 },
       })
       if (res.ok) {
@@ -38,11 +49,20 @@ export async function listPhotos(): Promise<{
             ? [
                 {
                   src: `${base}/${p.key}`,
+                  type: p.type === "video" ? "video" : "image",
                   width: p.width,
                   height: p.height,
                   alt: p.alt ?? "",
                   caption: p.caption,
                   blurDataURL: p.blurDataURL,
+                  full:
+                    p.full?.key && p.full.width && p.full.height
+                      ? {
+                          src: `${base}/${p.full.key}`,
+                          width: p.full.width,
+                          height: p.full.height,
+                        }
+                      : undefined,
                 },
               ]
             : []

@@ -15,7 +15,7 @@ export default async function HomePage({
   const t = await getTranslations("home")
   const { posts, sample: postsSample } = await listPosts()
   const latest = posts[0]
-  const { photos, sample: photosSample } = await listPhotos()
+  const { photos, sample: photosSample } = await listPhotos("home")
 
   const elsewhere = [
     {

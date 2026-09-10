@@ -8,6 +8,7 @@ import type { Photo } from "@/lib/photos"
 export const SAMPLE_PHOTOS: Photo[] = [
   {
     src: "/photos/sample-01.jpg",
+    type: "image",
     width: 1200,
     height: 800,
     alt: "Placeholder frame — landscape",
@@ -16,6 +17,7 @@ export const SAMPLE_PHOTOS: Photo[] = [
   },
   {
     src: "/photos/sample-02.jpg",
+    type: "image",
     width: 900,
     height: 1200,
     alt: "Placeholder frame — portrait",
@@ -24,6 +26,7 @@ export const SAMPLE_PHOTOS: Photo[] = [
   },
   {
     src: "/photos/sample-03.jpg",
+    type: "image",
     width: 1470,
     height: 630,
     alt: "Placeholder frame — panorama",
@@ -32,6 +35,7 @@ export const SAMPLE_PHOTOS: Photo[] = [
   },
   {
     src: "/photos/sample-04.jpg",
+    type: "image",
     width: 800,
     height: 1200,
     alt: "Placeholder frame — portrait",
@@ -40,6 +44,7 @@ export const SAMPLE_PHOTOS: Photo[] = [
   },
   {
     src: "/photos/sample-05.jpg",
+    type: "image",
     width: 1200,
     height: 675,
     alt: "Placeholder frame — landscape",
@@ -48,6 +53,7 @@ export const SAMPLE_PHOTOS: Photo[] = [
   },
   {
     src: "/photos/sample-06.jpg",
+    type: "image",
     width: 1200,
     height: 800,
     alt: "Placeholder frame — landscape",
