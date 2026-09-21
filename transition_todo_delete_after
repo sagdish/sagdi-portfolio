@@ -22,13 +22,11 @@ you couldn't run UNVERIFIED. No em dashes in any user-visible copy. He often kee
   "sample" chip. **The finish line: zero sample chips on any page, in all three languages.**
 - `.env.local` exists (gitignored) with the photo variables. Whether Notion and Resend keys are in it
   locally is unverified; both are in Vercel for All Environments, so preview deploys get them.
-- Photography is real and working locally (see "Photos" under DONE for how the pipeline works).
-  `PHOTOS_BASE_URL` is now in Vercel for All Environments (2026-09-21; it was Production only, which is
-  why the preview showed the sample frames). **Needs a rebuild**, then item 26.
-- 2026-09-21 fixes (Phase 2 links, headline, Cmd+Enter, email subject) are uncommitted.
+- Photography and the Notion blog work on the Vercel preview deploy. The contact form sends real email.
+- Branch is pushed. Nothing sits unsaved.
 
-**Immediate next steps, in order:** 26 (look at the Vercel deploy after the next rebuild) →
-Phase 1 copy (3, 4, 6) → Phase 5 translations → Phase 6 subscribe → Phase 7 go live.
+**Immediate next steps, in order:** Phase 1 copy (3, 4, 6) → Phase 5 translations →
+Phase 6 subscribe → Phase 7 go live.
 
 ---
 
@@ -61,22 +59,10 @@ Done, see DONE (items 7 to 11).
 
 `.env.local` exists. Check it against `env.local.template` for anything still empty.
 
-12. **Notion** (the blog). Needs `NOTION_API_KEY` and `NOTION_DATABASE_ID`. `NOTION_DATA_SOURCE_ID` is
-    optional, it resolves itself. The database needs these properties: Title or Name (title), Slug (rich
-    text), Tags (multi-select), Published (checkbox), Published Date or Date (date), Description (rich
-    text). Remember to share the database with the integration in Notion, otherwise the key alone does
-    nothing. Once this is live the three fake posts disappear from the home page, /writing, the post
-    pages, and the sitemap. Same three variable names the `main` branch already reads, and all three
-    are in Vercel for All Environments already.
-
-15. **Resend** (the contact form on /work). Needs `RESEND_API_KEY`, `CONTACT_TO_EMAIL`,
-    `CONTACT_FROM_EMAIL`. Same names `main` reads; all three are in Vercel for All Environments, so the
-    preview deploy has them. Nobody has submitted the form on a deploy yet (item 28).
-
 14. **Any variable added or changed in Vercel needs a redeploy** to take effect. The home page is
     built statically and revalidates hourly, so it only sees new variables on the next build.
 
-(13, photos, is done. See DONE.)
+(12 Notion, 13 photos and 15 Resend are done. See DONE.)
 
 ## Phase 4. Contact form
 
@@ -115,17 +101,12 @@ Only start this once Phase 1 English is frozen.
 
 ## Still unverified (not bugs, just things nobody has actually looked at)
 
-26. **The photo strip on a Vercel deploy.** Verified locally in every way (see DONE), never seen on
-    Vercel. Sagdi added `PHOTOS_BASE_URL` there on 2026-09-10 and was going to redeploy after the push.
-    To close: open the deploy's home page, confirm 24 frames load from `pub-….r2.dev`, no "sample"
-    chip, and the last frame (the video) plays muted when scrolled to. If frames are broken, first
-    suspect the variable wasn't in place at build time; redeploy.
 27. Mobile and dark mode were never verified on the identity-doc changes. Dark uses only existing tokens,
     so it's likely fine, but likely is not checked.
-28. The contact form has never sent a real email. It's wired end to end, and the Resend keys are in
-    Vercel, but nobody has submitted it on a deploy and seen a message land.
 29. Videos other than H.264 mp4. The one clip in the bucket is H.264 and plays in Chrome. HEVC (iPhone
     default) will not play in Chrome or Firefox; the sync script header says so.
+
+(26 and 28 are done, see DONE.)
 
 ---
 
@@ -137,6 +118,16 @@ Nothing.
 
 # DONE
 
+- **Photos on Vercel** (item 26, 2026-09-21). The preview showed sample frames because
+  `PHOTOS_BASE_URL` was set for Production only. Sagdi switched it to All Environments, the next
+  build picked it up, and he confirmed the real photos load on the preview deploy.
+- **Notion live on Vercel** (item 12). The preview home page shows the real post "Why I Got PSPO
+  Certified" with no sample chip. Keys are in Vercel for All Environments. The database needs these
+  properties: Title or Name (title), Slug (rich text), Tags (multi-select), Published (checkbox),
+  Published Date or Date (date), Description (rich text), and must be shared with the integration.
+- **Resend live, the form sends real email** (items 15 and 28). Sagdi has received messages from the
+  contact form. Keys (`RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`) are in Vercel for
+  All Environments.
 - **2026-09-21 batch.**
   - Item 1: no second headline line. `<br />` and `home.titleLine2` removed (all three languages).
   - Item 7: "Currently listening" points at the music channel `https://t.me/sftunes`, with a
@@ -193,4 +184,4 @@ Nothing.
   structured data. Sitemap covers everything.
 - **Contact API.** Wired to Resend, validated, honeypot, HTML-escaped. Now has a UI calling it.
 - **Prod-swap redirects** written and waiting in `next.config.ts`.
-- **Everything is committed and pushed** as of 2026-09-10 evening.
+- **Everything is committed and pushed** as of 2026-09-21.
