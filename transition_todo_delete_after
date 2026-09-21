@@ -6,7 +6,7 @@ Three statuses: PLANNED, IN PROGRESS, DONE. Move things between them, don't dele
 
 # START HERE (for whoever picks this up cold)
 
-Last touched: 2026-09-10, evening. Read this block, then the PLANNED list below, top to bottom.
+Last touched: 2026-09-21. Read this block, then the PLANNED list below, top to bottom.
 
 **What this is.** sagdi.com rebuilt as a public "hub", branch `rewamp2026` of this repo
 (`sagdi-portfolio/`, Next.js 15 App Router, Tailwind v4, next-intl en·ru·uz). `main` is the old
@@ -23,12 +23,12 @@ you couldn't run UNVERIFIED. No em dashes in any user-visible copy. He often kee
 - `.env.local` exists (gitignored) with the photo variables. Whether Notion and Resend keys are in it
   locally is unverified; both are in Vercel for All Environments, so preview deploys get them.
 - Photography is real and working locally (see "Photos" under DONE for how the pipeline works).
-  Sagdi added `PHOTOS_BASE_URL` in Vercel. **The production render has not been seen yet**, that's
-  item 26 below and the first thing to do.
-- Branch is pushed. Nothing sits unsaved.
+  `PHOTOS_BASE_URL` is now in Vercel for All Environments (2026-09-21; it was Production only, which is
+  why the preview showed the sample frames). **Needs a rebuild**, then item 26.
+- 2026-09-21 fixes (Phase 2 links, headline, Cmd+Enter, email subject) are uncommitted.
 
-**Immediate next steps, in order:** 26 (look at the Vercel deploy) → Phase 1 copy (1, 3, 4, 6) →
-Phase 2 links → Phase 5 translations → Phase 6 subscribe → Phase 7 go live.
+**Immediate next steps, in order:** 26 (look at the Vercel deploy after the next rebuild) →
+Phase 1 copy (3, 4, 6) → Phase 5 translations → Phase 6 subscribe → Phase 7 go live.
 
 ---
 
@@ -42,12 +42,10 @@ Everything here shows a "sample" chip on the live page.
 
 In `messages/en.json`:
 
-1. `home.titleLine2` is empty. The headline renders line one, a line break, then nothing. Either write
-   the second line or remove the `<br />` in `src/app/[locale]/page.tsx` (line 41).
 3. `home.currently.writingText` still says "something I've been thinking about".
 4. `home.currently.exploringText` still says "something currently occupying my attention".
 
-(2 and 5 are done, see DONE.)
+(1, 2 and 5 are done, see DONE.)
 
 In `src/content/products.ts`:
 
@@ -57,18 +55,7 @@ In `src/content/products.ts`:
 
 ## Phase 2. Four dead links
 
-Each of these currently points at a generic homepage and wears a "link" chip.
-
-7. Home, "Currently listening": points at `https://t.me`. Needs the real Telegram music channel.
-   `src/app/[locale]/page.tsx` line 118.
-8. Home, Elsewhere, Telegram: same placeholder. Same file, line 27.
-9. Home, Elsewhere, Threads: points at `https://www.threads.net`. Same file, line 30.
-10. Writing page, Elsewhere, X: points at `https://x.com`. `src/app/[locale]/writing/page.tsx` line 76.
-
-One decision while you're in there:
-
-11. The Work page's second button links to `https://sagdi.com`, which is this site linking to itself.
-    `src/app/[locale]/work/page.tsx` line 66. Probably wants to be something else or gone.
+Done, see DONE (items 7 to 11).
 
 ## Phase 3. API keys
 
@@ -150,6 +137,18 @@ Nothing.
 
 # DONE
 
+- **2026-09-21 batch.**
+  - Item 1: no second headline line. `<br />` and `home.titleLine2` removed (all three languages).
+  - Item 7: "Currently listening" points at the music channel `https://t.me/sftunes`, with a
+    monochrome music icon (lucide `Music`) before the label.
+  - Item 8: Elsewhere Telegram points at `https://t.me/raw_notepad`. Rule: music links go to sftunes,
+    every other Telegram link goes to raw_notepad.
+  - Item 9: Threads points at `https://www.threads.com/@forsi_ph`.
+  - Item 10: X chip removed from the Write page, `writing.elsewhere.x` removed from all three languages.
+  - Item 11: the Work page footer "sagdi.com" is plain text now, no link.
+  - Contact form: Cmd+Enter (Ctrl+Enter off Mac) sends from any field. Verified in headless Chromium
+    with the API mocked: empty form does not send, filled form sends once.
+  - Contact email subject now starts "sagdi.com: New message from ...". Not seen in a real inbox yet.
 - **Photos** (was item 13, plus the video ask; 2026-09-10). Real photography on the home strip:
   23 photos + 1 video from a Cloudflare R2 bucket (`sagdi-photos`, public URL
   `https://pub-d80e4e9eb39747c9b6eeca7668d027ed.r2.dev`). How it works:

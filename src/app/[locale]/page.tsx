@@ -1,3 +1,4 @@
+import { Music } from "lucide-react"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
 import { listPhotos } from "@/lib/photos"
@@ -24,11 +25,10 @@ export default async function HomePage({
     },
     { label: t("elsewhere.github"), href: "https://github.com/sagdish" },
     { label: t("elsewhere.instagram"), href: "https://instagram.com/forsi_ph" },
-    { label: t("elsewhere.telegram"), href: "https://t.me", pending: true },
+    { label: t("elsewhere.telegram"), href: "https://t.me/raw_notepad" },
     {
       label: t("elsewhere.threads"),
-      href: "https://www.threads.net",
-      pending: true,
+      href: "https://www.threads.com/@forsi_ph",
     },
   ]
 
@@ -36,11 +36,7 @@ export default async function HomePage({
     <>
       <Reveal className="hero">
         <div className="eyebrow hero-name">{t("name")}</div>
-        <h1>
-          {t("titleLine1")}
-          <br />
-          {t("titleLine2")}
-        </h1>
+        <h1>{t("titleLine1")}</h1>
         <p className="lede">{t("lede")}</p>
       </Reveal>
 
@@ -115,11 +111,12 @@ export default async function HomePage({
         <div className="elsewhere" style={{ marginTop: 12 }}>
           <a
             className="chip"
-            href="https://t.me"
+            href="https://t.me/sftunes"
             target="_blank"
             rel="noopener"
           >
-            {t("listening.telegram")} ↗<span className="sample">link</span>
+            <Music size={14} aria-hidden />
+            {t("listening.telegram")} ↗
           </a>
         </div>
       </Reveal>
@@ -137,7 +134,7 @@ export default async function HomePage({
               target="_blank"
               rel="noopener"
             >
-              {e.label} ↗{e.pending && <span className="sample">link</span>}
+              {e.label} ↗
             </a>
           ))}
         </div>

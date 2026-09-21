@@ -63,9 +63,7 @@ export default async function WorkPage({
         >
           LinkedIn
         </a>
-        <a href="https://sagdi.com" target="_blank" rel="noopener">
-          sagdi.com
-        </a>
+        <span className="t">sagdi.com</span>
       </div>
     </>
   )

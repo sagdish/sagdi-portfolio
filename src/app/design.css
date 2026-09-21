@@ -1278,7 +1278,8 @@
   font-size: 10px;
   color: var(--faint);
 }
-.foot-links a {
+.foot-links a,
+.foot-links .t {
   color: var(--muted);
   text-decoration: none;
   font-size: 13px;

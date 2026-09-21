@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, type FormEvent } from "react"
+import { useState, type FormEvent, type KeyboardEvent } from "react"
 import { cn } from "@/lib/utils"
 
 export type ContactFormLabels = {
@@ -70,12 +70,24 @@ export function ContactForm({
     }
   }
 
+  // Cmd+Enter (Ctrl+Enter off Mac) sends from any field, the textarea included.
+  function onKeyDown(e: KeyboardEvent<HTMLFormElement>) {
+    if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault()
+      e.currentTarget.requestSubmit()
+    }
+  }
+
   const submitting = status === "submitting"
 
   return (
     <div id={id} className={cn("cform", className)}>
       {status !== "success" && (
-        <form className="cform-fields" onSubmit={onSubmit}>
+        <form
+          className="cform-fields"
+          onSubmit={onSubmit}
+          onKeyDown={onKeyDown}
+        >
           <div className="cform-row">
             <div className="cfield">
               <label htmlFor="cf-name">{labels.name}</label>

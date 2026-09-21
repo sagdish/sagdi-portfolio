@@ -73,9 +73,6 @@ export default async function WritingPage({
         >
           {t("elsewhere.linkedin")} ↗
         </a>
-        <a className="chip" href="https://x.com" target="_blank" rel="noopener">
-          {t("elsewhere.x")} ↗ <span className="sample">link</span>
-        </a>
       </Reveal>
     </>
   )

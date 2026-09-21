@@ -30,7 +30,6 @@
   "home": {
     "name": "Sagdi Formanov",
     "titleLine1": "Technologist and creator",
-    "titleLine2": "",
     "lede": "Figuring things out. I'm trying to understand things, build what matters, and keep learning",
     "photography": {
       "label": "Photography",
@@ -90,8 +89,7 @@
     },
     "elsewhere": {
       "github": "GitHub",
-      "linkedin": "LinkedIn",
-      "x": "X / Twitter"
+      "linkedin": "LinkedIn"
     }
   },
   "world": {
