@@ -40,7 +40,10 @@ export async function listPhotos(set = "home"): Promise<{
   if (base) {
     try {
       const res = await fetch(`${base}/photos/${set}/manifest.json`, {
-        next: { revalidate: 3600 },
+        // 60s, not an hour: publishing deletes the files a photo no longer
+        // needs, so a page holding an older list must go stale quickly. The
+        // carousel drops any frame whose file is already gone.
+        next: { revalidate: 60 },
       })
       if (res.ok) {
         const manifest = (await res.json()) as { photos?: ManifestPhoto[] }

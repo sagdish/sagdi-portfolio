@@ -38,6 +38,14 @@ export function PhotoCarousel({
   const [index, setIndex] = useState(0)
   const [atStart, setAtStart] = useState(true)
   const [atEnd, setAtEnd] = useState(true)
+  // A page can outlive the photo list it was built from: publishing deletes the
+  // files a photo no longer needs. A frame whose file is gone drops out of the
+  // strip instead of sitting there as a broken image.
+  const [gone, setGone] = useState<string[]>([])
+  const shown = photos.filter((p) => !gone.includes(p.src))
+  const shownKey = shown.map((p) => p.src).join("|")
+  const drop = (src: string) =>
+    setGone((was) => (was.includes(src) ? was : [...was, src]))
 
   const update = useCallback(() => {
     const el = scrollerRef.current
@@ -133,7 +141,7 @@ export function PhotoCarousel({
       viewIO.disconnect()
       videos.forEach((v) => v.pause())
     }
-  }, [photos])
+  }, [shownKey])
 
   // Self-driven tween instead of scrollTo({behavior: "smooth"}): native smooth
   // scrolling is unreliable on snap containers (and can be disabled browser-wide),
@@ -186,7 +194,7 @@ export function PhotoCarousel({
     animateTo(el, offsets[target])
   }
 
-  if (!photos.length) return null
+  if (!shown.length) return null
 
   return (
     <div className={cn("pcar", className)}>
@@ -200,7 +208,7 @@ export function PhotoCarousel({
           className="pcar-scroller"
         >
           <ul ref={trackRef} className="pcar-track">
-            {photos.map((p) => {
+            {shown.map((p) => {
               return (
                 <li key={p.src} className="pcar-item">
                   <div
@@ -221,6 +229,7 @@ export function PhotoCarousel({
                         loop
                         preload="metadata"
                         draggable={false}
+                        onError={() => drop(p.src)}
                       />
                     ) : (
                       // Strip-sized WebP served straight from the bucket:
@@ -237,6 +246,7 @@ export function PhotoCarousel({
                         placeholder={p.blurDataURL ? "blur" : "empty"}
                         blurDataURL={p.blurDataURL}
                         draggable={false}
+                        onError={() => drop(p.src)}
                       />
                     )}
                   </div>
@@ -249,7 +259,7 @@ export function PhotoCarousel({
       </div>
       <div className="pcar-foot">
         <div className="pcar-count">
-          {pad(index + 1)} / {pad(photos.length)}
+          {pad(index + 1)} / {pad(shown.length)}
         </div>
         <div className="pcar-btns">
           <button

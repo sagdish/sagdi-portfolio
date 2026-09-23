@@ -1,187 +1,185 @@
-# Transition: what's left before sagdi.com goes live
+# sagdi.com launch checklist
 
-Three statuses: PLANNED, IN PROGRESS, DONE. Move things between them, don't delete them.
+Last updated: 2026-09-22
+Legend: [x] done  [ ] not done
 
----
-
-# START HERE (for whoever picks this up cold)
-
-Last touched: 2026-09-21. Read this block, then the PLANNED list below, top to bottom.
-
-**What this is.** sagdi.com rebuilt as a public "hub", branch `rewamp2026` of this repo
-(`sagdi-portfolio/`, Next.js 15 App Router, Tailwind v4, next-intl en·ru·uz). `main` is the old
-site and is what's live. The branch swaps to prod when this list is empty. Run it with `npm run dev`
-from this folder; `npm run typecheck`, `npm run lint`, `npm run build` must stay green.
-
-**How Sagdi works.** Plain English, answer first, short. Build the literal ask and stop; ask one plain
-question when something is ambiguous. Verify in the running app before saying done, and label anything
-you couldn't run UNVERIFIED. No em dashes in any user-visible copy. He often keeps this file open in vim.
-
-**State right now.**
-- Every page renders in all three languages. Content is still placeholder where you see a grey
-  "sample" chip. **The finish line: zero sample chips on any page, in all three languages.**
-- `.env.local` exists (gitignored) with the photo variables. Whether Notion and Resend keys are in it
-  locally is unverified; both are in Vercel for All Environments, so preview deploys get them.
-- Photography and the Notion blog work on the Vercel preview deploy. The contact form sends real email.
-- Branch is pushed. Nothing sits unsaved.
-
-**Immediate next steps, in order:** Phase 1 copy (3, 4, 6) → Phase 5 translations →
-Phase 6 subscribe → Phase 7 go live.
+Finish line: zero grey "sample" chips on any page, in en, ru and uz. Then go live.
+Cold start (new session): read REFERENCE at the bottom first.
 
 ---
 
-# PLANNED
+## AT A GLANCE
 
-## Phase 1. Lock the English copy
-
-Do this first. Translations copy from English, so translating before English is final means doing it twice.
-
-Everything here shows a "sample" chip on the live page.
-
-In `messages/en.json`:
-
-3. `home.currently.writingText` still says "something I've been thinking about".
-4. `home.currently.exploringText` still says "something currently occupying my attention".
-
-(1, 2 and 5 are done, see DONE.)
-
-In `src/content/products.ts`:
-
-6. Six of the seven products still have `placeholder: true` and need real `tagline` + `body`:
-   ReguSelf, Sagdi OS, OS Manager Blueprint, Pomodoro Focus Dock, Screenshots Processor, AI Job Agent.
-   Only the PM Guide has final copy. Drop the `placeholder: true` line once the words are real.
-
-## Phase 2. Four dead links
-
-Done, see DONE (items 7 to 11).
-
-## Phase 3. API keys
-
-`.env.local` exists. Check it against `env.local.template` for anything still empty.
-
-14. **Any variable added or changed in Vercel needs a redeploy** to take effect. The home page is
-    built statically and revalidates hourly, so it only sees new variables on the next build.
-
-(12 Notion, 13 photos and 15 Resend are done. See DONE.)
-
-## Phase 4. Contact form
-
-Done, see DONE. The env side of it is item 15 above.
-
-## Phase 5. Russian and Uzbek
-
-Only start this once Phase 1 English is frozen.
-
-16. `messages/ru.json` and `messages/uz.json` are 89 of 91 keys still in English (the contact form
-    added four keys, all English in both files). The only genuinely translated strings in either file
-    are the two photo carousel button labels.
-17. Before translating, re-sync. `home.titleLine1` and `home.lede` in both files hold the *old* English
-    text, from before the last headline edit. They have already drifted out of step with `en.json`.
-18. Those 91 keys include `meta.default.title`, `description`, and `keywords`. The per-locale SEO strings
-    are untranslated too, so search results in ru/uz currently read in English.
-19. `src/content/products.ts` needs `ru` and `uz` fields on each `tagline` and `body`. They silently fall
-    back to English today, so nothing looks broken, it just isn't translated.
-20. Blog posts need nothing here. They were locked as language-agnostic on purpose, only the surrounding
-    chrome is localized.
-
-## Phase 6. Make Subscribe real
-
-21. `src/components/ui/subscribe-band.tsx` is visual only. It accepts an email, shows a confirmation, and
-    sends nothing. Pick the provider (Resend Audiences was the leaning, since Resend is already in the
-    stack), wire it up, then delete the honest little disclaimers: `writing.subscribe.hint` says
-    "prototype, not wired to a backend yet" and `writing.subscribe.ok` says "nothing was actually sent".
-
-## Phase 7. Go live
-
-22. Delete the `legacy/` folder. 56 files still tracked in it.
-23. Merge `rewamp2026` into `main`.
-24. Check the six redirects in `next.config.ts` actually fire on the real domain: `/projects`, `/blog`,
-    `/blog/:slug`, `/about`, `/contact`, `/hub`, plus their ru and uz variants.
-25. Confirm `sitemap.xml` and `robots.txt` resolve on sagdi.com.
-
-## Still unverified (not bugs, just things nobody has actually looked at)
-
-27. Mobile and dark mode were never verified on the identity-doc changes. Dark uses only existing tokens,
-    so it's likely fine, but likely is not checked.
-29. Videos other than H.264 mp4. The one clip in the bucket is H.264 and plays in Chrome. HEVC (iPhone
-    default) will not play in Chrome or Firefox; the sync script header says so.
-
-(26 and 28 are done, see DONE.)
+- [x] 1. Site built
+- [x] 2. Links fixed
+- [x] 3. Services connected (photos, Notion, Resend)
+- [ ] 4. English copy ............ IN PROGRESS
+- [ ] 5. Russian and Uzbek ....... NEXT
+- [ ] 6. Subscribe works
+- [ ] 7. Go live
 
 ---
 
 # IN PROGRESS
 
-Nothing.
+## 4. English copy
+
+Finish before translating: ru and uz copy from English.
+
+- [x] Headline is one line (no second line)
+- [x] Currently → Building row
+- [x] Work page text
+- [ ] Currently → Writing row. `home.currently.writingText` in `messages/en.json`,
+      still "something I've been thinking about"
+- [ ] Currently → Exploring row. `home.currently.exploringText` in `messages/en.json`,
+      still "something currently occupying my attention"
+- [ ] Product texts (tagline + body) in `src/content/products.ts`.
+      Remove `placeholder: true` from a product once its words are real.
+  - [x] PM Guide
+  - [ ] ReguSelf
+  - [ ] Sagdi OS
+  - [ ] OS Manager Blueprint
+  - [ ] Pomodoro Focus Dock
+  - [ ] Screenshots Processor
+  - [ ] AI Job Agent
+
+---
+
+# NEXT (in this order)
+
+## 5. Russian and Uzbek
+
+Start only when 4 is done.
+
+- [ ] Re-sync first: `home.titleLine1` and `home.lede` in `ru.json` and `uz.json` still hold the
+      old English text
+- [ ] Translate `messages/ru.json` (almost all still English; only the two photo carousel buttons
+      are translated)
+- [ ] Translate `messages/uz.json` (same)
+- [ ] SEO text is part of those files: `meta.default.title`, `description`, `keywords`
+- [ ] Product texts: add `ru` and `uz` to each `tagline` and `body` in `src/content/products.ts`
+      (they fall back to English today)
+- Blog posts: nothing to do. They stay in the language they were written in.
+
+## 6. Subscribe works
+
+- [ ] Pick the provider (leaning Resend Audiences, Resend is already in the stack)
+- [ ] Wire `src/components/ui/subscribe-band.tsx` to it (visual only today, sends nothing)
+- [ ] Remove the "not wired" notes: `writing.subscribe.hint` and `writing.subscribe.ok`
+
+## 7. Go live
+
+- [ ] Delete the `legacy/` folder (56 tracked files)
+- [ ] Merge `rewamp2026` into `main`
+- [ ] Redirects fire on sagdi.com: `/projects` `/blog` `/blog/:slug` `/about` `/contact` `/hub`,
+      plus their ru and uz versions
+- [ ] `sitemap.xml` and `robots.txt` load on sagdi.com
+
+## Not checked yet (before go-live)
+
+- [ ] Mobile and dark mode on the identity-doc changes
+- [ ] New email subject "sagdi.com: New message from ..." seen in a real inbox
 
 ---
 
 # DONE
 
-- **Photos on Vercel** (item 26, 2026-09-21). The preview showed sample frames because
-  `PHOTOS_BASE_URL` was set for Production only. Sagdi switched it to All Environments, the next
-  build picked it up, and he confirmed the real photos load on the preview deploy.
-- **Notion live on Vercel** (item 12). The preview home page shows the real post "Why I Got PSPO
-  Certified" with no sample chip. Keys are in Vercel for All Environments. The database needs these
-  properties: Title or Name (title), Slug (rich text), Tags (multi-select), Published (checkbox),
-  Published Date or Date (date), Description (rich text), and must be shared with the integration.
-- **Resend live, the form sends real email** (items 15 and 28). Sagdi has received messages from the
-  contact form. Keys (`RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`) are in Vercel for
-  All Environments.
-- **2026-09-21 batch.**
-  - Item 1: no second headline line. `<br />` and `home.titleLine2` removed (all three languages).
-  - Item 7: "Currently listening" points at the music channel `https://t.me/sftunes`, with a
-    monochrome music icon (lucide `Music`) before the label.
-  - Item 8: Elsewhere Telegram points at `https://t.me/raw_notepad`. Rule: music links go to sftunes,
-    every other Telegram link goes to raw_notepad.
-  - Item 9: Threads points at `https://www.threads.com/@forsi_ph`.
-  - Item 10: X chip removed from the Write page, `writing.elsewhere.x` removed from all three languages.
-  - Item 11: the Work page footer "sagdi.com" is plain text now, no link.
-  - Contact form: Cmd+Enter (Ctrl+Enter off Mac) sends from any field. Verified in headless Chromium
-    with the API mocked: empty form does not send, filled form sends once.
-  - Contact email subject now starts "sagdi.com: New message from ...". Not seen in a real inbox yet.
-- **Photos** (was item 13, plus the video ask; 2026-09-10). Real photography on the home strip:
-  23 photos + 1 video from a Cloudflare R2 bucket (`sagdi-photos`, public URL
-  `https://pub-d80e4e9eb39747c9b6eeca7668d027ed.r2.dev`). How it works:
-  - **Sets are folders.** `photos-src/<set>/` on Sagdi's machine (gitignored). `home/` is the home
-    strip. A new block anywhere on the site is a new folder plus `listPhotos("<set>")`.
-  - **Order is by filename.** Camera names sort by date; a number prefix (`010-…`) sorts ahead when
-    manual control is wanted. Direction and captions in optional `set.json`:
-    `{ "order": "newest-first" | "oldest-first", "items": { "<file>": { "alt", "caption" } } }`.
-    Home is `newest-first`. All alt text is empty right now (digit-only filenames); fill via `items`.
-  - **Sync:** `npm run photos:sync -- [<set>…] [--prune]`. Uploads a 720px-tall WebP (what the strip
-    shows) and the 3000px JPEG original per photo, videos as-is, all named with a content hash and
-    cached immutable. Already-present files are skipped, so a reorder or caption edit re-syncs in
-    seconds. `--prune` deletes bucket files no longer in the folder; without it nothing is deleted.
-    Manifest per set at `photos/<set>/manifest.json`; the site revalidates it hourly.
-  - **Carousel loads the WebP straight from R2** (`unoptimized`), lazy with blur placeholder. Next's
-    image optimizer is out of the path on purpose: it aborts upstream fetches at 7s
-    (`node_modules/next/dist/server/image-optimizer.js` line 757) and on a home connection eight
-    parallel 2 MB originals blew past that, showing as broken frames.
-  - **Video frames** (`type: "video"` in the manifest) render as a muted, looping `<video>`, playing
-    only while at least 60% of the frame is inside the strip and the strip is on screen, paused
-    otherwise. Sizes come from the mp4's `tkhd` box (phone rotation handled) or `set.json`.
-  - Verified in headless Chrome against the dev server: all 23 images render, video plays at the end
-    of the strip, pauses when scrolled away, no-change sync uploads nothing.
-  - Env: `PHOTOS_BASE_URL` (site, also in Vercel) + `R2_ACCOUNT_ID` (32-hex only), `R2_ACCESS_KEY_ID`,
-    `R2_SECRET_ACCESS_KEY`, `R2_BUCKET` (sync script only, local). `next.config.ts` still parses
-    `PHOTOS_BASE_URL` at build time: a value without `https://` kills the build.
-  - Not done, by choice: r2.dev is rate-limited and not edge-cached; a custom domain
-    (`photos.sagdi.com`) needs sagdi.com's DNS on Cloudflare. Fine for now.
-- **The whole site is built.** Home, Build (with a detail page per product), Write (was Think, renamed
-  2026-09), World, Work with me, 404s, all three languages, all routes.
-- **Copy items 2 and 5.** `home.currently.buildingText` has real words. `work.prose2` is final, the
-  "refine copy" mark is gone. (`work.prose1` was dropped from the Work page along with the rename.)
-- **Contact form** (was Phase 4, item 15). `src/components/ui/contact-form.tsx` on /work, POSTs to
-  `/api/contact`. Built from the Codex design system, not ported from /legacy.
-- **Photo carousel component.** `src/components/ui/photo-carousel.tsx`. Takes photos and labels as
-  props, does no fetching and no translating, so it can sit on any page over any photo set. Fixed row
-  height, each frame keeps its true shape, native scroll and snap, arrows retire under 900px.
-- **Photo data layer.** `src/lib/photos.ts`, `listPhotos(set)`. Fetches the set's manifest, refreshes
-  hourly, skips malformed entries, and falls back to the bundled samples if anything at all goes wrong.
-- **Blog plumbing.** Notion connection with the same safe fallback, in-place tag filtering, post pages.
-- **SEO.** Every page builds its own canonical, hreflang, x-default, OG and Twitter cards. Products carry
-  structured data. Sitemap covers everything.
-- **Contact API.** Wired to Resend, validated, honeypot, HTML-escaped. Now has a UI calling it.
-- **Prod-swap redirects** written and waiting in `next.config.ts`.
-- **Everything is committed and pushed** as of 2026-09-21.
+## 1. Site built
+
+- [x] Pages: Home, Build (+ a page per product), Write (was Think), World, Work with me, 404s
+- [x] All routes in en, ru, uz
+- [x] SEO: every page has its own canonical, hreflang, x-default, OG and Twitter card; products have
+      structured data; sitemap covers everything
+- [x] Old-URL redirects written in `next.config.ts` (they take effect at go-live)
+- [x] Photo carousel (`src/components/ui/photo-carousel.tsx`) and photo data (`src/lib/photos.ts`)
+- [x] Blog: Notion connection, tag filter in place, post pages
+- [x] Contact form on /work, sends through `/api/contact` (Resend): validated, honeypot, HTML-escaped
+- [x] Cmd+Enter (Ctrl+Enter off Mac) sends the contact form
+- [x] Email subject starts "sagdi.com: New message from ..."
+
+## 2. Links fixed
+
+- [x] Currently listening → `t.me/sftunes`, with a music icon
+- [x] Elsewhere → Telegram → `t.me/raw_notepad`
+      Rule: music links go to sftunes, every other Telegram link goes to raw_notepad.
+- [x] Threads → `threads.com/@forsi_ph`
+- [x] X removed from the Write page
+- [x] Work page footer "sagdi.com" is plain text, no link
+
+## 3. Services connected
+
+- [x] Photos: 23 photos + 1 video from Cloudflare R2, confirmed on the Vercel preview
+- [x] Notion blog: real posts on the Vercel preview
+- [x] Resend: the contact form delivers real email
+
+---
+
+# REFERENCE
+
+## Cold start
+
+- What this is: sagdi.com rebuilt as a public "hub", branch `rewamp2026` of this repo
+  (`sagdi-portfolio/`, Next.js 15 App Router, Tailwind v4, next-intl en·ru·uz). `main` is the old
+  site and is what's live. The branch replaces it at step 7.
+- Run: `npm run dev` from this folder. `npm run typecheck`, `npm run lint`, `npm run build` must
+  stay green.
+- How Sagdi works: plain English, answer first, short. Build the literal ask and stop; ask one plain
+  question when something is ambiguous. Verify in the running app before saying done, and label
+  anything you couldn't run UNVERIFIED. No em dashes in any user-visible copy. He often keeps this
+  file open in vim.
+- Keep this file current: tick boxes, move sections between IN PROGRESS / NEXT / DONE, never delete.
+
+## Environment variables
+
+- Local: `.env.local` (gitignored) has the photo variables. Whether the Notion and Resend keys are in
+  it locally is unchecked. Compare against `env.local.template`.
+- Vercel: `PHOTOS_BASE_URL`, Notion and Resend keys are all set for All Environments.
+- Any variable added or changed in Vercel needs a redeploy. The home page is built statically and
+  refreshes hourly, so it only sees new variables on the next build.
+- Notion: `NOTION_API_KEY`, `NOTION_DATABASE_ID`, optional `NOTION_DATA_SOURCE_ID`. The database needs
+  these properties: Title or Name (title), Slug (rich text), Tags (multi-select), Published
+  (checkbox), Published Date or Date (date), Description (rich text). It must be shared with the
+  integration in Notion.
+- Resend: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`.
+- Photos: `PHOTOS_BASE_URL` (the site) + `R2_ACCOUNT_ID` (32-hex only), `R2_ACCESS_KEY_ID`,
+  `R2_SECRET_ACCESS_KEY`, `R2_BUCKET` (sync script only, local). `next.config.ts` parses
+  `PHOTOS_BASE_URL` at build time: a value without `https://` breaks the build.
+
+## Photos: how it works
+
+- Bucket: Cloudflare R2 `sagdi-photos`, public URL `https://pub-d80e4e9eb39747c9b6eeca7668d027ed.r2.dev`.
+- Sets are folders: `photos-src/<set>/` on Sagdi's machine (gitignored). `home/` is the home strip.
+  A new photo block anywhere is a new folder plus `listPhotos("<set>")`.
+- Day to day, order/add/delete happen in the PHOTO MANAGER, not by hand: double-click
+  `photo-manager/Open Photo Manager.command` (or `node photo-manager/server.mjs`). It opens
+  http://127.0.0.1:4455, shows the set in publish order, and does drag-to-reorder, drop-to-add
+  (HEIC → JPEG via `sips`, non-H.264 video → mp4 via `avconvert`), ✕ to `photos-src/.trash/<set>/`,
+  caption/alt boxes, Publish and Cleanup. The folder is gitignored, so it never reaches Vercel.
+- Order lives in `set.json`, which the manager writes:
+  `{ "order": "newest-first" | "oldest-first", "sequence": ["<file>", …],
+     "items": { "<file>": { "alt", "caption" } } }`.
+  `sequence` is the exact order; files missing from it join at the newest end (front for
+  newest-first, which home is). With no `sequence` it's the old rule — by filename, reversed for
+  newest-first — where a `010-` prefix sorts LAST in a newest-first set, not first. All alt text is
+  empty right now.
+- Sync: `npm run photos:sync -- [<set>…]`. Uploads a 720px-tall WebP (what the strip shows) and the
+  3000px JPEG original per photo, videos as-is, all named by content hash and cached immutable.
+  Anything already in the bucket is reused straight from the published manifest — not re-encoded —
+  so a reorder finishes in seconds. One manifest per set at `photos/<set>/manifest.json`, written
+  last so a half-finished run changes nothing. Hidden files (`._x.jpg`), `.heic` and same-content
+  twins are skipped with a warning. A lock file stops two runs at once.
+- Deleting is two steps on purpose. A normal run never deletes: the manifest drops the photo, but
+  pages already served still point at the old files, and Next only rebuilds a page on the first
+  visit after its hour is up — on a quiet page that can be days. Cleanup is separate:
+  `node scripts/photos-sync.mjs [<set>…] --cleanup [--site=…]`, and it deletes a bucket file only
+  when no manifest AND no live page mentions it. Vercel previews are behind a login wall, so
+  cleanup stops there unless Protection Bypass for Automation is on in Vercel and the secret is
+  passed as `--bypass=…` (the manager reads it from `photo-manager/settings.json`).
+- The carousel loads the WebP straight from R2 (`unoptimized`). Next's image optimizer is left out on
+  purpose: it gives up on a fetch after 7s, and on a home connection that showed as broken frames.
+- Videos play muted and looped while at least 60% of the frame is inside the strip and the strip is on
+  screen. Videos must be H.264 mp4: iPhone HEVC plays in Chrome on a Mac but not in Firefox or on
+  some phones, so the manager converts anything that isn't H.264 mp4 when you add it.
+- If frames show as samples on a deploy: `PHOTOS_BASE_URL` wasn't there at build time. Redeploy.
+- Left as is, by choice: r2.dev is rate-limited and not edge-cached. A custom domain
+  (`photos.sagdi.com`) needs sagdi.com's DNS on Cloudflare.
