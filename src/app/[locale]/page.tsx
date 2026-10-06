@@ -96,9 +96,16 @@ export default async function HomePage({
           <PhotoCarousel
             photos={photos}
             label={t("photography.label")}
-            buttonLabels={{
+            labels={{
               prev: t("photography.prev"),
               next: t("photography.next"),
+              open: t("photography.open"),
+              viewer: {
+                title: t("photography.viewer"),
+                close: t("photography.close"),
+                prev: t("photography.prevPhoto"),
+                next: t("photography.nextPhoto"),
+              },
             }}
           />
         </div>

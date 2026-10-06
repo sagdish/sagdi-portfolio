@@ -15,6 +15,26 @@ export const MAX_SIDE = 3000
 export const IMMUTABLE = "public, max-age=31536000, immutable"
 
 /**
+ * Full-view sizes, longest side in px: one for phones, one for big screens.
+ * The site's photo viewer loads only the one that fits the screen it's on.
+ */
+export const VIEW_SIDES = [1600, 2560]
+
+/**
+ * The full-view sizes to make for a photo whose longest side is `side`: every
+ * VIEW_SIDE smaller than the photo, plus the photo's own size when it's below
+ * the biggest one — so a small photo is never blown up, and big screens still
+ * get the best it has.
+ */
+export function viewSides(side) {
+  const below = VIEW_SIDES.filter((s) => s < side)
+  return side <= VIEW_SIDES.at(-1) ? [...below, side] : below
+}
+
+/** A video loops unless its set.json item says `"loop": false`. */
+export const loops = (item) => item?.loop !== false
+
+/**
  * .heic is deliberately absent: the installed sharp reads heif only for .avif,
  * so a HEIC file would crash the sync. The manager converts HEIC to JPEG with
  * the built-in `sips` when you add one.

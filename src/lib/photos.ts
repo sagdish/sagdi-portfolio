@@ -10,27 +10,31 @@ import { SAMPLE_PHOTOS } from "@/content/sample-photos"
  * Photos are grouped in named SETS — one folder each in photos-src/, synced by
  * scripts/photos-sync.mjs to photos/<set>/manifest.json:
  *   { "photos": [{ "key", "type?", "width", "height", "alt", "caption?",
- *                  "blurDataURL?", "full?": { "key", "width", "height" } }] }
+ *                  "loop?", "blurDataURL?", "full?": { "key", "width", "height" },
+ *                  "views?": [{ "key", "width", "height" }] }] }
  * `key` is the strip-sized WebP the carousel shows, served straight from the
  * bucket (no Next optimizer). `type` is "image" (default when absent) or
- * "video" — a muted clip the carousel autoplays in place. `full` points at the
- * 3000px original, for any later full-size use.
+ * "video" — a muted clip the carousel autoplays in place; `loop: false` plays
+ * it once. `views` are the full-view sizes, smallest first: the photo viewer
+ * loads only the one that fits the screen. `full` points at the 3000px
+ * original, for any later full-size use.
  */
-export type Photo = {
-  src: string
+export type PhotoFile = { src: string; width: number; height: number }
+
+export type Photo = PhotoFile & {
   type: "image" | "video"
-  width: number
-  height: number
   alt: string
   caption?: string
+  /** Videos only: false plays the clip once. Loops when absent. */
+  loop?: boolean
   blurDataURL?: string
-  full?: { src: string; width: number; height: number }
+  full?: PhotoFile
+  views?: PhotoFile[]
 }
 
-type ManifestPhoto = Partial<Omit<Photo, "src" | "full">> & {
-  key?: string
-  full?: { key?: string; width?: number; height?: number }
-}
+type ManifestFile = { key?: string; width?: number; height?: number }
+type ManifestPhoto = Partial<Omit<Photo, "src" | "full" | "views">> &
+  ManifestFile & { full?: ManifestFile; views?: ManifestFile[] }
 
 export async function listPhotos(set = "home"): Promise<{
   photos: Photo[]
@@ -47,29 +51,27 @@ export async function listPhotos(set = "home"): Promise<{
       })
       if (res.ok) {
         const manifest = (await res.json()) as { photos?: ManifestPhoto[] }
-        const photos = (manifest.photos ?? []).flatMap((p): Photo[] =>
-          p.key && p.width && p.height
-            ? [
-                {
-                  src: `${base}/${p.key}`,
-                  type: p.type === "video" ? "video" : "image",
-                  width: p.width,
-                  height: p.height,
-                  alt: p.alt ?? "",
-                  caption: p.caption,
-                  blurDataURL: p.blurDataURL,
-                  full:
-                    p.full?.key && p.full.width && p.full.height
-                      ? {
-                          src: `${base}/${p.full.key}`,
-                          width: p.full.width,
-                          height: p.full.height,
-                        }
-                      : undefined,
-                },
-              ]
-            : []
-        )
+        const file = (f?: ManifestFile): PhotoFile | undefined =>
+          f?.key && f.width && f.height
+            ? { src: `${base}/${f.key}`, width: f.width, height: f.height }
+            : undefined
+        const photos = (manifest.photos ?? []).flatMap((p): Photo[] => {
+          const strip = file(p)
+          if (!strip) return []
+          const views = (p.views ?? []).flatMap((v) => file(v) ?? [])
+          return [
+            {
+              ...strip,
+              type: p.type === "video" ? "video" : "image",
+              alt: p.alt ?? "",
+              caption: p.caption,
+              loop: p.loop,
+              blurDataURL: p.blurDataURL,
+              full: file(p.full),
+              views: views.length ? views : undefined,
+            },
+          ]
+        })
         if (photos.length) return { photos, sample: false }
       }
     } catch {

@@ -787,7 +787,8 @@
    One fixed row height; frame width follows each photo's aspect ratio (no crop).
    Native scroll + snap does the interaction; frames clip hard at the container
    edge — the peeking next frame is the affordance. Below 900px (the .wrap
-   16px-padding breakpoint) the strip bleeds edge-to-edge and the arrows retire. */
+   16px-padding breakpoint) the strip bleeds edge-to-edge and the arrows retire.
+   Each frame is a button that opens the photo viewer. */
 .pcar {
   --pcar-h: clamp(180px, 26vw, 260px);
 }
@@ -817,12 +818,23 @@
   flex-shrink: 0;
   scroll-snap-align: start;
 }
+/* Width spelled out from the row height and the photo's ratio (--ar, set per
+   frame): left to aspect-ratio, Safari sizes the slot by the image file's own
+   width, leaving wide gaps between frames. */
 .pcar-frame {
+  display: block;
   height: var(--pcar-h);
+  width: calc(var(--pcar-h) * var(--ar));
+  padding: 0;
   border: 1px solid var(--border);
   border-radius: 12px;
   background: var(--card-40);
   overflow: hidden;
+  cursor: zoom-in;
+}
+.pcar-frame:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  outline-offset: 2px;
 }
 .pcar-img {
   display: block;
@@ -894,6 +906,165 @@
   }
   .pcar-btns {
     display: none;
+  }
+}
+
+/* ── Photo viewer (full screen, opened from the strip) ─────────────────────────
+   Dark in both themes: overlay and content carry .dark, so every token inside
+   resolves to its dark value. One slide per screen width; a slide's padding is
+   the room for the bar, arrows and caption, and its content box is the size
+   container the photo fits into (whole, never past its biggest file). */
+.plb-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--bg);
+}
+.plb {
+  position: fixed;
+  inset: 0;
+  z-index: 101;
+  color: var(--text);
+  outline: none;
+}
+.plb-overlay[data-state="open"],
+.plb[data-state="open"] {
+  animation: plb-in 0.2s ease-out;
+}
+.plb-overlay[data-state="closed"],
+.plb[data-state="closed"] {
+  animation: plb-out 0.15s ease-in forwards;
+}
+@keyframes plb-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes plb-out {
+  to {
+    opacity: 0;
+  }
+}
+.plb-track {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+.plb-track::-webkit-scrollbar {
+  display: none;
+}
+.plb-slide {
+  flex: 0 0 100%;
+  display: grid;
+  place-items: center;
+  padding: calc(64px + env(safe-area-inset-top, 0px))
+    calc(12px + env(safe-area-inset-right, 0px))
+    calc(56px + env(safe-area-inset-bottom, 0px))
+    calc(12px + env(safe-area-inset-left, 0px));
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  container-type: size;
+}
+.plb-media {
+  position: relative;
+  aspect-ratio: var(--ar);
+  width: min(100cqw, 100cqh * var(--ar), var(--nw));
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--card-40);
+}
+.plb-fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.plb-sharp {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.plb-sharp.in {
+  opacity: 1;
+}
+.plb-bar {
+  position: absolute;
+  top: calc(12px + env(safe-area-inset-top, 0px));
+  left: calc(16px + env(safe-area-inset-left, 0px));
+  right: calc(12px + env(safe-area-inset-right, 0px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.plb-bar > * {
+  pointer-events: auto;
+}
+.plb-btn {
+  height: 40px;
+  width: 40px;
+  border-radius: 11px;
+}
+.plb-nav {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+}
+.plb-prev {
+  left: calc(16px + env(safe-area-inset-left, 0px));
+}
+.plb-next {
+  right: calc(16px + env(safe-area-inset-right, 0px));
+}
+.plb-cap {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  pointer-events: none;
+}
+/* Mouse and trackpad screens get arrows and room for them; touch swipes. */
+@media (hover: hover) and (pointer: fine) {
+  .plb-slide {
+    padding-inline: calc(72px + env(safe-area-inset-left, 0px))
+      calc(72px + env(safe-area-inset-right, 0px));
+  }
+}
+@media (hover: none), (pointer: coarse) {
+  .plb-nav {
+    display: none;
+  }
+}
+/* Short screens (a phone on its side): the counter and close button sit in
+   the side gutters, so the photo gets nearly the full height. */
+@media (max-height: 500px) {
+  .plb-slide {
+    padding-block: calc(12px + env(safe-area-inset-top, 0px))
+      calc(28px + env(safe-area-inset-bottom, 0px));
+    padding-inline: calc(72px + env(safe-area-inset-left, 0px))
+      calc(72px + env(safe-area-inset-right, 0px));
+  }
+  .plb-cap {
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .plb-overlay,
+  .plb {
+    animation: none !important;
+  }
+  .plb-sharp {
+    transition: none;
   }
 }
 

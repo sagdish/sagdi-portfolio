@@ -9,14 +9,18 @@
  * (photo-manager/, gitignored — start it and drag the photos around) writes:
  *   { "order": "newest-first" | "oldest-first",   direction for anything new
  *     "sequence": ["<file>", ...],                the exact order
- *     "items": { "<file>": { "alt", "caption", "width", "height" } } }
+ *     "items": { "<file>": { "alt", "caption", "loop", "width", "height" } } }
  * Files missing from "sequence" join at the newest end. With no "sequence" the
  * order is by file name, reversed for newest-first. width/height are only
- * needed for videos this script can't measure (webm).
+ * needed for videos this script can't measure (webm). "loop": false makes a
+ * video play once instead of looping; videos loop by default.
  *
- * Per image it uploads a strip-sized WebP (720px tall, what the carousel shows)
- * and the 3000px JPEG original, both named with a content hash so they can be
- * cached forever. Anything already in the bucket is reused from the published
+ * Per image it uploads a strip-sized WebP (720px tall, what the carousel shows),
+ * full-view WebPs (1600 and 2560px on the longest side, never bigger than the
+ * photo — the photo viewer loads only the one that fits the screen) and the
+ * 3000px JPEG original, all named with a content hash so they can be cached
+ * forever. A photo published before the full-view sizes existed gets just
+ * those added. Anything already in the bucket is reused from the published
  * manifest — not re-encoded — so a reorder finishes in seconds. Videos upload
  * as-is: H.264 in an mp4 plays everywhere, HEVC (the iPhone default) doesn't
  * play in Firefox or on some phones. Each set gets photos/<set>/manifest.json,
@@ -57,6 +61,7 @@ import {
   STRIP_HEIGHT,
   VIDEO_TYPES,
   altFromName,
+  loops,
   cloudBase,
   extOf,
   isMedia,
@@ -66,6 +71,7 @@ import {
   orderFiles,
   playsEverywhere,
   unusableReason,
+  viewSides,
 } from "./photos-shared.mjs"
 
 const ROOT = path.join(import.meta.dirname, "..")
@@ -305,13 +311,14 @@ async function runSync() {
       seenHashes.set(hash, file)
       const alt = items[file]?.alt ?? altFromName(file)
       const caption = items[file]?.caption
+      const loop = loops(items[file])
 
       if (isVideo(file)) {
         const key = `${base}${ext}`
         const kept = existing.has(key) ? previous.get(key) : null
         if (kept?.width && kept?.height) {
           console.log(`= ${key} (unchanged)`)
-          photos.push({ ...kept, alt, caption, type: "video" })
+          photos.push({ ...kept, alt, caption, loop, type: "video" })
           continue
         }
         const fromCfg =
@@ -342,6 +349,7 @@ async function runSync() {
           height: info.height,
           alt,
           caption,
+          loop,
         })
         continue
       }
@@ -354,7 +362,10 @@ async function runSync() {
           : null
       if (kept?.width && kept?.height && kept.full?.key) {
         console.log(`= ${stripKey} (unchanged)`)
-        photos.push({ ...kept, alt, caption })
+        const views = kept.views?.every((v) => existing.has(v.key))
+          ? kept.views
+          : await putViews(src, base)
+        photos.push({ ...kept, alt, caption, views })
         continue
       }
 
@@ -397,6 +408,7 @@ async function runSync() {
           width: full.info.width,
           height: full.info.height,
         },
+        views: await putViews(src, base),
       })
     }
 
@@ -421,6 +433,7 @@ async function runSync() {
     for (const p of photos) {
       keep.add(p.key)
       if (p.full?.key) keep.add(p.full.key)
+      for (const v of p.views ?? []) keep.add(v.key)
     }
     const gone = [...existing.keys()].filter(
       (k) => k.startsWith(`photos/${set}/`) && !keep.has(k)
@@ -440,6 +453,44 @@ async function runSync() {
         ? `\n${photos.length} photos live, ${gone.length} file(s) deleted — the site follows within a minute`
         : `\nthe site follows within a minute`
     )
+  }
+
+  /**
+   * The full-view WebPs for one photo, smallest first. A size already in the
+   * bucket isn't encoded again: its pixel size is worked out instead.
+   */
+  async function putViews(src, base) {
+    const { autoOrient } = await sharp(src).metadata()
+    const { width, height } = autoOrient
+    const side = Math.max(width, height)
+    const views = []
+    for (const s of viewSides(side)) {
+      const key = `${base}-${s}.webp`
+      if (existing.has(key)) {
+        console.log(`= ${key} (in bucket)`)
+        views.push({
+          key,
+          width: Math.round((width * s) / side),
+          height: Math.round((height * s) / side),
+        })
+        continue
+      }
+      const view = await sharp(src)
+        .rotate()
+        .resize(s, s, { fit: "inside", withoutEnlargement: true })
+        // Slowest, smallest encode: these are the heavy files, and only the
+        // first publish of a photo pays for it.
+        .webp({ quality: 75, effort: 6 })
+        .toBuffer({ resolveWithObject: true })
+      await put(
+        key,
+        view.data,
+        "image/webp",
+        `${view.info.width}×${view.info.height}, ${(view.data.length / 1024).toFixed(0)}kB`
+      )
+      views.push({ key, width: view.info.width, height: view.info.height })
+    }
+    return views
   }
 
   async function put(key, body, contentType, note) {

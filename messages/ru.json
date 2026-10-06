@@ -34,7 +34,12 @@
     "photography": {
       "label": "Photography",
       "prev": "Предыдущие фото",
-      "next": "Следующие фото"
+      "next": "Следующие фото",
+      "open": "Открыть фото",
+      "viewer": "Просмотр фото",
+      "close": "Закрыть",
+      "prevPhoto": "Предыдущее фото",
+      "nextPhoto": "Следующее фото"
     },
     "listening": {
       "label": "Currently listening",

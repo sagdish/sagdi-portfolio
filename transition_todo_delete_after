@@ -1,6 +1,6 @@
 # sagdi.com launch checklist
 
-Last updated: 2026-09-22
+Last updated: 2026-10-05
 Legend: [x] done  [ ] not done
 
 Finish line: zero grey "sample" chips on any page, in en, ru and uz. Then go live.
@@ -21,6 +21,21 @@ Cold start (new session): read REFERENCE at the bottom first.
 ---
 
 # IN PROGRESS
+
+## Photos: full-screen view
+
+- [x] Strip arrows move the strip again (Chrome re-snapped every step back to the start)
+- [x] Tap or click a photo: full-screen view. Swipe on phones; arrows and ←/→ on desktop;
+      Esc, ✕, tap beside the photo or the back button closes
+- [x] Opens the one size that fits the screen; the viewer's code loads only when needed
+- [x] Video in the full-screen view plays with sound
+- [x] Loop checkbox per video in the photo manager (strip and full-screen view)
+- [x] Safari: wide gaps between strip photos fixed
+- [x] Checked in headless Chrome and WebKit: phone portrait and landscape, tablet, desktop
+- [ ] Publish once in the photo manager, so the full-screen sizes exist (until then the
+      full-screen view shows the strip-size image)
+- [ ] Check on a real iPhone
+- [ ] Commit
 
 ## 4. English copy
 
@@ -154,32 +169,36 @@ Start only when 4 is done.
   `photo-manager/Open Photo Manager.command` (or `node photo-manager/server.mjs`). It opens
   http://127.0.0.1:4455, shows the set in publish order, and does drag-to-reorder, drop-to-add
   (HEIC → JPEG via `sips`, non-H.264 video → mp4 via `avconvert`), ✕ to `photos-src/.trash/<set>/`,
-  caption/alt boxes, Publish and Cleanup. The folder is gitignored, so it never reaches Vercel.
+  caption/alt boxes, a Loop checkbox per video, Publish and "Check the site". The folder is
+  gitignored, so it never reaches Vercel. How to use it: `photo-manager/README.md`.
 - Order lives in `set.json`, which the manager writes:
   `{ "order": "newest-first" | "oldest-first", "sequence": ["<file>", …],
-     "items": { "<file>": { "alt", "caption" } } }`.
+     "items": { "<file>": { "alt", "caption", "loop": false } } }`. `loop` is written only when
+  off; videos loop by default.
   `sequence` is the exact order; files missing from it join at the newest end (front for
   newest-first, which home is). With no `sequence` it's the old rule — by filename, reversed for
   newest-first — where a `010-` prefix sorts LAST in a newest-first set, not first. All alt text is
   empty right now.
-- Sync: `npm run photos:sync -- [<set>…]`. Uploads a 720px-tall WebP (what the strip shows) and the
-  3000px JPEG original per photo, videos as-is, all named by content hash and cached immutable.
+- Sync: `npm run photos:sync -- [<set>…]` (Publish runs the same script). Uploads per photo a
+  720px-tall WebP (what the strip shows), full-view WebPs at 1600 and 2560px on the longest side
+  (skipped when bigger than the photo) and the 3000px JPEG original; videos as-is. All named by
+  content hash and cached immutable.
   Anything already in the bucket is reused straight from the published manifest — not re-encoded —
   so a reorder finishes in seconds. One manifest per set at `photos/<set>/manifest.json`, written
   last so a half-finished run changes nothing. Hidden files (`._x.jpg`), `.heic` and same-content
   twins are skipped with a warning. A lock file stops two runs at once.
-- Deleting is two steps on purpose. A normal run never deletes: the manifest drops the photo, but
-  pages already served still point at the old files, and Next only rebuilds a page on the first
-  visit after its hour is up — on a quiet page that can be days. Cleanup is separate:
-  `node scripts/photos-sync.mjs [<set>…] --cleanup [--site=…]`, and it deletes a bucket file only
-  when no manifest AND no live page mentions it. Vercel previews are behind a login wall, so
-  cleanup stops there unless Protection Bypass for Automation is on in Vercel and the secret is
-  passed as `--bypass=…` (the manager reads it from `photo-manager/settings.json`).
+- Deleting happens in the same run: once the new manifest is up, every bucket file in that set the
+  manifest doesn't name is removed. Safe because the site re-reads the manifest every 60s and the
+  strip drops a frame whose file is gone. (The old separate `--cleanup` step no longer exists.)
 - The carousel loads the WebP straight from R2 (`unoptimized`). Next's image optimizer is left out on
   purpose: it gives up on a fetch after 7s, and on a home connection that showed as broken frames.
-- Videos play muted and looped while at least 60% of the frame is inside the strip and the strip is on
-  screen. Videos must be H.264 mp4: iPhone HEVC plays in Chrome on a Mac but not in Firefox or on
+- Videos play muted while at least 60% of the frame is inside the strip and the strip is on
+  screen; a play-once video plays once each time it comes into view. Videos must be H.264 mp4: iPhone HEVC plays in Chrome on a Mac but not in Firefox or on
   some phones, so the manager converts anything that isn't H.264 mp4 when you add it.
+- Full-screen view (`src/components/ui/photo-viewer.tsx`): tap a strip photo. It loads the
+  smallest full-view WebP at least as wide as the photo will be on that screen, only for the
+  open photo and its neighbours, showing the strip WebP until it arrives. Back closes it (it adds
+  one history entry on open).
 - If frames show as samples on a deploy: `PHOTOS_BASE_URL` wasn't there at build time. Redeploy.
 - Left as is, by choice: r2.dev is rate-limited and not edge-cached. A custom domain
   (`photos.sagdi.com`) needs sagdi.com's DNS on Cloudflare.

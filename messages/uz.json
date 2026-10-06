@@ -34,7 +34,12 @@
     "photography": {
       "label": "Photography",
       "prev": "Oldingi suratlar",
-      "next": "Keyingi suratlar"
+      "next": "Keyingi suratlar",
+      "open": "Suratni ochish",
+      "viewer": "Suratni koʻrish",
+      "close": "Yopish",
+      "prevPhoto": "Oldingi surat",
+      "nextPhoto": "Keyingi surat"
     },
     "listening": {
       "label": "Currently listening",
