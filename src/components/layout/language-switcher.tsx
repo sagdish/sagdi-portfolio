@@ -102,8 +102,10 @@ export function LanguageSwitcher({
   const [open, setOpen] = React.useState(false)
   const [pending, startTransition] = React.useTransition()
   const rootRef = React.useRef<HTMLDivElement>(null)
+  const buttonRef = React.useRef<HTMLButtonElement>(null)
+  const menuId = React.useId()
 
-  // Close on outside click / Escape.
+  // Close on outside click / Escape (Escape hands focus back to the trigger).
   React.useEffect(() => {
     if (!open) return
     const onDown = (e: MouseEvent) => {
@@ -112,7 +114,9 @@ export function LanguageSwitcher({
       }
     }
     const onEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false)
+      if (e.key !== "Escape") return
+      setOpen(false)
+      buttonRef.current?.focus()
     }
     document.addEventListener("mousedown", onDown)
     document.addEventListener("keydown", onEsc)
@@ -131,34 +135,25 @@ export function LanguageSwitcher({
   }
 
   return (
-    <div ref={rootRef} className="relative">
+    <div ref={rootRef} className="lang">
       <button
+        ref={buttonRef}
         type="button"
+        className="lang-btn"
         aria-label={t("changeLanguage")}
-        aria-haspopup="menu"
         aria-expanded={open}
+        aria-controls={menuId}
         disabled={pending}
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex h-8 items-center gap-1.5 rounded-[9px] border border-[var(--border)] bg-[var(--field)] px-2.5 text-[var(--muted)] transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--surface-hover)] hover:text-[var(--text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] disabled:opacity-60"
       >
         <Flag code={locale} />
-        <ChevronDown
-          className={cn(
-            "h-3.5 w-3.5 transition-transform",
-            open && "rotate-180"
-          )}
-        />
+        <ChevronDown className="lang-chev" size={14} aria-hidden />
       </button>
 
       {open && (
         <div
-          role="menu"
-          aria-label={t("changeLanguage")}
-          className={cn(
-            "absolute z-50 min-w-[10rem] overflow-hidden rounded-[12px] border border-[var(--border)] bg-[var(--elevated)] p-1 shadow-[var(--shadow)]",
-            alignLeft ? "left-0" : "right-0",
-            openUp ? "bottom-full mb-2" : "mt-2"
-          )}
+          id={menuId}
+          className={cn("lang-menu", alignLeft && "start", openUp && "up")}
         >
           {LANGUAGES.map(({ code, label }) => {
             const active = code === locale
@@ -166,23 +161,13 @@ export function LanguageSwitcher({
               <button
                 key={code}
                 type="button"
-                role="menuitemradio"
-                aria-checked={active}
+                lang={code}
+                className="lang-item"
+                aria-current={active ? "true" : undefined}
                 onClick={() => switchTo(code)}
-                className={cn(
-                  "flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm transition-colors hover:bg-[var(--surface-hover)]",
-                  active
-                    ? "font-medium text-[var(--text)]"
-                    : "text-[var(--muted)]"
-                )}
               >
                 {/* checkmark on the LEFT, reserved space keeps rows aligned */}
-                <Check
-                  className={cn(
-                    "h-4 w-4 shrink-0",
-                    active ? "opacity-100" : "opacity-0"
-                  )}
-                />
+                <Check className="lang-check" size={16} aria-hidden />
                 <Flag code={code} />
                 <span>{label}</span>
               </button>

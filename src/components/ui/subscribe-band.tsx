@@ -27,6 +27,7 @@ export function SubscribeBand({
   hint,
   buttonLabel,
   okLabel,
+  emailLabel,
   armIntent = false,
   className,
   style,
@@ -37,11 +38,12 @@ export function SubscribeBand({
   hint: string
   buttonLabel: string
   okLabel: string
+  emailLabel: string
   armIntent?: boolean
   className?: string
   style?: CSSProperties
 }) {
-  const { ref: revealRef, className: revealClassName } = useReveal()
+  const { ref: revealRef, state: revealState } = useReveal()
   const rootRef = useRef<HTMLDivElement | null>(null)
   const inputRef = useRef<HTMLInputElement | null>(null)
   const ranRef = useRef(false)
@@ -96,10 +98,11 @@ export function SubscribeBand({
     <div
       ref={setRoot}
       id={id}
-      className={cn("sub", revealClassName, glowing && "glow", className)}
+      className={cn("sub", glowing && "glow", className)}
+      data-reveal={revealState}
       style={style}
     >
-      <h3>{heading}</h3>
+      <h2>{heading}</h2>
       <p>{text}</p>
       {done ? (
         <div className="ok">{okLabel}</div>
@@ -115,7 +118,7 @@ export function SubscribeBand({
             ref={inputRef}
             type="email"
             placeholder="you@email.com"
-            aria-label="Email address"
+            aria-label={emailLabel}
             required
           />
           <button className="btn btn-primary" type="submit">

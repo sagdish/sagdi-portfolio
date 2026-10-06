@@ -1,17 +1,14 @@
 import type { Metadata } from "next"
 import { getTranslations } from "next-intl/server"
 import { routing } from "@/i18n/routing"
+import { LINKS } from "@/content/links"
 
 export const SITE_URL = "https://sagdi.com"
 
 export const OG_IMAGE_ALT = "Sagdi Formanov · building in public"
 
-// Social profiles used for JSON-LD `sameAs` (mirror of footer socialLinks).
-export const SOCIAL_LINKS = [
-  "https://linkedin.com/in/sagdi-formanov",
-  "https://github.com/sagdish",
-  "https://instagram.com/forsi_ph",
-]
+// Social profiles used for JSON-LD `sameAs`.
+export const SOCIAL_LINKS = [LINKS.linkedin, LINKS.github, LINKS.instagram]
 
 // OpenGraph locale codes per app locale.
 export const OG_LOCALE: Record<string, string> = {

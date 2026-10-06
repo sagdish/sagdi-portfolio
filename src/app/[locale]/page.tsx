@@ -1,6 +1,7 @@
 import { Music } from "lucide-react"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
+import { ELSEWHERE, LINKS } from "@/content/links"
 import { listPhotos } from "@/lib/photos"
 import { listPosts } from "@/lib/writing"
 import { PhotoCarousel } from "@/components/ui/photo-carousel"
@@ -18,20 +19,6 @@ export default async function HomePage({
   const latest = posts[0]
   const { photos, sample: photosSample } = await listPhotos("home")
 
-  const elsewhere = [
-    {
-      label: t("elsewhere.linkedin"),
-      href: "https://linkedin.com/in/sagdi-formanov",
-    },
-    { label: t("elsewhere.github"), href: "https://github.com/sagdish" },
-    { label: t("elsewhere.instagram"), href: "https://instagram.com/forsi_ph" },
-    { label: t("elsewhere.telegram"), href: "https://t.me/raw_notepad" },
-    {
-      label: t("elsewhere.threads"),
-      href: "https://www.threads.com/@forsi_ph",
-    },
-  ]
-
   return (
     <>
       <Reveal className="hero">
@@ -40,12 +27,10 @@ export default async function HomePage({
         <p className="lede">{t("lede")}</p>
       </Reveal>
 
-      <div style={{ height: 44 }} />
-
       {latest && (
-        <Reveal>
-          <div className="eyebrow">{t("latest.label")}</div>
-          <div className="elsewhere" style={{ marginTop: 12 }}>
+        <Reveal className="section">
+          <h2 className="eyebrow">{t("latest.label")}</h2>
+          <div className="elsewhere section-body">
             <Link className="chip" href={`/writing/${latest.slug}`}>
               {latest.title} →
               {postsSample && <span className="sample">sample</span>}
@@ -54,10 +39,10 @@ export default async function HomePage({
         </Reveal>
       )}
 
-      <Reveal className="nowcard currently">
+      <Reveal className="nowcard currently section">
         <div className="cur-head">
           <span className="livedot" />
-          <span className="lbl">{t("currently.heading")}</span>
+          <h2 className="lbl">{t("currently.heading")}</h2>
         </div>
         <div className="row">
           <span className="lbl">{t("currently.buildingLabel")}</span>
@@ -87,12 +72,12 @@ export default async function HomePage({
         </div>
       </Reveal>
 
-      <Reveal>
-        <div className="eyebrow" style={{ marginTop: 44 }}>
+      <Reveal className="section">
+        <h2 className="eyebrow">
           {t("photography.label")}
           {photosSample && <span className="sample">photos</span>}
-        </div>
-        <div style={{ marginTop: 12 }}>
+        </h2>
+        <div className="section-body">
           <PhotoCarousel
             photos={photos}
             label={t("photography.label")}
@@ -111,37 +96,28 @@ export default async function HomePage({
         </div>
       </Reveal>
 
-      <Reveal>
-        <div className="eyebrow" style={{ marginTop: 44 }}>
-          {t("listening.label")}
-        </div>
-        <div className="elsewhere" style={{ marginTop: 12 }}>
-          <a
-            className="chip"
-            href="https://t.me/sftunes"
-            target="_blank"
-            rel="noopener"
-          >
+      <Reveal className="section">
+        <h2 className="eyebrow">{t("listening.label")}</h2>
+        <div className="elsewhere section-body">
+          <a className="chip" href={LINKS.music} target="_blank" rel="noopener">
             <Music size={14} aria-hidden />
             {t("listening.telegram")} ↗
           </a>
         </div>
       </Reveal>
 
-      <Reveal>
-        <div className="eyebrow" style={{ marginTop: 44 }}>
-          {t("elsewhere.label")}
-        </div>
-        <div className="elsewhere" style={{ marginTop: 12 }}>
-          {elsewhere.map((e) => (
+      <Reveal className="section">
+        <h2 className="eyebrow">{t("elsewhere.label")}</h2>
+        <div className="elsewhere section-body">
+          {ELSEWHERE.map((key) => (
             <a
-              key={e.label}
+              key={key}
               className="chip"
-              href={e.href}
+              href={LINKS[key]}
               target="_blank"
               rel="noopener"
             >
-              {e.label} ↗
+              {t(`elsewhere.${key}`)} ↗
             </a>
           ))}
         </div>

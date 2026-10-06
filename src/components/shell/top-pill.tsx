@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useId, useRef, useState } from "react"
 import { EllipsisVertical } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
@@ -18,10 +18,12 @@ import { ThemeControl } from "./theme-control"
  */
 export function TopPill() {
   const t = useTranslations("shell")
+  const tn = useTranslations("nav")
   const [show, setShow] = useState(false)
   const [open, setOpen] = useState(false)
   const moreRef = useRef<HTMLButtonElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
+  const menuId = useId()
 
   useEffect(() => {
     const scroller = document.getElementById("scroller")
@@ -47,8 +49,11 @@ export function TopPill() {
         return
       setOpen(false)
     }
+    // Escape closes and hands focus back to the kebab.
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false)
+      if (e.key !== "Escape") return
+      setOpen(false)
+      moreRef.current?.focus()
     }
     document.addEventListener("click", onClick)
     document.addEventListener("keydown", onKey)
@@ -60,7 +65,7 @@ export function TopPill() {
 
   return (
     <header className={cn("topbar", show && "show")}>
-      <Link className="tb-home" href="/" aria-label="Home">
+      <Link className="tb-home" href="/" aria-label={tn("home")}>
         <span className="brand-sq">S</span>
       </Link>
       <span className="tb-name">SAGDI</span>
@@ -69,8 +74,8 @@ export function TopPill() {
         type="button"
         className="tb-more"
         aria-label={t("menu")}
-        aria-haspopup="true"
         aria-expanded={open}
+        aria-controls={menuId}
         onClick={(e) => {
           e.stopPropagation()
           setOpen((o) => !o)
@@ -79,7 +84,7 @@ export function TopPill() {
         <EllipsisVertical size={18} />
       </button>
 
-      <div ref={menuRef} className={cn("tb-menu", open && "open")}>
+      <div ref={menuRef} id={menuId} className={cn("tb-menu", open && "open")}>
         <div className="tb-menu-row">
           <span className="tb-menu-label">{t("theme")}</span>
           <ThemeControl />

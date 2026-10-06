@@ -5,6 +5,7 @@ import { pageMetadata } from "@/lib/seo"
 import { Reveal } from "@/components/ui/reveal"
 import { SubscribeBand } from "@/components/ui/subscribe-band"
 import { WritingList } from "@/components/writing/writing-list"
+import { LINKS } from "@/content/links"
 
 // ISR: pick up new Notion posts without a rebuild (matches the post detail).
 export const revalidate = 60
@@ -32,7 +33,7 @@ export default async function WritingPage({
     <>
       <Reveal className="sec-head">
         <div className="eyebrow">{t("eyebrow")}</div>
-        <h2>{t("title")}</h2>
+        <h1>{t("title")}</h1>
         <p>
           {t("lede")}
           {sample && <span className="sample">{t("sampleNote")}</span>}
@@ -54,20 +55,16 @@ export default async function WritingPage({
         hint={t("subscribe.hint")}
         buttonLabel={t("subscribe.button")}
         okLabel={t("subscribe.ok")}
+        emailLabel={t("subscribe.emailLabel")}
       />
 
       <Reveal className="elsewhere">
-        <a
-          className="chip"
-          href="https://github.com/sagdish"
-          target="_blank"
-          rel="noopener"
-        >
+        <a className="chip" href={LINKS.github} target="_blank" rel="noopener">
           {t("elsewhere.github")} ↗
         </a>
         <a
           className="chip"
-          href="https://linkedin.com/in/sagdi-formanov"
+          href={LINKS.linkedin}
           target="_blank"
           rel="noopener"
         >

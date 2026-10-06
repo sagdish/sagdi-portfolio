@@ -45,8 +45,8 @@
   --color-accent-fg: var(--accent-fg);
   --color-live: var(--live);
 
-  /* shadcn semantic aliases — resolve FROM the prototype tokens above, so the
-     reused button.tsx (and any shadcn primitive) inherits Codex + blue. */
+  /* shadcn semantic aliases — resolve FROM the prototype tokens above, so any
+     shadcn primitive inherits Codex + blue. */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -63,11 +63,13 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Radius scale from the prototype --radius (10px). */
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  /* Radius utilities read the same scale as design.css (:root --r-*). */
+  --radius-xs: var(--r-xs);
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-ctl);
+  --radius-xl: var(--r-lg);
+  --radius-2xl: var(--r-xl);
 }
 
 /* ── Light (Codex ink-&-paper) ─────────────────────────────────────────────── */
@@ -95,6 +97,26 @@
   --shadow:
     0 8px 30px -12px rgb(20 20 20 / 0.18), 0 2px 8px -4px rgb(20 20 20 / 0.12);
   --radius: 10px;
+
+  /* Corner radius scale — every rounded corner uses one of these. Nested corners
+     step down by the parent's padding (theme 8 → button 6, dock 22 → item 16). */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-ctl: 10px; /* bordered controls: chips, buttons, fields */
+  --r-lg: 12px; /* cards, menus, photo frames */
+  --r-xl: 16px;
+  --r-pill: 22px; /* floating glass dock / top pill */
+
+  /* Motion — two speeds, two curves. Reveal-on-scroll is the one slow move. */
+  --dur-fast: 0.15s;
+  --dur: 0.2s;
+  --dur-slow: 0.6s;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  /* Keyboard focus, the same on every control. */
+  --focus-ring: 2px solid var(--accent);
 
   /* Font stacks (the next/font vars are set on <body>). Declared here — not only in
      @theme — so var(--font-*) resolves in plain CSS (design.css); @theme inline does
@@ -204,12 +226,13 @@
     text-underline-offset: 2px;
   }
   /* Visible keyboard focus (handoff §4e): accent outline on keyboard nav only.
-     Elements with their own focus (subform input, language switcher) keep theirs. */
+     Form fields add their own focus style on top (design.css, .subform/.cform). */
   a:focus-visible,
   button:focus-visible,
   input:focus-visible,
+  textarea:focus-visible,
   [tabindex]:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: var(--focus-ring);
     outline-offset: 2px;
   }
   ::selection {
@@ -227,7 +250,7 @@
   }
   ::-webkit-scrollbar-thumb {
     background: var(--border-strong);
-    border-radius: 8px;
+    border-radius: var(--r-md);
     border: 2px solid transparent;
     background-clip: padding-box;
   }

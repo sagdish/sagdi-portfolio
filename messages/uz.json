@@ -70,10 +70,10 @@
     "eyebrow": "Build",
     "title": "What I'm making and working on.",
     "lede": "Product, software, AI, experiments, and the work behind them.",
-    "readMore": "read more",
+    "readMore": "Read more",
     "visit": "Visit",
-    "statusLive": "Live · in-progress",
-    "statusProgress": "In-progress",
+    "statusLive": "Live · in progress",
+    "statusProgress": "In progress",
     "statusPreStart": "Pre-start",
     "statusParked": "Parked",
     "back": "Back to Build"
@@ -90,7 +90,8 @@
       "text": "Get new essays and builds in your inbox. That's the whole pitch.",
       "hint": "prototype · not wired to a backend yet",
       "button": "Subscribe",
-      "ok": "You're on the list ✓  (prototype, nothing was actually sent)"
+      "ok": "You're on the list ✓  (prototype, nothing was actually sent)",
+      "emailLabel": "Email address"
     },
     "elsewhere": {
       "github": "GitHub",
@@ -128,5 +129,10 @@
       "error": "Something went wrong sending that. Try again, or reach me on LinkedIn."
     },
     "footerCopyright": "© 2026 Sagdi Formanov"
+  },
+  "notFound": {
+    "title": "ROAD CLOSED HERE",
+    "text": "This page took an exit that doesn't exist.",
+    "home": "Take me home"
   }
 }

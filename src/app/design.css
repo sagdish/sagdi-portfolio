@@ -1,10 +1,87 @@
 /* ─────────────────────────────────────────────────────────────────────────────
-   sagdi.com — design layer.
-   The prototype's component CSS, ported verbatim (PRODUCTS/sagdi-com-rewamp/
-   prototype.html), inline mono → var(--font-mono). References the token source in
-   globals.css only. Shared React components apply these classes on real routes, so
-   there is zero page-to-page copy-paste — the design is the prototype's, to the dot.
+   sagdi.com — design layer. Started as the prototype's CSS (PRODUCTS/sagdi-com-
+   rewamp/prototype.html); now the source of truth, with the rules in CLAUDE.md.
+   Reads tokens from globals.css only. Shared React components apply these
+   classes, so there is zero page-to-page copy-paste.
+
+   Hover rules sit inside @media (hover: hover) so a tap on a phone never leaves a
+   control stuck in its hover state.
    ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Type roles ────────────────────────────────────────────────────────────────
+   Every small mono label is one of three roles, defined once here. Component
+   rules below add only color (and size, where a role allows it). */
+/* label: section / field / status labels, all caps */
+.eyebrow,
+.nowcard .lbl,
+.cfield label,
+.tb-menu-label,
+.pill,
+.tagchip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+/* nav: rail + dock links, all caps; each sets its own size */
+.nav a,
+.dock a {
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+/* meta: dates, counts, captions, notes */
+.rail-note,
+.post .date,
+.article-meta .date,
+.card .go,
+.pcar-cap,
+.pcar-count,
+.plb-cap,
+.sub .hint,
+.foot-links .c {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+/* ── Bordered control ──────────────────────────────────────────────────────────
+   The one look shared by chips, tag chips, the Subscribe pill, the photo
+   arrows and the language button. Each class below keeps only its own size
+   and type. Hover brightens border + background; nothing lifts. */
+.chip,
+.tagchip,
+.railsub,
+.pcar-btn,
+.lang-btn {
+  border: 1px solid var(--border);
+  background: var(--field);
+  border-radius: var(--r-ctl);
+  transition:
+    border-color var(--dur-fast),
+    background-color var(--dur-fast),
+    color var(--dur-fast);
+}
+@media (hover: hover) {
+  .chip:not(.static):hover,
+  .tagchip:not(.static, .on):hover,
+  .railsub:hover,
+  .pcar-btn:hover:not(:disabled),
+  .lang-btn:hover:not(:disabled) {
+    border-color: var(--border-strong);
+    background: var(--surface-hover);
+    color: var(--text);
+  }
+}
+
+/* ── Popover surface: the top-pill menu and the language menu ──────────────── */
+.tb-menu,
+.lang-menu {
+  background: var(--elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+}
 
 /* ── App shell ─────────────────────────────────────────────────────────────── */
 .app {
@@ -50,7 +127,7 @@
   place-items: center;
   background: var(--accent);
   color: var(--accent-fg);
-  border-radius: 6px;
+  border-radius: var(--r-sm);
   font-weight: 700;
   font-size: 13px;
   line-height: 1;
@@ -85,20 +162,19 @@
   align-items: center;
   gap: 9px;
   padding: 8px 10px;
-  border-radius: 8px;
-  font-family: var(--font-mono);
+  border-radius: var(--r-md);
   font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.13em;
   color: var(--muted);
   text-decoration: none;
   transition:
-    background-color 0.15s,
-    color 0.15s;
+    background-color var(--dur-fast),
+    color var(--dur-fast);
 }
-.nav a:hover {
-  background: var(--surface-hover);
-  color: var(--text);
+@media (hover: hover) {
+  .nav a:hover {
+    background: var(--surface-hover);
+    color: var(--text);
+  }
 }
 .nav a.active {
   background: var(--accent-soft);
@@ -160,9 +236,9 @@
   --pet-box-2: #8c6231;
 }
 .rail-pet:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: var(--focus-ring);
   outline-offset: -3px;
-  border-radius: 12px;
+  border-radius: var(--r-lg);
 }
 .pet-canvas {
   position: absolute;
@@ -202,8 +278,6 @@
   gap: 8px;
 }
 .rail-note {
-  font-family: var(--font-mono);
-  font-size: 10px;
   color: var(--faint);
 }
 /* Subscribe as a quiet footer pill — matches the theme control's weight; blue only in the arrow. */
@@ -215,31 +289,26 @@
   width: 100%;
   height: 32px;
   padding: 0 12px;
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  background: var(--field);
   color: var(--text);
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: -0.01em;
   cursor: pointer;
-  transition:
-    border-color 0.15s,
-    background-color 0.15s,
-    transform 0.15s;
-}
-.railsub:hover {
-  border-color: var(--border-strong);
-  background: var(--surface-hover);
-  transform: translateY(-1px);
 }
 .railsub .arw {
   color: var(--accent);
-  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.railsub:hover .arw {
-  transform: translateX(3px);
+/* Arrow nudge — shared by every button that carries an arrow. */
+.railsub .arw,
+.btn .arw {
+  transition: transform var(--dur) var(--ease-spring);
+}
+@media (hover: hover) {
+  .railsub:hover .arw,
+  .btn:hover .arw {
+    transform: translateX(3px);
+  }
 }
 
 /* Landing utilities (mobile): theme + Subscribe, right-aligned, top of every page.
@@ -283,7 +352,7 @@
   gap: 2px;
   border: 1px solid var(--border);
   background: var(--field);
-  border-radius: 8px;
+  border-radius: var(--r-md);
   padding: 2px;
 }
 .tbtn {
@@ -294,15 +363,17 @@
   border: none;
   background: transparent;
   color: var(--muted);
-  border-radius: 6px;
+  border-radius: var(--r-sm);
   cursor: pointer;
   transition:
-    background-color 0.15s,
-    color 0.15s;
+    background-color var(--dur-fast),
+    color var(--dur-fast);
 }
-.tbtn:hover {
-  background: var(--surface-hover);
-  color: var(--text);
+@media (hover: hover) {
+  .tbtn:hover {
+    background: var(--surface-hover);
+    color: var(--text);
+  }
 }
 .tbtn.active {
   background: var(--accent);
@@ -333,7 +404,7 @@
   gap: 8px;
   height: 48px;
   padding: 0 6px 0 8px;
-  border-radius: 22px;
+  border-radius: var(--r-pill);
   background: var(--glass);
   -webkit-backdrop-filter: blur(13px) saturate(190%) brightness(1.05);
   backdrop-filter: blur(13px) saturate(190%) brightness(1.05);
@@ -347,8 +418,8 @@
   opacity: 0;
   pointer-events: none;
   transition:
-    transform 0.26s cubic-bezier(0.22, 0.61, 0.36, 1),
-    opacity 0.2s ease;
+    transform var(--dur) var(--ease-out),
+    opacity var(--dur);
 }
 .topbar.show {
   transform: none;
@@ -380,7 +451,7 @@
   align-items: center;
   text-decoration: none;
   color: var(--text);
-  border-radius: 8px;
+  border-radius: var(--r-md);
 }
 .tb-home .brand-sq {
   height: 26px;
@@ -404,13 +475,17 @@
   border: none;
   background: transparent;
   color: var(--accent);
-  border-radius: 10px;
+  border-radius: var(--r-ctl);
   cursor: pointer;
-  transition: background-color 0.15s;
+  transition: background-color var(--dur-fast);
 }
-.tb-more:hover,
 .tb-more[aria-expanded="true"] {
   background: var(--accent-soft);
+}
+@media (hover: hover) {
+  .tb-more:hover {
+    background: var(--accent-soft);
+  }
 }
 .tb-more svg {
   width: 18px;
@@ -428,25 +503,115 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: var(--elevated);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  box-shadow: var(--shadow);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-6px) scale(0.98);
   transform-origin: top left;
   pointer-events: none;
   transition:
-    opacity 0.16s ease,
-    transform 0.16s cubic-bezier(0.34, 1.4, 0.64, 1),
-    visibility 0.16s;
+    opacity var(--dur-fast),
+    transform var(--dur-fast) var(--ease-spring),
+    visibility var(--dur-fast);
 }
 .tb-menu.open {
   opacity: 1;
   visibility: visible;
   transform: none;
   pointer-events: auto;
+}
+
+/* Language picker: the bordered-control trigger + a popover that pops in the
+   same way as the top-pill menu. `.up` opens above (rail foot), `.start`
+   aligns to the trigger's left edge (narrow rail). */
+.lang {
+  position: relative;
+}
+.lang-btn {
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.lang-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.lang-chev {
+  transition: transform var(--dur-fast);
+}
+.lang-btn[aria-expanded="true"] .lang-chev {
+  transform: rotate(180deg);
+}
+.lang-menu {
+  position: absolute;
+  z-index: 50;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 10rem;
+  padding: 4px;
+  overflow: hidden;
+  transform-origin: top right;
+  animation: pop-in var(--dur-fast) var(--ease-spring);
+}
+.lang-menu.start {
+  right: auto;
+  left: 0;
+  transform-origin: top left;
+}
+.lang-menu.up {
+  top: auto;
+  bottom: calc(100% + 8px);
+  transform-origin: bottom left;
+}
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+}
+.lang-menu.up {
+  animation-name: pop-in-up;
+}
+@keyframes pop-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+}
+.lang-item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: var(--r-md);
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--dur-fast);
+}
+.lang-item[aria-current="true"] {
+  color: var(--text);
+  font-weight: 500;
+}
+.lang-check {
+  flex-shrink: 0;
+  opacity: 0;
+}
+.lang-item[aria-current="true"] .lang-check {
+  opacity: 1;
+}
+@media (hover: hover) {
+  .lang-item:hover {
+    background: var(--surface-hover);
+  }
 }
 .tb-menu-row {
   display: flex;
@@ -455,10 +620,6 @@
   gap: 12px;
 }
 .tb-menu-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
   color: var(--faint);
 }
 
@@ -473,7 +634,7 @@
   align-items: stretch;
   gap: 4px;
   padding: 4px 6px;
-  border-radius: 22px;
+  border-radius: var(--r-pill);
   background: var(--glass);
   -webkit-backdrop-filter: blur(13px) saturate(190%) brightness(1.05);
   backdrop-filter: blur(13px) saturate(190%) brightness(1.05);
@@ -509,16 +670,13 @@
   justify-content: center;
   gap: 2px;
   padding: 4px 2px;
-  border-radius: 16px;
+  border-radius: var(--r-xl);
   color: var(--muted);
   text-decoration: none;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: 10px;
   transition:
-    color 0.15s,
-    background-color 0.15s;
+    color var(--dur-fast),
+    background-color var(--dur-fast);
 }
 .dock a:active {
   background: color-mix(in srgb, var(--surface-hover) 70%, transparent);
@@ -571,38 +729,25 @@
   align-items: center;
   gap: 8px;
   padding: 10px 16px;
-  border-radius: 10px;
+  border-radius: var(--r-ctl);
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
   border: 1px solid transparent;
   transition:
-    background-color 0.15s,
-    border-color 0.15s,
-    color 0.15s;
-}
-.btn .arw {
-  transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.btn:hover .arw {
-  transform: translateX(3px);
+    background-color var(--dur-fast),
+    border-color var(--dur-fast),
+    color var(--dur-fast);
 }
 .btn-primary {
   background: var(--accent);
   color: var(--accent-fg);
 }
-.btn-primary:hover {
-  background: color-mix(in srgb, var(--accent) 90%, #000);
-}
-.btn-ghost {
-  background: var(--field);
-  color: var(--text);
-  border-color: var(--border);
-}
-.btn-ghost:hover {
-  border-color: var(--border-strong);
-  background: var(--surface-hover);
+@media (hover: hover) {
+  .btn-primary:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--accent) 90%, #000);
+  }
 }
 
 /* ── Back button: the .chip primitive, pinned top-left of detail pages ─────── */
@@ -612,10 +757,8 @@
 
 /* ── Home hero ─────────────────────────────────────────────────────────────── */
 .eyebrow {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  margin: 0;
+  font-weight: 400;
   color: var(--accent);
 }
 .hero-name {
@@ -637,19 +780,27 @@
   max-width: 46ch;
   margin: 16px 0 0;
 }
-.hero .cta {
+.cta {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 26px;
 }
 
+/* Page sections: one gap between sections, one gap under a section's label.
+   Child selector so it outranks the body's own margin (e.g. .elsewhere). */
+.section {
+  margin-top: 44px;
+}
+.section > .section-body {
+  margin-top: 12px;
+}
+
 .nowcard {
-  margin-top: 30px;
   padding: 16px 18px;
   background: var(--card-40);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--r-lg);
   display: flex;
   gap: 12px;
   align-items: flex-start;
@@ -676,10 +827,8 @@
   }
 }
 .nowcard .lbl {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  margin: 0;
+  font-weight: 400;
   color: var(--faint);
 }
 
@@ -713,7 +862,7 @@
 .sec-head {
   margin: 8px 0 22px;
 }
-.sec-head h2 {
+.sec-head h1 {
   font-size: clamp(24px, 3.5vw, 32px);
   letter-spacing: -0.02em;
   margin: 6px 0 0;
@@ -723,6 +872,9 @@
   color: var(--muted);
   margin: 8px 0 0;
   max-width: 54ch;
+}
+.sec-head .status {
+  margin-top: 12px;
 }
 
 /* ── Card grid ─────────────────────────────────────────────────────────────── */
@@ -736,20 +888,22 @@
   text-decoration: none;
   color: inherit;
   padding: 18px;
-  border-radius: 12px;
+  border-radius: var(--r-lg);
   background: var(--card-30);
   border: 1px solid var(--border);
   transition:
-    transform 0.2s cubic-bezier(0.34, 1.4, 0.64, 1),
-    box-shadow 0.2s,
-    border-color 0.2s;
+    transform var(--dur) var(--ease-spring),
+    box-shadow var(--dur),
+    border-color var(--dur);
 }
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow);
-  border-color: var(--border-strong);
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+    border-color: var(--border-strong);
+  }
 }
-.card h3 {
+.card h2 {
   margin: 0 0 6px;
   font-size: 16px;
   font-weight: 650;
@@ -767,21 +921,30 @@
   justify-content: space-between;
 }
 .card .go {
-  font-family: var(--font-mono);
-  font-size: 11px;
   color: var(--accent);
   opacity: 0;
   transform: translateX(-4px);
   transition:
-    opacity 0.2s,
-    transform 0.2s;
+    opacity var(--dur),
+    transform var(--dur);
 }
-.card:hover .go {
+/* Shown on hover, on keyboard focus, and always where there is no hover. */
+.card:focus-visible .go {
   opacity: 1;
   transform: none;
 }
-
-/* Big CTA cards on the home page */
+@media (hover: hover) {
+  .card:hover .go {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (hover: none) {
+  .card .go {
+    opacity: 1;
+    transform: none;
+  }
+}
 
 /* ── Photo carousel (contact-sheet filmstrip) ──────────────────────────────────
    One fixed row height; frame width follows each photo's aspect ratio (no crop).
@@ -802,9 +965,9 @@
   display: none;
 }
 .pcar-scroller:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  outline: var(--focus-ring);
   outline-offset: 2px;
-  border-radius: 12px;
+  border-radius: var(--r-lg);
 }
 .pcar-track {
   display: flex;
@@ -827,30 +990,25 @@
   width: calc(var(--pcar-h) * var(--ar));
   padding: 0;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--r-lg);
   background: var(--card-40);
   overflow: hidden;
   cursor: zoom-in;
-}
-.pcar-frame:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
-  outline-offset: 2px;
 }
 .pcar-img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.2s ease;
+  transition: transform var(--dur) var(--ease-out);
 }
-.pcar-item:hover .pcar-img {
-  transform: scale(1.02);
+@media (hover: hover) {
+  .pcar-item:hover .pcar-img {
+    transform: scale(1.02);
+  }
 }
 .pcar-cap {
   margin-top: 6px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.06em;
   color: var(--faint);
 }
 .pcar-foot {
@@ -860,9 +1018,6 @@
   margin-top: 10px;
 }
 .pcar-count {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
   color: var(--faint);
 }
 .pcar-btns {
@@ -874,22 +1029,8 @@
   width: 32px;
   display: grid;
   place-items: center;
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  background: var(--field);
   color: var(--muted);
   cursor: pointer;
-  transition:
-    border-color 0.15s,
-    background-color 0.15s,
-    color 0.15s,
-    transform 0.15s;
-}
-.pcar-btn:hover:not(:disabled) {
-  border-color: var(--border-strong);
-  background: var(--surface-hover);
-  color: var(--text);
-  transform: translateY(-1px);
 }
 .pcar-btn:disabled {
   color: var(--faint);
@@ -929,11 +1070,11 @@
 }
 .plb-overlay[data-state="open"],
 .plb[data-state="open"] {
-  animation: plb-in 0.2s ease-out;
+  animation: plb-in var(--dur) ease-out;
 }
 .plb-overlay[data-state="closed"],
 .plb[data-state="closed"] {
-  animation: plb-out 0.15s ease-in forwards;
+  animation: plb-out var(--dur-fast) ease-in forwards;
 }
 @keyframes plb-in {
   from {
@@ -974,7 +1115,7 @@
   position: relative;
   aspect-ratio: var(--ar);
   width: min(100cqw, 100cqh * var(--ar), var(--nw));
-  border-radius: 8px;
+  border-radius: var(--r-md);
   overflow: hidden;
   background: var(--card-40);
 }
@@ -987,7 +1128,7 @@
 }
 .plb-sharp {
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity var(--dur) ease;
 }
 .plb-sharp.in {
   opacity: 1;
@@ -1008,7 +1149,6 @@
 .plb-btn {
   height: 40px;
   width: 40px;
-  border-radius: 11px;
 }
 .plb-nav {
   position: absolute;
@@ -1027,9 +1167,6 @@
   right: 16px;
   bottom: calc(20px + env(safe-area-inset-bottom, 0px));
   text-align: center;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
   color: var(--muted);
   pointer-events: none;
 }
@@ -1093,10 +1230,6 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: var(--muted);
 }
 .pill .d {
@@ -1124,7 +1257,7 @@
   text-transform: uppercase;
   color: var(--faint);
   border: 1px dashed var(--border-strong);
-  border-radius: 4px;
+  border-radius: var(--r-xs);
   padding: 1px 5px;
   margin-left: 8px;
   vertical-align: middle;
@@ -1143,14 +1276,18 @@
   text-decoration: none;
   color: inherit;
   align-items: baseline;
-  transition: padding-left 0.18s;
 }
-.post:hover {
-  padding-left: 10px;
+/* Hover nudges the row's content right; the divider line stays put. Transform,
+   not padding, so the text never reflows. */
+.post > * {
+  transition: transform var(--dur) var(--ease-out);
+}
+@media (hover: hover) {
+  .post:hover > * {
+    transform: translateX(6px);
+  }
 }
 .post .date {
-  font-family: var(--font-mono);
-  font-size: 11px;
   color: var(--faint);
   flex-shrink: 0;
   width: 90px;
@@ -1171,11 +1308,11 @@
   position: relative;
   margin-top: 34px;
   padding: 28px;
-  border-radius: 16px;
+  border-radius: var(--r-xl);
   background: var(--accent-soft);
   border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
 }
-.sub h3 {
+.sub h2 {
   margin: 0;
   font-size: 21px;
   letter-spacing: -0.01em;
@@ -1277,7 +1414,7 @@
 .cform input,
 .cform textarea {
   padding: 11px 14px;
-  border-radius: 10px;
+  border-radius: var(--r-ctl);
   border: 1px solid var(--border-strong);
   background: var(--content-bg);
   color: var(--text);
@@ -1303,10 +1440,7 @@
 }
 .sub .hint {
   margin-top: 10px;
-  font-family: var(--font-mono);
-  font-size: 10px;
   color: var(--faint);
-  letter-spacing: 0.06em;
 }
 
 /* ── Contact form (Work with me) ────────────────────────────────── */
@@ -1333,10 +1467,6 @@
   min-width: 0;
 }
 .cfield label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
   color: var(--faint);
 }
 .cform input,
@@ -1404,21 +1534,13 @@
   align-items: center;
   gap: 7px;
   padding: 8px 13px;
-  border-radius: 9px;
-  border: 1px solid var(--border);
-  background: var(--field);
   color: var(--text);
   text-decoration: none;
   font-size: 13px;
-  transition:
-    border-color 0.15s,
-    background-color 0.15s,
-    transform 0.15s;
 }
-.chip:hover {
-  border-color: var(--border-strong);
-  background: var(--surface-hover);
-  transform: translateY(-1px);
+/* A chip that is only a label (World areas): no hover, plain cursor. */
+.chip.static {
+  cursor: default;
 }
 
 .prose {
@@ -1445,8 +1567,6 @@
   align-items: center;
 }
 .foot-links .c {
-  font-family: var(--font-mono);
-  font-size: 10px;
   color: var(--faint);
 }
 .foot-links a,
@@ -1455,21 +1575,29 @@
   text-decoration: none;
   font-size: 13px;
 }
-.foot-links a:hover {
-  color: var(--text);
+@media (hover: hover) {
+  .foot-links a:hover {
+    color: var(--text);
+  }
 }
 
-/* ── Reveal-on-scroll (the "bounce in") ────────────────────────────────────── */
-.reveal {
+/* ── Reveal-on-scroll (the "bounce in") ──────────────────────────────────────
+   Only blocks that start below the fold take part (use-reveal.ts): "wait" hides
+   them until they scroll into view, "in" plays the entrance once. It uses the
+   `translate` property and an animation, so a component's own `transform` and
+   `transition` (card lift, row nudge) are never touched. */
+[data-reveal="wait"] {
   opacity: 0;
-  transform: translateY(16px);
-  transition:
-    opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1),
-    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  translate: 0 16px;
 }
-.reveal.in {
-  opacity: 1;
-  transform: none;
+[data-reveal="in"] {
+  animation: reveal-in var(--dur-slow) var(--ease-out) both;
+}
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
 }
 
 /* ── ≥880px — desktop: rail returns, mobile dock + top-bar retire ──────────── */
@@ -1491,9 +1619,9 @@
     transition: none !important;
     scroll-behavior: auto !important;
   }
-  .reveal {
+  [data-reveal] {
     opacity: 1;
-    transform: none;
+    translate: none;
   }
 }
 
@@ -1505,24 +1633,9 @@
   margin: 2px 0 24px;
 }
 .tagchip {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
   padding: 6px 11px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--field);
   color: var(--muted);
   cursor: pointer;
-  transition:
-    border-color 0.15s,
-    background-color 0.15s,
-    color 0.15s;
-}
-.tagchip:hover {
-  border-color: var(--border-strong);
-  color: var(--text);
 }
 .tagchip.on {
   background: var(--accent-soft);
@@ -1552,9 +1665,10 @@
   margin: 14px 0 24px;
 }
 .article-meta .date {
-  font-family: var(--font-mono);
-  font-size: 11px;
   color: var(--faint);
+}
+.article .sample-note {
+  margin-bottom: 20px;
 }
 .article-body p {
   color: var(--text);
@@ -1590,12 +1704,12 @@
   font-size: 13px;
   background: var(--surface);
   padding: 1px 5px;
-  border-radius: 4px;
+  border-radius: var(--r-xs);
 }
 .article-body pre {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: var(--r-ctl);
   padding: 14px 16px;
   overflow-x: auto;
   margin: 0 0 16px;
@@ -1612,7 +1726,7 @@
 }
 .article-body img {
   max-width: 100%;
-  border-radius: 10px;
+  border-radius: var(--r-ctl);
   margin: 20px 0;
 }
 .article-body strong {

@@ -40,13 +40,13 @@ export default async function WorldPage({
     <>
       <Reveal className="sec-head">
         <div className="eyebrow">{t("eyebrow")}</div>
-        <h2>{t("title")}</h2>
+        <h1>{t("title")}</h1>
         <p>{t("lede")}</p>
       </Reveal>
 
       <Reveal className="elsewhere">
         {AREA_KEYS.map((key) => (
-          <span key={key} className="chip">
+          <span key={key} className="chip static">
             {t(`areas.${key}`)}
           </span>
         ))}

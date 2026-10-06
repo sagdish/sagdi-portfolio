@@ -93,8 +93,8 @@ export default async function ProductPage({
       <BackLink href="/building" label={t("back")} />
       <Reveal className="sec-head">
         <div className="eyebrow">{t("eyebrow")}</div>
-        <h2>{product.title}</h2>
-        <div style={{ marginTop: 12 }}>
+        <h1>{product.title}</h1>
+        <div className="status">
           <span className={`pill ${STATUS_CLASS[product.status]}`.trim()}>
             <span className="d" />
             {statusLabel[product.status]}
@@ -109,7 +109,7 @@ export default async function ProductPage({
         </p>
         <p className="dim">{loc(product.body, locale as Locale)}</p>
         {product.url && (
-          <div className="cta" style={{ marginTop: 22 }}>
+          <div className="cta">
             <a
               className="btn btn-primary"
               href={product.url}

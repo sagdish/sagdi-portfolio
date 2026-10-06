@@ -97,7 +97,7 @@ export default async function WritingPostPage({
         ))}
       </div>
       {sample && (
-        <p style={{ marginBottom: 20 }}>
+        <p className="sample-note">
           <span className="sample">{t("sampleNote")}</span>
         </p>
       )}

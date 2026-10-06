@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 import { ContactForm } from "@/components/ui/contact-form"
 import { Reveal } from "@/components/ui/reveal"
 import { pageMetadata } from "@/lib/seo"
+import { LINKS } from "@/content/links"
 
 export async function generateMetadata({
   params,
@@ -31,7 +32,7 @@ export default async function WorkPage({
     <>
       <Reveal className="sec-head">
         <div className="eyebrow">{t("eyebrow")}</div>
-        <h2>{t("title")}</h2>
+        <h1>{t("title")}</h1>
       </Reveal>
 
       <Reveal className="prose">
@@ -53,14 +54,10 @@ export default async function WorkPage({
 
       <div className="foot-links">
         <span className="c">{t("footerCopyright")}</span>
-        <a href="https://github.com/sagdish" target="_blank" rel="noopener">
+        <a href={LINKS.github} target="_blank" rel="noopener">
           GitHub
         </a>
-        <a
-          href="https://linkedin.com/in/sagdi-formanov"
-          target="_blank"
-          rel="noopener"
-        >
+        <a href={LINKS.linkedin} target="_blank" rel="noopener">
           LinkedIn
         </a>
         <span className="t">sagdi.com</span>

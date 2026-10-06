@@ -41,14 +41,14 @@ export default async function BuildingPage({
     <>
       <Reveal className="sec-head">
         <div className="eyebrow">{t("eyebrow")}</div>
-        <h2>{t("title")}</h2>
+        <h1>{t("title")}</h1>
         <p>{t("lede")}</p>
       </Reveal>
 
       <div className="grid">
         {PRODUCTS.map((p) => (
           <Reveal key={p.slug} href={`/building/${p.slug}`} className="card">
-            <h3>{p.title}</h3>
+            <h2>{p.title}</h2>
             <p>
               {loc(p.tagline, locale as Locale)}
               {p.placeholder && <span className="sample">sample</span>}

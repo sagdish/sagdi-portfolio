@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
 import { LanguageSwitcher } from "@/components/layout/language-switcher"
 import { SubscribeButton } from "./subscribe-button"
@@ -9,9 +10,10 @@ import { ThemeControl } from "./theme-control"
  * picker + theme + Subscribe grouped right (§I). Hidden ≥880 (the rail owns these).
  */
 export function UtilBar() {
+  const tn = useTranslations("nav")
   return (
     <div className="util-bar">
-      <Link className="tb-home" href="/" aria-label="Home">
+      <Link className="tb-home" href="/" aria-label={tn("home")}>
         <span className="brand-sq">S</span>
       </Link>
       <div className="util-right">

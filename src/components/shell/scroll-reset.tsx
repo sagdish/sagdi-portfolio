@@ -15,7 +15,11 @@ export function ScrollReset() {
     try {
       if (sessionStorage.getItem("subscribe-intent")) return
     } catch {}
-    document.getElementById("scroller")?.scrollTo({ top: 0 })
+    // Instant: .content has smooth scrolling on, which would glide every page
+    // change up from wherever the last page was left.
+    document
+      .getElementById("scroller")
+      ?.scrollTo({ top: 0, behavior: "instant" })
   }, [pathname])
   return null
 }

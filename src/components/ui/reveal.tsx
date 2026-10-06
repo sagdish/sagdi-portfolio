@@ -2,7 +2,6 @@
 
 import type { ReactNode } from "react"
 import { Link } from "@/i18n/navigation"
-import { cn } from "@/lib/utils"
 import { useReveal } from "./use-reveal"
 
 type RevealProps = {
@@ -15,14 +14,13 @@ type RevealProps = {
 }
 
 /**
- * Reveal-on-scroll wrapper. The reveal classes go on the element itself (div, Link, or
- * external <a>) so grid items / anchors keep their place — no extra wrapper. `href` is a
- * string (not a component) so a Server Component can use it without passing `Link` across
- * the RSC boundary.
+ * Reveal-on-scroll wrapper. The `data-reveal` state goes on the element itself (div,
+ * Link, or external <a>) so grid items / anchors keep their place — no extra wrapper.
+ * `href` is a string (not a component) so a Server Component can use it without
+ * passing `Link` across the RSC boundary.
  */
 export function Reveal({ href, external, className, children }: RevealProps) {
-  const { ref, className: revealClassName } = useReveal()
-  const merged = cn(revealClassName, className)
+  const { ref, state } = useReveal()
 
   if (href && external) {
     return (
@@ -31,7 +29,8 @@ export function Reveal({ href, external, className, children }: RevealProps) {
         href={href}
         target="_blank"
         rel="noopener"
-        className={merged}
+        className={className}
+        data-reveal={state}
       >
         {children}
       </a>
@@ -39,13 +38,13 @@ export function Reveal({ href, external, className, children }: RevealProps) {
   }
   if (href) {
     return (
-      <Link ref={ref} href={href} className={merged}>
+      <Link ref={ref} href={href} className={className} data-reveal={state}>
         {children}
       </Link>
     )
   }
   return (
-    <div ref={ref} className={merged}>
+    <div ref={ref} className={className} data-reveal={state}>
       {children}
     </div>
   )

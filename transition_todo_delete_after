@@ -1,6 +1,6 @@
 # sagdi.com launch checklist
 
-Last updated: 2026-10-05
+Last updated: 2026-10-06
 Legend: [x] done  [ ] not done
 
 Finish line: zero grey "sample" chips on any page, in en, ru and uz. Then go live.
@@ -98,6 +98,25 @@ Start only when 4 is done.
 ---
 
 # DONE
+
+## UI/UX and quality pass (2026-10-06)
+
+- [x] Writing list hover no longer jitters (row content slides; the line stays still)
+- [x] Build cards lift on hover again; "Read more" shows on phones and keyboard focus
+- [x] Hover never sticks after a tap on phones
+- [x] Pages show instantly on open; only things further down fade in on scroll
+- [x] Page change lands at the top with no glide
+- [x] World chips no longer look clickable
+- [x] One H1 per page; home sections are real headings
+- [x] One label style system, one section gap, one hover rule per control type,
+      one radius scale, one focus ring, shared motion speeds
+- [x] Language picker uses the shared control and menu styles; Esc returns focus
+- [x] Social links live in one file: `src/content/links.ts`
+- [x] Translated: Home labels, subscribe field label, the 404 page
+- [x] Unused `button.tsx` and its 2 packages removed
+- [x] Checked in headless Chrome and WebKit: phone and desktop, light and dark
+- [ ] Check on a real iPhone
+- [ ] Commit
 
 ## 1. Site built
 
