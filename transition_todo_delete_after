@@ -32,10 +32,9 @@ Cold start (new session): read REFERENCE at the bottom first.
 - [x] Loop checkbox per video in the photo manager (strip and full-screen view)
 - [x] Safari: wide gaps between strip photos fixed
 - [x] Checked in headless Chrome and WebKit: phone portrait and landscape, tablet, desktop
-- [ ] Publish once in the photo manager, so the full-screen sizes exist (until then the
-      full-screen view shows the strip-size image)
+- [x] Published: every photo in the home manifest has its full-screen sizes
 - [ ] Check on a real iPhone
-- [ ] Commit
+- [x] Commit
 
 ## 4. English copy
 
@@ -68,8 +67,8 @@ Start only when 4 is done.
 
 - [ ] Re-sync first: `home.titleLine1` and `home.lede` in `ru.json` and `uz.json` still hold the
       old English text
-- [ ] Translate `messages/ru.json` (almost all still English; only the two photo carousel buttons
-      are translated)
+- [ ] Translate `messages/ru.json` (almost all still English; only the photo strip and full-screen
+      view button labels are translated)
 - [ ] Translate `messages/uz.json` (same)
 - [ ] SEO text is part of those files: `meta.default.title`, `description`, `keywords`
 - [ ] Product texts: add `ru` and `uz` to each `tagline` and `body` in `src/content/products.ts`
@@ -92,7 +91,8 @@ Start only when 4 is done.
 
 ## Not checked yet (before go-live)
 
-- [ ] Mobile and dark mode on the identity-doc changes
+- [x] Mobile and dark mode on the identity-doc changes (headless phone + desktop, light + dark,
+      every page, 2026-10-06)
 - [ ] New email subject "sagdi.com: New message from ..." seen in a real inbox
 
 ---
@@ -116,7 +116,8 @@ Start only when 4 is done.
 - [x] Unused `button.tsx` and its 2 packages removed
 - [x] Checked in headless Chrome and WebKit: phone and desktop, light and dark
 - [ ] Check on a real iPhone
-- [ ] Commit
+- [x] Commit
+- [x] Rules for any new session written down: `CLAUDE.md` in this folder
 
 ## 1. Site built
 
@@ -142,7 +143,8 @@ Start only when 4 is done.
 
 ## 3. Services connected
 
-- [x] Photos: 23 photos + 1 video from Cloudflare R2, confirmed on the Vercel preview
+- [x] Photos from Cloudflare R2, confirmed on the Vercel preview (home set today: 16 photos +
+      1 video)
 - [x] Notion blog: real posts on the Vercel preview
 - [x] Resend: the contact form delivers real email
 
@@ -155,6 +157,7 @@ Start only when 4 is done.
 - What this is: sagdi.com rebuilt as a public "hub", branch `rewamp2026` of this repo
   (`sagdi-portfolio/`, Next.js 15 App Router, Tailwind v4, next-intl en·ru·uz). `main` is the old
   site and is what's live. The branch replaces it at step 7.
+- Code rules (design system, copy, commits): `CLAUDE.md` in this folder.
 - Run: `npm run dev` from this folder. `npm run typecheck`, `npm run lint`, `npm run build` must
   stay green.
 - How Sagdi works: plain English, answer first, short. Build the literal ask and stop; ask one plain
@@ -212,8 +215,9 @@ Start only when 4 is done.
 - The carousel loads the WebP straight from R2 (`unoptimized`). Next's image optimizer is left out on
   purpose: it gives up on a fetch after 7s, and on a home connection that showed as broken frames.
 - Videos play muted while at least 60% of the frame is inside the strip and the strip is on
-  screen; a play-once video plays once each time it comes into view. Videos must be H.264 mp4: iPhone HEVC plays in Chrome on a Mac but not in Firefox or on
-  some phones, so the manager converts anything that isn't H.264 mp4 when you add it.
+  screen; a play-once video plays once each time it comes into view. Videos must be H.264 mp4:
+  iPhone HEVC plays in Chrome on a Mac but not in Firefox or on some phones, so the manager
+  converts anything that isn't H.264 mp4 when you add it.
 - Full-screen view (`src/components/ui/photo-viewer.tsx`): tap a strip photo. It loads the
   smallest full-view WebP at least as wide as the photo will be on that screen, only for the
   open photo and its neighbours, showing the strip WebP until it arrives. Back closes it (it adds
