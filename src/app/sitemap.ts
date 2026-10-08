@@ -3,6 +3,7 @@ import { routing } from "@/i18n/routing"
 import { SITE_URL, absoluteUrl } from "@/lib/seo"
 import { PRODUCTS } from "@/content/products"
 import { listPosts } from "@/lib/writing"
+import { isSamplePost } from "@/content/sample-posts"
 
 type Route = {
   path: string
@@ -42,13 +43,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   })
 
   // Posts are language-agnostic → each listed once at its unprefixed URL.
+  // Placeholder posts never go to search engines.
   const { posts } = await listPosts()
-  const postPages: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${SITE_URL}/writing/${post.slug}`,
-    lastModified: new Date(post.publishedDate),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }))
+  const postPages: MetadataRoute.Sitemap = posts
+    .filter((post) => !isSamplePost(post))
+    .map((post) => ({
+      url: `${SITE_URL}/writing/${post.slug}`,
+      lastModified: new Date(post.publishedDate),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }))
 
   return [...staticPages, ...postPages]
 }

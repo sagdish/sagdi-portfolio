@@ -1,11 +1,22 @@
+import type { Metadata } from "next"
 import { Music } from "lucide-react"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
 import { ELSEWHERE, LINKS } from "@/content/links"
 import { listPhotos } from "@/lib/photos"
 import { listPosts } from "@/lib/writing"
+import { pageMetadata } from "@/lib/seo"
 import { PhotoCarousel } from "@/components/ui/photo-carousel"
 import { Reveal } from "@/components/ui/reveal"
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  return pageMetadata({ locale, path: "/" })
+}
 
 export default async function HomePage({
   params,

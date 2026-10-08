@@ -3,6 +3,11 @@ import type { BlogPost } from "@/types/blog"
 // Placeholder posts shown until real Notion posts are connected (no NOTION env in this
 // environment). Swapped automatically when getPublishedPosts() returns real data — see
 // src/lib/writing.ts. These carry tags so the tag filter is demonstrable.
+
+/** A placeholder post: flagged in the list, kept out of the sitemap and search. */
+export const isSamplePost = (post: Pick<BlogPost, "id">) =>
+  post.id.startsWith("sample-")
+
 export const SAMPLE_POSTS: BlogPost[] = [
   {
     id: "sample-personal-os-adhd",

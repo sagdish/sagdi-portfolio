@@ -24,7 +24,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>
 }): Promise<Metadata> {
   const { locale } = await params
-  return pageMetadata({ locale, path: "/world", namespace: "world" })
+  return pageMetadata({ locale, path: "/world", page: "world" })
 }
 
 export default async function WorldPage({

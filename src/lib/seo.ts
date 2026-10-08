@@ -5,8 +5,6 @@ import { LINKS } from "@/content/links"
 
 export const SITE_URL = "https://sagdi.com"
 
-export const OG_IMAGE_ALT = "Sagdi Formanov · building in public"
-
 // Social profiles used for JSON-LD `sameAs`.
 export const SOCIAL_LINKS = [LINKS.linkedin, LINKS.github, LINKS.instagram]
 
@@ -48,31 +46,25 @@ export function absoluteUrl(locale: string, path: string): string {
 // Complete OpenGraph object for a page. Page-level `openGraph` REPLACES the
 // parent's (Next doesn't deep-merge), so every page must emit the full set
 // (locale, siteName, alternateLocale, image) — this keeps them consistent.
-// One-call metadata for a top-level page: localized title/description from `namespace`,
-// canonical + hreflang alternates, and the full OpenGraph/Twitter set (page-level
-// `openGraph`/`twitter` REPLACE the layout's, so partial objects would lose fields).
+// One-call metadata for a top-level page. Title + description come from
+// `meta.pages.<page>` in each language file (home: `meta.default`): search copy, written
+// per language and kept separate from the on-page heading. Adds canonical + hreflang
+// alternates and the full OpenGraph/Twitter set (page-level `openGraph`/`twitter`
+// REPLACE the layout's, so partial objects would lose fields).
 export async function pageMetadata(opts: {
   locale: string
   path: string
-  namespace: string
-  titleKey?: string
-  descriptionKey?: string
+  /** key under `meta.pages`; omit for the home page */
+  page?: string
 }): Promise<Metadata> {
-  const {
-    locale,
-    path,
-    namespace,
-    titleKey = "title",
-    descriptionKey = "lede",
-  } = opts
-  const [t, meta] = await Promise.all([
-    getTranslations({ locale, namespace }),
-    getTranslations({ locale, namespace: "meta" }),
-  ])
-  const title = t(titleKey)
-  const description = t(descriptionKey)
+  const { locale, path, page } = opts
+  const meta = await getTranslations({ locale, namespace: "meta" })
+  const keys = page ? `pages.${page}` : "default"
+  const title = meta(`${keys}.title`)
+  const description = meta(`${keys}.description`)
   return {
-    title,
+    // The home title is the full site title, not "<page> | <site>".
+    title: page ? title : { absolute: title },
     description,
     alternates: localeAlternates(path, locale),
     openGraph: buildOpenGraph({
@@ -81,6 +73,7 @@ export async function pageMetadata(opts: {
       title,
       description,
       siteName: meta("siteName"),
+      imageAlt: meta("ogImageAlt"),
     }),
     twitter: { card: "summary_large_image", title, description },
   }
@@ -92,9 +85,18 @@ export function buildOpenGraph(opts: {
   title: string
   description: string
   siteName: string
+  imageAlt: string
   type?: "website" | "article"
 }): NonNullable<Metadata["openGraph"]> {
-  const { locale, path, title, description, siteName, type = "website" } = opts
+  const {
+    locale,
+    path,
+    title,
+    description,
+    siteName,
+    imageAlt,
+    type = "website",
+  } = opts
   return {
     type,
     siteName,
@@ -105,13 +107,18 @@ export function buildOpenGraph(opts: {
     alternateLocale: routing.locales
       .filter((l) => l !== locale)
       .map((l) => OG_LOCALE[l]),
-    images: [
-      {
-        url: absoluteUrl(locale, "/opengraph-image"),
-        width: 1200,
-        height: 630,
-        alt: OG_IMAGE_ALT,
-      },
-    ],
+    images: ogImages(locale, imageAlt),
   }
+}
+
+// The link-preview image for a locale (rendered by [locale]/opengraph-image.tsx).
+export function ogImages(locale: string, alt: string) {
+  return [
+    {
+      url: absoluteUrl(locale, "/opengraph-image"),
+      width: 1200,
+      height: 630,
+      alt,
+    },
+  ]
 }

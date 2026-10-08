@@ -6,6 +6,25 @@
       "title": "Sagdi Formanov · building in public",
       "description": "Technologist and creator trying to understand people. Build meaningful things, explore the intersection of technology and humanity, and live a life of strength, curiosity, creativity and freedom.",
       "keywords": "Sagdi Formanov, builder, product, full-stack, indie software, building in public, ReguSelf"
+    },
+    "ogImageAlt": "Sagdi Formanov · building in public",
+    "pages": {
+      "building": {
+        "title": "What I'm making and working on.",
+        "description": "Product, software, AI, experiments, and the work behind them."
+      },
+      "writing": {
+        "title": "Things I'm trying to understand.",
+        "description": "Psychology, technology, people, culture, and whatever keeps occupying my head long enough to become a thought worth writing down."
+      },
+      "world": {
+        "title": "Everything else that makes up my world.",
+        "description": "Music, cinema, cars, photography, books, art, travel, nature, martial arts, and the things I'm currently drawn to."
+      },
+      "work": {
+        "title": "Let's build something.",
+        "description": "Right now I'm looking for a product role where I can build, not just manage. If that's the kind of person you're after, I'd like to talk."
+      }
     }
   },
   "nav": {

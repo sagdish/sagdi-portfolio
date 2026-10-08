@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { Reveal } from "@/components/ui/reveal"
+import { isSamplePost } from "@/content/sample-posts"
 import type { BlogPost } from "@/types/blog"
 
 function formatMonth(iso: string, locale: string) {
@@ -64,9 +65,7 @@ export function WritingList({
             <div>
               <div className="t">
                 {p.title}
-                {p.id.startsWith("sample-") && (
-                  <span className="sample">sample</span>
-                )}
+                {isSamplePost(p) && <span className="sample">sample</span>}
               </div>
               <div className="x">{p.description}</div>
             </div>

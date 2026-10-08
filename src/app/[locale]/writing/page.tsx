@@ -16,7 +16,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>
 }): Promise<Metadata> {
   const { locale } = await params
-  return pageMetadata({ locale, path: "/writing", namespace: "writing" })
+  return pageMetadata({ locale, path: "/writing", page: "writing" })
 }
 
 export default async function WritingPage({

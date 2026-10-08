@@ -1,6 +1,6 @@
 # sagdi.com launch checklist
 
-Last updated: 2026-10-06
+Last updated: 2026-10-08
 Legend: [x] done  [ ] not done
 
 Finish line: zero grey "sample" chips on any page, in en, ru and uz. Then go live.
@@ -56,6 +56,10 @@ Finish before translating: ru and uz copy from English.
   - [ ] Pomodoro Focus Dock
   - [ ] Screenshots Processor
   - [ ] AI Job Agent
+- [ ] Search text per page, written for Google (not the on-page heading): `meta.pages.*`
+      (building, writing, world, work) and `meta.default` in `messages/en.json`. They hold the
+      on-page heading and lede for now.
+- [ ] Alt text for every photo (photo manager, alt box). All empty today.
 
 ---
 
@@ -70,7 +74,9 @@ Start only when 4 is done.
 - [ ] Translate `messages/ru.json` (almost all still English; only the photo strip and full-screen
       view button labels are translated)
 - [ ] Translate `messages/uz.json` (same)
-- [ ] SEO text is part of those files: `meta.default.title`, `description`, `keywords`
+- [ ] SEO text is part of those files, all under `meta`: `siteName` (main used "Сагди Форманов"),
+      `jobTitle`, `default.*`, `pages.*`, `ogImageAlt`. The preview image picks these up by itself.
+- [ ] New keys since the last sync, still English: `notFound.*`, `writing.subscribe.emailLabel`
 - [ ] Product texts: add `ru` and `uz` to each `tagline` and `body` in `src/content/products.ts`
       (they fall back to English today)
 - Blog posts: nothing to do. They stay in the language they were written in.
@@ -79,6 +85,8 @@ Start only when 4 is done.
 
 - [ ] Pick the provider (leaning Resend Audiences, Resend is already in the stack)
 - [ ] Wire `src/components/ui/subscribe-band.tsx` to it (visual only today, sends nothing)
+- [ ] Confirmation email (double opt-in) and an unsubscribe link in every email
+- [ ] Success and error text in en, ru, uz
 - [ ] Remove the "not wired" notes: `writing.subscribe.hint` and `writing.subscribe.ok`
 
 ## 7. Go live
@@ -88,16 +96,30 @@ Start only when 4 is done.
 - [ ] Redirects fire on sagdi.com: `/projects` `/blog` `/blog/:slug` `/about` `/contact` `/hub`,
       plus their ru and uz versions
 - [ ] `sitemap.xml` and `robots.txt` load on sagdi.com
+- [ ] Google Search Console: submit the sitemap, check the en/ru/uz pages are paired (hreflang)
+- [ ] Share a link in Telegram: the preview image shows (en and ru)
 
 ## Not checked yet (before go-live)
 
 - [x] Mobile and dark mode on the identity-doc changes (headless phone + desktop, light + dark,
       every page, 2026-10-06)
 - [ ] New email subject "sagdi.com: New message from ..." seen in a real inbox
+- [ ] Real iPhone: photo full-screen view and the UI/UX pass
 
 ---
 
 # DONE
+
+## SEO per language (2026-10-08)
+
+- [x] Each page's search title and description live in `meta.pages.*` of each language file,
+      separate from the page heading (same idea as `main`)
+- [x] Home has its own complete metadata; its preview image no longer goes through a redirect
+- [x] Preview image (`og:image`) is made per language from the messages; Cyrillic and Uzbek
+      letters render
+- [x] Blog posts got a preview image; they no longer claim the URL's language
+- [x] Sample posts are hidden from Google (`noindex`) and left out of the sitemap
+- [x] Checked on a production build: titles, canonicals, hreflang, og tags in en, ru, uz; sitemap
 
 ## UI/UX and quality pass (2026-10-06)
 

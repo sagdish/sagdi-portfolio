@@ -7,7 +7,8 @@ import remarkBreaks from "remark-breaks"
 import rehypeRaw from "rehype-raw"
 import { BackLink } from "@/components/ui/back-link"
 import { getPost, listPosts } from "@/lib/writing"
-import { SITE_URL } from "@/lib/seo"
+import { SITE_URL, ogImages } from "@/lib/seo"
+import { routing } from "@/i18n/routing"
 import { JsonLd } from "@/components/seo/json-ld"
 
 export const revalidate = 60
@@ -23,7 +24,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>
 }): Promise<Metadata> {
   const { locale, slug } = await params
-  const { post } = await getPost(slug)
+  const { post, sample } = await getPost(slug)
   if (!post) return { title: "Post not found" }
   const meta = await getTranslations({ locale, namespace: "meta" })
   const title = post.title
@@ -35,6 +36,8 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: `/writing/${slug}` },
+    // Placeholder posts stay out of search.
+    ...(sample ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       type: "article",
       siteName: meta("siteName"),
@@ -42,6 +45,8 @@ export async function generateMetadata({
       description,
       url,
       publishedTime: post.publishedDate,
+      // The canonical (unprefixed) URL's image, like og:url.
+      images: ogImages(routing.defaultLocale, meta("ogImageAlt")),
     },
     twitter: { card: "summary_large_image", title, description },
   }
@@ -77,7 +82,6 @@ export default async function WritingPostPage({
     dateModified: post.publishedDate,
     author: { "@type": "Person", name: "Sagdi Formanov", url: SITE_URL },
     keywords: post.tags?.length ? post.tags.join(", ") : undefined,
-    inLanguage: locale,
     url: `${SITE_URL}/writing/${slug}`,
     mainEntityOfPage: `${SITE_URL}/writing/${slug}`,
   }

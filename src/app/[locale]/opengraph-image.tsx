@@ -1,10 +1,25 @@
 import { ImageResponse } from "next/og"
+import { getTranslations } from "next-intl/server"
+import { routing } from "@/i18n/routing"
 
-export const alt = "Sagdi Formanov · building in public"
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
 
-export default async function OpengraphImage() {
+// One preview image per language; the text comes from that language's messages.
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }))
+}
+
+export default async function OpengraphImage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+  const [meta, home] = await Promise.all([
+    getTranslations({ locale, namespace: "meta" }),
+    getTranslations({ locale, namespace: "home" }),
+  ])
   return new ImageResponse(
     (
       <div
@@ -48,7 +63,6 @@ export default async function OpengraphImage() {
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
             fontSize: 62,
             fontWeight: 800,
             color: "#1f2328",
@@ -56,11 +70,10 @@ export default async function OpengraphImage() {
             lineHeight: 1.08,
           }}
         >
-          <span>Technologist and creator</span>
-          <span>trying to understand people.</span>
+          {home("titleLine1")}
         </div>
         <div style={{ fontSize: 34, color: "#57606a", marginTop: 34 }}>
-          Sagdi Formanov · building in public
+          {meta("default.title")}
         </div>
       </div>
     ),
