@@ -1,6 +1,6 @@
 # sagdi.com launch checklist
 
-Last updated: 2026-10-08
+Last updated: 2026-10-10
 Legend: [x] done  [ ] not done
 
 Finish line: zero grey "sample" chips on any page, in en, ru and uz. Then go live.
@@ -41,25 +41,42 @@ Cold start (new session): read REFERENCE at the bottom first.
 Finish before translating: ru and uz copy from English.
 
 - [x] Headline is one line (no second line)
-- [x] Currently → Building row
+- [x] Currently → Building row (its leftover "sample" chip removed 2026-10-08)
 - [x] Work page text
-- [ ] Currently → Writing row. `home.currently.writingText` in `messages/en.json`,
-      still "something I've been thinking about"
-- [ ] Currently → Exploring row. `home.currently.exploringText` in `messages/en.json`,
-      still "something currently occupying my attention"
+- [ ] Work page: a "refine copy" chip still sits after `work.prose2` (`work/page.tsx`)
+- [ ] Remove every remaining "sample" chip on the site (Sagdi's call, 2026-10-10): the 5 product
+      chips and the Work page "refine copy" chip
+- [x] Currently → Writing row: "Why limits matter when everything competes for your dopamine"
+- [x] Currently → Exploring row: "A YouTube transcription and visualization tool"
 - [ ] Product texts (tagline + body) in `src/content/products.ts`.
       Remove `placeholder: true` from a product once its words are real.
   - [x] PM Guide
   - [ ] ReguSelf
-  - [ ] Sagdi OS
-  - [ ] OS Manager Blueprint
+  - [x] Sagdi OS: removed from the site (2026-10-08)
+  - [ ] OS Manager Blueprint: renamed Personal OS (slug `personal-os`). Tagline + body from the
+        README of https://github.com/sagdish/personal_OS- , no personal details; add the GitHub link
   - [ ] Pomodoro Focus Dock
-  - [ ] Screenshots Processor
-  - [ ] AI Job Agent
+  - [ ] Screenshots Processor (status now In progress)
+  - [x] AI Job Agent: removed from the site (2026-10-08)
+  - [ ] finKeep (new, In progress): booking tool for psychologists and personal coaches.
+        Body still repeats the tagline
 - [ ] Search text per page, written for Google (not the on-page heading): `meta.pages.*`
       (building, writing, world, work) and `meta.default` in `messages/en.json`. They hold the
       on-page heading and lede for now.
 - [ ] Alt text for every photo (photo manager, alt box). All empty today.
+
+## Product pages: screenshots and fuller text (`/building/[slug]`)
+
+Needs Sagdi's yes on the layout before building.
+
+- [ ] Screenshot strip under the title; tap opens the same full-screen viewer as the home photos.
+      No strip on products with nothing to show yet
+- [ ] Longer text in short sections: what it is, who it's for, how it works, where it stands
+- [ ] Links: Visit (and GitHub where there is one) right under the tagline, repeated once at the
+      end of the page
+- [ ] Draft each product's longer text from its README or OS `overview.md`; Sagdi approves each
+- [ ] Screenshots: Sagdi supplies them
+- [ ] Pomodoro Focus Dock: Sagdi sends more info and images
 
 ---
 

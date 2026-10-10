@@ -64,22 +64,16 @@ export default async function HomePage({
                   {chunks}
                 </a>
               ),
-            })}{" "}
-            <span className="sample">sample</span>
+            })}
           </div>
         </div>
         <div className="row">
           <span className="lbl">{t("currently.writingLabel")}</span>
-          <div>
-            {t("currently.writingText")} <span className="sample">sample</span>
-          </div>
+          <div>{t("currently.writingText")}</div>
         </div>
         <div className="row">
           <span className="lbl">{t("currently.exploringLabel")}</span>
-          <div>
-            {t("currently.exploringText")}{" "}
-            <span className="sample">sample</span>
-          </div>
+          <div>{t("currently.exploringText")}</div>
         </div>
       </Reveal>
 

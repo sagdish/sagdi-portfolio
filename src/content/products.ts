@@ -44,21 +44,9 @@ export const PRODUCTS: Product[] = [
     },
   },
   {
-    slug: "sagdi-os",
-    status: "progress",
-    title: "Sagdi OS",
-    tagline: {
-      en: "A personal life OS: five areas, one ledger, one live session.",
-    },
-    body: {
-      en: "The system running my days: five life areas, a single ledger, and one live working session. The thing this hub is built inside of.",
-    },
-    placeholder: true,
-  },
-  {
-    slug: "os-manager-blueprint",
+    slug: "personal-os",
     status: "pre-start",
-    title: "OS Manager Blueprint",
+    title: "Personal OS",
     tagline: { en: "The reusable blueprint behind the OS." },
     body: {
       en: "The blueprint that makes the personal OS reproducible for anyone, not just me.",
@@ -77,7 +65,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "screenshots-processor",
-    status: "pre-start",
+    status: "progress",
     title: "Screenshots Processor",
     tagline: { en: "Turns a pile of screenshots into something useful." },
     body: {
@@ -86,12 +74,12 @@ export const PRODUCTS: Product[] = [
     placeholder: true,
   },
   {
-    slug: "ai-job-agent",
-    status: "parked",
-    title: "AI Job Agent",
-    tagline: { en: "An agent that works the job hunt." },
+    slug: "finkeep",
+    status: "progress",
+    title: "finKeep",
+    tagline: { en: "A booking tool for psychologists and personal coaches." },
     body: {
-      en: "An agent that runs the repetitive parts of a job search. Parked for now.",
+      en: "A booking tool for psychologists and personal coaches.",
     },
     placeholder: true,
   },
