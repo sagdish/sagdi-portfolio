@@ -48,7 +48,8 @@ Finish before translating: ru and uz copy from English.
       chips and the Work page "refine copy" chip
 - [x] Sample blog posts removed entirely (2026-10-10): the Write list, post pages, tags and sitemap
       show only Notion posts. If Notion is down the list is empty
-- [x] Currently → Writing row: "Why limits matter when everything competes for your dopamine"
+- [x] Currently → Writing row: "Why limits matter when everything competes for your dopamine".
+      Row removed from home on Sagdi's call (2026-10-10)
 - [x] Currently → Exploring row: "A YouTube transcription and visualization tool"
 - [ ] Product texts (tagline + body) in `src/content/products.ts`.
       All `placeholder: true` flags removed 2026-10-10 (no chips); the open ones still need polish.
@@ -59,7 +60,10 @@ Finish before translating: ru and uz copy from English.
         README of https://github.com/sagdish/personal_OS- , no personal details; add the GitHub link.
         Done 2026-10-10, status Live
   - [ ] Pomodoro Focus Dock
-  - [ ] Screenshots Processor (status now In progress)
+  - [ ] Screenshots Processor (status now In progress). To be replaced on the Build page by the
+        YouTube transcript tool (Sagdi, 2026-10-10): complete transcripts of YouTube videos, with
+        an option to make infographics; a goldmine for anyone who wants full transcripts with
+        visuals. Waiting on Sagdi: name, status, link
   - [x] AI Job Agent: removed from the site (2026-10-08)
   - [ ] finKeep (new, In progress): booking tool for psychologists and personal coaches.
         Body still repeats the tagline

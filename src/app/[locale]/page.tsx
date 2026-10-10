@@ -67,10 +67,6 @@ export default async function HomePage({
           </div>
         </div>
         <div className="row">
-          <span className="lbl">{t("currently.writingLabel")}</span>
-          <div>{t("currently.writingText")}</div>
-        </div>
-        <div className="row">
           <span className="lbl">{t("currently.exploringLabel")}</span>
           <div>{t("currently.exploringText")}</div>
         </div>
