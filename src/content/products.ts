@@ -29,7 +29,6 @@ export const PRODUCTS: Product[] = [
     body: {
       en: "ReguSelf is live and moving: a tool for regulating your own attention and habits, built in public.",
     },
-    placeholder: true,
   },
   {
     slug: "pm-guide",
@@ -45,13 +44,15 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "personal-os",
-    status: "pre-start",
+    status: "live",
+    url: "https://github.com/sagdish/personal_OS-",
     title: "Personal OS",
-    tagline: { en: "The reusable blueprint behind the OS." },
-    body: {
-      en: "The blueprint that makes the personal OS reproducible for anyone, not just me.",
+    tagline: {
+      en: "Your life as plain text files, read by an AI once a day.",
     },
-    placeholder: true,
+    body: {
+      en: "Your life as plain text files on your own computer. Once a day an AI reads them and tells you where you stand across the areas of your life, in your own words, with no score and no nagging. A ten-minute setup builds it around you: your areas, your voice, your rhythm. It is not a task manager or a habit app with streaks.",
+    },
   },
   {
     slug: "pomodoro-focus-dock",
@@ -61,7 +62,6 @@ export const PRODUCTS: Product[] = [
     body: {
       en: "A small, always-there focus timer that sits on the dock and keeps a session honest.",
     },
-    placeholder: true,
   },
   {
     slug: "screenshots-processor",
@@ -71,7 +71,6 @@ export const PRODUCTS: Product[] = [
     body: {
       en: "Point it at a folder of screenshots and get back something structured and searchable.",
     },
-    placeholder: true,
   },
   {
     slug: "finkeep",
@@ -81,7 +80,6 @@ export const PRODUCTS: Product[] = [
     body: {
       en: "A booking tool for psychologists and personal coaches.",
     },
-    placeholder: true,
   },
 ]
 

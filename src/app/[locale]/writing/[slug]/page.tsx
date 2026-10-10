@@ -14,7 +14,7 @@ import { JsonLd } from "@/components/seo/json-ld"
 export const revalidate = 60
 
 export async function generateStaticParams() {
-  const { posts } = await listPosts()
+  const posts = await listPosts()
   return posts.map((p) => ({ slug: p.slug }))
 }
 
@@ -24,7 +24,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>
 }): Promise<Metadata> {
   const { locale, slug } = await params
-  const { post, sample } = await getPost(slug)
+  const post = await getPost(slug)
   if (!post) return { title: "Post not found" }
   const meta = await getTranslations({ locale, namespace: "meta" })
   const title = post.title
@@ -36,8 +36,6 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: `/writing/${slug}` },
-    // Placeholder posts stay out of search.
-    ...(sample ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       type: "article",
       siteName: meta("siteName"),
@@ -60,7 +58,7 @@ export default async function WritingPostPage({
   const { locale, slug } = await params
   setRequestLocale(locale)
   const t = await getTranslations("writing")
-  const { post, sample } = await getPost(slug)
+  const post = await getPost(slug)
   if (!post) notFound()
 
   const date = new Date(post.publishedDate)
@@ -100,11 +98,6 @@ export default async function WritingPostPage({
           </span>
         ))}
       </div>
-      {sample && (
-        <p className="sample-note">
-          <span className="sample">{t("sampleNote")}</span>
-        </p>
-      )}
       <div className="article-body">
         <ReactMarkdown
           remarkPlugins={[remarkGfm, remarkBreaks]}

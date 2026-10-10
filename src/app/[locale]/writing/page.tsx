@@ -27,17 +27,14 @@ export default async function WritingPage({
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations("writing")
-  const [{ posts, sample }, tags] = await Promise.all([listPosts(), listTags()])
+  const [posts, tags] = await Promise.all([listPosts(), listTags()])
 
   return (
     <>
       <Reveal className="sec-head">
         <div className="eyebrow">{t("eyebrow")}</div>
         <h1>{t("title")}</h1>
-        <p>
-          {t("lede")}
-          {sample && <span className="sample">{t("sampleNote")}</span>}
-        </p>
+        <p>{t("lede")}</p>
       </Reveal>
 
       <WritingList

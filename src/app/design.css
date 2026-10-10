@@ -1667,9 +1667,6 @@
 .article-meta .date {
   color: var(--faint);
 }
-.article .sample-note {
-  margin-bottom: 20px;
-}
 .article-body p {
   color: var(--text);
   margin: 0 0 16px;

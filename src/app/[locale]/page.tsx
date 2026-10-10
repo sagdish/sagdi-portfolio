@@ -26,7 +26,7 @@ export default async function HomePage({
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations("home")
-  const { posts, sample: postsSample } = await listPosts()
+  const posts = await listPosts()
   const latest = posts[0]
   const { photos, sample: photosSample } = await listPhotos("home")
 
@@ -44,7 +44,6 @@ export default async function HomePage({
           <div className="elsewhere section-body">
             <Link className="chip" href={`/writing/${latest.slug}`}>
               {latest.title} →
-              {postsSample && <span className="sample">sample</span>}
             </Link>
           </div>
         </Reveal>

@@ -43,18 +43,21 @@ Finish before translating: ru and uz copy from English.
 - [x] Headline is one line (no second line)
 - [x] Currently → Building row (its leftover "sample" chip removed 2026-10-08)
 - [x] Work page text
-- [ ] Work page: a "refine copy" chip still sits after `work.prose2` (`work/page.tsx`)
-- [ ] Remove every remaining "sample" chip on the site (Sagdi's call, 2026-10-10): the 5 product
+- [x] Work page: a "refine copy" chip still sits after `work.prose2` (`work/page.tsx`). Removed
+- [x] Remove every remaining "sample" chip on the site (Sagdi's call, 2026-10-10): the 5 product
       chips and the Work page "refine copy" chip
+- [x] Sample blog posts removed entirely (2026-10-10): the Write list, post pages, tags and sitemap
+      show only Notion posts. If Notion is down the list is empty
 - [x] Currently → Writing row: "Why limits matter when everything competes for your dopamine"
 - [x] Currently → Exploring row: "A YouTube transcription and visualization tool"
 - [ ] Product texts (tagline + body) in `src/content/products.ts`.
-      Remove `placeholder: true` from a product once its words are real.
+      All `placeholder: true` flags removed 2026-10-10 (no chips); the open ones still need polish.
   - [x] PM Guide
   - [ ] ReguSelf
   - [x] Sagdi OS: removed from the site (2026-10-08)
-  - [ ] OS Manager Blueprint: renamed Personal OS (slug `personal-os`). Tagline + body from the
-        README of https://github.com/sagdish/personal_OS- , no personal details; add the GitHub link
+  - [x] OS Manager Blueprint: renamed Personal OS (slug `personal-os`). Tagline + body from the
+        README of https://github.com/sagdish/personal_OS- , no personal details; add the GitHub link.
+        Done 2026-10-10, status Live
   - [ ] Pomodoro Focus Dock
   - [ ] Screenshots Processor (status now In progress)
   - [x] AI Job Agent: removed from the site (2026-10-08)
@@ -75,7 +78,8 @@ Needs Sagdi's yes on the layout before building.
 - [ ] Links: Visit (and GitHub where there is one) right under the tagline, repeated once at the
       end of the page
 - [ ] Draft each product's longer text from its README or OS `overview.md`; Sagdi approves each
-- [ ] Screenshots: Sagdi supplies them
+- [ ] Screenshots: Sagdi supplies them. They go to R2 through the photo manager, one set per
+      product named after its slug (`photos-src/<slug>/`), read with `listPhotos("<slug>")`
 - [ ] Pomodoro Focus Dock: Sagdi sends more info and images
 
 ---
@@ -122,6 +126,10 @@ Start only when 4 is done.
       every page, 2026-10-06)
 - [ ] New email subject "sagdi.com: New message from ..." seen in a real inbox
 - [ ] Real iPhone: photo full-screen view and the UI/UX pass
+- [ ] Work page scrolls sideways by 15px (phone and desktop): the contact form's hidden spam
+      field `.cform-hp` sticks out past the edge (found 2026-10-10)
+- [ ] /uz/writing: post dates render differently on server and browser ("okt, 2026" vs
+      "2026 M10"), a React hydration error (found 2026-10-10)
 
 ---
 

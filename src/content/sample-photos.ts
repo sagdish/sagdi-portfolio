@@ -2,8 +2,8 @@ import type { Photo } from "@/lib/photos"
 
 /**
  * Placeholder frames shown until real photos are synced to the bucket
- * (generated gradients, clearly non-photographic). Mirrors SAMPLE_POSTS:
- * the UI flags this state with the `.sample` chip.
+ * (generated gradients, clearly non-photographic). The UI flags this state
+ * with the `.sample` chip.
  */
 export const SAMPLE_PHOTOS: Photo[] = [
   {

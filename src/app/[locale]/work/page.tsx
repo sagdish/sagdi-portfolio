@@ -31,9 +31,7 @@ export default async function WorkPage({
       </Reveal>
 
       <Reveal className="prose">
-        <p className="dim">
-          {t("prose2")} <span className="sample">refine copy</span>
-        </p>
+        <p className="dim">{t("prose2")}</p>
         <ContactForm
           labels={{
             name: t("form.name"),
