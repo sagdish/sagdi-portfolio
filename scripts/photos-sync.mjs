@@ -2,8 +2,11 @@
  * Publish photography to Cloudflare R2: `npm run photos:sync [-- <set>...]`
  *
  * Every folder in ./photos-src (gitignored) is a SET — a named group of photos
- * the site can ask for, e.g. photos-src/home/ → listPhotos("home"). Files
- * sitting loose in photos-src/ belong to no set and are ignored.
+ * the site can ask for, e.g. photos-src/home/ → listPhotos("home") — except
+ * the GROUPS (products/, writing/, world/), whose folders are the sets:
+ * photos-src/products/reguself/ → listPhotos("products/reguself"). Files
+ * sitting loose in photos-src/ or in a group belong to no set and are ignored.
+ * Run one set with `npm run photos:sync -- products/reguself`.
  *
  * ORDER comes from photos-src/<set>/set.json, which the local photo manager
  * (photo-manager/, gitignored — start it and drag the photos around) writes:
@@ -56,6 +59,7 @@ import {
 } from "@aws-sdk/client-s3"
 import sharp from "sharp"
 import {
+  GROUPS,
   IMMUTABLE,
   MAX_SIDE,
   STRIP_HEIGHT,
@@ -66,6 +70,7 @@ import {
   extOf,
   isMedia,
   isVideo,
+  listSets,
   missingFromSequence,
   mp4Info,
   orderFiles,
@@ -137,17 +142,33 @@ try {
 } catch {
   fail(`No ${SRC_DIR} folder — create it, with one folder per set inside.`)
 }
-const allSets = entries
-  .filter((e) => e.isDirectory() && !e.name.startsWith("."))
-  .map((e) => e.name)
-  .sort()
+const allSets = await listSets(SRC_DIR)
 const loose = entries.filter((e) => e.isFile() && isMedia(e.name))
 if (loose.length) {
   console.warn(
     `! ignoring ${loose.length} file(s) loose in photos-src/ — move them into a set folder, e.g. photos-src/home/`
   )
 }
+for (const group of GROUPS) {
+  let inGroup = []
+  try {
+    inGroup = await readdir(path.join(SRC_DIR, group))
+  } catch {
+    continue // No such group folder yet.
+  }
+  const strays = inGroup.filter(isMedia)
+  if (strays.length) {
+    console.warn(
+      `! ignoring ${strays.length} file(s) loose in photos-src/${group}/ — a group holds sets, e.g. photos-src/${group}/<name>/`
+    )
+  }
+}
 for (const w of wanted) {
+  if (GROUPS.includes(w)) {
+    fail(
+      `photos-src/${w}/ is a group of sets, not a set — name one, e.g. ${w}/<name>`
+    )
+  }
   if (!allSets.includes(w)) fail(`No set folder photos-src/${w}/`)
 }
 const sets = wanted.length ? wanted : allSets
@@ -266,7 +287,16 @@ async function runSync() {
       if (why) console.warn(`! skipping ${set}/${name}: ${why}`)
     }
     const media = inFolder.filter(isMedia)
-    if (!media.length) fail(`photos-src/${set}/ has no images or videos.`)
+    if (!media.length) {
+      // A set made with "New set" stays empty until photos go in. Publishing
+      // everything skips it; naming it fails, as publishing nothing would
+      // delete whatever it had online.
+      if (!wanted.length) {
+        console.log(`\n${set}: no photos yet, skipped`)
+        continue
+      }
+      fail(`photos-src/${set}/ has no images or videos.`)
+    }
     const files = orderFiles(media, { ...cfg, order })
     for (const name of missingFromSequence(media, cfg)) {
       console.warn(

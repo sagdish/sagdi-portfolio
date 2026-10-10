@@ -6,7 +6,44 @@
  * warnings the sync will actually publish — one rule, one place.
  */
 import { createHash } from "node:crypto"
+import { readdir } from "node:fs/promises"
 import path from "node:path"
+
+/**
+ * Folders in photos-src/ that hold sets instead of photos: products/reguself/
+ * is the set "products/reguself", read by the site as
+ * listPhotos("products/reguself"). Every other folder in photos-src/ is a set
+ * on its own (home/).
+ *
+ * A group is never a set itself. Publishing deletes every file under
+ * photos/<set>/ that the new manifest doesn't name, so a set called "products"
+ * would wipe the sets inside it.
+ */
+export const GROUPS = ["products", "writing", "world"]
+
+/** A new set's name: lowercase letters, digits and hyphens, like a page address. */
+export const SET_NAME = /^[a-z0-9][a-z0-9-]{0,62}$/
+
+/** Every set in photos-src/, sorted: "home", "products/reguself", … */
+export async function listSets(srcDir) {
+  const sets = []
+  for (const e of await readdir(srcDir, { withFileTypes: true })) {
+    if (!e.isDirectory() || e.name.startsWith(".")) continue
+    if (!GROUPS.includes(e.name)) {
+      sets.push(e.name)
+      continue
+    }
+    const inner = await readdir(path.join(srcDir, e.name), {
+      withFileTypes: true,
+    })
+    for (const s of inner) {
+      if (s.isDirectory() && !s.name.startsWith(".")) {
+        sets.push(`${e.name}/${s.name}`)
+      }
+    }
+  }
+  return sets.sort()
+}
 
 /** Bump to re-encode and re-upload every photo. */
 export const PIPELINE = "v1"
@@ -119,7 +156,8 @@ export const missingFromSequence = (files, cfg = {}) =>
 
 /**
  * Where a file lands in the bucket: photos/<set>/<clean name>-<hash of the
- * bytes>. Content in the hash means an edited photo gets a new name and can be
+ * bytes> (a set in a group keeps its path: photos/products/reguself/…).
+ * Content in the hash means an edited photo gets a new name and can be
  * cached forever; the readable stem is there so the bucket stays browsable.
  */
 export function cloudBase(set, file, bytes) {

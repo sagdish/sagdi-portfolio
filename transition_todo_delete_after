@@ -88,8 +88,12 @@ Layout approved by Sagdi 2026-10-10.
 - [ ] Screenshots: Sagdi supplies them. They go to R2 through the photo manager, one set per
       product under a `products` group (`photos-src/products/<slug>/`), read with
       `listPhotos("products/<slug>")`. The page side is done; the manager needs groups (below)
-- [ ] Photo manager: groups of sets (`products/`, later `writing/`, `world/`), a "New set" button,
-      Publish keeps the path in R2. `home` stays where it is
+- [x] Photo manager: groups of sets (`products/`, later `writing/`, `world/`), a "New set" button,
+      Publish keeps the path in R2. `home` stays where it is. Done 2026-10-10: groups live in
+      `GROUPS` (`scripts/photos-shared.mjs`); menu shows them; "On the site: …" line; publishing
+      everything skips empty sets. Tested in a scratch copy without publishing
+- [ ] First real Publish of a product set (e.g. `products/reguself`): confirm the strip shows on
+      its page
 - [ ] Pomodoro Focus Dock: Sagdi sends more info and images
 
 ---
@@ -245,7 +249,12 @@ Start only when 4 is done.
 
 - Bucket: Cloudflare R2 `sagdi-photos`, public URL `https://pub-d80e4e9eb39747c9b6eeca7668d027ed.r2.dev`.
 - Sets are folders: `photos-src/<set>/` on Sagdi's machine (gitignored). `home/` is the home strip.
-  A new photo block anywhere is a new folder plus `listPhotos("<set>")`.
+  Groups (`products/`, `writing/`, `world/`, listed in `GROUPS` in `scripts/photos-shared.mjs`)
+  hold sets: `photos-src/products/reguself/` is the set `products/reguself`, at
+  `photos/products/reguself/` in R2, read by its product page with
+  `listPhotos("products/reguself")`. A group is never a set itself (publishing a set deletes
+  everything under its prefix). New sets in a group: the manager's "New set…" button.
+  A new photo block anywhere else is a new folder plus `listPhotos("<set>")`.
 - Day to day, order/add/delete happen in the PHOTO MANAGER, not by hand: double-click
   `photo-manager/Open Photo Manager.command` (or `node photo-manager/server.mjs`). It opens
   http://127.0.0.1:4455, shows the set in publish order, and does drag-to-reorder, drop-to-add
