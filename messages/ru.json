@@ -95,7 +95,24 @@
     "statusProgress": "In progress",
     "statusPreStart": "Pre-start",
     "statusParked": "Parked",
-    "back": "Back to Build"
+    "back": "Back to Build",
+    "github": "GitHub",
+    "sections": {
+      "what": "What it is",
+      "who": "Who it's for",
+      "how": "How it works",
+      "now": "Where it stands"
+    },
+    "shots": {
+      "label": "Screenshots",
+      "prev": "Previous screenshots",
+      "next": "Next screenshots",
+      "open": "Open screenshot",
+      "viewer": "Screenshot viewer",
+      "close": "Close",
+      "prevShot": "Previous screenshot",
+      "nextShot": "Next screenshot"
+    }
   },
   "writing": {
     "eyebrow": "Write",

@@ -10,9 +10,16 @@ export type Product = {
   status: ProductStatus
   /** external product site; the detail page renders it as a Visit CTA */
   url?: string
+  /** source repository; the detail page renders it as a GitHub link */
+  github?: string
   title: string
   tagline: Localized
+  /** "What it is" on the detail page */
   body: Localized
+  /** optional detail-page sections; each renders only when present */
+  who?: Localized
+  how?: Localized[]
+  now?: Localized
   /** copy still to be replaced with Sagdi's real words (renders a "sample" marker) */
   placeholder?: boolean
 }
@@ -45,13 +52,33 @@ export const PRODUCTS: Product[] = [
   {
     slug: "personal-os",
     status: "live",
-    url: "https://github.com/sagdish/personal_OS-",
+    github: "https://github.com/sagdish/personal_OS-",
     title: "Personal OS",
     tagline: {
       en: "Your life as plain text files, read by an AI once a day.",
     },
     body: {
       en: "Your life as plain text files on your own computer. Once a day an AI reads them and tells you where you stand across the areas of your life, in your own words, with no score and no nagging. A ten-minute setup builds it around you: your areas, your voice, your rhythm. It is not a task manager or a habit app with streaks.",
+    },
+    who: {
+      en: "Anyone who wants to keep several parts of their life in view without a task manager or streaks. No coding needed: you type a few commands and the AI does the rest.",
+    },
+    how: [
+      {
+        en: "Install it with one command, then answer a short setup interview inside Claude Code: your areas, your voice, your rhythm.",
+      },
+      {
+        en: "Write anything, anywhere in your journal: on the page, inside Claude, or on your phone through Obsidian.",
+      },
+      {
+        en: "Once a day the read arrives: where you stand, one line per area, what moved, and at most one question.",
+      },
+      {
+        en: "Everything stays on your computer as plain text files. Only the daily read goes to your AI provider.",
+      },
+    ],
+    now: {
+      en: "Ready to install from GitHub: one command on Mac and Linux, step by step on Windows. It needs a Claude Pro or Max subscription.",
     },
   },
   {

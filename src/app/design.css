@@ -47,13 +47,15 @@
 
 /* ── Bordered control ──────────────────────────────────────────────────────────
    The one look shared by chips, tag chips, the Subscribe pill, the photo
-   arrows and the language button. Each class below keeps only its own size
-   and type. Hover brightens border + background; nothing lifts. */
+   arrows, the language button and the secondary button. Each class below
+   keeps only its own size and type. Hover brightens border + background;
+   nothing lifts. */
 .chip,
 .tagchip,
 .railsub,
 .pcar-btn,
-.lang-btn {
+.lang-btn,
+.btn-secondary {
   border: 1px solid var(--border);
   background: var(--field);
   border-radius: var(--r-ctl);
@@ -67,7 +69,8 @@
   .tagchip:not(.static, .on):hover,
   .railsub:hover,
   .pcar-btn:hover:not(:disabled),
-  .lang-btn:hover:not(:disabled) {
+  .lang-btn:hover:not(:disabled),
+  .btn-secondary:hover {
     border-color: var(--border-strong);
     background: var(--surface-hover);
     color: var(--text);
@@ -734,7 +737,10 @@
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  border: 1px solid transparent;
+  /* width + style only: the color comes from the variant (.btn-secondary takes
+     the bordered-control border), so both variants are the same size. */
+  border-width: 1px;
+  border-style: solid;
   transition:
     background-color var(--dur-fast),
     border-color var(--dur-fast),
@@ -743,6 +749,10 @@
 .btn-primary {
   background: var(--accent);
   color: var(--accent-fg);
+  border-color: transparent;
+}
+.btn-secondary {
+  color: var(--text);
 }
 @media (hover: hover) {
   .btn-primary:hover:not(:disabled) {
@@ -1684,11 +1694,17 @@
   margin: 22px 0 8px;
 }
 .article-body ul,
-.article-body ol {
+.article-body ol,
+.prose ul {
   margin: 0 0 16px;
   padding-left: 22px;
 }
-.article-body li {
+/* Tailwind's preflight strips list markers; product "How it works" keeps them. */
+.prose ul {
+  list-style: disc;
+}
+.article-body li,
+.prose li {
   margin: 4px 0;
 }
 .article-body a {
