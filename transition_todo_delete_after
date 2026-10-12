@@ -24,12 +24,22 @@ Cold start (new session): read REFERENCE at the bottom first.
 
 ## Write page: post list layout (2026-10-12)
 
-- [x] Date moved above the title (was a 90px column that squeezed the title on phones)
+- [x] Date moved above the title (was a 90px column that squeezed the title on phones).
+      Same day: moved back to the left as a narrow stacked column (below)
 - [x] Description capped at 62ch on desktop (same as `.prose`)
 - [x] Hover no longer slides the row; the title turns link blue (also on keyboard focus).
       Rule updated in `CLAUDE.md`
 - [ ] Check on a real iPhone
 - [x] Commit
+- [x] Second pass (Sagdi: the list looked bland):
+  - [x] Date on the left again, month over year ("Oct" / "2026"); the column is as wide as the
+        widest date (subgrid), about 29px, so the title gets 315px on a phone (was 242px)
+  - [x] Titles 16px to 18px
+  - [x] Tags shown under the description as static chips (the row is the link)
+  - [x] Titles wrap in even lines (`text-wrap: balance`): no single word left on the last line
+  - [x] Checked in headless Chrome: phone and desktop, light and dark, en, ru, uz
+  - [ ] Check on a real iPhone
+  - [x] Commit
 
 ## Photos: full-screen view
 

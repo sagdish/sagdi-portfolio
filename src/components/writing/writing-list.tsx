@@ -5,14 +5,14 @@ import { cn } from "@/lib/utils"
 import { Reveal } from "@/components/ui/reveal"
 import type { BlogPost } from "@/types/blog"
 
-function formatMonth(iso: string, locale: string) {
+/** Month and year as two lines ("Oct" over "2026") for the narrow date column. */
+function monthYear(iso: string, locale: string) {
   const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return iso
-  return d.toLocaleDateString(locale, {
-    month: "short",
-    year: "numeric",
-    timeZone: "UTC",
-  })
+  if (Number.isNaN(d.getTime())) return { month: iso, year: "" }
+  return {
+    month: d.toLocaleDateString(locale, { month: "short", timeZone: "UTC" }),
+    year: String(d.getUTCFullYear()),
+  }
 }
 
 /**
@@ -58,15 +58,30 @@ export function WritingList({
       )}
 
       <div className="posts">
-        {shown.map((p) => (
-          <Reveal key={p.id} href={`/writing/${p.slug}`} className="post">
-            <span className="date">{formatMonth(p.publishedDate, locale)}</span>
-            <div>
-              <div className="t">{p.title}</div>
-              <div className="x">{p.description}</div>
-            </div>
-          </Reveal>
-        ))}
+        {shown.map((p) => {
+          const { month, year } = monthYear(p.publishedDate, locale)
+          return (
+            <Reveal key={p.id} href={`/writing/${p.slug}`} className="post">
+              <span className="date">
+                <span>{month}</span>
+                <span>{year}</span>
+              </span>
+              <div>
+                <div className="t">{p.title}</div>
+                <div className="x">{p.description}</div>
+                {p.tags.length > 0 && (
+                  <div className="tags">
+                    {p.tags.map((tag) => (
+                      <span key={tag} className="tagchip static">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </Reveal>
+          )
+        })}
       </div>
     </>
   )
