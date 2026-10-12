@@ -67,7 +67,8 @@ Branch `rewamp2026` replaces `main` (live) at launch.
   - `.eyebrow`, `.btn .btn-primary`, `.card`, `.sec-head`, `.section` + `.section-body`, `.cta`,
     `.static` (non-clickable chips).
 - Every `:hover` rule goes inside `@media (hover: hover)`. One hover per kind: controls brighten their
-  border and background with no lift, cards lift 3px, and list rows nudge their content.
+  border and background with no lift, cards lift 3px, and list rows turn their title link blue
+  with nothing moving.
 - Never animate layout (padding, margin, size). Movement uses `transform` or `translate`; colors may fade.
 - Reveal-on-scroll: `<Reveal>` / `useReveal` set `data-reveal` and animate `translate`.
   - Never put `transform` or `transition` rules on `[data-reveal]`.

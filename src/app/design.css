@@ -1278,39 +1278,39 @@
   display: flex;
   flex-direction: column;
 }
+/* Date sits above the title, so the text gets the full row width on a phone. */
 .post {
-  display: flex;
-  gap: 18px;
-  padding: 18px 4px;
+  display: block;
+  padding: 18px 0;
   border-bottom: 1px solid var(--border);
   text-decoration: none;
   color: inherit;
-  align-items: baseline;
-}
-/* Hover nudges the row's content right; the divider line stays put. Transform,
-   not padding, so the text never reflows. */
-.post > * {
-  transition: transform var(--dur) var(--ease-out);
-}
-@media (hover: hover) {
-  .post:hover > * {
-    transform: translateX(6px);
-  }
 }
 .post .date {
+  display: block;
   color: var(--faint);
-  flex-shrink: 0;
-  width: 90px;
+  margin-bottom: 6px;
 }
 .post .t {
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.01em;
+  transition: color var(--dur-fast);
+}
+/* Hover and keyboard focus turn the title link blue; nothing moves. */
+.post:focus-visible .t {
+  color: var(--link);
+}
+@media (hover: hover) {
+  .post:hover .t {
+    color: var(--link);
+  }
 }
 .post .x {
   color: var(--muted);
   font-size: 14px;
   margin-top: 3px;
+  max-width: 62ch;
 }
 
 /* ── Subscribe band ────────────────────────────────────────────────────────── */
@@ -1595,7 +1595,7 @@
    Only blocks that start below the fold take part (use-reveal.ts): "wait" hides
    them until they scroll into view, "in" plays the entrance once. It uses the
    `translate` property and an animation, so a component's own `transform` and
-   `transition` (card lift, row nudge) are never touched. */
+   `transition` (card lift) are never touched. */
 [data-reveal="wait"] {
   opacity: 0;
   translate: 0 16px;

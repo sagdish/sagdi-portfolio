@@ -1,6 +1,6 @@
 # sagdi.com launch checklist
 
-Last updated: 2026-10-10
+Last updated: 2026-10-12
 Legend: [x] done  [ ] not done
 
 Finish line: zero grey "sample" chips on any page, in en, ru and uz. Then go live.
@@ -21,6 +21,15 @@ Cold start (new session): read REFERENCE at the bottom first.
 ---
 
 # IN PROGRESS
+
+## Write page: post list layout (2026-10-12)
+
+- [x] Date moved above the title (was a 90px column that squeezed the title on phones)
+- [x] Description capped at 62ch on desktop (same as `.prose`)
+- [x] Hover no longer slides the row; the title turns link blue (also on keyboard focus).
+      Rule updated in `CLAUDE.md`
+- [ ] Check on a real iPhone
+- [x] Commit
 
 ## Photos: full-screen view
 
