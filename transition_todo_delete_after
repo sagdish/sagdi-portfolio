@@ -65,6 +65,12 @@ Sagdi: the box was gigantic next to the new cards. Fixed in `.sub` / `.subform` 
 - [x] Checked in headless Chrome: phone and desktop, light and dark, en, ru, uz
 - [ ] Check on a real iPhone
 - [x] Commit
+- [x] Desktop: the box itself is only as wide as its contents (490px: the 440px field row plus
+      padding), left-aligned; the 440px cap moved from the form to the box. Phones unchanged
+      (full width). Checked headless: phone and desktop, light and dark, en, ru, uz. Committed
+- [ ] Still open from the same review, waiting for Sagdi's pick: field and button as tall as
+      the chips (~38px, now ~45px); button with chip-size text and padding; bordered button
+      instead of solid blue; text wraps evenly (no lone "pitch."); desktop text left + form right
 
 ## Photos: full-screen view
 
