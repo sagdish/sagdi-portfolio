@@ -1,32 +1,14 @@
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
-import { listPosts, listTags } from "@/lib/writing"
+import { formatPostDate, listPosts, listTags } from "@/lib/writing"
 import { pageMetadata } from "@/lib/seo"
 import { Reveal } from "@/components/ui/reveal"
 import { SubscribeBand } from "@/components/ui/subscribe-band"
-import { WritingList, type MonthYear } from "@/components/writing/writing-list"
+import { WritingList } from "@/components/writing/writing-list"
 import { LINKS } from "@/content/links"
 
 // ISR: pick up new Notion posts without a rebuild (matches the post detail).
 export const revalidate = 60
-
-/**
- * Month and year as two lines ("Oct" over "2026"), first letter capitalized
- * ("окт." → "Окт."). Formatted here on the server, never in the browser: Chrome
- * has no Uzbek month names and would show "M10".
- */
-function monthYear(iso: string, locale: string): MonthYear {
-  const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return { month: iso, year: "" }
-  const month = d.toLocaleDateString(locale, {
-    month: "short",
-    timeZone: "UTC",
-  })
-  return {
-    month: month.charAt(0).toLocaleUpperCase(locale) + month.slice(1),
-    year: String(d.getUTCFullYear()),
-  }
-}
 
 export async function generateMetadata({
   params,
@@ -47,7 +29,7 @@ export default async function WritingPage({
   const t = await getTranslations("writing")
   const [posts, tags] = await Promise.all([listPosts(), listTags()])
   const dates = Object.fromEntries(
-    posts.map((p) => [p.id, monthYear(p.publishedDate, locale)])
+    posts.map((p) => [p.id, formatPostDate(p.publishedDate, locale)])
   )
 
   return (

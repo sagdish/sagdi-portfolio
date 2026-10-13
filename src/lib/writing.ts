@@ -28,3 +28,19 @@ export async function listTags(): Promise<string[]> {
     return []
   }
 }
+
+/**
+ * Post date in the page's language ("October 9, 2026"). Call it on the server
+ * only: Chrome has no Uzbek month names and would show "M10".
+ */
+export function formatPostDate(iso: string, locale: string): string {
+  const date = new Date(iso)
+  return Number.isNaN(date.getTime())
+    ? iso
+    : date.toLocaleDateString(locale, {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        timeZone: "UTC",
+      })
+}

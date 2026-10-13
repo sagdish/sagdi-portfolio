@@ -1,6 +1,6 @@
 # sagdi.com launch checklist
 
-Last updated: 2026-10-12
+Last updated: 2026-10-13
 Legend: [x] done  [ ] not done
 
 Finish line: zero grey "sample" chips on any page, in en, ru and uz. Then go live.
@@ -37,6 +37,18 @@ Cold start (new session): read REFERENCE at the bottom first.
   - [x] Titles 16px to 18px
   - [x] Tags shown under the description as static chips (the row is the link)
   - [x] Titles wrap in even lines (`text-wrap: balance`): no single word left on the last line
+  - [x] Checked in headless Chrome: phone and desktop, light and dark, en, ru, uz
+  - [ ] Check on a real iPhone
+  - [x] Commit
+- [x] Third pass (Sagdi, 2026-10-13: the right side of the list sat empty; reuse the list from
+      `main`'s blog, the list only, this site's fonts and text sizes kept):
+  - [x] Each post is a full-width card like `main`: calendar icon + full date
+        ("October 9, 2026"), title, description, tag icon + tags as soft pills (cards only;
+        the filter row on top is unchanged)
+  - [x] Built on the shared `.card` (lifts 3px on hover). The stacked date column, the 62ch
+        description cap and the blue-title hover are gone. Post titles are `<h2>`
+  - [x] Full date formatted on the server by `formatPostDate` (`lib/writing.ts`), shared with
+        the post page
   - [x] Checked in headless Chrome: phone and desktop, light and dark, en, ru, uz
   - [ ] Check on a real iPhone
   - [x] Commit

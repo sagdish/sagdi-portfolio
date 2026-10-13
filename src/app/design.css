@@ -17,7 +17,8 @@
 .cfield label,
 .tb-menu-label,
 .pill,
-.tagchip {
+.tagchip,
+.post .tag {
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.12em;
@@ -1274,59 +1275,44 @@
 }
 
 /* ── Writing list ──────────────────────────────────────────────────────────── */
-/* Narrow date column ("Oct" over "2026"). Rows share the list's columns
-   (subgrid), so the column is as wide as the widest date in any language. */
+/* One .card per post, full width (layout from the old site's blog list):
+   date, title, description, then the tags as soft pills. */
 .posts {
   display: grid;
-  grid-template-columns: max-content 1fr;
-  column-gap: 14px;
+  gap: 24px;
 }
 .post {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: subgrid;
-  align-items: baseline;
-  padding: 18px 0;
-  border-bottom: 1px solid var(--border);
-  text-decoration: none;
-  color: inherit;
+  padding: 24px;
 }
-.post .date {
-  display: flex;
-  flex-direction: column;
-  color: var(--faint);
-}
-.post .t {
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  text-wrap: balance;
-  transition: color var(--dur-fast);
-}
-/* Hover and keyboard focus turn the title link blue; nothing moves. */
-.post:focus-visible .t {
-  color: var(--link);
-}
-@media (hover: hover) {
-  .post:hover .t {
-    color: var(--link);
-  }
-}
-.post .x {
-  color: var(--muted);
-  font-size: 14px;
-  margin-top: 3px;
-  max-width: 62ch;
-}
-/* The row is the link, so its tags are static chips that keep the link's cursor. */
+.post .date,
 .post .tags {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 10px;
+  align-items: center;
+  color: var(--faint);
 }
-.post .tagchip.static {
-  cursor: inherit;
+.post .date {
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.post h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+  text-wrap: balance;
+}
+.post .tags {
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.post svg {
+  flex-shrink: 0;
+}
+.post .tag {
+  padding: 2px 10px;
+  border-radius: var(--r-pill);
+  background: var(--surface-hover);
+  color: var(--muted);
 }
 
 /* ── Subscribe band ────────────────────────────────────────────────────────── */

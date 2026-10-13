@@ -1,16 +1,16 @@
 "use client"
 
 import { useState } from "react"
+import { Calendar, Tag } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Reveal } from "@/components/ui/reveal"
 import type { BlogPost } from "@/types/blog"
 
-export type MonthYear = { month: string; year: string }
-
 /**
  * Writing list with tag filter-in-place: chips narrow the list client-side, no tag
  * URLs (per the resolved decision). "All" clears the filter.
- * `dates` (post id → month and year) comes formatted from the server.
+ * Each post is a card (layout from the old site's blog list).
+ * `dates` (post id → date text) comes formatted from the server.
  */
 export function WritingList({
   posts,
@@ -19,7 +19,7 @@ export function WritingList({
   allLabel,
 }: {
   posts: BlogPost[]
-  dates: Record<string, MonthYear>
+  dates: Record<string, string>
   tags: string[]
   allLabel: string
 }) {
@@ -51,30 +51,26 @@ export function WritingList({
       )}
 
       <div className="posts">
-        {shown.map((p) => {
-          const { month, year } = dates[p.id]
-          return (
-            <Reveal key={p.id} href={`/writing/${p.slug}`} className="post">
-              <span className="date">
-                <span>{month}</span>
-                <span>{year}</span>
-              </span>
-              <div>
-                <div className="t">{p.title}</div>
-                <div className="x">{p.description}</div>
-                {p.tags.length > 0 && (
-                  <div className="tags">
-                    {p.tags.map((tag) => (
-                      <span key={tag} className="tagchip static">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
+        {shown.map((p) => (
+          <Reveal key={p.id} href={`/writing/${p.slug}`} className="card post">
+            <div className="date">
+              <Calendar size={14} aria-hidden />
+              <time dateTime={p.publishedDate}>{dates[p.id]}</time>
+            </div>
+            <h2>{p.title}</h2>
+            {p.description && <p>{p.description}</p>}
+            {p.tags.length > 0 && (
+              <div className="tags">
+                <Tag size={14} aria-hidden />
+                {p.tags.map((tag) => (
+                  <span key={tag} className="tag">
+                    {tag}
+                  </span>
+                ))}
               </div>
-            </Reveal>
-          )
-        })}
+            )}
+          </Reveal>
+        ))}
       </div>
     </>
   )

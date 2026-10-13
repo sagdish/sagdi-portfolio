@@ -6,7 +6,7 @@ import remarkGfm from "remark-gfm"
 import remarkBreaks from "remark-breaks"
 import rehypeRaw from "rehype-raw"
 import { BackLink } from "@/components/ui/back-link"
-import { getPost, listPosts } from "@/lib/writing"
+import { formatPostDate, getPost, listPosts } from "@/lib/writing"
 import { SITE_URL, ogImages } from "@/lib/seo"
 import { routing } from "@/i18n/routing"
 import { JsonLd } from "@/components/seo/json-ld"
@@ -61,15 +61,7 @@ export default async function WritingPostPage({
   const post = await getPost(slug)
   if (!post) notFound()
 
-  const date = new Date(post.publishedDate)
-  const formatted = Number.isNaN(date.getTime())
-    ? post.publishedDate
-    : date.toLocaleDateString(locale, {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        timeZone: "UTC",
-      })
+  const formatted = formatPostDate(post.publishedDate, locale)
 
   const structuredData = {
     "@context": "https://schema.org",
