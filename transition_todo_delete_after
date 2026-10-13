@@ -53,6 +53,19 @@ Cold start (new session): read REFERENCE at the bottom first.
   - [ ] Check on a real iPhone
   - [x] Commit
 
+## Write page: subscribe box size (2026-10-13)
+
+Sagdi: the box was gigantic next to the new cards. Fixed in `.sub` / `.subform` (`design.css`).
+
+- [x] Same scale as the post cards: padding 28px to 24px, corners 16px to 12px (`--r-lg`),
+      heading 21px to 18px, text 16px to 14px
+- [x] Email field no longer stretches across the page: field + button capped at 440px
+- [x] Phones: field and button on one row (field minimum 200px to 140px; they wrap only if a
+      translated button label leaves the field less than 140px)
+- [x] Checked in headless Chrome: phone and desktop, light and dark, en, ru, uz
+- [ ] Check on a real iPhone
+- [x] Commit
+
 ## Photos: full-screen view
 
 - [x] Strip arrows move the strip again (Chrome re-snapped every step back to the start)

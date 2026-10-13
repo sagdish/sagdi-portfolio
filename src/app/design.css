@@ -1316,17 +1316,18 @@
 }
 
 /* ── Subscribe band ────────────────────────────────────────────────────────── */
+/* Same scale as the post cards above it: padding, corners, title and text size. */
 .sub {
   position: relative;
   margin-top: 34px;
-  padding: 28px;
-  border-radius: var(--r-xl);
+  padding: 24px;
+  border-radius: var(--r-lg);
   background: var(--accent-soft);
   border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
 }
 .sub h2 {
   margin: 0;
-  font-size: 21px;
+  font-size: 18px;
   letter-spacing: -0.01em;
 }
 
@@ -1413,13 +1414,17 @@
 .sub p {
   margin: 8px 0 0;
   color: var(--muted);
+  font-size: 14px;
   max-width: 48ch;
 }
+/* Field and button stay one compact row (on phones too); they wrap only when
+   the button label is too long to leave the field 140px. */
 .subform {
   display: flex;
   gap: 10px;
   margin-top: 18px;
   flex-wrap: wrap;
+  max-width: 440px;
 }
 /* Shared field treatment: Subscribe band + contact form. Layout stays per-form. */
 .subform input,
@@ -1442,7 +1447,7 @@
 }
 .subform input {
   flex: 1;
-  min-width: 200px;
+  min-width: 140px;
 }
 .sub .ok {
   margin-top: 14px;
