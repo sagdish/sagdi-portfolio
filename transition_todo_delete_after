@@ -161,8 +161,10 @@ Start only when 4 is done.
 - [ ] Real iPhone: photo full-screen view and the UI/UX pass
 - [ ] Work page scrolls sideways by 15px (phone and desktop): the contact form's hidden spam
       field `.cform-hp` sticks out past the edge (found 2026-10-10)
-- [ ] /uz/writing: post dates render differently on server and browser ("okt, 2026" vs
-      "2026 M10"), a React hydration error (found 2026-10-10)
+- [x] /uz/writing: post dates render differently on server and browser ("okt, 2026" vs
+      "2026 M10"), a React hydration error (found 2026-10-10). Fixed 2026-10-12: Chrome has
+      no Uzbek month names, so the list's dates are now formatted on the server only
+      (`writing/page.tsx`); ru and uz months start with a capital ("Окт.", "Okt")
 - [ ] Blog post lists (`.article-body ul/ol`) show no bullets or numbers: Tailwind's preflight
       strips them (found 2026-10-10)
 

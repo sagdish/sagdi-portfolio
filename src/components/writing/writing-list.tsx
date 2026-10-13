@@ -5,29 +5,22 @@ import { cn } from "@/lib/utils"
 import { Reveal } from "@/components/ui/reveal"
 import type { BlogPost } from "@/types/blog"
 
-/** Month and year as two lines ("Oct" over "2026") for the narrow date column. */
-function monthYear(iso: string, locale: string) {
-  const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return { month: iso, year: "" }
-  return {
-    month: d.toLocaleDateString(locale, { month: "short", timeZone: "UTC" }),
-    year: String(d.getUTCFullYear()),
-  }
-}
+export type MonthYear = { month: string; year: string }
 
 /**
  * Writing list with tag filter-in-place: chips narrow the list client-side, no tag
  * URLs (per the resolved decision). "All" clears the filter.
+ * `dates` (post id → month and year) comes formatted from the server.
  */
 export function WritingList({
   posts,
+  dates,
   tags,
-  locale,
   allLabel,
 }: {
   posts: BlogPost[]
+  dates: Record<string, MonthYear>
   tags: string[]
-  locale: string
   allLabel: string
 }) {
   const [active, setActive] = useState<string | null>(null)
@@ -59,7 +52,7 @@ export function WritingList({
 
       <div className="posts">
         {shown.map((p) => {
-          const { month, year } = monthYear(p.publishedDate, locale)
+          const { month, year } = dates[p.id]
           return (
             <Reveal key={p.id} href={`/writing/${p.slug}`} className="post">
               <span className="date">
