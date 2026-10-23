@@ -1,6 +1,6 @@
 # sagdi.com launch checklist
 
-Last updated: 2026-10-13
+Last updated: 2026-10-24
 Legend: [x] done  [ ] not done
 
 Finish line: zero grey "sample" chips on any page, in en, ru and uz. Then go live.
@@ -13,8 +13,9 @@ Cold start (new session): read REFERENCE at the bottom first.
 - [x] 1. Site built
 - [x] 2. Links fixed
 - [x] 3. Services connected (photos, Notion, Resend)
-- [ ] 4. English copy ............ IN PROGRESS
-- [ ] 5. Russian and Uzbek ....... NEXT
+- [ ] 4. English copy ............ IN PROGRESS (product real copy + SEO search text left)
+- [ ] 5. Russian and Uzbek ....... IN PROGRESS (full first pass done 2026-10-24, waiting on Sagdi's
+      review of the judgment calls below)
 - [ ] 6. Subscribe works
 - [ ] 7. Go live
 
@@ -152,19 +153,32 @@ Layout approved by Sagdi 2026-10-10.
 
 ## 5. Russian and Uzbek
 
-Start only when 4 is done.
+First full pass DONE 2026-10-24 (Sagdi was away; translated from the current English, natural
+spoken tone, no em dashes). Verified: typecheck, lint, production build, and headless Chrome in
+ru + uz at phone and desktop, light and dark (home, build list, product page, write list, world,
+work form, 404). Still waiting on Sagdi's review of the judgment calls at the bottom.
 
-- [ ] Re-sync first: `home.titleLine1` and `home.lede` in `ru.json` and `uz.json` still hold the
-      old English text
-- [ ] Translate `messages/ru.json` (almost all still English; only the photo strip and full-screen
-      view button labels are translated)
-- [ ] Translate `messages/uz.json` (same)
-- [ ] SEO text is part of those files, all under `meta`: `siteName` (main used "Сагди Форманов"),
-      `jobTitle`, `default.*`, `pages.*`, `ogImageAlt`. The preview image picks these up by itself.
-- [ ] New keys since the last sync, still English: `notFound.*`, `writing.subscribe.emailLabel`
-- [ ] Product texts: add `ru` and `uz` to each `tagline` and `body` in `src/content/products.ts`
-      (they fall back to English today)
+- [x] Re-sync first: `home.titleLine1` and `home.lede` now match the current English (were old)
+- [x] Translate `messages/ru.json` (every string, incl. meta/SEO; brand names and blog titles kept)
+- [x] Translate `messages/uz.json` (same; Latin script, okina ʻ / tutuq ʼ like the existing labels)
+- [x] SEO text under `meta`: `siteName` (ru "Сагди Форманов", uz Latin), `jobTitle`, `default.*`,
+      `pages.*`, `ogImageAlt` all translated. `pages.*` mirror each language's own heading, same as
+      en; writing search-separate copy is still open (see step 4, applies to all three languages).
+- [x] New keys since the last sync: `notFound.*`, `writing.subscribe.emailLabel` translated
+- [x] Product texts: `ru` and `uz` added to every `tagline`/`body`/`who`/`how`/`now` in
+      `src/content/products.ts`. (These are translations of the English; the English itself for
+      ReguSelf/Pomodoro/Screenshots/finKeep still needs Sagdi's real words, so ru/uz inherit that.)
 - Blog posts: nothing to do. They stay in the language they were written in.
+- [ ] Waiting on Sagdi (translation judgment calls, easy to change):
+  - Name in Russian: used Cyrillic "Сагди Форманов" for siteName, the hero name and the footer
+    (matches `main`). Keep, or Latin everywhere?
+  - Nav/section labels ru: Проекты / Заметки / Мир (uz: Loyihalar / Yozuvlar / Dunyo). These read
+    as nouns, not the English verbs Build/Write. OK, or prefer verb-style (Делаю / Пишу)?
+  - Tone ru: informal "ты" on reader-facing pages (home, write, products), polite "вы" on the work
+    page + contact form. OK?
+  - Slogan "building in public": ru "строю у всех на виду", uz "ochiq quraman". Keep, reword, or
+    leave the English phrase?
+  - Uzbek reads natural but should get a native proofread before go-live.
 
 ## 6. Subscribe works
 

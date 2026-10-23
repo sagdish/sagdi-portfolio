@@ -1,57 +1,57 @@
 {
   "meta": {
-    "siteName": "Sagdi Formanov",
-    "jobTitle": "Builder · design, full-stack, product",
+    "siteName": "Сагди Форманов",
+    "jobTitle": "Создаю продукты · дизайн, фулстек, продукт",
     "default": {
-      "title": "Sagdi Formanov · building in public",
-      "description": "Technologist and creator trying to understand people. Build meaningful things, explore the intersection of technology and humanity, and live a life of strength, curiosity, creativity and freedom.",
-      "keywords": "Sagdi Formanov, builder, product, full-stack, indie software, building in public, ReguSelf"
+      "title": "Сагди Форманов · строю у всех на виду",
+      "description": "Технолог и креатор, которому интересно понять людей. Делаю осмысленные вещи, исследую стык технологий и человечности и стараюсь жить с силой, любопытством, творчеством и свободой.",
+      "keywords": "Сагди Форманов, Sagdi Formanov, разработчик, продукт, фулстек, инди-разработка, building in public, ReguSelf"
     },
-    "ogImageAlt": "Sagdi Formanov · building in public",
+    "ogImageAlt": "Сагди Форманов · строю у всех на виду",
     "pages": {
       "building": {
-        "title": "What I'm making and working on.",
-        "description": "Product, software, AI, experiments, and the work behind them."
+        "title": "Что я делаю и над чем работаю.",
+        "description": "Продукты, софт, AI, эксперименты и работа, которая за ними стоит."
       },
       "writing": {
-        "title": "Things I'm trying to understand.",
-        "description": "Psychology, technology, people, culture, and whatever keeps occupying my head long enough to become a thought worth writing down."
+        "title": "То, что я пытаюсь понять.",
+        "description": "Психология, технологии, люди, культура и всё, что достаточно долго крутится в голове, чтобы стать мыслью, которую стоит записать."
       },
       "world": {
-        "title": "Everything else that makes up my world.",
-        "description": "Music, cinema, cars, photography, books, art, travel, nature, martial arts, and the things I'm currently drawn to."
+        "title": "Всё остальное, из чего состоит мой мир.",
+        "description": "Музыка, кино, машины, фотография, книги, искусство, путешествия, природа, единоборства и то, что меня сейчас цепляет."
       },
       "work": {
-        "title": "Let's build something.",
-        "description": "Right now I'm looking for a product role where I can build, not just manage. If that's the kind of person you're after, I'd like to talk."
+        "title": "Давай построим что-нибудь вместе.",
+        "description": "Сейчас ищу продуктовую роль, где можно строить, а не только управлять. Если вам нужен такой человек, давайте поговорим."
       }
     }
   },
   "nav": {
-    "home": "Home",
-    "building": "Build",
-    "writing": "Write",
-    "world": "World",
-    "work": "Work with me",
-    "workShort": "Work",
-    "changeLanguage": "Change language"
+    "home": "Главная",
+    "building": "Проекты",
+    "writing": "Заметки",
+    "world": "Мир",
+    "work": "Работа со мной",
+    "workShort": "Работа",
+    "changeLanguage": "Сменить язык"
   },
   "shell": {
-    "subscribe": "Subscribe",
-    "theme": "Theme",
-    "themeLight": "Light",
-    "themeAuto": "Auto",
-    "themeDark": "Dark",
-    "brandTag": "building in public",
-    "menu": "Menu",
-    "language": "Language"
+    "subscribe": "Подписаться",
+    "theme": "Тема",
+    "themeLight": "Светлая",
+    "themeAuto": "Авто",
+    "themeDark": "Тёмная",
+    "brandTag": "строю у всех на виду",
+    "menu": "Меню",
+    "language": "Язык"
   },
   "home": {
-    "name": "Sagdi Formanov",
-    "titleLine1": "Figuring things out",
-    "lede": "I'm trying to understand things, build what matters, and use technology without losing sight of the human part. I want to keep learning, creating, and having enough freedom to see where life takes me.",
+    "name": "Сагди Форманов",
+    "titleLine1": "Технолог и креатор",
+    "lede": "Разбираюсь по ходу дела. Пытаюсь понять, как всё устроено, делать то, что важно, и не переставать учиться.",
     "photography": {
-      "label": "Photography",
+      "label": "Фотография",
       "prev": "Предыдущие фото",
       "next": "Следующие фото",
       "open": "Открыть фото",
@@ -61,21 +61,21 @@
       "nextPhoto": "Следующее фото"
     },
     "listening": {
-      "label": "Currently listening",
+      "label": "Сейчас слушаю",
       "telegram": "Telegram"
     },
     "latest": {
-      "label": "Latest writing"
+      "label": "Последняя заметка"
     },
     "currently": {
-      "heading": "Currently",
-      "buildingLabel": "Building",
-      "buildingText": "Shipping a public hub, keeping <reguself>ReguSelf</reguself> moving, and running my life out of a personal OS.",
-      "exploringLabel": "Exploring",
-      "exploringText": "A YouTube transcription and visualization tool"
+      "heading": "Сейчас",
+      "buildingLabel": "Строю",
+      "buildingText": "Запускаю публичный хаб, развиваю <reguself>ReguSelf</reguself> и веду всю свою жизнь из персональной ОС.",
+      "exploringLabel": "Изучаю",
+      "exploringText": "Инструмент для расшифровки и визуализации видео с YouTube"
     },
     "elsewhere": {
-      "label": "Elsewhere",
+      "label": "Где ещё",
       "linkedin": "LinkedIn",
       "github": "GitHub",
       "instagram": "Instagram",
@@ -84,47 +84,47 @@
     }
   },
   "building": {
-    "eyebrow": "Build",
-    "title": "What I'm making and working on.",
-    "lede": "Product, software, AI, experiments, and the work behind them.",
-    "readMore": "Read more",
-    "visit": "Visit",
-    "statusLive": "Live · in progress",
-    "statusProgress": "In progress",
-    "statusPreStart": "Pre-start",
-    "statusParked": "Parked",
-    "back": "Back to Build",
+    "eyebrow": "Проекты",
+    "title": "Что я делаю и над чем работаю.",
+    "lede": "Продукты, софт, AI, эксперименты и работа, которая за ними стоит.",
+    "readMore": "Подробнее",
+    "visit": "Открыть",
+    "statusLive": "Запущен · в работе",
+    "statusProgress": "В работе",
+    "statusPreStart": "До старта",
+    "statusParked": "На паузе",
+    "back": "Ко всем проектам",
     "github": "GitHub",
     "sections": {
-      "what": "What it is",
-      "who": "Who it's for",
-      "how": "How it works",
-      "now": "Where it stands"
+      "what": "Что это",
+      "who": "Для кого",
+      "how": "Как работает",
+      "now": "Где сейчас"
     },
     "shots": {
-      "label": "Screenshots",
-      "prev": "Previous screenshots",
-      "next": "Next screenshots",
-      "open": "Open screenshot",
-      "viewer": "Screenshot viewer",
-      "close": "Close",
-      "prevShot": "Previous screenshot",
-      "nextShot": "Next screenshot"
+      "label": "Скриншоты",
+      "prev": "Предыдущие скриншоты",
+      "next": "Следующие скриншоты",
+      "open": "Открыть скриншот",
+      "viewer": "Просмотр скриншота",
+      "close": "Закрыть",
+      "prevShot": "Предыдущий скриншот",
+      "nextShot": "Следующий скриншот"
     }
   },
   "writing": {
-    "eyebrow": "Write",
-    "title": "Things I'm trying to understand.",
-    "lede": "Psychology, technology, people, culture, and whatever keeps occupying my head long enough to become a thought worth writing down.",
-    "all": "All",
-    "back": "Back to Write",
+    "eyebrow": "Заметки",
+    "title": "То, что я пытаюсь понять.",
+    "lede": "Психология, технологии, люди, культура и всё, что достаточно долго крутится в голове, чтобы стать мыслью, которую стоит записать.",
+    "all": "Все",
+    "back": "Ко всем заметкам",
     "subscribe": {
-      "heading": "Subscribe.",
-      "text": "Get new essays and builds in your inbox. That's the whole pitch.",
-      "hint": "prototype · not wired to a backend yet",
-      "button": "Subscribe",
-      "ok": "You're on the list ✓  (prototype, nothing was actually sent)",
-      "emailLabel": "Email address"
+      "heading": "Подпишись.",
+      "text": "Новые заметки и проекты будут приходить тебе на почту. В этом вся суть.",
+      "hint": "прототип · пока не подключено к бэкенду",
+      "button": "Подписаться",
+      "ok": "Ты в списке ✓  (прототип, на самом деле ничего не отправилось)",
+      "emailLabel": "Адрес почты"
     },
     "elsewhere": {
       "github": "GitHub",
@@ -132,40 +132,40 @@
     }
   },
   "world": {
-    "eyebrow": "World",
-    "title": "Everything else that makes up my world.",
-    "lede": "Music, cinema, cars, photography, books, art, travel, nature, martial arts, and the things I'm currently drawn to.",
+    "eyebrow": "Мир",
+    "title": "Всё остальное, из чего состоит мой мир.",
+    "lede": "Музыка, кино, машины, фотография, книги, искусство, путешествия, природа, единоборства и то, что меня сейчас цепляет.",
     "areas": {
-      "music": "Music",
-      "cinema": "Cinema",
-      "cars": "Cars",
-      "books": "Books",
-      "photography": "Photography",
-      "art": "Art",
-      "travel": "Travel",
-      "nature": "Nature",
-      "family": "Family",
-      "martialArts": "Martial arts"
+      "music": "Музыка",
+      "cinema": "Кино",
+      "cars": "Машины",
+      "books": "Книги",
+      "photography": "Фотография",
+      "art": "Искусство",
+      "travel": "Путешествия",
+      "nature": "Природа",
+      "family": "Семья",
+      "martialArts": "Единоборства"
     }
   },
   "work": {
-    "eyebrow": "Work with me",
-    "title": "Let's build something.",
-    "prose2": "Right now I'm looking for a product role where I can build, not just manage. If that's the kind of person you're after, I'd like to talk.",
+    "eyebrow": "Работа со мной",
+    "title": "Давай построим что-нибудь вместе.",
+    "prose2": "Сейчас я ищу продуктовую роль, где можно строить, а не только управлять. Если вам нужен такой человек, давайте поговорим.",
     "form": {
-      "name": "Name",
-      "email": "Email",
-      "message": "Message",
-      "send": "Send message",
-      "sending": "Sending",
-      "sent": "Thanks. Your message is on its way, I'll reply to the address you gave.",
-      "error": "Something went wrong sending that. Try again, or reach me on LinkedIn."
+      "name": "Имя",
+      "email": "Почта",
+      "message": "Сообщение",
+      "send": "Отправить",
+      "sending": "Отправка",
+      "sent": "Спасибо. Сообщение уже в пути, отвечу на указанный адрес.",
+      "error": "Что-то пошло не так при отправке. Попробуйте ещё раз или напишите мне в LinkedIn."
     },
-    "footerCopyright": "© 2026 Sagdi Formanov"
+    "footerCopyright": "© 2026 Сагди Форманов"
   },
   "notFound": {
-    "title": "ROAD CLOSED HERE",
-    "text": "This page took an exit that doesn't exist.",
-    "home": "Take me home"
+    "title": "ДОРОГА ПЕРЕКРЫТА",
+    "text": "Эта страница свернула на съезд, которого нет.",
+    "home": "На главную"
   }
 }
