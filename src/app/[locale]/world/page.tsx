@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { pageMetadata } from "@/lib/seo"
 import { Reveal } from "@/components/ui/reveal"
+import { KneadingDough } from "@/components/ui/kneading-dough"
 
 // The areas of the World, in the order they appear. Non-clickable for now;
 // individual chips become links when their destinations exist.
@@ -50,6 +51,11 @@ export default async function WorldPage({
             {t(`areas.${key}`)}
           </span>
         ))}
+      </Reveal>
+
+      <Reveal className="section wip">
+        <KneadingDough />
+        <p>{t("soon")}</p>
       </Reveal>
     </>
   )

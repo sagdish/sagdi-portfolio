@@ -23,6 +23,18 @@ Cold start (new session): read REFERENCE at the bottom first.
 
 # IN PROGRESS
 
+## World page: "still cooking" placeholder (2026-10-31)
+
+- [x] Under the chips, centered: a looping dough animation (rolling pin presses a smiling ball of
+      dough on a board, flour puffs) and one line, `world.soon`: en "Coming soon. Still cooking.",
+      ru "Скоро. Пока ещё готовится.", uz "Tez orada. Hali pishyapti." Art is
+      `components/ui/kneading-dough.tsx`, styles `.wip*` in `design.css` (own palette like the rail
+      cat). Size 140px phone, 180px tablet, 220px desktop. Stops under reduced motion.
+- [x] Checked: typecheck, lint, build in a copy; headless en/ru/uz at 390, 820, 1440, light and
+      dark (one h1, no sideways scroll); animation frames checked (pin and dough stay in contact)
+- [ ] Sagdi to review the ru and uz line
+- [ ] Remove when the World page has real content
+
 ## Write page: post list layout (2026-10-12)
 
 - [x] Date moved above the title (was a 90px column that squeezed the title on phones).

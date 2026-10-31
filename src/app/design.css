@@ -1236,6 +1236,156 @@
   margin: 18px 0 0;
 }
 
+/* ── Still cooking (unfinished page: dough art + one line) ─────────────────────
+   kneading-dough.tsx. Its own palette like the rail cat (one-off decorative art);
+   kraft wood and pink cheeks match the cat's box and ears. One 1.8s loop, linear so
+   the pin and the dough stay in contact; transform + opacity only. */
+.wip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+.wip p {
+  color: var(--muted);
+  margin: 0;
+}
+.wip-art {
+  --wip-ink: #3a2f25;
+  --wip-dough: #f2dcae;
+  --wip-wood: #c79355;
+  --wip-grain: #9a6c3a;
+  --wip-flour: #d9cfbd;
+  --wip-pink: #e58f9e;
+  width: clamp(140px, 22vw, 220px);
+  height: auto;
+  overflow: visible;
+}
+.dark .wip-art {
+  --wip-ink: #05070a;
+  --wip-dough: #e8cf9c;
+  --wip-wood: #c0873f;
+  --wip-grain: #8c6231;
+  --wip-flour: #e9e2d4;
+  --wip-pink: #e79aa8;
+}
+.wip-wood {
+  fill: var(--wip-wood);
+  stroke: var(--wip-ink);
+  stroke-width: 2.5;
+}
+.wip-grain,
+.wip-line {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.wip-grain {
+  stroke: var(--wip-grain);
+}
+.wip-line {
+  stroke: var(--wip-ink);
+}
+.wip-blob {
+  fill: var(--wip-dough);
+  stroke: var(--wip-ink);
+  stroke-width: 2.5;
+}
+.wip-shine {
+  fill: #ffffff;
+  opacity: 0.55;
+}
+.wip-cheek {
+  fill: var(--wip-pink);
+  opacity: 0.7;
+}
+.wip-eye {
+  fill: var(--wip-ink);
+}
+.wip-puff {
+  fill: var(--wip-flour);
+  opacity: 0;
+}
+.wip-pin,
+.wip-dough,
+.wip-puff {
+  transform-box: fill-box;
+  animation: 1.8s linear infinite;
+}
+.wip-pin {
+  animation-name: wip-press;
+}
+.wip-dough {
+  transform-origin: 50% 100%;
+  animation-name: wip-squish;
+}
+.wip-puff.l {
+  animation-name: wip-puff-l;
+}
+.wip-puff.r {
+  animation-name: wip-puff-r;
+}
+@keyframes wip-press {
+  0%,
+  68%,
+  100% {
+    transform: translateY(0);
+  }
+  15% {
+    transform: translateY(6px);
+  }
+  40%,
+  55% {
+    transform: translateY(16px);
+  }
+}
+@keyframes wip-squish {
+  0%,
+  15%,
+  80%,
+  100% {
+    transform: scale(1, 1);
+  }
+  40%,
+  55% {
+    transform: scale(1.14, 0.82);
+  }
+  68% {
+    transform: scale(0.96, 1.05);
+  }
+}
+@keyframes wip-puff-l {
+  0%,
+  36% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  42% {
+    opacity: 1;
+  }
+  72%,
+  100% {
+    opacity: 0;
+    transform: translate(-12px, -12px);
+  }
+}
+@keyframes wip-puff-r {
+  0%,
+  36% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  42% {
+    opacity: 1;
+  }
+  72%,
+  100% {
+    opacity: 0;
+    transform: translate(12px, -12px);
+  }
+}
+
 /* ── Status pill ───────────────────────────────────────────────────────────── */
 .pill {
   display: inline-flex;
