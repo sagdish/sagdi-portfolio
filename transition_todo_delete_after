@@ -1,6 +1,6 @@
 # sagdi.com launch checklist
 
-Last updated: 2026-10-29
+Last updated: 2026-10-31
 Legend: [x] done  [ ] not done
 
 Finish line: zero grey "sample" chips on any page, in en, ru and uz. Then go live.
@@ -167,6 +167,12 @@ work form, 404). Still waiting on Sagdi's review of the judgment calls at the bo
       on the build list and all 6 product pages, phone and desktop, light and dark. The new ru/uz
       product text had 6 em dashes (ru: personal-os tagline, body x2, now; screenshots body;
       uz: personal-os body); all replaced with commas or removed, none left.
+- [x] 2026-10-31: second native pass. `messages/ru.json`, `messages/uz.json` and the ru/uz lines in
+      `src/content/products.ts` replaced again with Sagdi's native-reviewed files (117 keys each,
+      same as en, placeholders match, no em dashes; en untouched). Checked: typecheck, lint, build
+      in a copy, headless ru + uz, phone and desktop, light and dark: home, build list, all 6
+      product pages, write, world, work (88 page loads: all 200, one h1, no raw keys). The judgment
+      calls below describe the 2026-10-24 pass.
 
 - [x] Re-sync first: `home.titleLine1` and `home.lede` now match the current English (were old)
 - [x] Translate `messages/ru.json` (every string, incl. meta/SEO; brand names and blog titles kept)
