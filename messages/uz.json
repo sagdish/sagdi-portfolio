@@ -1,29 +1,29 @@
 {
   "meta": {
     "siteName": "Sagdi Formanov",
-    "jobTitle": "Mahsulot yarataman · dizayn, full-stack, product",
+    "jobTitle": "Mahsulot yarataman · dizayn, full-stack va mahsulot boshqaruvi",
     "default": {
-      "title": "Sagdi Formanov · ochiq quraman",
-      "description": "Texnolog va kreator, odamlarni tushunishga urinaman. Mazmunli narsalar yarataman, texnologiya va insoniylik tutashgan nuqtani oʻrganaman, kuch, qiziquvchanlik, ijod va erkinlikka toʻla hayot kechirishga intilaman.",
-      "keywords": "Sagdi Formanov, dasturchi, mahsulot, full-stack, indi dasturiy taʼminot, building in public, ReguSelf"
+      "title": "Sagdi Formanov · jarayonni ochiq ulashaman",
+      "description": "Odamlarni tushunishga intiladigan texnologiya mutaxassisi va ijodkor. Mazmunli narsalar yarataman, texnologiya va insoniylik kesishgan nuqtalarni o‘rganaman hamda kuch, qiziquvchanlik, ijodkorlik va erkinlikka boy hayot kechirishga harakat qilaman.",
+      "keywords": "Sagdi Formanov, yaratuvchi, mahsulot, full-stack, mustaqil dasturiy ta’minot, jarayonni ochiq ulashish, ReguSelf"
     },
-    "ogImageAlt": "Sagdi Formanov · ochiq quraman",
+    "ogImageAlt": "Sagdi Formanov · jarayonni ochiq ulashaman",
     "pages": {
       "building": {
-        "title": "Nimalar qilyapman va nima ustida ishlayapman.",
-        "description": "Mahsulot, dasturiy taʼminot, AI, tajribalar va ularning ortidagi ish."
+        "title": "Nimalar yaratyapman va nimalar ustida ishlayapman.",
+        "description": "Mahsulotlar, dasturiy ta’minot, sun’iy intellekt, tajribalar va ularning ortidagi mehnat."
       },
       "writing": {
-        "title": "Men tushunishga urinayotgan narsalar.",
-        "description": "Psixologiya, texnologiya, odamlar, madaniyat va yozib qoʻyishga arziydigan fikrga aylanguncha boshimda aylanadigan hamma narsa."
+        "title": "Tushunishga urinayotgan narsalarim.",
+        "description": "Psixologiya, texnologiya, odamlar, madaniyat va xayolimda uzoq aylanib, oxiri yozishga arziydigan fikrga aylangan narsalar."
       },
       "world": {
-        "title": "Dunyomni tashkil qiladigan qolgan hamma narsa.",
-        "description": "Musiqa, kino, mashinalar, fotografiya, kitoblar, sanʼat, sayohat, tabiat, yakkakurash va hozir meni oʻziga tortayotgan narsalar."
+        "title": "Dunyomning boshqa qismlari.",
+        "description": "Musiqa, kino, avtomobillar, fotografiya, kitoblar, san’at, sayohat, tabiat, yakkakurash va ayni paytda meni qiziqtirayotgan narsalar."
       },
       "work": {
-        "title": "Keling, biror narsa quramiz.",
-        "description": "Hozir shunchaki boshqarish emas, qurish imkoni boʻlgan mahsulot boʻyicha ish qidiryapman. Agar sizga shunaqa odam kerak boʻlsa, gaplashaylik."
+        "title": "Keling, birga nimadir yarataylik.",
+        "description": "Hozir faqat boshqarish bilan cheklanmay, mahsulot yaratishim mumkin bo‘lgan ish izlayapman. Agar sizga shunday odam kerak bo‘lsa, suhbatlashishdan xursand bo‘laman."
       }
     }
   },
@@ -31,51 +31,51 @@
     "home": "Bosh sahifa",
     "building": "Loyihalar",
     "writing": "Yozuvlar",
-    "world": "Dunyo",
-    "work": "Men bilan ishlash",
+    "world": "Dunyom",
+    "work": "Hamkorlik",
     "workShort": "Ish",
-    "changeLanguage": "Tilni oʻzgartirish"
+    "changeLanguage": "Tilni almashtirish"
   },
   "shell": {
-    "subscribe": "Obuna boʻlish",
-    "theme": "Koʻrinish",
-    "themeLight": "Yorugʻ",
-    "themeAuto": "Avto",
-    "themeDark": "Qorongʻi",
-    "brandTag": "ochiq quraman",
+    "subscribe": "Obuna bo‘lish",
+    "theme": "Mavzu",
+    "themeLight": "Yorug‘",
+    "themeAuto": "Avtomatik",
+    "themeDark": "Qorong‘i",
+    "brandTag": "jarayonni ochiq ulashaman",
     "menu": "Menyu",
     "language": "Til"
   },
   "home": {
     "name": "Sagdi Formanov",
-    "titleLine1": "Texnolog va kreator",
-    "lede": "Hammasini asta-sekin anglab boryapman. Narsalarni tushunishga, muhim ishni qurishga va oʻrganishni toʻxtatmaslikka harakat qilaman.",
+    "titleLine1": "Texnologiya mutaxassisi va ijodkor",
+    "lede": "Jarayonda o‘rganib boryapman. Tushunishga, muhim narsalar yaratishga va o‘rganishdan to‘xtamaslikka harakat qilaman.",
     "photography": {
       "label": "Fotografiya",
       "prev": "Oldingi suratlar",
       "next": "Keyingi suratlar",
       "open": "Suratni ochish",
-      "viewer": "Suratni koʻrish",
+      "viewer": "Surat ko‘ruvchisi",
       "close": "Yopish",
       "prevPhoto": "Oldingi surat",
       "nextPhoto": "Keyingi surat"
     },
     "listening": {
-      "label": "Hozir tinglayapman",
+      "label": "Hozir tinglayotganim",
       "telegram": "Telegram"
     },
     "latest": {
-      "label": "Soʻnggi yozuv"
+      "label": "So‘nggi yozuvlar"
     },
     "currently": {
       "heading": "Hozir",
-      "buildingLabel": "Quryapman",
-      "buildingText": "Ommaviy hub ustida ishlayapman, <reguself>ReguSelf</reguself>ni rivojlantiryapman va hayotimni shaxsiy OS orqali boshqaraman.",
-      "exploringLabel": "Oʻrganyapman",
-      "exploringText": "YouTube videolarini matnga aylantirish va vizualizatsiya qilish vositasi"
+      "buildingLabel": "Yaratayotganlarim",
+      "buildingText": "Shaxsiy saytimni yagona markazga aylantiryapman, <reguself>ReguSelf</reguself>ni rivojlantiryapman va hayotimni shaxsiy OS orqali boshqaryapman.",
+      "exploringLabel": "O‘rganayotganlarim",
+      "exploringText": "YouTube videolarini matnga aylantirib, vizual ko‘rsatadigan vosita"
     },
     "elsewhere": {
-      "label": "Yana qayerda",
+      "label": "Boshqa platformalarda",
       "linkedin": "LinkedIn",
       "github": "GitHub",
       "instagram": "Instagram",
@@ -85,28 +85,28 @@
   },
   "building": {
     "eyebrow": "Loyihalar",
-    "title": "Nimalar qilyapman va nima ustida ishlayapman.",
-    "lede": "Mahsulot, dasturiy taʼminot, AI, tajribalar va ularning ortidagi ish.",
+    "title": "Nimalar yaratyapman va nimalar ustida ishlayapman.",
+    "lede": "Mahsulotlar, dasturiy ta’minot, sun’iy intellekt, tajribalar va ularning ortidagi mehnat.",
     "readMore": "Batafsil",
-    "visit": "Ochish",
-    "statusLive": "Ishga tushgan · jarayonda",
+    "visit": "Ko‘rish",
+    "statusLive": "Ishlayapti · rivojlanmoqda",
     "statusProgress": "Jarayonda",
     "statusPreStart": "Hali boshlanmagan",
-    "statusParked": "Pauzada",
-    "back": "Barcha loyihalarga",
+    "statusParked": "Vaqtincha to‘xtatilgan",
+    "back": "Loyihalarga qaytish",
     "github": "GitHub",
     "sections": {
-      "what": "Bu nima",
-      "who": "Kim uchun",
-      "how": "Qanday ishlaydi",
-      "now": "Hozir qanday"
+      "what": "Bu nima?",
+      "who": "Kimlar uchun?",
+      "how": "Qanday ishlaydi?",
+      "now": "Hozirgi holati"
     },
     "shots": {
       "label": "Skrinshotlar",
       "prev": "Oldingi skrinshotlar",
       "next": "Keyingi skrinshotlar",
       "open": "Skrinshotni ochish",
-      "viewer": "Skrinshotni koʻrish",
+      "viewer": "Skrinshot ko‘ruvchisi",
       "close": "Yopish",
       "prevShot": "Oldingi skrinshot",
       "nextShot": "Keyingi skrinshot"
@@ -114,17 +114,17 @@
   },
   "writing": {
     "eyebrow": "Yozuvlar",
-    "title": "Men tushunishga urinayotgan narsalar.",
-    "lede": "Psixologiya, texnologiya, odamlar, madaniyat va yozib qoʻyishga arziydigan fikrga aylanguncha boshimda aylanadigan hamma narsa.",
-    "all": "Hammasi",
-    "back": "Barcha yozuvlarga",
+    "title": "Tushunishga urinayotgan narsalarim.",
+    "lede": "Psixologiya, texnologiya, odamlar, madaniyat va xayolimda uzoq aylanib, oxiri yozishga arziydigan fikrga aylangan narsalar.",
+    "all": "Barchasi",
+    "back": "Barcha yozuvlarga qaytish",
     "subscribe": {
-      "heading": "Obuna boʻling.",
-      "text": "Yangi yozuvlar va loyihalarni toʻgʻridan-toʻgʻri pochtangizga yuboraman. Gap shu, xolos.",
-      "hint": "prototip · hali backendga ulanmagan",
-      "button": "Obuna boʻlish",
-      "ok": "Roʻyxatdasiz ✓  (prototip, aslida hech narsa yuborilmadi)",
-      "emailLabel": "Pochta manzili"
+      "heading": "Obuna bo‘ling",
+      "text": "Yangi maqolalar va loyihalar haqida xabarlar elektron pochtangizga keladi. Hammasi shu.",
+      "hint": "prototip · hozircha server qismiga ulanmagan",
+      "button": "Obuna bo‘lish",
+      "ok": "Ro‘yxatga qo‘shildingiz ✓ (prototip: aslida hech narsa yuborilmadi)",
+      "emailLabel": "Elektron pochta manzili"
     },
     "elsewhere": {
       "github": "GitHub",
@@ -132,16 +132,16 @@
     }
   },
   "world": {
-    "eyebrow": "Dunyo",
-    "title": "Dunyomni tashkil qiladigan qolgan hamma narsa.",
-    "lede": "Musiqa, kino, mashinalar, fotografiya, kitoblar, sanʼat, sayohat, tabiat, yakkakurash va hozir meni oʻziga tortayotgan narsalar.",
+    "eyebrow": "Dunyom",
+    "title": "Dunyomning boshqa qismlari.",
+    "lede": "Musiqa, kino, avtomobillar, fotografiya, kitoblar, san’at, sayohat, tabiat, yakkakurash va ayni paytda meni qiziqtirayotgan narsalar.",
     "areas": {
       "music": "Musiqa",
       "cinema": "Kino",
-      "cars": "Mashinalar",
+      "cars": "Avtomobillar",
       "books": "Kitoblar",
       "photography": "Fotografiya",
-      "art": "Sanʼat",
+      "art": "San’at",
       "travel": "Sayohat",
       "nature": "Tabiat",
       "family": "Oila",
@@ -149,23 +149,23 @@
     }
   },
   "work": {
-    "eyebrow": "Men bilan ishlash",
-    "title": "Keling, biror narsa quramiz.",
-    "prose2": "Hozir shunchaki boshqarish emas, qurish imkoni boʻlgan mahsulot boʻyicha ish qidiryapman. Agar sizga shunaqa odam kerak boʻlsa, gaplashsak xursand boʻlardim.",
+    "eyebrow": "Hamkorlik",
+    "title": "Keling, birga nimadir yarataylik.",
+    "prose2": "Hozir faqat boshqarish bilan cheklanmay, mahsulot yaratishim mumkin bo‘lgan ish izlayapman. Agar sizga shunday odam kerak bo‘lsa, suhbatlashishdan xursand bo‘laman.",
     "form": {
       "name": "Ism",
-      "email": "Pochta",
+      "email": "Elektron pochta",
       "message": "Xabar",
-      "send": "Yuborish",
-      "sending": "Yuborilyapti",
-      "sent": "Rahmat. Xabaringiz yoʻlda, siz koʻrsatgan manzilga javob beraman.",
-      "error": "Yuborishda nimadir xato ketdi. Qayta urinib koʻring yoki LinkedInda yozing."
+      "send": "Xabar yuborish",
+      "sending": "Yuborilmoqda…",
+      "sent": "Rahmat! Xabaringiz yuborildi. Ko‘rsatgan elektron pochta manzilingizga javob beraman.",
+      "error": "Xabarni yuborishda xatolik yuz berdi. Qayta urinib ko‘ring yoki LinkedIn orqali yozing."
     },
     "footerCopyright": "© 2026 Sagdi Formanov"
   },
   "notFound": {
-    "title": "YOʻL YOPIQ",
-    "text": "Bu sahifa mavjud boʻlmagan chiqishga burildi.",
-    "home": "Bosh sahifaga"
+    "title": "YO‘L YOPIQ",
+    "text": "Bu sahifa mavjud bo‘lmagan chiqish yo‘liga burilib ketdi.",
+    "home": "Bosh sahifaga qaytish"
   }
 }
