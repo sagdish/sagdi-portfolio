@@ -1,6 +1,6 @@
 # sagdi.com launch checklist
 
-Last updated: 2026-10-31
+Last updated: 2026-11-02
 Legend: [x] done  [ ] not done
 
 Finish line: zero grey "sample" chips on any page, in en, ru and uz. Then go live.
@@ -22,6 +22,30 @@ Cold start (new session): read REFERENCE at the bottom first.
 ---
 
 # IN PROGRESS
+
+## Product icons and uz/ru label fixes (2026-11-02)
+
+- [x] Icons for ReguSelf, PM Guide and Pomodoro Focus Dock. ReguSelf uses the dark logo in both
+      light and dark mode (Sagdi, 2026-11-02; the light logo and the theme-swap code are gone).
+      Files in `public/products/`, set per product with `icon` in `content/products.ts`,
+      drawn by `components/ui/product-icon.tsx`, styles `.picon*` in `design.css`. Round, 44px
+      beside the title on the Build cards, 56px in the product page header.
+- [x] Logos drawn for the other three (same family: round, one bold glyph, Pomodoro's black and
+      PM's white discs, one blue `--accent` detail): Personal OS = black disc, text file with one
+      blue line; Screenshots Processor = white disc, capture frame with blue text lines; finKeep =
+      black disc, calendar with a blue check. SVG files in `public/products/` (`personal-os.svg`,
+      `screenshots-processor.svg`, `finkeep.svg`)
+- [x] PM Guide icon is the book mark cut out of Sagdi's "PM Guide" logo screenshot, on a white
+      circle (the screenshot's mark is about 100px, so it is soft at large sizes)
+- [x] Checked: typecheck, lint, prettier, build in a copy; headless /building and the product
+      pages (all six icons) at 390 and 1280, light and dark
+- [ ] Sagdi to approve the look, including the three new logos
+- [ ] Original screenshot `Screenshot 2026-11-02 at 10.01.18 PM.png` is still in the project root
+      (untracked), delete when done
+- [x] uz phone dock: Home label is "Home" (new key `nav.homeShort`, en/ru same as `nav.home`);
+      the rail keeps "Bosh sahifa"
+- [x] Home "Now" labels: uz Building "Yaratish", Exploring "Izlanish"; ru Exploring "Запускаю"
+- [ ] Commit (uz.json also holds Sagdi's `brandTag` edit)
 
 ## World page: "still cooking" placeholder (2026-10-31)
 

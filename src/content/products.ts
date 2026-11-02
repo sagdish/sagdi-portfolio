@@ -13,6 +13,9 @@ export type Product = {
   /** source repository; the detail page renders it as a GitHub link */
   github?: string
   title: string
+  /** round mark shown beside the title (files in `public/products/`), the same in light and
+   *  dark. No icon, no slot. */
+  icon?: { src: string }
   tagline: Localized
   /** "What it is" on the detail page */
   body: Localized
@@ -32,6 +35,7 @@ export const PRODUCTS: Product[] = [
     status: "live",
     url: "https://reguself.com",
     title: "ReguSelf",
+    icon: { src: "/products/reguself.png" },
     tagline: {
       en: "Regulate yourself: a tool for staying on track.",
       ru: "Управляй своим состоянием и вниманием, чтобы не сбиваться с пути.",
@@ -48,6 +52,7 @@ export const PRODUCTS: Product[] = [
     status: "live",
     url: "https://pm-guide.vercel.app/",
     title: "The Ultimate Guide to Product Management",
+    icon: { src: "/products/pm-guide.png" },
     tagline: {
       en: "A comprehensive, practical resource for aspiring and experienced product managers.",
       ru: "Практическое руководство по продуктовому менеджменту для тех, кто только начинает, и тех, у кого уже есть опыт.",
@@ -64,6 +69,7 @@ export const PRODUCTS: Product[] = [
     status: "live",
     github: "https://github.com/sagdish/personal_OS-",
     title: "Personal OS",
+    icon: { src: "/products/personal-os.svg" },
     tagline: {
       en: "Your life as plain text files, read by an AI once a day.",
       ru: "Твоя жизнь в обычных текстовых файлах. Раз в день их просматривает ИИ.",
@@ -111,6 +117,7 @@ export const PRODUCTS: Product[] = [
     slug: "pomodoro-focus-dock",
     status: "pre-start",
     title: "Pomodoro Focus Dock",
+    icon: { src: "/products/pomodoro-focus-dock.png" },
     tagline: {
       en: "A focus timer that lives on the dock.",
       ru: "Таймер для концентрации, который всегда под рукой в доке.",
@@ -126,6 +133,7 @@ export const PRODUCTS: Product[] = [
     slug: "screenshots-processor",
     status: "progress",
     title: "Screenshots Processor",
+    icon: { src: "/products/screenshots-processor.svg" },
     tagline: {
       en: "Turns a pile of screenshots into something useful.",
       ru: "Превращает папку со скриншотами в полезную информацию.",
@@ -141,6 +149,7 @@ export const PRODUCTS: Product[] = [
     slug: "finkeep",
     status: "progress",
     title: "finKeep",
+    icon: { src: "/products/finkeep.svg" },
     tagline: {
       en: "A booking tool for psychologists and personal coaches.",
       ru: "Сервис для записи клиентов к психологам и персональным коучам.",

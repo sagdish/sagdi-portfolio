@@ -957,6 +957,52 @@
   }
 }
 
+/* ── Product icon ──────────────────────────────────────────────────────────────
+   Round mark beside a product title: 44px in a card row, 56px (.picon-lg) in the
+   page header. One image per product, the same in light and dark. */
+.picon {
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.picon-lg {
+  width: 56px;
+  height: 56px;
+}
+.picon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* Hairline edge: keeps a white or a black mark readable on any surface. */
+.picon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+.card .card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 10px;
+}
+.card .card-head h2 {
+  margin: 0;
+}
+.sec-head.has-icon {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.sec-head-text {
+  min-width: 0;
+}
+
 /* ── Photo carousel (contact-sheet filmstrip) ──────────────────────────────────
    One fixed row height; frame width follows each photo's aspect ratio (no crop).
    Native scroll + snap does the interaction; frames clip hard at the container

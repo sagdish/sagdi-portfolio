@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { BackLink } from "@/components/ui/back-link"
 import { Reveal } from "@/components/ui/reveal"
+import { ProductIcon } from "@/components/ui/product-icon"
 import { PhotoCarousel } from "@/components/ui/photo-carousel"
 import {
   PRODUCTS,
@@ -126,14 +127,17 @@ export default async function ProductPage({
     <>
       <JsonLd data={structuredData} />
       <BackLink href="/building" label={t("back")} />
-      <Reveal className="sec-head">
-        <div className="eyebrow">{t("eyebrow")}</div>
-        <h1>{product.title}</h1>
-        <div className="status">
-          <span className={`pill ${STATUS_CLASS[product.status]}`.trim()}>
-            <span className="d" />
-            {statusLabel[product.status]}
-          </span>
+      <Reveal className={product.icon ? "sec-head has-icon" : "sec-head"}>
+        {product.icon && <ProductIcon icon={product.icon} large />}
+        <div className="sec-head-text">
+          <div className="eyebrow">{t("eyebrow")}</div>
+          <h1>{product.title}</h1>
+          <div className="status">
+            <span className={`pill ${STATUS_CLASS[product.status]}`.trim()}>
+              <span className="d" />
+              {statusLabel[product.status]}
+            </span>
+          </div>
         </div>
       </Reveal>
 

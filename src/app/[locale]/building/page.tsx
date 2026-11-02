@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { pageMetadata } from "@/lib/seo"
 import { Reveal } from "@/components/ui/reveal"
+import { ProductIcon } from "@/components/ui/product-icon"
 import { PRODUCTS, loc, type ProductStatus } from "@/content/products"
 import type { Locale } from "@/i18n/routing"
 
@@ -48,7 +49,14 @@ export default async function BuildingPage({
       <div className="grid">
         {PRODUCTS.map((p) => (
           <Reveal key={p.slug} href={`/building/${p.slug}`} className="card">
-            <h2>{p.title}</h2>
+            {p.icon ? (
+              <div className="card-head">
+                <ProductIcon icon={p.icon} />
+                <h2>{p.title}</h2>
+              </div>
+            ) : (
+              <h2>{p.title}</h2>
+            )}
             <p>
               {loc(p.tagline, locale as Locale)}
               {p.placeholder && <span className="sample">sample</span>}
