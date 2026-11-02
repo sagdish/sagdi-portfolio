@@ -29,6 +29,7 @@
   },
   "nav": {
     "home": "Home",
+    "homeShort": "Home",
     "building": "Build",
     "writing": "Write",
     "world": "World",

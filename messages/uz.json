@@ -29,8 +29,9 @@
   },
   "nav": {
     "home": "Bosh sahifa",
-    "building": "Yarataman",
-    "writing": "Yozaman",
+    "homeShort": "Home",
+    "building": "Yaratish",
+    "writing": "Yozish",
     "world": "Dunyo",
     "work": "Hamkorlik",
     "workShort": "Ish",
@@ -42,14 +43,14 @@
     "themeLight": "Yorugʻ",
     "themeAuto": "Avto",
     "themeDark": "Qorongʻi",
-    "brandTag": "yaratish jarayonini ochiq ulashaman",
+    "brandTag": "Ochiq ijod",
     "menu": "Menyu",
     "language": "Til"
   },
   "home": {
     "name": "Sagdi Formanov",
     "titleLine1": "Texnolog va ijodkor",
-    "lede": "Dunyoni tushunishga harakat qilyapman. Narsalar qanday ishlashini anglash, muhim boʻlgan narsalarni yaratish va oʻrganishdan toʻxtamaslik niyatidaman.",
+    "lede": "Tushunishga, muhim narsalarni yaratishga va oʻrganishda davom etishga harakatdaman.",
     "photography": {
       "label": "Fotografiya",
       "prev": "Oldingi suratlar",
@@ -69,10 +70,10 @@
     },
     "currently": {
       "heading": "Hozir",
-      "buildingLabel": "Yaratayapman",
-      "buildingText": "Shaxsiy saytimni yagona markazga aylantiryapman, <reguself>ReguSelf</reguself>ni rivojlantiryapman va kundalik hayotimni oʻzim yaratgan shaxsiy OS orqali yoʻlga qoʻyyapman.",
-      "exploringLabel": "Oʻrganayapman",
-      "exploringText": "YouTube videolarini matnga aylantirish va mazmunini vizual koʻrsatish vositasi"
+      "buildingLabel": "Yaratish",
+      "buildingText": "Saytimni ommaga ochyapman, <reguself>ReguSelf</reguself>ni yurityapman, hayotimni shaxsiy OSda boshqaryapman.",
+      "exploringLabel": "Izlanish",
+      "exploringText": "YouTube videolarini matnga aylantirish va vizuallashtirish vositasi."
     },
     "elsewhere": {
       "label": "Yana qayerda",

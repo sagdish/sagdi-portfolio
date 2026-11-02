@@ -21,7 +21,7 @@ export type NavItem = {
  * house / package / pen-line / globe / briefcase). Consumed by the rail and the dock.
  */
 export const NAV_ITEMS: NavItem[] = [
-  { href: "/", key: "home", dockKey: "home", icon: House },
+  { href: "/", key: "home", dockKey: "homeShort", icon: House },
   { href: "/building", key: "building", dockKey: "building", icon: Package },
   { href: "/writing", key: "writing", dockKey: "writing", icon: PenLine },
   { href: "/world", key: "world", dockKey: "world", icon: Globe },
