@@ -1,6 +1,6 @@
 # sagdi.com launch checklist
 
-Last updated: 2026-11-02
+Last updated: 2026-11-03
 Legend: [x] done  [ ] not done
 
 Finish line: zero grey "sample" chips on any page, in en, ru and uz. Then go live.
@@ -22,6 +22,34 @@ Cold start (new session): read REFERENCE at the bottom first.
 ---
 
 # IN PROGRESS
+
+## Home, nav, Write and Russian font pass (2026-11-03)
+
+- [x] ru and uz home heading and lede from Sagdi (`home.titleLine1`, `home.lede`)
+- [x] ru font: Hanken Grotesk has no basic Cyrillic, so Russian fell back to Arial. ru now uses
+      Onest from a local file (`src/app/fonts/Onest-Variable.woff2`, OFL in `Onest-License.txt`,
+      loaded in `fonts/onest.ts`), switched on by `html:lang(ru)` in `globals.css`; `<body>` reads
+      `var(--font-sans)` (no `font-sans` class). `size-adjust: 93.5%` so Russian letters are as tall
+      as Hanken's (x-height 527 vs 493). en and uz never download it
+- [ ] uz: the `ʻ` letter has no glyph in Hanken and shows in Arial (asked Sagdi)
+- [ ] ru: the → arrow is shorter in Onest than in Hanken (asked Sagdi)
+- [x] Pages renamed: en Projects / Writings (menu, page label, back link); ru Проекты / Записи /
+      Мой мир (menu, page label), home "Новая запись"; uz Loyihalar / Shaxsiy fikrlarim / Dunyom
+      (menu only). uz World heading and search title: "Dunyoyimni tashkil etuvchi qolgan barcha narsa."
+- [x] Phone dock: own short Writing label `nav.writingShort` (uz "Fikrlarim", en/ru same as full);
+      each item as wide as its label plus an equal share of the spare room, labels never wrap;
+      dock 14px from the screen edges (was 16px). Checked 320, 360, 390
+- [x] Write: subscribe text drops its last sentence ("That's the whole pitch.", ru, uz too); lede
+      shortened (en, ru, uz); filter pill "All" in all three languages
+- [ ] Write search description `meta.pages.writing.description` still has the old long text
+      (asked Sagdi)
+- [x] Home: phone heading shrinks with the screen so the en line fits on one line (21px at 320 up
+      to 28px at 430; wider screens unchanged); lede moved to its own section after Photography;
+      Currently card: labels removed, bullets in the live dot's column, hairline between items
+      (`.cur-list`); `currently.buildingLabel` / `exploringLabel` deleted
+- [x] Checked: typecheck, lint, build in a copy; headless en, ru, uz at phone and desktop, light
+      and dark
+- [x] Commit
 
 ## Product icons and uz/ru label fixes (2026-11-02)
 
@@ -226,6 +254,8 @@ work form, 404). Still waiting on Sagdi's review of the judgment calls at the bo
     (matches `main`). Keep, or Latin everywhere?
   - Nav/section labels ru: Проекты / Заметки / Мир (uz: Loyihalar / Yozuvlar / Dunyo). These read
     as nouns, not the English verbs Build/Write. OK, or prefer verb-style (Делаю / Пишу)?
+    Decided by Sagdi 2026-11-03: ru Проекты / Записи / Мой мир, uz Loyihalar / Shaxsiy fikrlarim /
+    Dunyom, en Projects / Writings
   - Tone ru: informal "ты" on reader-facing pages (home, write, products), polite "вы" on the work
     page + contact form. OK?
   - Slogan "building in public": ru "строю у всех на виду", uz "ochiq quraman". Keep, reword, or

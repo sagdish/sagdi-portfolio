@@ -17,6 +17,7 @@ import { BottomDock } from "@/components/shell/bottom-dock"
 import { TopPill } from "@/components/shell/top-pill"
 import { UtilBar } from "@/components/shell/util-bar"
 import { ScrollReset } from "@/components/shell/scroll-reset"
+import { onest } from "@/app/fonts/onest"
 
 const hanken = Hanken_Grotesk({
   subsets: ["latin"],
@@ -122,9 +123,9 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       suppressHydrationWarning
-      className={`${hanken.variable} ${jetbrains.variable}`}
+      className={`${hanken.variable} ${onest.variable} ${jetbrains.variable}`}
     >
-      <body className="font-sans antialiased">
+      <body className="antialiased">
         <JsonLd data={structuredData} />
         <NextTopLoader color="#4686eb" height={2} showSpinner={false} />
 

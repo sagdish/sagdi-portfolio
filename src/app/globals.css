@@ -192,6 +192,13 @@
   --destructive: oklch(0.704 0.191 22.216);
 }
 
+/* Hanken Grotesk has no basic Cyrillic, so Russian uses Onest for all its text
+   (loaded in [locale]/layout.tsx). Body reads var(--font-sans), so this one token does it. */
+html:lang(ru) {
+  --font-sans:
+    var(--font-onest), ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
 /* ── Base ──────────────────────────────────────────────────────────────────── */
 @layer base {
   * {

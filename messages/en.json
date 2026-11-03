@@ -30,8 +30,9 @@
   "nav": {
     "home": "Home",
     "homeShort": "Home",
-    "building": "Build",
-    "writing": "Write",
+    "building": "Projects",
+    "writing": "Writings",
+    "writingShort": "Writings",
     "world": "World",
     "work": "Work with me",
     "workShort": "Work",
@@ -49,7 +50,7 @@
   },
   "home": {
     "name": "Sagdi Formanov",
-    "titleLine1": "Technologist and creator",
+    "titleLine1": "Product - Reflection & creation",
     "lede": "Figuring things out. I'm trying to understand things, build what matters, and keep learning",
     "photography": {
       "label": "Photography",
@@ -62,7 +63,7 @@
       "nextPhoto": "Next photo"
     },
     "listening": {
-      "label": "Currently listening",
+      "label": "Playlist",
       "telegram": "Telegram"
     },
     "latest": {
@@ -70,9 +71,7 @@
     },
     "currently": {
       "heading": "Currently",
-      "buildingLabel": "Building",
       "buildingText": "Shipping a public hub, keeping <reguself>ReguSelf</reguself> moving, and running my life out of a personal OS.",
-      "exploringLabel": "Exploring",
       "exploringText": "A YouTube transcription and visualization tool"
     },
     "elsewhere": {
@@ -85,7 +84,7 @@
     }
   },
   "building": {
-    "eyebrow": "Build",
+    "eyebrow": "Projects",
     "title": "What I'm making and working on.",
     "lede": "Product, software, AI, experiments, and the work behind them.",
     "readMore": "Read more",
@@ -94,7 +93,7 @@
     "statusProgress": "In progress",
     "statusPreStart": "Pre-start",
     "statusParked": "Parked",
-    "back": "Back to Build",
+    "back": "Back to Projects",
     "github": "GitHub",
     "sections": {
       "what": "What it is",
@@ -114,14 +113,14 @@
     }
   },
   "writing": {
-    "eyebrow": "Write",
+    "eyebrow": "Writings",
     "title": "Things I'm trying to understand.",
-    "lede": "Psychology, technology, people, culture, and whatever keeps occupying my head long enough to become a thought worth writing down.",
+    "lede": "Psychology, technology, people, culture, and whatever keeps occupying my head.",
     "all": "All",
-    "back": "Back to Write",
+    "back": "Back to Writings",
     "subscribe": {
       "heading": "Subscribe.",
-      "text": "Get new essays and builds in your inbox. That's the whole pitch.",
+      "text": "Get new essays and builds in your inbox.",
       "hint": "prototype · not wired to a backend yet",
       "button": "Subscribe",
       "ok": "You're on the list ✓  (prototype, nothing was actually sent)",

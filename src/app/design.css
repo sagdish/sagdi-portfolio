@@ -630,8 +630,8 @@
 /* Bottom dock — mobile nav as a FLOATING GLASS PILL. Hidden ≥ 880px. */
 .dock {
   position: fixed;
-  left: 16px;
-  right: 16px;
+  left: 14px;
+  right: 14px;
   bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   z-index: 50;
   display: flex;
@@ -663,11 +663,14 @@
       rgba(255, 255, 255, 0) 62%
     );
 }
+/* Each item is as wide as its label plus an equal share of the spare room, so long
+   labels (uz LOYIHALAR, FIKRLARIM) never collide and short ones (HOME, ISH) don't float. */
 .dock a {
   position: relative;
   z-index: 1;
-  flex: 1 1 0;
+  flex: 1 1 auto;
   min-width: 0;
+  white-space: nowrap;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -785,11 +788,19 @@
   margin: 14px 0 0;
   font-weight: 700;
 }
-.hero .lede {
+/* Phones: shrinks with the screen so the en line ("Product - Reflection & creation")
+   stays on one line down to 320px. */
+@media (max-width: 640px) {
+  .hero h1 {
+    font-size: min(28px, calc(7.3vw - 2.4px));
+  }
+}
+/* Home lede: its own section, right after Photography. */
+.lede {
   font-size: clamp(16px, 2.4vw, 19px);
   color: var(--muted);
   max-width: 46ch;
-  margin: 16px 0 0;
+  margin: 0;
 }
 .cta {
   display: flex;
@@ -843,7 +854,7 @@
   color: var(--faint);
 }
 
-/* Currently card (home): the nowcard pattern extended to a heading + rows. */
+/* Currently card (home): the nowcard pattern extended to a heading + a list. */
 .nowcard.currently {
   display: block;
 }
@@ -856,17 +867,35 @@
 .cur-head .livedot {
   margin-top: 0;
 }
-.nowcard .row {
-  display: flex;
-  gap: 12px;
-  align-items: baseline;
+/* Bullets sit in the live dot's column (8px dot + 10px gap = 18px), so each item's
+   text starts where the heading text starts; wrapped lines hang under the text.
+   A hairline separates the items. */
+.cur-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
-.nowcard .row + .row {
-  margin-top: 10px;
+.cur-list li {
+  position: relative;
+  padding-left: 18px;
 }
-.nowcard .row .lbl {
-  flex-shrink: 0;
-  min-width: 86px;
+.cur-list li::before {
+  content: "";
+  position: absolute;
+  left: 1.5px;
+  top: calc(0.8em - 2.5px);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--faint);
+}
+.cur-list li + li {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.cur-list li + li::before {
+  top: calc(12px + 0.8em - 2.5px);
 }
 
 /* ── Section headers ───────────────────────────────────────────────────────── */

@@ -35,7 +35,6 @@ export default async function HomePage({
       <Reveal className="hero">
         <div className="eyebrow hero-name">{t("name")}</div>
         <h1>{t("titleLine1")}</h1>
-        <p className="lede">{t("lede")}</p>
       </Reveal>
 
       {latest && (
@@ -54,9 +53,8 @@ export default async function HomePage({
           <span className="livedot" />
           <h2 className="lbl">{t("currently.heading")}</h2>
         </div>
-        <div className="row">
-          <span className="lbl">{t("currently.buildingLabel")}</span>
-          <div>
+        <ul className="cur-list">
+          <li>
             {t.rich("currently.buildingText", {
               reguself: (chunks) => (
                 <a href="https://reguself.com" target="_blank" rel="noopener">
@@ -64,12 +62,9 @@ export default async function HomePage({
                 </a>
               ),
             })}
-          </div>
-        </div>
-        <div className="row">
-          <span className="lbl">{t("currently.exploringLabel")}</span>
-          <div>{t("currently.exploringText")}</div>
-        </div>
+          </li>
+          <li>{t("currently.exploringText")}</li>
+        </ul>
       </Reveal>
 
       <Reveal className="section">
@@ -94,6 +89,10 @@ export default async function HomePage({
             }}
           />
         </div>
+      </Reveal>
+
+      <Reveal className="section">
+        <p className="lede">{t("lede")}</p>
       </Reveal>
 
       <Reveal className="section">

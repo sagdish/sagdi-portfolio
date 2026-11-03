@@ -23,7 +23,7 @@ export type NavItem = {
 export const NAV_ITEMS: NavItem[] = [
   { href: "/", key: "home", dockKey: "homeShort", icon: House },
   { href: "/building", key: "building", dockKey: "building", icon: Package },
-  { href: "/writing", key: "writing", dockKey: "writing", icon: PenLine },
+  { href: "/writing", key: "writing", dockKey: "writingShort", icon: PenLine },
   { href: "/world", key: "world", dockKey: "world", icon: Globe },
   { href: "/work", key: "work", dockKey: "workShort", icon: Briefcase },
 ]

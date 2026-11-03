@@ -18,7 +18,7 @@
         "description": "Psixologiya, texnologiya, odamlar, madaniyat va xayolimda yetarlicha uzoq aylanib, yozishga arziydigan fikrga aylangan narsalar."
       },
       "world": {
-        "title": "Dunyomning boshqa qirralari.",
+        "title": "Dunyoyimni tashkil etuvchi qolgan barcha narsa.",
         "description": "Musiqa, kino, avtomobillar, fotografiya, kitoblar, sanʼat, sayohat, tabiat, yakkakurash va ayni paytda meni qiziqtirayotgan narsalar."
       },
       "work": {
@@ -30,9 +30,10 @@
   "nav": {
     "home": "Bosh sahifa",
     "homeShort": "Home",
-    "building": "Yaratish",
-    "writing": "Yozish",
-    "world": "Dunyo",
+    "building": "Loyihalar",
+    "writing": "Shaxsiy fikrlarim",
+    "writingShort": "Fikrlarim",
+    "world": "Dunyom",
     "work": "Hamkorlik",
     "workShort": "Ish",
     "changeLanguage": "Tilni oʻzgartirish"
@@ -49,8 +50,8 @@
   },
   "home": {
     "name": "Sagdi Formanov",
-    "titleLine1": "Texnolog va ijodkor",
-    "lede": "Tushunishga, muhim narsalarni yaratishga va oʻrganishda davom etishga harakatdaman.",
+    "titleLine1": "Product. Fikrlash. Yaratish.",
+    "lede": "Oʻz yoʻlimni topib, atrofdagi jarayonlarni anglashga, muhim narsalarni yaratishga va oʻrganishga intilyapman.",
     "photography": {
       "label": "Fotografiya",
       "prev": "Oldingi suratlar",
@@ -62,21 +63,19 @@
       "nextPhoto": "Keyingi surat"
     },
     "listening": {
-      "label": "Hozir tinglayapman",
+      "label": "Playlist",
       "telegram": "Telegram"
     },
     "latest": {
-      "label": "Soʻnggi maqolalar"
+      "label": "Soʻnggi yozuvlar"
     },
     "currently": {
-      "heading": "Hozir",
-      "buildingLabel": "Yaratish",
-      "buildingText": "Saytimni ommaga ochyapman, <reguself>ReguSelf</reguself>ni yurityapman, hayotimni shaxsiy OSda boshqaryapman.",
-      "exploringLabel": "Izlanish",
+      "heading": "Hozirgi paytda",
+      "buildingText": "Sayt xab-ni ishga tushirish, <reguself>ReguSelf</reguself> loyihasini rivojlantirishda davom etish va hayotimni shaxsiy OS tizim orqali boshqarish.",
       "exploringText": "YouTube videolarini matnga aylantirish va vizuallashtirish vositasi."
     },
     "elsewhere": {
-      "label": "Yana qayerda",
+      "label": "boshqa sahifalar",
       "linkedin": "LinkedIn",
       "github": "GitHub",
       "instagram": "Instagram",
@@ -116,12 +115,12 @@
   "writing": {
     "eyebrow": "Yozaman",
     "title": "Tushunishga urinayotgan mavzularim.",
-    "lede": "Psixologiya, texnologiya, odamlar, madaniyat va xayolimda yetarlicha uzoq aylanib, yozishga arziydigan fikrga aylangan narsalar.",
-    "all": "Hammasi",
+    "lede": "Psixologiya, texnologiya, odamlar, madaniyat va xayolimdan oʻtgan barcha narsalar haqida.",
+    "all": "All",
     "back": "Barcha yozuvlarga qaytish",
     "subscribe": {
       "heading": "Obuna boʻling.",
-      "text": "Yangi maqola va loyihalar haqida xabarlar pochtangizga keladi. Taklifim shu, xolos.",
+      "text": "Yangi maqola va loyihalar haqida xabarlar pochtangizga keladi.",
       "hint": "prototip · hali serverga ulanmagan",
       "button": "Obuna boʻlish",
       "ok": "Roʻyxatdasiz ✓ (bu prototip, aslida hech qanday xabar yuborilmadi)",
@@ -134,7 +133,7 @@
   },
   "world": {
     "eyebrow": "Olamim",
-    "title": "Dunyomning boshqa qirralari.",
+    "title": "Dunyoyimni tashkil etuvchi qolgan barcha narsa.",
     "lede": "Musiqa, kino, avtomobillar, fotografiya, kitoblar, sanʼat, sayohat, tabiat, yakkakurash va ayni paytda meni qiziqtirayotgan narsalar.",
     "soon": "Tez orada. Hali pishyapti.",
     "areas": {
