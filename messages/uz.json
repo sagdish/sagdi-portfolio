@@ -72,8 +72,8 @@
     },
     "currently": {
       "heading": "Hozirgi paytda",
-      "buildingText": "Sayt xab-ni ishga tushirish, <reguself>ReguSelf</reguself> loyihasini rivojlantirishda davom etish va hayotimni shaxsiy OS tizim orqali boshqarish.",
-      "exploringText": "YouTube videolarini matnga aylantirish va vizuallashtirish vositasi."
+      "buildingText": "<reguself>ReguSelf</reguself>ni rivojlantiryapman, shaxsiy  OS yaratyapman va AI asosidagi mahsulotlarni sinab ko‘ryapman",
+      "exploringText": "YouTube videolarini matnga aylantirish va vizualizatsiya qilish skill"
     },
     "elsewhere": {
       "label": "boshqa sahifalar",

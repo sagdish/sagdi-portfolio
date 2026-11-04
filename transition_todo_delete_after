@@ -23,6 +23,14 @@ Cold start (new session): read REFERENCE at the bottom first.
 
 # IN PROGRESS
 
+## Home: Currently copy (2026-11-04)
+
+- [x] Both lines replaced with Sagdi's text in en/ru/uz (`home.currently.buildingText`,
+      `exploringText`); ReguSelf stays a link in all three (uz: "ReguSelf" of "ReguSelfni")
+- [x] Checked: 390 and 1280, light and dark, en/ru/uz (headless); typecheck, lint, build in a copy
+- [ ] UNVERIFIED: on a real phone
+- [x] Commit
+
 ## Home: intro line under the heading (2026-11-04)
 
 - [x] New line under "Product - Reflection & creation" from Sagdi (`home.intro`, en/ru/uz).
