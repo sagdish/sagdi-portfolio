@@ -1,6 +1,6 @@
 # sagdi.com launch checklist
 
-Last updated: 2026-11-03
+Last updated: 2026-11-04
 Legend: [x] done  [ ] not done
 
 Finish line: zero grey "sample" chips on any page, in en, ru and uz. Then go live.
@@ -22,6 +22,19 @@ Cold start (new session): read REFERENCE at the bottom first.
 ---
 
 # IN PROGRESS
+
+## iPhone: frosted glass on the dock and top pill (2026-11-04)
+
+- [x] Cause: `backdrop-filter: url(#liquid-glass) …` (the SVG lens) is accepted by Safari but it
+      draws no glass at all (WebKit bug 245510, still open). Chrome and Firefox draw it
+- [x] Fix: one `@supports (font: -apple-system-body)` block in `design.css` (WebKit-only font
+      keyword) gives `.dock` and `.topbar` the plain blur in Safari. Chrome and Firefox keep the
+      lens. Remove the block once Safari ships url() in backdrop-filter
+- [x] Checked: computed `backdrop-filter` in WebKit (plain blur) and Chromium (lens, unchanged),
+      en/ru/uz, light and dark; typecheck, lint, build in a copy
+- [ ] UNVERIFIED: the glass on a real iPhone (headless WebKit draws no backdrop blur at all).
+      Sagdi to check. Chrome and Firefox on iPhone (also WebKit) not tested
+- [ ] Commit
 
 ## Home, nav, Write and Russian font pass (2026-11-03)
 

@@ -704,6 +704,16 @@
   stroke-width: 2;
 }
 
+/* Safari draws no glass when backdrop-filter holds an SVG filter (WebKit bug 245510),
+   so it gets the plain blur. `-apple-system-body` is a WebKit-only font keyword.
+   Remove this block once Safari ships it. */
+@supports (font: -apple-system-body) {
+  .dock,
+  .topbar {
+    backdrop-filter: blur(13px) saturate(190%) brightness(1.05);
+  }
+}
+
 @media (prefers-reduced-transparency: reduce) {
   .dock,
   .topbar {
