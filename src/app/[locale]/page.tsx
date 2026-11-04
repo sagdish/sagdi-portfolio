@@ -35,6 +35,7 @@ export default async function HomePage({
       <Reveal className="hero">
         <div className="eyebrow hero-name">{t("name")}</div>
         <h1>{t("titleLine1")}</h1>
+        <p className="lede">{t("intro")}</p>
       </Reveal>
 
       {latest && (

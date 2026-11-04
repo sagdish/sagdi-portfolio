@@ -805,12 +805,18 @@
     font-size: min(28px, calc(7.3vw - 2.4px));
   }
 }
-/* Home lede: its own section, right after Photography. */
+/* Home lede: the intro line under the hero heading, and its own section after
+   Photography. Under the heading it sits 18px down, like .nf-sub under .nf-road,
+   and runs the full width (no 46ch cap). */
 .lede {
   font-size: clamp(16px, 2.4vw, 19px);
   color: var(--muted);
   max-width: 46ch;
   margin: 0;
+}
+.hero .lede {
+  margin-top: 18px;
+  max-width: none;
 }
 .cta {
   display: flex;

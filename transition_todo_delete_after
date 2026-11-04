@@ -23,6 +23,15 @@ Cold start (new session): read REFERENCE at the bottom first.
 
 # IN PROGRESS
 
+## Home: intro line under the heading (2026-11-04)
+
+- [x] New line under "Product - Reflection & creation" from Sagdi (`home.intro`, en/ru/uz).
+      Same `.lede` look as "Figuring things out..."; `.hero .lede` gives it an 18px gap (same as
+      `.nf-sub` under `.nf-road`) and full width (no 46ch cap; "Figuring things out..." keeps it)
+- [x] Checked: 390 and 1280, light and dark, en/ru/uz (headless); typecheck, lint, build in a copy
+- [ ] UNVERIFIED: on a real phone
+- [x] Commit
+
 ## iPhone: frosted glass on the dock and top pill (2026-11-04)
 
 - [x] Cause: `backdrop-filter: url(#liquid-glass) …` (the SVG lens) is accepted by Safari but it
