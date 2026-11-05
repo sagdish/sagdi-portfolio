@@ -24,7 +24,8 @@ Branch `rewamp2026` replaces `main` (live) at launch.
 - New route: add it to `NAV_ITEMS` (`components/shell/nav.ts`), `app/sitemap.ts` and `meta.pages.*`.
 - Copy: every user-visible string, aria-labels included, lives in `messages/{en,ru,uz}.json`.
 - Outside URLs: only in `content/links.ts`. Products: `content/products.ts`. Cross-folder imports use `@/*`.
-- Blog: Notion (`lib/notion.ts` via `lib/writing.ts`, sample posts as fallback). Photos: R2 (`lib/photos.ts`),
+- Blog: Notion only (`lib/notion.ts` via `lib/writing.ts`). No sample posts: if Notion can't be reached,
+  the Writing list is empty and a post page 404s. Photos: R2 (`lib/photos.ts`),
   managed with `photo-manager/`, never by hand. Contact: `api/contact/route.ts` (Resend).
   Env vars: `env.local.template`.
 - `legacy/` is the old site plus the old status doc, frozen and excluded from the build. Don't touch
@@ -32,8 +33,8 @@ Branch `rewamp2026` replaces `main` (live) at launch.
 
 ## Content and languages
 
-- Unfinished copy is marked: a `.sample` chip, `placeholder: true` on a product, or a sample post
-  (`isSamplePost`). Remove the marker only when Sagdi gives the real words.
+- Unfinished copy is marked with the `.sample` chip: `placeholder: true` on a product shows it.
+  Remove the marker only when Sagdi gives the real words.
 - Product facts come from the OS `PRODUCTS/*/overview.md`, one piece at a time, with his approval.
   Old-site copy is reused only sentence by sentence, with his approval.
 - A screenshot or text he shows is the spec: put it in the target file directly. Never search the repo
@@ -53,7 +54,8 @@ Branch `rewamp2026` replaces `main` (live) at launch.
 - Every page has its own canonical plus hreflang en, ru, uz and x-default (`localeAlternates`).
 - The link-preview image is rendered per language from messages (`[locale]/opengraph-image.tsx`).
 - Posts are language-agnostic: one unprefixed canonical, no hreflang, no `inLanguage`.
-- Placeholders never reach search: sample posts are `noindex` and left out of `sitemap.ts`.
+- `sitemap.ts` lists the posts Notion returns (none if Notion is down). There are no sample posts
+  and no `noindex` rule for posts.
 
 ## Design system
 
