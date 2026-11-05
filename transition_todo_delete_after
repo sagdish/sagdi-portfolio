@@ -36,6 +36,10 @@ Cold start (new session): read REFERENCE at the bottom first.
       text color on hover like the footer links; placeholder and sample chip removed. Checked
       390 and 1280, light and dark, en/ru/uz (headless); typecheck, lint, build in a copy
 - [x] Commit the email change
+- [x] PSPO I card: the ribbon tile is replaced by Sagdi's badge image (`public/certs/pspo-i.png`,
+      moved from the project root; `.cert-badge`, 44px, alt = the card title). Checked 390 and 1280,
+      light and dark, en/ru/uz (headless); typecheck, lint, build in a copy
+- [x] Commit the badge change
 - [ ] ru, uz: the new Work strings mirror en (waiting on translations)
 - [ ] Found: the form's honeypot input (`.cform-hp`) reaches 15px past the right edge at 390
       (document scrollWidth 405). Pre-existing, not touched

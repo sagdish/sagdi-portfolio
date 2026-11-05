@@ -1797,16 +1797,13 @@
   text-decoration: none;
   transition: color var(--dur-fast);
 }
-/* Icon tile on the certificate card: the accent wash used for active nav. */
-.cert-icon {
-  display: grid;
-  place-items: center;
+/* The certificate's own badge image on the certificate card, same 44px slot as
+   the product mark in .card-head. Not clipped: the badge has its own round edge. */
+.cert-badge {
+  display: block;
   flex-shrink: 0;
   width: 44px;
   height: 44px;
-  border-radius: var(--r-ctl);
-  background: var(--accent-soft);
-  color: var(--accent);
 }
 
 /* ── Elsewhere / prose ─────────────────────────────────────────────────────── */

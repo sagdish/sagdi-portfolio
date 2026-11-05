@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
-import { Award, Briefcase, Handshake } from "lucide-react"
+import Image from "next/image"
+import { Briefcase, Handshake } from "lucide-react"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { ContactForm } from "@/components/ui/contact-form"
 import { Reveal } from "@/components/ui/reveal"
@@ -62,9 +63,13 @@ export default async function WorkPage({
         </p>
         <a className="card" href={LINKS.pspo} target="_blank" rel="noopener">
           <div className="card-head">
-            <span className="cert-icon">
-              <Award size={22} aria-hidden />
-            </span>
+            <Image
+              className="cert-badge"
+              src="/certs/pspo-i.png"
+              alt={t("cert.title")}
+              width={88}
+              height={88}
+            />
             <div>
               <h2>{t("cert.title")}</h2>
               <p>{t("cert.issuer")}</p>
