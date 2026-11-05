@@ -95,7 +95,8 @@ first minutes after go-live, since Instant Rollback undoes a bad deploy in secon
 - [ ] Home carousel on a phone: the first photos show fast, swiping loads the rest, the video plays
 - [ ] Frosted glass on the dock and top pill on a real iPhone (headless WebKit draws no blur)
 - [ ] Contact form: a real email arrives, subject "sagdi.com: New message from ..." **(preview)**
-- [ ] Inbox the contact form sends to (`CONTACT_TO_EMAIL`). Checked 2026-11-05: the sender
+- [x] Moved to Later (C) by Sagdi, 2026-11-05: "okay for now". Inbox the contact form sends to
+      (`CONTACT_TO_EMAIL`). Checked 2026-11-05: the sender
       (`CONTACT_FROM_EMAIL`) is on `resend.dev`, Resend's test address, and no domain of yours
       has Resend's DNS records. With that sender Resend only delivers to the email of your Resend
       account ([Resend](https://resend.com/docs/knowledge-base/403-error-resend-dev-domain)).
@@ -126,8 +127,8 @@ pages in en, ru, uz). Decide for each below: blocker or Later **(you)**
       under 160 characters. Checked in the dev server and a production build: title, description,
       link-preview and Twitter text match on all 12 pages; page headings unchanged. Home
       (`meta.default`) not touched
-- [ ] ru and uz: your review of the open judgment calls (Cyrillic name, ты/вы split, slogan) and a
-      native Uzbek proofread
+- [x] ru and uz: the open judgment calls (Cyrillic name, ты/вы split, slogan) and the native Uzbek
+      proofread. Sagdi OK'd them as they are (2026-11-05)
 - [x] Work page in ru and uz: Sagdi OK'd it as it is (2026-11-05), including the labels that stay in
       English ("Product opportunities", "Collaboration", "Certified")
 - [x] Photo alt text: written 2026-11-05 for all 20 home items (19 photos, 1 video), English, in
@@ -207,6 +208,10 @@ From Sagdi:
 - [ ] Verify `sagdi.com` in Resend (moved from A.5 on 2026-11-05): Resend → Domains → Add → DNS
       records into GoDaddy, then `CONTACT_FROM_EMAIL` on sagdi.com. Needed before Subscribe can
       email anyone but you
+- [ ] Contact inbox (moved from A.5 on 2026-11-05, Sagdi: "okay for now"): `CONTACT_TO_EMAIL` has
+      to be your Resend login email while the sender is on `resend.dev` (or verify sagdi.com, line
+      above). If it isn't, Resend refuses every message and visitors see the form's error text
+      ("Try again, or reach me on LinkedIn")
 
 Suggested (move up, keep or drop):
 
@@ -291,4 +296,5 @@ this."). Later option: email new Notion posts automatically (needs an RSS feed o
 - Cloudflare R2 public buckets (r2.dev is for development): https://developers.cloudflare.com/r2/buckets/public-buckets/
 - Google, language versions (hreflang): https://developers.google.com/search/docs/specialty/international/localized-versions
 - Core Web Vitals thresholds: https://web.dev/articles/vitals
-- Full audit write-up: https://claude.ai/artifact/1niNnGSmyCHbzoy9nu7U6G
+- Full audit write-up (2026-11-05): a private page in Sagdi's Claude account. Not linked here,
+  because this repo is public
