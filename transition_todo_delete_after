@@ -370,20 +370,26 @@ Production build of `ce79fd1` in a copy, Lighthouse 12 + headless Chromium/WebKi
 
 - [x] Brave on iPhone errors (`window.ethereum`, `window.__firefox__`) come from Brave's own
       scripts, not the site; seen only in `npm run dev` over http. Brave bug 58670, fixed in 1.100
-- [x] typecheck, lint, build pass; 0 layout shift in 80 browser runs; hreflang en/ru/uz/x-default
-      complete and reciprocal on every page; 0 `sample` chips on the 36 sitemap pages
+- [x] typecheck, lint, build pass; 0 layout shift in 80 fast browser runs (0.033 at most on a
+      slow connection); hreflang en/ru/uz/x-default complete and reciprocal on every page;
+      0 `sample` chips on the 36 sitemap pages
 - [ ] Next.js 15.4.8 has 33 security advisories (3 critical); first fixed 15.x is 15.5.28
       (live `main` is on the same version)
 - [ ] `/apple-icon` (iPhone home-screen icon) returns 404: middleware rewrites it to
       `/en/apple-icon` (matcher only skips paths with a dot)
-- [ ] Home on a phone: Lighthouse 67, LCP 5.9 s. Carousel photos are `unoptimized` (full size),
-      the first one is lazy, and home loads 2.2 MB (847 KB video)
+- [ ] Home on a phone (en): first photo shows at 5.8 s on a slow connection (Lighthouse, real
+      throttling, 3 runs). The photos are already strip-sized (720px tall, 50 to 240 KB, blur
+      placeholder); the cause is the first photo being lazy (its download starts at 1.5 s) and 4
+      more photos (about 540 KB) downloading at the same time. The video isn't the cause (blocked:
+      same 5.8 s). Fix: carousel loads the on-screen photos first, the rest left to right
 - [ ] Photos come from `pub-…r2.dev`, which Cloudflare says is rate-limited and for development
-      only; needs a custom domain. UNVERIFIED: what Vercel production uses
+      only; a custom domain needs sagdi.com's DNS moved from GoDaddy to Cloudflare. Sagdi: ignore
+      for now (2026-11-05). UNVERIFIED: what Vercel production uses
 - [ ] Work page sideways scroll (above) still there: `.cform input { width: 100% }` beats
       `.cform-hp`
 - [ ] Notion post images are signed links that expire after 1 hour (`X-Amz-Expires=3600`);
-      likely a dead image for the first visitor after a quiet hour (not seen, reasoning only)
+      likely a dead image for the first visitor after a quiet hour (not seen, reasoning only).
+      Sagdi: ignore for now, moving the images to Cloudflare (2026-11-05)
 - [ ] Small-text contrast under 4.5:1 in light mode: `--faint` (4.06 to 4.35) and the blue accent
       as text (3.12 to 3.57); token change, needs Sagdi's yes. Dark mode not measured
 - [ ] Sitemap: ru and uz URLs have no `<url>` of their own; `lastmod` is the build time
