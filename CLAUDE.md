@@ -3,14 +3,17 @@
 Next.js 15 App Router, React 19, Tailwind v4, next-intl (en unprefixed, `/ru`, `/uz`), next-themes.
 Branch `rewamp2026` replaces `main` (live) at launch.
 
-## Status doc: `transition_todo_delete_after`
+## Checklist: `PREPRODUCTION.md`
 
-- Read it first. It holds the launch checklist (finish line: zero `sample` chips in en, ru, uz),
-  what's next and in what order, env vars, and how photos work.
-- Update it in the same commit as the work: tick boxes, add newly found work, move sections between
-  IN PROGRESS / NEXT / DONE, bump "Last updated". Never delete items. Keep its shape: checkboxes,
-  AT A GLANCE on top, REFERENCE at the bottom.
-- Sagdi often has it open in vim: re-read it right before editing.
+- Read it first. It holds what must be true before `main` goes live (blockers), the go-live steps
+  in order, the Later list, and the subscribe plan.
+- Update it in the same commit as the work: tick boxes, add newly found work to the right section,
+  bump "Last updated". Never delete items. Tag what needs Sagdi **(you)**, a Vercel preview
+  **(preview)**, or happens at go-live **(go-live)**.
+- The repo is public: no secrets, keys or private URLs in it.
+- Re-read it right before editing (Sagdi may have it open).
+- The old status doc `legacy/transition_todo_delete_after` is frozen: never update it. Its REFERENCE
+  section (env vars, how photos work) is read-only background.
 
 ## Map
 
@@ -24,7 +27,8 @@ Branch `rewamp2026` replaces `main` (live) at launch.
 - Blog: Notion (`lib/notion.ts` via `lib/writing.ts`, sample posts as fallback). Photos: R2 (`lib/photos.ts`),
   managed with `photo-manager/`, never by hand. Contact: `api/contact/route.ts` (Resend).
   Env vars: `env.local.template`.
-- `legacy/` is the old site, frozen and excluded from the build. Don't touch it.
+- `legacy/` is the old site plus the old status doc, frozen and excluded from the build. Don't touch
+  it. The go-live steps in `PREPRODUCTION.md` say what happens to it.
 
 ## Content and languages
 
