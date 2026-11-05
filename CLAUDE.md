@@ -1,19 +1,22 @@
 # sagdi.com: rules for every session
 
 Next.js 15 App Router, React 19, Tailwind v4, next-intl (en unprefixed, `/ru`, `/uz`), next-themes.
-Branch `rewamp2026` replaces `main` (live) at launch.
+`main` is the live site: the new site since go-live on 2026-11-05. The old site is kept in branch
+`pre-nov-2026-version`.
 
 ## Checklist: `PREPRODUCTION.md`
 
-- Read it first. It holds what must be true before `main` goes live (blockers), the go-live steps
-  in order, the Later list, and the subscribe plan.
+- Read it first. It holds the pre-launch blockers and go-live steps (live since 2026-11-05), the
+  checks right after go-live, the Later list, and the subscribe plan.
 - Update it in the same commit as the work: tick boxes, add newly found work to the right section,
   bump "Last updated". Never delete items. Tag what needs Sagdi **(you)**, a Vercel preview
   **(preview)**, or happens at go-live **(go-live)**.
 - The repo is public: no secrets, keys or private URLs in it.
 - Re-read it right before editing (Sagdi may have it open).
-- The old status doc `legacy/transition_todo_delete_after` is frozen: never update it. Its REFERENCE
-  section (env vars, how photos work) is read-only background.
+- The old status doc is frozen in branch `pre-nov-2026-version` at
+  `legacy/transition_todo_delete_after`: never update it. Its REFERENCE section (env vars, how photos
+  work) is read-only background:
+  `git show pre-nov-2026-version:legacy/transition_todo_delete_after`.
 
 ## Map
 
@@ -28,8 +31,8 @@ Branch `rewamp2026` replaces `main` (live) at launch.
   the Writing list is empty and a post page 404s. Photos: R2 (`lib/photos.ts`),
   managed with `photo-manager/`, never by hand. Contact: `api/contact/route.ts` (Resend).
   Env vars: `env.local.template`.
-- `legacy/` is the old site plus the old status doc, frozen and excluded from the build. Don't touch
-  it. The go-live steps in `PREPRODUCTION.md` say what happens to it.
+- The old site and the old status doc live only in branch `pre-nov-2026-version` (`legacy/` was
+  removed from `main` at go-live).
 
 ## Content and languages
 
@@ -93,7 +96,7 @@ Branch `rewamp2026` replaces `main` (live) at launch.
   running app at a phone width and a desktop width, in light and dark. Anything not run is UNVERIFIED.
 - Sagdi often runs `npm run dev` here, and it shares `.next`. Never run `next build` in this folder while
   that's running. Test builds go in a copy: rsync the repo (without `node_modules`, `.next`, `.git`,
-  `legacy`, `photos-src`) to a scratch dir, symlink `node_modules`, then build and start there on a free port.
+  `photos-src`) to a scratch dir, symlink `node_modules`, then build and start there on a free port.
   Other local apps run too (for example on 3100).
 - Headless checks only, never Sagdi's own Chrome or tabs. `playwright-core` is not a project dependency:
   install it in a scratch dir. A Chromium headless shell is cached in `~/Library/Caches/ms-playwright/`.

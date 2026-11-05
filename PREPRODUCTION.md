@@ -1,11 +1,13 @@
 # sagdi.com pre-production checklist
 
-Last updated: 2026-11-05. Branch `rewamp2026` replaces `main` (live) at go-live.
+Last updated: 2026-11-05. Live since 2026-11-05: `main` is the new site (it was `rewamp2026`); the
+old site is in branch `pre-nov-2026-version`.
 
 Legend: `[x]` checked and passing · `[ ]` open · **(you)** needs Sagdi · **(preview)** needs a Vercel
 preview deploy · **(go-live)** done during or right after go-live.
 
-This file replaces `transition_todo_delete_after` (moved to `legacy/`, frozen). Tick items in the
+This file replaces `transition_todo_delete_after` (frozen, kept in branch `pre-nov-2026-version`
+under `legacy/`). Tick items in the
 same commit as the work. The GitHub repo is public: anyone can read this file, so never put secrets,
 keys or private URLs here.
 
@@ -176,7 +178,9 @@ pages in en, ru, uz). Decide for each below: blocker or Later **(you)**
 
 ## B. Go-live steps, in order
 
-1. Clear section A.
+1. Clear section A. At go-live (2026-11-05, Sagdi: "just push to prod") the preview look was still
+   open: photos on the preview, the phone pass, analytics on Preview. Those are checked on
+   sagdi.com right after go-live instead (step 5).
 2. Push `rewamp2026` to GitHub (it is 10+ commits ahead). Vercel builds a preview; run every
    **(preview)** item on it. Done 2026-11-05 on Sagdi's "push": GitHub refused twice with
    "remote: fatal error in commit_refs" (its status page was green), the third try went through.
@@ -193,8 +197,23 @@ pages in en, ru, uz). Decide for each below: blocker or Later **(you)**
       purpose to fix a Vercel build, commit `062d773`) and `react-dom` (Next needs it). Update the
       two `CLAUDE.md` lines that point into `legacy/` (the old status doc lives on only in
       `pre-nov-2026-version`). Then typecheck, lint, build, browser runs.
+   - Done 2026-11-05, names as Sagdi said ("make current branch main, and main rename to
+     pre-nov-2026-version"). Step 3.2 is commit `97246b4` on `pre-nov-2026-version`: only
+     `legacy/README.md` and `legacy/transition_todo_delete_after` (the other 50 legacy files were
+     checked identical to that branch's own files; 5 macOS `.DS_Store` files left out). Step 3.4 is
+     this commit on `main`: `legacy/` deleted (57 files); the 3 packages removed from
+     `package.json` and the lock (10 lock entries gone, no other version changed); `legacy`
+     dropped from `tsconfig.json`, `eslint.config.mjs`, `.prettierignore`; CLAUDE.md updated.
+     Checked in a scratch copy with a fresh `npm ci`: typecheck, lint, build (53 static pages),
+     search tags and noindex, all 18 old addresses, 40 Chromium and 40 WebKit runs with no errors
+     besides the two Vercel-only scripts (WebKit needed a longer wait on `/writing/pspo`: the
+     post's image from Notion's S3 is slow from here)
 4. Push. `main` on GitHub fast-forwards (checked: the old `main` is fully inside this branch's
-   history, so no force push). Production deploys. Also push `pre-nov-2026-version`.
+   history, so no force push). Production deploys. Also push `pre-nov-2026-version`. Order on
+   2026-11-05: `pre-nov-2026-version` first, then `main`.
+   - Keep the go-live deployment as the latest production deployment until Sagdi confirms the
+     site: on Hobby, Instant Rollback only goes back one deployment, so another push to `main`
+     would make the old site unreachable by rollback
 5. Right after: sagdi.com loads; old URLs redirect; `sitemap.xml` and `robots.txt` load; Web
    Analytics and Speed Insights show data; Telegram and LinkedIn previews; Google Search Console:
    submit the sitemap and check the en/ru/uz pairs. Optional: to hide the old contact page

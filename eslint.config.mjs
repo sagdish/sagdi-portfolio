@@ -10,8 +10,6 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  // Frozen old site under /legacy — reference only, never linted.
-  { ignores: ["legacy/**"] },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 

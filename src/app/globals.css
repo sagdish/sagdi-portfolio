@@ -8,8 +8,8 @@
    DRY: the prototype token names are canonical; shadcn's semantic aliases resolve
    FROM them (so reused shadcn primitives inherit Codex + blue for free).
 
-   Source scanning is scoped to src/ (source("../")) so the frozen /legacy site
-   never emits utilities into the build.
+   Source scanning is scoped to src/ (source("../")) so nothing outside src/
+   (photo-manager, scripts) emits utilities into the build.
    ───────────────────────────────────────────────────────────────────────────── */
 @import "tailwindcss" source("../");
 
