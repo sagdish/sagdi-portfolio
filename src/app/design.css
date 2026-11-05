@@ -123,19 +123,12 @@
   color: var(--text);
   padding: 4px 6px 14px;
 }
+/* The SF logo image (BrandMark); it carries its own blue square and rounded corners. */
 .brand-sq {
+  display: block;
   height: 28px;
   width: 28px;
   flex-shrink: 0;
-  display: grid;
-  place-items: center;
-  background: var(--accent);
-  color: var(--accent-fg);
-  border-radius: var(--r-sm);
-  font-weight: 700;
-  font-size: 13px;
-  line-height: 1;
-  font-family: var(--font-mono);
 }
 .brand-text {
   display: flex;
@@ -460,7 +453,6 @@
 .tb-home .brand-sq {
   height: 26px;
   width: 26px;
-  font-size: 12px;
 }
 .tb-name {
   font-family: var(--font-mono);

@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
 import { LanguageSwitcher } from "@/components/layout/language-switcher"
 import { cn } from "@/lib/utils"
+import { BrandMark } from "./brand-mark"
 import { SubscribeButton } from "./subscribe-button"
 import { ThemeControl } from "./theme-control"
 
@@ -66,7 +67,7 @@ export function TopPill() {
   return (
     <header className={cn("topbar", show && "show")}>
       <Link className="tb-home" href="/" aria-label={tn("home")}>
-        <span className="brand-sq">S</span>
+        <BrandMark />
       </Link>
       <span className="tb-name">SAGDI</span>
       <button

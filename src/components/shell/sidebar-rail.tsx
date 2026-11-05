@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 import { Link, usePathname } from "@/i18n/navigation"
 import { LanguageSwitcher } from "@/components/layout/language-switcher"
 import { cn } from "@/lib/utils"
+import { BrandMark } from "./brand-mark"
 import { NAV_ITEMS, isActivePath } from "./nav"
 import { RailPet } from "./rail-pet"
 import { SubscribeButton } from "./subscribe-button"
@@ -21,7 +22,7 @@ export function SidebarRail() {
   return (
     <aside className="rail">
       <Link className="brand" href="/">
-        <span className="brand-sq">S</span>
+        <BrandMark />
         <span className="brand-text">
           <span className="brand-name">SAGDI</span>
           <span className="brand-tag">{ts("brandTag")}</span>

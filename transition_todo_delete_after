@@ -23,6 +23,20 @@ Cold start (new session): read REFERENCE at the bottom first.
 
 # IN PROGRESS
 
+## SF logo replaces the "S" tile (2026-11-05)
+
+- [x] `main`'s logo (`public/chrome.png`, blue rounded square with "SF") copied to
+      `public/logo.png`; one `BrandMark` component (`components/shell/brand-mark.tsx`) used in the
+      rail, the top pill and the phone top bar. `.brand-sq` is now just the image size (28px in the
+      rail, 26px in the top bar and pill); the old S tile styles are gone
+- [x] Decorative (`alt=""`): each link already has its own name ("SAGDI" text or aria-label)
+- [x] Checked: 390 and 1280, light and dark, en/ru/uz (headless), rail, top bar and top pill after
+      scroll; typecheck, lint, build in a copy
+- [ ] Not changed (not asked): `apple-icon.tsx` still draws the "S" for the iOS home-screen icon
+- [ ] UNVERIFIED: on a real phone
+- [x] Commit
+- [x] uz `brandTag` set to "building in public", same as en and ru
+
 ## Playlist moved to World, Work page additions (2026-11-04)
 
 - [x] Playlist section (Telegram music chip) moved from home to World, above the dough graphic;
