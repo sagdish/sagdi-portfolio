@@ -151,12 +151,15 @@ pages in en, ru, uz). Decide for each below: blocker or Later **(you)**
       WebSite, CreativeWork, BlogPosting with image); preview image per language
 - [x] Work page kept out of Google (Sagdi's call, 2026-11-05): `noindex, follow` on `/work`,
       `/ru/work`, `/uz/work`, and left out of the sitemap. `robots.txt` still allows it, because
-      Google has to read the noindex. Link previews still work. The old live `/contact` and
-      `/about` (indexable today) redirect there, so Google drops them too, the next time it
-      visits them after go-live. Checked in the dev server and a production build: noindex on
+      Google has to read the noindex. Link previews still work. The old live `/contact`
+      (indexable today) redirects there, so Google drops it too, the next time it visits it
+      after go-live. The old `/about` used to redirect there as well; it now goes to home
+      (Sagdi, 2026-11-05), so it keeps its place in Google. Checked in the dev server and a production build: noindex on
       the 3 Work pages only, every other page still `index, follow`
 - [x] Old live URLs (`/blog`, `/blog/:slug`, `/about`, `/contact`, `/projects`, `/hub`, ru and uz
-      too) reach the new page in one redirect (local build)
+      too) reach the new page in one redirect (local build). `/about` → home since 2026-11-05
+      (was Work). Re-checked that day in a production build: all 18 (en, ru, uz) reach a 200
+      page in one redirect
 - [x] 404 page in all 3 languages, status 404, inside the site shell
 - [x] iPhone home-screen icon loads (was 404), commit `9490949`
 - [x] Work page no longer slides sideways at 390 and 1280
@@ -186,7 +189,7 @@ pages in en, ru, uz). Decide for each below: blocker or Later **(you)**
    Analytics and Speed Insights show data; Telegram and LinkedIn previews; Google Search Console:
    submit the sitemap and check the en/ru/uz pairs. Optional: to hide the old contact page
    sooner than Google's next visit, Search Console → Removals → `https://sagdi.com/contact`
-   (and `/about`, plus their `/ru/` and `/uz/` versions) **(you)**
+   (plus `/ru/contact` and `/uz/contact`) **(you)**
 6. If something breaks: Vercel → sagdi-site → Instant Rollback. On Hobby it goes back to the
    previous production deployment only. After a rollback, pushes to `main` don't go live until
    you press "Undo Rollback". The old code stays in `pre-nov-2026-version`; the exact old live

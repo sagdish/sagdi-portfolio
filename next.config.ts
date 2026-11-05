@@ -7,7 +7,9 @@ const REDIRECTS: [string, string][] = [
   ["/projects", "/building"],
   ["/blog", "/writing"],
   ["/blog/:slug", "/writing/:slug"],
-  ["/about", "/work"],
+  // About → home, not Work: Work is kept out of Google, and home is the about-me
+  // page now, so the old About keeps its place in search (Sagdi, 2026-11-05).
+  ["/about", "/"],
   ["/contact", "/work"],
   ["/hub", "/building"],
 ]
@@ -45,7 +47,8 @@ const nextConfig: NextConfig = {
       { source: from, destination: to, permanent: true },
       {
         source: `/:locale(ru|uz)${from}`,
-        destination: `/:locale${to}`,
+        // "/" goes to "/ru", not "/ru/", which would need a second redirect
+        destination: to === "/" ? "/:locale" : `/:locale${to}`,
         permanent: true,
       },
     ])
