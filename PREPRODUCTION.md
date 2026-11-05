@@ -128,8 +128,9 @@ pages in en, ru, uz). Decide for each below: blocker or Later **(you)**
    3. Rename `rewamp2026` → `main`.
    4. On the new `main`: delete `legacy/`; remove the packages only `legacy/` used (`motion`,
       `svg-dotted-map`, `@radix-ui/react-navigation-menu`). Keep `lightningcss` (added on
-      purpose to fix a Vercel build, commit `062d773`) and `react-dom` (Next needs it). Then
-      typecheck, lint, build, browser runs.
+      purpose to fix a Vercel build, commit `062d773`) and `react-dom` (Next needs it). Update the
+      two `CLAUDE.md` lines that point into `legacy/` (the old status doc lives on only in
+      `pre-nov-2026-version`). Then typecheck, lint, build, browser runs.
 4. Push. `main` on GitHub fast-forwards (checked: the old `main` is fully inside this branch's
    history, so no force push). Production deploys. Also push `pre-nov-2026-version`.
 5. Right after: sagdi.com loads; old URLs redirect; `sitemap.xml` and `robots.txt` load; Web
