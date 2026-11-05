@@ -363,6 +363,33 @@ work form, 404). Still waiting on Sagdi's review of the judgment calls at the bo
 - [ ] Blog post lists (`.article-body ul/ol`) show no bullets or numbers: Tailwind's preflight
       strips them (found 2026-10-10)
 
+## Site health audit (2026-11-05)
+
+Production build of `ce79fd1` in a copy, Lighthouse 12 + headless Chromium/WebKit, 390 and
+1280, light and dark. Full write-up: https://claude.ai/artifact/1niNnGSmyCHbzoy9nu7U6G
+
+- [x] Brave on iPhone errors (`window.ethereum`, `window.__firefox__`) come from Brave's own
+      scripts, not the site; seen only in `npm run dev` over http. Brave bug 58670, fixed in 1.100
+- [x] typecheck, lint, build pass; 0 layout shift in 80 browser runs; hreflang en/ru/uz/x-default
+      complete and reciprocal on every page; 0 `sample` chips on the 36 sitemap pages
+- [ ] Next.js 15.4.8 has 33 security advisories (3 critical); first fixed 15.x is 15.5.28
+      (live `main` is on the same version)
+- [ ] `/apple-icon` (iPhone home-screen icon) returns 404: middleware rewrites it to
+      `/en/apple-icon` (matcher only skips paths with a dot)
+- [ ] Home on a phone: Lighthouse 67, LCP 5.9 s. Carousel photos are `unoptimized` (full size),
+      the first one is lazy, and home loads 2.2 MB (847 KB video)
+- [ ] Photos come from `pub-…r2.dev`, which Cloudflare says is rate-limited and for development
+      only; needs a custom domain. UNVERIFIED: what Vercel production uses
+- [ ] Work page sideways scroll (above) still there: `.cform input { width: 100% }` beats
+      `.cform-hp`
+- [ ] Notion post images are signed links that expire after 1 hour (`X-Amz-Expires=3600`);
+      likely a dead image for the first visitor after a quiet hour (not seen, reasoning only)
+- [ ] Small-text contrast under 4.5:1 in light mode: `--faint` (4.06 to 4.35) and the blue accent
+      as text (3.12 to 3.57); token change, needs Sagdi's yes. Dark mode not measured
+- [ ] Sitemap: ru and uz URLs have no `<url>` of their own; `lastmod` is the build time
+- [ ] Small: BlogPosting has no `image`; ReguSelf link in home text has no underline (2.62:1 vs
+      text); PSPO image alt is its file name; no security headers, `X-Powered-By` sent
+
 ---
 
 # DONE
