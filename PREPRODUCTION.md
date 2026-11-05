@@ -72,6 +72,13 @@ keys or private URLs here.
       `CONTACT_FROM_EMAIL`, `PHOTOS_BASE_URL`, `TAILWIND_DISABLE_LIGHTNINGCSS`. Values not checked
 - [ ] On the preview: Writing lists the posts, home shows the real photos (not the sample frames).
       Both fail quietly if a variable is wrong **(preview)**
+  - [x] Posts: the preview build of `3f8ed77` (2026-11-05) generated the 3 post pages, so the
+        Notion variables work on Preview. Build log: no errors or warnings
+  - [ ] Photos: open home on the preview. The build log can't show it (a failure falls back to
+        the sample frames quietly) **(you)**
+  - Headless checks on the preview need a "Protection Bypass for Automation" secret, and the
+    project has none. `vercel curl` would create one in the project settings: only with
+    Sagdi's yes
 
 ### 4. Domain
 
@@ -171,7 +178,10 @@ pages in en, ru, uz). Decide for each below: blocker or Later **(you)**
 
 1. Clear section A.
 2. Push `rewamp2026` to GitHub (it is 10+ commits ahead). Vercel builds a preview; run every
-   **(preview)** item on it.
+   **(preview)** item on it. Done 2026-11-05 on Sagdi's "push": GitHub refused twice with
+   "remote: fatal error in commit_refs" (its status page was green), the third try went through.
+   Preview of `3f8ed77` is Ready (Vercel → sagdi-site → Deployments; opening it needs a Vercel
+   login).
 3. Branches, locally first:
    1. Rename `main` → `pre-nov-2026-version`.
    2. On `pre-nov-2026-version`, add one commit with only what it doesn't have yet, under
