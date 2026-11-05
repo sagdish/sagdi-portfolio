@@ -118,9 +118,9 @@
     "subscribe": {
       "heading": "Obuna boʻling.",
       "text": "Yangi maqola va loyihalar haqida xabarlar pochtangizga keladi.",
-      "hint": "prototip · hali serverga ulanmagan",
+      "hint": "Spam yoʻq, faqat yangi maqolalar.",
       "button": "Obuna boʻlish",
-      "ok": "Roʻyxatdasiz ✓ (bu prototip, aslida hech qanday xabar yuborilmadi)",
+      "ok": "Roʻyxatdasiz ✓",
       "emailLabel": "Elektron pochta manzili"
     },
     "elsewhere": {

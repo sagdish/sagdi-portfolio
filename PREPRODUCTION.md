@@ -126,9 +126,10 @@ pages in en, ru, uz). Decide for each below: blocker or Later **(you)**
       `photos-src/home/set.json` (photo manager's file, order untouched; backup of the old file in
       the session scratch folder). Not live yet: review them in the photo manager's alt boxes, then
       press Publish. One alt per photo, so ru and uz pages show the English alt **(you)**
-- [ ] Subscribe: kept on the site (Sagdi, 2026-11-05). Emails are now saved (see D), but the text
-      still says "prototype · not wired to a backend yet" and "(prototype, nothing was actually
-      sent)" in en, ru, uz. "Not wired" is no longer true. Needs your words **(you)**
+- [x] Subscribe: kept on the site, emails are saved (see D). Text changed with Sagdi's yes
+      (2026-11-05): hint "No spam, just new posts." (ru "Без спама, только новые записи.",
+      uz "Spam yoʻq, faqat yangi maqolalar."), confirmation "You're on the list ✓" (ru "Ты в
+      списке ✓", uz "Roʻyxatdasiz ✓"). Checked at 390 in en, ru, uz, light and dark
 
 ### 7. Speed, SEO and errors (production build, headless Chromium + WebKit, 2026-11-05)
 

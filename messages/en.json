@@ -118,9 +118,9 @@
     "subscribe": {
       "heading": "Subscribe.",
       "text": "Get new essays and builds in your inbox.",
-      "hint": "prototype · not wired to a backend yet",
+      "hint": "No spam, just new posts.",
       "button": "Subscribe",
-      "ok": "You're on the list ✓  (prototype, nothing was actually sent)",
+      "ok": "You're on the list ✓",
       "emailLabel": "Email address"
     },
     "elsewhere": {
