@@ -7,7 +7,7 @@ import {
   useState,
   type CSSProperties,
 } from "react"
-import Image from "next/image"
+import Image, { getImageProps } from "next/image"
 import dynamic from "next/dynamic"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -20,6 +20,26 @@ import { childOffsets, glideTo, nearestIndex } from "./scroll-glide"
 // the strip (hover, touch or focus), so the page itself stays light.
 const loadViewer = () => import("./photo-viewer").then((m) => m.PhotoViewer)
 const PhotoViewer = dynamic(loadViewer, { ssr: false })
+
+// Frames whose file loads straight away, from the server HTML, so the browser
+// finds them before any script runs. About what a phone shows.
+const EAGER = 2
+
+// The blur Next's image placeholder paints, for a frame whose photo hasn't
+// started loading yet: it looks the same before and while the photo loads.
+function blurBackground(p: Photo): string | undefined {
+  if (!p.blurDataURL) return undefined
+  const { props } = getImageProps({
+    src: p.src,
+    width: p.width,
+    height: p.height,
+    alt: "",
+    unoptimized: true,
+    placeholder: "blur",
+    blurDataURL: p.blurDataURL,
+  })
+  return props.style?.backgroundImage as string | undefined
+}
 
 type PhotoCarouselProps = {
   photos: Photo[]
@@ -74,6 +94,59 @@ export function PhotoCarousel({
   const shownKey = shown.map((p) => p.src).join("|")
   const drop = (src: string) =>
     setGone((was) => (was.includes(src) ? was : [...was, src]))
+
+  // Loading order. The first EAGER frames load at once, the first photo at top
+  // priority. Every later frame waits until those photos are done (so nothing
+  // shares the connection with them), then loads once it is within one strip
+  // width of view: left to right as the strip scrolls. `reach` is the last
+  // frame allowed to load.
+  const [primed, setPrimed] = useState(false)
+  const [reach, setReach] = useState(EAGER - 1)
+  const firstPhoto = shown.findIndex((p) => p.type !== "video")
+
+  useEffect(() => {
+    if (primed) return
+    const imgs = Array.from(
+      trackRef.current?.querySelectorAll<HTMLImageElement>("img[data-eager]") ??
+        []
+    ).filter((img) => !img.complete)
+    if (!imgs.length) {
+      setPrimed(true)
+      return
+    }
+    let left = imgs.length
+    const done = () => {
+      left -= 1
+      if (left === 0) setPrimed(true)
+    }
+    imgs.forEach((img) => {
+      img.addEventListener("load", done, { once: true })
+      img.addEventListener("error", done, { once: true })
+    })
+    return () =>
+      imgs.forEach((img) => {
+        img.removeEventListener("load", done)
+        img.removeEventListener("error", done)
+      })
+  }, [primed])
+
+  useEffect(() => {
+    const scroller = scrollerRef.current
+    const items = Array.from(trackRef.current?.children ?? [])
+    if (!primed || !scroller || reach >= items.length - 1) return
+    const io = new IntersectionObserver(
+      (entries) => {
+        let last = -1
+        for (const e of entries) {
+          if (e.isIntersecting) last = Math.max(last, items.indexOf(e.target))
+        }
+        if (last > -1) setReach((was) => Math.max(was, last))
+      },
+      { root: scroller, rootMargin: "0px 100% 0px 0px" }
+    )
+    items.slice(reach + 1).forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [primed, reach, shownKey])
 
   const update = useCallback(() => {
     const el = scrollerRef.current
@@ -243,15 +316,16 @@ export function PhotoCarousel({
                       muted
                       playsInline
                       loop={p.loop !== false}
-                      preload="metadata"
+                      preload={i <= reach ? "metadata" : "none"}
                       draggable={false}
                       onError={() => drop(p.src)}
                     />
-                  ) : (
+                  ) : i <= reach ? (
                     // Strip-sized WebP served straight from the bucket:
                     // no Next optimizer in the path (its 7s upstream fetch
                     // timeout broke frames on slow links), one size fits the
-                    // fixed-height strip. Lazy by default, blur while loading.
+                    // fixed-height strip. Blur while loading. Only rendered
+                    // once its turn comes (see `reach`), so it loads at once.
                     <Image
                       className="pcar-img"
                       src={p.src}
@@ -259,10 +333,22 @@ export function PhotoCarousel({
                       height={p.height}
                       alt={p.alt}
                       unoptimized
+                      loading="eager"
+                      fetchPriority={i === firstPhoto ? "high" : undefined}
+                      data-eager={i < EAGER ? "" : undefined}
                       placeholder={p.blurDataURL ? "blur" : "empty"}
                       blurDataURL={p.blurDataURL}
                       draggable={false}
                       onError={() => drop(p.src)}
+                    />
+                  ) : (
+                    // Not its turn yet: the same blur, no request.
+                    <span
+                      className="pcar-img pcar-ph"
+                      aria-hidden="true"
+                      style={
+                        { "--ph": blurBackground(p) ?? "none" } as CSSProperties
+                      }
                     />
                   )}
                 </button>

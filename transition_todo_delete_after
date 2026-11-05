@@ -390,6 +390,15 @@ Production build of `ce79fd1` in a copy, Lighthouse 12 + headless Chromium/WebKi
       placeholder); the cause is the first photo being lazy (its download starts at 1.5 s) and 4
       more photos (about 540 KB) downloading at the same time. The video isn't the cause (blocked:
       same 5.8 s). Fix: carousel loads the on-screen photos first, the rest left to right
+- [x] Carousel loading order (`photo-carousel.tsx`, `.pcar-ph` in design.css): the first 2
+      frames load from the server HTML (eager, the first photo at high priority); later frames
+      show the same blur (Next's `getImageProps`) and load only after those finish, once within
+      one strip width of view. Measured (throttled, 3 runs): home en first photo 5.8 s -> 1.6 s,
+      score 78 -> 99, photos at first load 1,809 KB -> 422 KB; /ru and /building unchanged.
+      Loaded carousel pixel-identical to before (390 and 1280, light and dark, Chromium +
+      WebKit); swiping to the end loads all 19 photos, video plays, viewer opens and closes.
+      Only home uses the carousel now (product pages have no screenshots yet). Not measured on
+      a real phone
 - [ ] Photos come from `pub-…r2.dev`, which Cloudflare says is rate-limited and for development
       only; a custom domain needs sagdi.com's DNS moved from GoDaddy to Cloudflare. Sagdi: ignore
       for now (2026-11-05). UNVERIFIED: what Vercel production uses

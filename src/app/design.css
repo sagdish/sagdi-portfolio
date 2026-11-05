@@ -1096,6 +1096,11 @@
   object-fit: cover;
   transition: transform var(--dur) var(--ease-out);
 }
+/* A frame whose photo hasn't started loading: the same blur as Next's image
+   placeholder (--ph, per photo), so nothing changes when the photo arrives. */
+.pcar-ph {
+  background: var(--ph) 50% 50% / cover no-repeat;
+}
 @media (hover: hover) {
   .pcar-item:hover .pcar-img {
     transform: scale(1.02);
