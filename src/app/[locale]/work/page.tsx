@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Award, Briefcase, Handshake } from "lucide-react"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { ContactForm } from "@/components/ui/contact-form"
 import { Reveal } from "@/components/ui/reveal"
@@ -32,6 +33,16 @@ export default async function WorkPage({
 
       <Reveal className="prose">
         <p className="dim">{t("prose2")}</p>
+        <div className="elsewhere">
+          <span className="chip static">
+            <Briefcase size={14} aria-hidden />
+            {t("options.product")}
+          </span>
+          <span className="chip static">
+            <Handshake size={14} aria-hidden />
+            {t("options.collab")}
+          </span>
+        </div>
         <ContactForm
           labels={{
             name: t("form.name"),
@@ -43,6 +54,33 @@ export default async function WorkPage({
             error: t("form.error"),
           }}
         />
+      </Reveal>
+
+      <Reveal className="direct">
+        <p className="direct-email">
+          {t("emailPlaceholder")}
+          <span className="sample">email</span>
+        </p>
+        <a className="card" href={LINKS.pspo} target="_blank" rel="noopener">
+          <div className="card-head">
+            <span className="cert-icon">
+              <Award size={22} aria-hidden />
+            </span>
+            <div>
+              <h2>{t("cert.title")}</h2>
+              <p>{t("cert.issuer")}</p>
+            </div>
+          </div>
+          <div className="foot">
+            <span className="pill done">
+              <span className="d" />
+              {t("cert.status")}
+            </span>
+            <span className="go" aria-hidden>
+              ↗
+            </span>
+          </div>
+        </a>
       </Reveal>
 
       <div className="foot-links">

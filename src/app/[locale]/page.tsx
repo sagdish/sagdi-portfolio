@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { Music } from "lucide-react"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
 import { ELSEWHERE, LINKS } from "@/content/links"
@@ -94,16 +93,6 @@ export default async function HomePage({
 
       <Reveal className="section">
         <p className="lede">{t("lede")}</p>
-      </Reveal>
-
-      <Reveal className="section">
-        <h2 className="eyebrow">{t("listening.label")}</h2>
-        <div className="elsewhere section-body">
-          <a className="chip" href={LINKS.music} target="_blank" rel="noopener">
-            <Music size={14} aria-hidden />
-            {t("listening.telegram")} ↗
-          </a>
-        </div>
       </Reveal>
 
       <Reveal className="section">

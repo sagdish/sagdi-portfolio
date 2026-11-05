@@ -1,6 +1,6 @@
 # sagdi.com launch checklist
 
-Last updated: 2026-11-04
+Last updated: 2026-11-05
 Legend: [x] done  [ ] not done
 
 Finish line: zero grey "sample" chips on any page, in en, ru and uz. Then go live.
@@ -22,6 +22,24 @@ Cold start (new session): read REFERENCE at the bottom first.
 ---
 
 # IN PROGRESS
+
+## Playlist moved to World, Work page additions (2026-11-04)
+
+- [x] Playlist section (Telegram music chip) moved from home to World, above the dough graphic;
+      strings moved `home.listening` → `world.listening` (en/ru/uz)
+- [x] Work: two display-only `.chip.static` items under the intro (Product opportunities,
+      Collaboration; lucide Briefcase, Handshake); form unchanged
+- [x] Work: `.direct` block under the form (hairline above): email line, then PSPO I card (`.card`
+      + `.card-head` + `.cert-icon` tile on `--accent-soft`, `.pill.done` "Certified", ↗) linking
+      to Credly (`LINKS.pspo`)
+- [ ] Email: placeholder "you@example.com" with a sample chip (`work.emailPlaceholder`). Waiting on
+      Sagdi's address, then it becomes a mailto: link and the chip comes off
+- [ ] ru, uz: the new Work strings mirror en (waiting on translations)
+- [ ] Found: the form's honeypot input (`.cform-hp`) reaches 15px past the right edge at 390
+      (document scrollWidth 405). Pre-existing, not touched
+- [x] Checked: 390, 768, 1280, light and dark, en/ru/uz (headless); typecheck, lint, build in a copy
+- [ ] UNVERIFIED: on a real phone
+- [x] Commit
 
 ## Home: Currently copy (2026-11-04)
 

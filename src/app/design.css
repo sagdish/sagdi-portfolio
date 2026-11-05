@@ -1780,6 +1780,29 @@
     grid-template-columns: 1fr;
   }
 }
+/* Under the form: the direct email, then the certificate (a link .card with a
+   .card-head and a .pill status). Same measure as the form, a hairline above. */
+.direct {
+  max-width: 62ch;
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+.direct-email {
+  margin: 0 0 16px;
+  color: var(--muted);
+}
+/* Icon tile on the certificate card: the accent wash used for active nav. */
+.cert-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-ctl);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
 
 /* ── Elsewhere / prose ─────────────────────────────────────────────────────── */
 .elsewhere {

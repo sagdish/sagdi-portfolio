@@ -63,10 +63,6 @@
       "prevPhoto": "Previous photo",
       "nextPhoto": "Next photo"
     },
-    "listening": {
-      "label": "Playlist",
-      "telegram": "Telegram"
-    },
     "latest": {
       "label": "Latest writing"
     },
@@ -137,6 +133,10 @@
     "title": "Everything else that makes up my world.",
     "lede": "Music, cinema, cars, photography, books, art, travel, nature, martial arts, and the things I'm currently drawn to.",
     "soon": "Coming soon. Still cooking.",
+    "listening": {
+      "label": "Playlist",
+      "telegram": "Telegram"
+    },
     "areas": {
       "music": "Music",
       "cinema": "Cinema",
@@ -154,6 +154,16 @@
     "eyebrow": "Work with me",
     "title": "Let's build something.",
     "prose2": "Right now I'm looking for a product role where I can build, not just manage. If that's the kind of person you're after, I'd like to talk.",
+    "options": {
+      "product": "Product opportunities",
+      "collab": "Collaboration"
+    },
+    "emailPlaceholder": "you@example.com",
+    "cert": {
+      "title": "Professional Scrum Product Owner I",
+      "issuer": "Scrum.org · PSPO I",
+      "status": "Certified"
+    },
     "form": {
       "name": "Name",
       "email": "Email",

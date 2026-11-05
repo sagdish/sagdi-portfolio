@@ -63,10 +63,6 @@
       "prevPhoto": "Предыдущее фото",
       "nextPhoto": "Следующее фото"
     },
-    "listening": {
-      "label": "Плейлист",
-      "telegram": "Telegram"
-    },
     "latest": {
       "label": "Новая запись"
     },
@@ -137,6 +133,10 @@
     "title": "Всё остальное, из чего складывается мой мир.",
     "lede": "Музыка, кино, автомобили, фотография, книги, искусство, путешествия, природа, единоборства и всё, что сейчас меня увлекает.",
     "soon": "Скоро. В процессе готовки.",
+    "listening": {
+      "label": "Плейлист",
+      "telegram": "Telegram"
+    },
     "areas": {
       "music": "Музыка",
       "cinema": "Кино",
@@ -154,6 +154,16 @@
     "eyebrow": "Сотрудничество",
     "title": "Давай создавать что-нибудь вместе.",
     "prose2": "Сейчас ищу роль в продуктовой команде, где можно не только управлять, но и создавать. Если вам нужен именно такой человек, буду рад поговорить.",
+    "options": {
+      "product": "Product opportunities",
+      "collab": "Collaboration"
+    },
+    "emailPlaceholder": "you@example.com",
+    "cert": {
+      "title": "Professional Scrum Product Owner I",
+      "issuer": "Scrum.org · PSPO I",
+      "status": "Certified"
+    },
     "form": {
       "name": "Имя",
       "email": "Почта",

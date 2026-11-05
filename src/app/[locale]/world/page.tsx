@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
+import { Music } from "lucide-react"
 import { getTranslations, setRequestLocale } from "next-intl/server"
+import { LINKS } from "@/content/links"
 import { pageMetadata } from "@/lib/seo"
 import { Reveal } from "@/components/ui/reveal"
 import { KneadingDough } from "@/components/ui/kneading-dough"
@@ -51,6 +53,16 @@ export default async function WorldPage({
             {t(`areas.${key}`)}
           </span>
         ))}
+      </Reveal>
+
+      <Reveal className="section">
+        <h2 className="eyebrow">{t("listening.label")}</h2>
+        <div className="elsewhere section-body">
+          <a className="chip" href={LINKS.music} target="_blank" rel="noopener">
+            <Music size={14} aria-hidden />
+            {t("listening.telegram")} ↗
+          </a>
+        </div>
       </Reveal>
 
       <Reveal className="section wip">

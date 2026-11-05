@@ -63,10 +63,6 @@
       "prevPhoto": "Oldingi surat",
       "nextPhoto": "Keyingi surat"
     },
-    "listening": {
-      "label": "Playlist",
-      "telegram": "Telegram"
-    },
     "latest": {
       "label": "Soʻnggi yozuvlar"
     },
@@ -137,6 +133,10 @@
     "title": "Dunyoyimni tashkil etuvchi qolgan barcha narsa.",
     "lede": "Musiqa, kino, avtomobillar, fotografiya, kitoblar, sanʼat, sayohat, tabiat, yakkakurash va ayni paytda meni qiziqtirayotgan narsalar.",
     "soon": "Tez orada. Hali pishyapti.",
+    "listening": {
+      "label": "Playlist",
+      "telegram": "Telegram"
+    },
     "areas": {
       "music": "Musiqa",
       "cinema": "Kino",
@@ -154,6 +154,16 @@
     "eyebrow": "Hamkorlik",
     "title": "Keling, birga nimadir yaratamiz.",
     "prose2": "Hozir mahsulot jamoasida faqat boshqarish emas, nimadir yaratish ham mumkin boʻlgan rol izlayapman. Agar sizga shunday mutaxassis kerak boʻlsa, suhbatlashsak xursand boʻlaman.",
+    "options": {
+      "product": "Product opportunities",
+      "collab": "Collaboration"
+    },
+    "emailPlaceholder": "you@example.com",
+    "cert": {
+      "title": "Professional Scrum Product Owner I",
+      "issuer": "Scrum.org · PSPO I",
+      "status": "Certified"
+    },
     "form": {
       "name": "Ism",
       "email": "Pochta",
