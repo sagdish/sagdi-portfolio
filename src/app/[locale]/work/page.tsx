@@ -58,8 +58,7 @@ export default async function WorkPage({
 
       <Reveal className="direct">
         <p className="direct-email">
-          {t("emailPlaceholder")}
-          <span className="sample">email</span>
+          <a href={`mailto:${LINKS.email}`}>{LINKS.email}</a>
         </p>
         <a className="card" href={LINKS.pspo} target="_blank" rel="noopener">
           <div className="card-head">

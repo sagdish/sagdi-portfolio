@@ -32,8 +32,10 @@ Cold start (new session): read REFERENCE at the bottom first.
 - [x] Work: `.direct` block under the form (hairline above): email line, then PSPO I card (`.card`
       + `.card-head` + `.cert-icon` tile on `--accent-soft`, `.pill.done` "Certified", ↗) linking
       to Credly (`LINKS.pspo`)
-- [ ] Email: placeholder "you@example.com" with a sample chip (`work.emailPlaceholder`). Waiting on
-      Sagdi's address, then it becomes a mailto: link and the chip comes off
+- [x] Email: sagdish544@gmail.com from Sagdi (2026-11-05), a mailto: link (`LINKS.email`); muted,
+      text color on hover like the footer links; placeholder and sample chip removed. Checked
+      390 and 1280, light and dark, en/ru/uz (headless); typecheck, lint, build in a copy
+- [x] Commit the email change
 - [ ] ru, uz: the new Work strings mirror en (waiting on translations)
 - [ ] Found: the form's honeypot input (`.cform-hp`) reaches 15px past the right edge at 390
       (document scrollWidth 405). Pre-existing, not touched

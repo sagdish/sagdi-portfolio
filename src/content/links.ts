@@ -10,6 +10,8 @@ export const LINKS = {
   telegram: "https://t.me/raw_notepad",
   threads: "https://www.threads.com/@forsi_ph",
   music: "https://t.me/sftunes",
+  /** Direct email under the Work page form (shown as text, linked as mailto:). */
+  email: "sagdish544@gmail.com",
   /** Credly verification page for the PSPO I certificate (Work page card). */
   pspo: "https://www.credly.com/badges/057d3c11-6bcf-44a8-9a88-8992495c420d",
 } as const
