@@ -56,12 +56,12 @@ export const PRODUCTS: Product[] = [
     tagline: {
       en: "A comprehensive, practical resource for aspiring and experienced product managers.",
       ru: "Практическое руководство по продуктовому менеджменту для тех, кто только начинает, и тех, у кого уже есть опыт.",
-      uz: "Product-menejmentni endi oʻrganayotganlar va bu sohada tajribaga ega mutaxassislar uchun amaliy qoʻllanma.",
+      uz: "Boshlovchi va tajribali Product Managerlar uchun to‘liq, amaliy manba.",
     },
     body: {
       en: "Covers core PM concepts, frameworks, and real-world applications to help you excel in product management roles.",
       ru: "В нём собраны основные концепции, фреймворки и примеры из практики, которые помогут увереннее работать в продуктовом менеджменте и развиваться в этой сфере.",
-      uz: "Unda product-menejmentning asosiy tushunchalari, freymvorklar va amaliy misollar jamlangan. Bular sohada puxtaroq ishlash va rivojlanishga yordam beradi.",
+      uz: "Product Management rolida muvaffaqiyat qozonishga yordam beruvchi asosiy tushunchalar, freymvorklar va real misollarni qamrab oladi.",
     },
   },
   {

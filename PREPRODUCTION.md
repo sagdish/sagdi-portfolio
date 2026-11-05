@@ -107,6 +107,8 @@ first minutes after go-live, since Instant Rollback undoes a bad deploy in secon
     ever reach you).
   - Where: Vercel → sagdi-site → Settings → Environment Variables → edit → redeploy (a changed
     variable only applies to the next deployment) **(you)**
+  - Sagdi decided 2026-11-05: verifying `sagdi.com` in Resend is Later (C). So for go-live,
+    `CONTACT_TO_EMAIL` must be your Resend login email **(you)**
 - [ ] Link previews in Telegram and LinkedIn, en and ru. Preview URLs need a login, so bots can't
       read them: check on sagdi.com right after go-live **(go-live)**
 
@@ -115,17 +117,20 @@ first minutes after go-live, since Instant Rollback undoes a bad deploy in secon
 The old status doc said "zero sample chips, then go live". Zero sample chips: done (0 on all 36
 pages in en, ru, uz). Decide for each below: blocker or Later **(you)**
 
-- [ ] English product texts still waiting on your words: ReguSelf, Pomodoro Focus Dock, Screenshots
-      Processor (to be replaced by the YouTube transcript tool: name, status, link), finKeep (body
-      repeats the tagline). Personal OS longer text drafted, waiting for your approval
+- [x] Product texts: Sagdi decided 2026-11-05 they are enough for go-live. The open ones moved to
+      Later (C). The Uzbek text of The Ultimate Guide to Product Management replaced with his words
+      the same day
 - [ ] Search text per page (`meta.pages.*`, `meta.default` in `messages/*.json`) still mirrors the
       on-page heading; the Writing search description is the old long text
-- [ ] ru and uz: your review of the open judgment calls (Cyrillic name, ты/вы split, slogan), a
-      native Uzbek proofread, and the new Work strings (they still mirror English)
-- [ ] Photo alt text: written 2026-11-05 for all 20 home items (19 photos, 1 video), English, in
+- [ ] ru and uz: your review of the open judgment calls (Cyrillic name, ты/вы split, slogan) and a
+      native Uzbek proofread
+- [x] Work page in ru and uz: Sagdi OK'd it as it is (2026-11-05), including the labels that stay in
+      English ("Product opportunities", "Collaboration", "Certified")
+- [x] Photo alt text: written 2026-11-05 for all 20 home items (19 photos, 1 video), English, in
       `photos-src/home/set.json` (photo manager's file, order untouched; backup of the old file in
-      the session scratch folder). Not live yet: review them in the photo manager's alt boxes, then
-      press Publish. One alt per photo, so ru and uz pages show the English alt **(you)**
+      the session scratch folder). Sagdi OK'd them 2026-11-05. One alt per photo, so ru and uz pages
+      show the English alt
+  - [ ] Live only after Publish in the photo manager **(you)**
 - [x] Subscribe: kept on the site, emails are saved (see D). Text changed with Sagdi's yes
       (2026-11-05): hint "No spam, just new posts." (ru "Без спама, только новые записи.",
       uz "Spam yoʻq, faqat yangi maqolalar."), confirmation "You're on the list ✓" (ru "Ты в
@@ -184,6 +189,12 @@ From Sagdi:
 - [ ] Cat in the box on mobile too (today only in the desktop rail)
 - [ ] World page: the rest of the content, then remove the "still cooking" placeholder
 - [ ] Translation buttons on blog posts: read a post in another language
+- [ ] Product texts (moved from A.6 on 2026-11-05): ReguSelf, Pomodoro Focus Dock, Screenshots
+      Processor (to be replaced by the YouTube transcript tool: name, status, link), finKeep (body
+      repeats the tagline). Personal OS longer text drafted, waiting for your approval
+- [ ] Verify `sagdi.com` in Resend (moved from A.5 on 2026-11-05): Resend → Domains → Add → DNS
+      records into GoDaddy, then `CONTACT_FROM_EMAIL` on sagdi.com. Needed before Subscribe can
+      email anyone but you
 
 Suggested (move up, keep or drop):
 
