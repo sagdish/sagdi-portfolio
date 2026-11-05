@@ -16,7 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/building", changeFrequency: "weekly", priority: 0.9 },
     { path: "/writing", changeFrequency: "weekly", priority: 0.8 },
     { path: "/world", changeFrequency: "weekly", priority: 0.8 },
-    { path: "/work", changeFrequency: "monthly", priority: 0.7 },
+    // No /work: it's noindex (see its generateMetadata), so it stays out of here.
     ...PRODUCTS.map((p) => ({
       path: `/building/${p.slug}`,
       changeFrequency: "monthly" as const,

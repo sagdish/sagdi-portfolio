@@ -56,6 +56,9 @@ Branch `rewamp2026` replaces `main` (live) at launch.
 - Posts are language-agnostic: one unprefixed canonical, no hreflang, no `inLanguage`.
 - `sitemap.ts` lists the posts Notion returns (none if Notion is down). There are no sample posts
   and no `noindex` rule for posts.
+- The Work page stays out of Google (Sagdi's call, 2026-11-05): `noindex, follow` in its
+  `generateMetadata` and left out of `sitemap.ts`. Never block it in `robots.txt`: Google has to
+  read the noindex.
 
 ## Design system
 

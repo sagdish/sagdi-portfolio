@@ -13,7 +13,13 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>
 }): Promise<Metadata> {
   const { locale } = await params
-  return pageMetadata({ locale, path: "/work", page: "work" })
+  // Kept out of search (Sagdi's call, 2026-11-05): noindex here and left out of
+  // sitemap.ts. Never block it in robots.txt, or Google can't read the noindex.
+  // This replaces the layout's whole `robots` object, googleBot included.
+  return {
+    ...(await pageMetadata({ locale, path: "/work", page: "work" })),
+    robots: { index: false, follow: true },
+  }
 }
 
 export default async function WorkPage({

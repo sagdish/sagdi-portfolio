@@ -145,9 +145,15 @@ pages in en, ru, uz). Decide for each below: blocker or Later **(you)**
 - [x] Home: first photo at 1.6 s on a slow phone connection (was 5.8 s), score 99; other pages
       about 1.5 s; layout shift 0.033 at most (Google's limit is 0.1). Commit `b6e6de8`
 - [x] SEO: own canonical on every page; hreflang en, ru, uz, x-default on every page and each links
-      back; `<html lang>` right; sitemap has 36 entries (33 pages in 3 languages + 3 posts);
-      `robots.txt`; structured data (Person, WebSite, CreativeWork, BlogPosting with image);
-      preview image per language
+      back; `<html lang>` right; sitemap has 33 entries (30 pages in 3 languages + 3 posts; it
+      was 36 until Work was taken out, next item); `robots.txt`; structured data (Person,
+      WebSite, CreativeWork, BlogPosting with image); preview image per language
+- [x] Work page kept out of Google (Sagdi's call, 2026-11-05): `noindex, follow` on `/work`,
+      `/ru/work`, `/uz/work`, and left out of the sitemap. `robots.txt` still allows it, because
+      Google has to read the noindex. Link previews still work. The old live `/contact` and
+      `/about` (indexable today) redirect there, so Google drops them too, the next time it
+      visits them after go-live. Checked in the dev server and a production build: noindex on
+      the 3 Work pages only, every other page still `index, follow`
 - [x] Old live URLs (`/blog`, `/blog/:slug`, `/about`, `/contact`, `/projects`, `/hub`, ru and uz
       too) reach the new page in one redirect (local build)
 - [x] 404 page in all 3 languages, status 404, inside the site shell
@@ -177,7 +183,9 @@ pages in en, ru, uz). Decide for each below: blocker or Later **(you)**
    history, so no force push). Production deploys. Also push `pre-nov-2026-version`.
 5. Right after: sagdi.com loads; old URLs redirect; `sitemap.xml` and `robots.txt` load; Web
    Analytics and Speed Insights show data; Telegram and LinkedIn previews; Google Search Console:
-   submit the sitemap and check the en/ru/uz pairs.
+   submit the sitemap and check the en/ru/uz pairs. Optional: to hide the old contact page
+   sooner than Google's next visit, Search Console → Removals → `https://sagdi.com/contact`
+   (and `/about`, plus their `/ru/` and `/uz/` versions) **(you)**
 6. If something breaks: Vercel → sagdi-site → Instant Rollback. On Hobby it goes back to the
    previous production deployment only. After a rollback, pushes to `main` don't go live until
    you press "Undo Rollback". The old code stays in `pre-nov-2026-version`; the exact old live
