@@ -12,6 +12,8 @@ export type ContactFormLabels = {
   sent: string
   /** fallback when the server sends no error of its own */
   error: string
+  /** the firewall's rate limit on /api/contact answered 429 */
+  tooMany: string
 }
 
 type Status = "idle" | "submitting" | "success" | "error"
@@ -58,10 +60,17 @@ export function ContactForm({
         body: JSON.stringify(payload),
       })
       if (!res.ok) {
+        // 429 comes from the Vercel Firewall rate limit on POST /api/contact
+        // (10 per 10 minutes per IP), not from the route.
+        if (res.status === 429) throw new Error(labels.tooMany)
+        // The route sends { error: "text" }; anything else (like the
+        // firewall's { error: { code, message } }) gets the fallback.
         const body = (await res.json().catch(() => null)) as {
-          error?: string
+          error?: unknown
         } | null
-        throw new Error(body?.error || labels.error)
+        throw new Error(
+          typeof body?.error === "string" ? body.error : labels.error
+        )
       }
       setStatus("success")
     } catch (err) {

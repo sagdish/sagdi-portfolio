@@ -170,7 +170,8 @@
       "send": "Send message",
       "sending": "Sending",
       "sent": "Thanks. Your message is on its way, I'll reply to the address you gave.",
-      "error": "Something went wrong sending that. Try again, or reach me on LinkedIn."
+      "error": "Something went wrong sending that. Try again, or reach me on LinkedIn.",
+      "tooMany": "Too many messages in a short time. Try again in a few minutes, or reach me on LinkedIn."
     },
     "footerCopyright": "© 2026 Sagdi Formanov"
   },

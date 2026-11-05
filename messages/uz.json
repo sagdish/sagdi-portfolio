@@ -170,7 +170,8 @@
       "send": "Yuborish",
       "sending": "Yuborilyapti",
       "sent": "Rahmat! Xabaringiz yuborildi. Koʻrsatgan elektron pochta manzilingizga javob beraman.",
-      "error": "Xabarni yuborishda xatolik yuz berdi. Qayta urinib koʻring yoki LinkedIn orqali yozing."
+      "error": "Xabarni yuborishda xatolik yuz berdi. Qayta urinib koʻring yoki LinkedIn orqali yozing.",
+      "tooMany": "Qisqa vaqt ichida juda koʻp xabar yuborildi. Bir necha daqiqadan soʻng qayta urinib koʻring yoki LinkedIn orqali yozing."
     },
     "footerCopyright": "© 2026 Sagdi Formanov"
   },

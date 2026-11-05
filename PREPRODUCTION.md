@@ -20,11 +20,14 @@ keys or private URLs here.
       requested on every page in en, ru, uz (local production build)
 - [x] Speed Insights added (`@vercel/speed-insights` 2.0.0, commit `3e54657`). Script requested on
       every page in en, ru, uz
-- [ ] Speed Insights is switched OFF in the Vercel project (disabled 2026-09-16). Turn it on:
-      Vercel → sagdi-site → Speed Insights → Enable. Until then the script sends nothing **(you)**
-- [ ] On a preview: page views show in Web Analytics and vitals in Speed Insights (filter:
-      Preview), and both scripts load with the new `X-Content-Type-Options: nosniff` header
-      (locally they are 404 pages, so this can't be tested here) **(preview)**
+- [x] Vercel's Speed Insights page shows "Get Started" (install package, add component, deploy and
+      visit). There is no switch to flip: steps 1 and 2 are done, step 3 is the deploy. (Corrected
+      2026-11-05: an earlier line here said "turn it on", which was a guess from a `disabledAt`
+      field in Vercel's API. If no data shows after a deploy, that field is the first suspect)
+- [ ] On a preview: page views show in Web Analytics and vitals in Speed Insights (switch the
+      filter from Production to Preview), and both scripts load with the new
+      `X-Content-Type-Options: nosniff` header (locally they are 404 pages, so this can't be
+      tested here) **(preview)**
 
 ### 2. Security
 
@@ -39,14 +42,19 @@ keys or private URLs here.
 - [x] Security headers on every response: `X-Content-Type-Options: nosniff`,
       `Referrer-Policy: strict-origin-when-cross-origin`, `X-Frame-Options: SAMEORIGIN`, no
       `X-Powered-By` (commit `9490949`). HSTS comes from Vercel. No CSP yet (see Later)
-- [ ] Contact form abuse (`src/app/api/contact/route.ts`): only a honeypot. No rate limit and no
-      length limit, and error replies show visitors internal details (missing env var names,
-      Resend's raw error text). Fix in two parts:
-  - [ ] One Vercel Firewall rate-limit rule (Hobby allows exactly 1 per project): path starts with
-        `/api/`, about 5 requests per 10 minutes per IP. Dashboard only, no code. Covering `/api/`
-        also covers a future `/api/subscribe` **(you)**
-  - [ ] Code: cap name, email and message length; generic error text for visitors, details only
-        in the server log
+- [ ] Contact form abuse (`src/app/api/contact/route.ts`): it had only a honeypot. Fix in two parts:
+  - [x] Vercel Firewall rate-limit rule "Contact form rate limit", published to production
+        2026-11-05 (Hobby allows 1): POST `/api/contact`, 10 per 10 minutes per IP, then 429.
+        Lenient on purpose so real visitors never hit it. Tested on sagdi.com: 10 empty
+        submissions answered 400, the 11th and 12th 429; pages and GET unaffected. A future
+        `/api/subscribe` needs a condition added to this same rule. See or change it:
+        Vercel → sagdi-site → Firewall → Rules, or `vercel firewall rules list --project sagdi-site`
+  - [x] The form shows a proper message on 429 in en, ru, uz (`form.tooMany`). Before, it would
+        have shown "[object Object]", because the firewall's error is an object. Tested with a
+        simulated 429, 400, 500 and 200 in Chromium and WebKit, all 3 languages
+  - [ ] Code: cap name, email and message length; the route's own error text ("Invalid email",
+        "Server not configured: missing ...", Resend's raw error) is English in every language and
+        shows internal details: give visitors the translated fallback, keep details in the server log
 - [x] Vercel Firewall active, DDoS mitigation on (Sagdi's screenshot 2026-11-05). Bot Protection
       is off: your call
 - [x] Preview deployments require a Vercel login ("all except custom domains")
@@ -66,8 +74,11 @@ keys or private URLs here.
 - [ ] `https://www.sagdi.com` shows a browser security warning today: it serves an expired
       `*.sagdi.com` certificate (expired 2025-11-05). `www.sagdi.com` is not added to the Vercel
       project (only `sagdi.com` and `sagdi-site.vercel.app` are), but DNS still points it at Vercel.
-      Fix: Vercel → sagdi-site → Domains → add `www.sagdi.com`, redirect to `sagdi.com`.
-      Already broken on the live site, not caused by the new one **(you)**
+      Fix: Vercel → sagdi-site → Settings → Domains → Add → `www.sagdi.com`; UNCHECK "Include apex
+      and www variants" (sagdi.com is already there and would be set to redirect to itself);
+      choose "Redirect to Another Domain", 308, `sagdi.com`. If Vercel then says "Invalid
+      Configuration", add the DNS record it shows in GoDaddy. Already broken on the live site, not
+      caused by the new one **(you)**
 - [x] `https://sagdi.com`: valid certificate until 2027-01-19 (auto-renew on), http redirects to
       https, HSTS on
 
@@ -78,6 +89,10 @@ keys or private URLs here.
 - [ ] Home carousel on a phone: the first photos show fast, swiping loads the rest, the video plays
 - [ ] Frosted glass on the dock and top pill on a real iPhone (headless WebKit draws no blur)
 - [ ] Contact form: a real email arrives, subject "sagdi.com: New message from ..." **(preview)**
+- [ ] Inbox the contact form sends to: Vercel → sagdi-site → Settings → Environment Variables →
+      `CONTACT_TO_EMAIL` → edit (Production, and Preview to test) → redeploy. A changed variable
+      only takes effect on the next deployment. `CONTACT_FROM_EMAIL` must stay an address on a
+      domain verified in Resend **(you)**
 - [ ] Link previews in Telegram and LinkedIn, en and ru. Preview URLs need a login, so bots can't
       read them: check on sagdi.com right after go-live **(go-live)**
 

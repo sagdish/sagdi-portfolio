@@ -53,6 +53,7 @@ export default async function WorkPage({
             sending: t("form.sending"),
             sent: t("form.sent"),
             error: t("form.error"),
+            tooMany: t("form.tooMany"),
           }}
         />
       </Reveal>
