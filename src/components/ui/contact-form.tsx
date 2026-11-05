@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent, type KeyboardEvent } from "react"
 import { cn } from "@/lib/utils"
+import { CONTACT_LIMITS } from "@/lib/contact-limits"
 
 export type ContactFormLabels = {
   name: string
@@ -10,7 +11,7 @@ export type ContactFormLabels = {
   send: string
   sending: string
   sent: string
-  /** fallback when the server sends no error of its own */
+  /** shown for any failed send except the rate limit */
   error: string
   /** the firewall's rate limit on /api/contact answered 429 */
   tooMany: string
@@ -61,16 +62,9 @@ export function ContactForm({
       })
       if (!res.ok) {
         // 429 comes from the Vercel Firewall rate limit on POST /api/contact
-        // (10 per 10 minutes per IP), not from the route.
-        if (res.status === 429) throw new Error(labels.tooMany)
-        // The route sends { error: "text" }; anything else (like the
-        // firewall's { error: { code, message } }) gets the fallback.
-        const body = (await res.json().catch(() => null)) as {
-          error?: unknown
-        } | null
-        throw new Error(
-          typeof body?.error === "string" ? body.error : labels.error
-        )
+        // (10 per 10 minutes per IP), not from the route. Every other failure
+        // shows the translated fallback: the route only sends short codes.
+        throw new Error(res.status === 429 ? labels.tooMany : labels.error)
       }
       setStatus("success")
     } catch (err) {
@@ -106,6 +100,7 @@ export function ContactForm({
                 type="text"
                 autoComplete="name"
                 required
+                maxLength={CONTACT_LIMITS.name}
                 disabled={submitting}
               />
             </div>
@@ -117,6 +112,7 @@ export function ContactForm({
                 type="email"
                 autoComplete="email"
                 required
+                maxLength={CONTACT_LIMITS.email}
                 disabled={submitting}
               />
             </div>
@@ -129,6 +125,7 @@ export function ContactForm({
               name="message"
               rows={6}
               required
+              maxLength={CONTACT_LIMITS.message}
               disabled={submitting}
             />
           </div>

@@ -1760,12 +1760,15 @@
 .cform-status .err {
   color: var(--destructive);
 }
-/* Honeypot: off-screen rather than display:none, which bots skip. Scoped to
-   .cform so it outranks `.cform input { width: 100% }`; at full width it stuck
-   out past the screen and the page could slide sideways. */
-.cform .cform-hp {
+/* Honeypot (contact form and Subscribe band): off-screen rather than
+   display:none, which bots skip. Scoped to its form so it outranks the field
+   rules (`.cform input { width: 100% }`, `.subform input { min-width }`); at
+   full width it stuck out past the screen and the page could slide sideways. */
+.cform .cform-hp,
+.subform .cform-hp {
   position: absolute;
   width: 1px;
+  min-width: 0;
   height: 1px;
   padding: 0;
   margin: -1px;

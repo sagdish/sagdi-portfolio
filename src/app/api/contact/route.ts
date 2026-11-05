@@ -1,55 +1,56 @@
 import { NextResponse } from "next/server"
+import { CONTACT_LIMITS } from "@/lib/contact-limits"
 
-type ContactBody = {
-  name?: string
-  email?: string
-  message?: string
-  website?: string // honeypot
-}
+// Visitors only ever get a short code back; the form shows its own translated
+// text. Details (missing settings, Resend's reply) go to the server log only.
+// Spam floods are stopped before this route by the Vercel Firewall rate-limit
+// rule on POST /api/contact (10 per 10 minutes per IP, see PREPRODUCTION.md).
+const fail = (status: number, error: string) =>
+  NextResponse.json({ ok: false, error }, { status })
+
+const text = (v: unknown) => (typeof v === "string" ? v.trim() : "")
 
 export async function POST(req: Request) {
   try {
-    const { name, email, message, website }: ContactBody = await req.json()
+    const body = (await req.json().catch(() => null)) as Record<
+      string,
+      unknown
+    > | null
+    if (!body) return fail(400, "invalid")
 
-    // Simple honeypot: if filled, pretend success
-    if (website && website.trim().length > 0) {
-      return NextResponse.json({ ok: true })
-    }
+    // Honeypot: bots fill the hidden "website" field; pretend success.
+    if (text(body.website)) return NextResponse.json({ ok: true })
 
-    if (!name || !email || !message) {
-      return NextResponse.json(
-        { ok: false, error: "Missing required fields" },
-        { status: 400 }
-      )
-    }
+    const name = text(body.name)
+    const email = text(body.email)
+    const message = text(body.message)
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { ok: false, error: "Invalid email" },
-        { status: 400 }
-      )
+    if (!name || !email || !message) return fail(400, "invalid")
+    if (
+      name.length > CONTACT_LIMITS.name ||
+      email.length > CONTACT_LIMITS.email ||
+      message.length > CONTACT_LIMITS.message
+    ) {
+      return fail(400, "invalid")
     }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail(400, "invalid")
 
     const RESEND_API_KEY = process.env.RESEND_API_KEY
     const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL
     const CONTACT_FROM_EMAIL = process.env.CONTACT_FROM_EMAIL
 
-    const missing: string[] = []
-    if (!RESEND_API_KEY) missing.push("RESEND_API_KEY")
-    if (!CONTACT_TO_EMAIL) missing.push("CONTACT_TO_EMAIL")
-    if (!CONTACT_FROM_EMAIL) missing.push("CONTACT_FROM_EMAIL")
+    const missing = [
+      !RESEND_API_KEY && "RESEND_API_KEY",
+      !CONTACT_TO_EMAIL && "CONTACT_TO_EMAIL",
+      !CONTACT_FROM_EMAIL && "CONTACT_FROM_EMAIL",
+    ].filter(Boolean)
     if (missing.length) {
-      return NextResponse.json(
-        {
-          ok: false,
-          error: `Server not configured: missing ${missing.join(", ")}`,
-        },
-        { status: 500 }
-      )
+      console.error(`[contact] not configured, missing: ${missing.join(", ")}`)
+      return fail(500, "unavailable")
     }
 
-    const subject = `sagdi.com: New message from ${name}`
+    // One line for the subject: no line breaks from the name field.
+    const subject = `sagdi.com: New message from ${name.replace(/\s+/g, " ")}`
     const html = `
       <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6;color:#111">
         <h2 style="margin:0 0 8px 0">Portfolio Contact</h2>
@@ -77,19 +78,16 @@ export async function POST(req: Request) {
     })
 
     if (!resp.ok) {
-      const text = await resp.text()
-      return NextResponse.json(
-        { ok: false, error: `Email send failed: ${text}` },
-        { status: 502 }
+      console.error(
+        `[contact] Resend refused (${resp.status}): ${await resp.text()}`
       )
+      return fail(502, "send_failed")
     }
 
     return NextResponse.json({ ok: true })
-  } catch {
-    return NextResponse.json(
-      { ok: false, error: "Unexpected error" },
-      { status: 500 }
-    )
+  } catch (err) {
+    console.error("[contact] unexpected error", err)
+    return fail(500, "unexpected")
   }
 }
 

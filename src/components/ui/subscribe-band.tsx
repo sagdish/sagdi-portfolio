@@ -8,11 +8,12 @@ import {
   type CSSProperties,
 } from "react"
 import { cn } from "@/lib/utils"
+import { CONTACT_LIMITS } from "@/lib/contact-limits"
 import { useReveal } from "./use-reveal"
 
 /**
- * Subscribe band (visual only at launch). Reveals on scroll; the visual submit swaps
- * the form for a confirmation line. When `armIntent` is set (the Writing instance) and
+ * Subscribe band. Submitting saves the address through /api/subscribe (Resend contacts;
+ * no email is sent yet) and swaps the form for a confirmation line. Reveals on scroll. When `armIntent` is set (the Writing instance) and
  * the nav Subscribe flow stashed `subscribe-intent`, on arrival it scrolls itself to
  * center, focuses the field, and plays a one-shot rainbow glow (prototype §4c/§4d).
  *
@@ -111,15 +112,39 @@ export function SubscribeBand({
           className="subform"
           onSubmit={(e) => {
             e.preventDefault()
+            // Saves the address (/api/subscribe → Resend contacts); nothing
+            // is emailed yet. The confirmation line shows right away, whatever
+            // the save does: failures are logged on the server.
+            const data = new FormData(e.currentTarget)
+            void fetch("/api/subscribe", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                email: String(data.get("email") ?? ""),
+                website: String(data.get("website") ?? ""),
+              }),
+              keepalive: true,
+            }).catch(() => {})
             setDone(true)
           }}
         >
           <input
             ref={inputRef}
+            name="email"
             type="email"
             placeholder="you@email.com"
             aria-label={emailLabel}
+            maxLength={CONTACT_LIMITS.email}
             required
+          />
+          {/* Honeypot, same as the contact form: bots fill it, people never see it. */}
+          <input
+            className="cform-hp"
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
           />
           <button className="btn btn-primary" type="submit">
             {buttonLabel} <span className="arw">→</span>

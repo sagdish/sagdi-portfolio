@@ -35,26 +35,30 @@ keys or private URLs here.
       Resend, Notion, AWS-style keys or private keys found; `env.local.template` has empty values;
       `.gitignore` covers `.env*`
 - [x] Next.js 15.4.8 → 15.5.29 and sharp → 0.35.5: all 33 Next.js advisories fixed (commit `3771fb5`)
-- [ ] `npm audit --omit=dev` still lists: postcss bundled inside Next (only Next 16 fixes it; used at
-      build time on our own CSS, not reachable by visitors) and source-map-js, nanoid,
-      mdast-util-to-hast (`npm audit fix` fixes these three without breaking changes). Do: run
-      `npm audit fix`, then typecheck, lint, build, browser runs
+- [x] `npm audit fix` run 2026-11-05: source-map-js, nanoid, mdast-util-to-hast and other indirect
+      packages got patch or minor updates; `package.json` unchanged, Next and React unchanged.
+      Checked: typecheck, lint, build, 80 browser runs
+- [ ] Left on purpose: postcss bundled inside Next (only Next 16 fixes it; used at build time on our
+      own CSS, not reachable by visitors). See Later: Next 16
 - [x] Security headers on every response: `X-Content-Type-Options: nosniff`,
       `Referrer-Policy: strict-origin-when-cross-origin`, `X-Frame-Options: SAMEORIGIN`, no
       `X-Powered-By` (commit `9490949`). HSTS comes from Vercel. No CSP yet (see Later)
-- [ ] Contact form abuse (`src/app/api/contact/route.ts`): it had only a honeypot. Fix in two parts:
-  - [x] Vercel Firewall rate-limit rule "Contact form rate limit", published to production
-        2026-11-05 (Hobby allows 1): POST `/api/contact`, 10 per 10 minutes per IP, then 429.
-        Lenient on purpose so real visitors never hit it. Tested on sagdi.com: 10 empty
-        submissions answered 400, the 11th and 12th 429; pages and GET unaffected. A future
-        `/api/subscribe` needs a condition added to this same rule. See or change it:
-        Vercel → sagdi-site → Firewall → Rules, or `vercel firewall rules list --project sagdi-site`
+- [x] Contact form abuse (`src/app/api/contact/route.ts`): it had only a honeypot. Fixed in three parts:
+  - [x] Vercel Firewall rate-limit rule "API form rate limit", live in production since 2026-11-05
+        (Hobby allows 1): any POST to `/api/` (contact form and subscribe), 10 per 10 minutes per
+        IP, then 429. Lenient on purpose so real visitors never hit it. Tested on sagdi.com twice:
+        10 empty submissions answered 400, the 11th and 12th 429; pages and GET unaffected. See or
+        change it: Vercel → sagdi-site → Firewall → Rules, or
+        `vercel firewall rules list --project sagdi-site`
   - [x] The form shows a proper message on 429 in en, ru, uz (`form.tooMany`). Before, it would
         have shown "[object Object]", because the firewall's error is an object. Tested with a
         simulated 429, 400, 500 and 200 in Chromium and WebKit, all 3 languages
-  - [ ] Code: cap name, email and message length; the route's own error text ("Invalid email",
-        "Server not configured: missing ...", Resend's raw error) is English in every language and
-        shows internal details: give visitors the translated fallback, keep details in the server log
+  - [x] Code (2026-11-05): name 100, email 254, message 5,000 characters max, in the form
+        (`maxLength`) and the route (`src/lib/contact-limits.ts`); non-text fields rejected. The
+        route now sends visitors only a short code; the form always shows its own translated
+        text. Details (missing settings, Resend's reply) go to the Vercel log as `[contact] ...`.
+        Tested: 7 bad or honeypot requests to the route, and the form with simulated 429, 400,
+        500, 200 in Chromium and WebKit, en, ru, uz
 - [x] Vercel Firewall active, DDoS mitigation on (Sagdi's screenshot 2026-11-05). Bot Protection
       is off: your call
 - [x] Preview deployments require a Vercel login ("all except custom domains")
@@ -71,28 +75,38 @@ keys or private URLs here.
 
 ### 4. Domain
 
-- [ ] `https://www.sagdi.com` shows a browser security warning today: it serves an expired
-      `*.sagdi.com` certificate (expired 2025-11-05). `www.sagdi.com` is not added to the Vercel
-      project (only `sagdi.com` and `sagdi-site.vercel.app` are), but DNS still points it at Vercel.
-      Fix: Vercel → sagdi-site → Settings → Domains → Add → `www.sagdi.com`; UNCHECK "Include apex
-      and www variants" (sagdi.com is already there and would be set to redirect to itself);
-      choose "Redirect to Another Domain", 308, `sagdi.com`. If Vercel then says "Invalid
-      Configuration", add the DNS record it shows in GoDaddy. Already broken on the live site, not
-      caused by the new one **(you)**
+- [x] `https://www.sagdi.com` showed a security warning (expired `*.sagdi.com` certificate from an
+      older setup; www wasn't in the Vercel project). Sagdi added `www.sagdi.com` in Vercel
+      2026-11-05: it now redirects (308) to `https://sagdi.com/` with its own certificate, valid
+      until 2027-02-03 (checked)
 - [x] `https://sagdi.com`: valid certificate until 2027-01-19 (auto-renew on), http redirects to
       https, HSTS on
 
-### 5. Real devices and real services (all on the preview)
+### 5. Real devices and real services (on the preview, or right after go-live)
+
+Sagdi checked the site on his phone over the local network (`npm run dev`, 2026-11-05). That
+covers how pages look and behave on a real phone. It can't cover what only exists on Vercel:
+analytics data, Vercel's env vars, and a real email. Those can be checked on a preview, or in the
+first minutes after go-live, since Instant Rollback undoes a bad deploy in seconds.
 
 - [ ] iPhone Safari, Android Chrome, Brave on iPhone: every page, light and dark, en, ru, uz.
-      Previews need you signed in to Vercel on the phone **(preview)** **(you)**
+      Partly done on the local network; one pass on the deployed site after the latest changes
+      **(you)**
 - [ ] Home carousel on a phone: the first photos show fast, swiping loads the rest, the video plays
 - [ ] Frosted glass on the dock and top pill on a real iPhone (headless WebKit draws no blur)
 - [ ] Contact form: a real email arrives, subject "sagdi.com: New message from ..." **(preview)**
-- [ ] Inbox the contact form sends to: Vercel → sagdi-site → Settings → Environment Variables →
-      `CONTACT_TO_EMAIL` → edit (Production, and Preview to test) → redeploy. A changed variable
-      only takes effect on the next deployment. `CONTACT_FROM_EMAIL` must stay an address on a
-      domain verified in Resend **(you)**
+- [ ] Inbox the contact form sends to (`CONTACT_TO_EMAIL`). Checked 2026-11-05: the sender
+      (`CONTACT_FROM_EMAIL`) is on `resend.dev`, Resend's test address, and no domain of yours
+      has Resend's DNS records. With that sender Resend only delivers to the email of your Resend
+      account ([Resend](https://resend.com/docs/knowledge-base/403-error-resend-dev-domain)).
+      So either:
+  - set `CONTACT_TO_EMAIL` to the email you log in to Resend with, or
+  - verify `sagdi.com` in Resend (Resend → Domains → Add → put the DNS records it shows into
+    GoDaddy), then set `CONTACT_FROM_EMAIL` to an address on it, e.g. `hello@sagdi.com`. Then any
+    `CONTACT_TO_EMAIL` works, and Subscribe can email people later (with `resend.dev` it can only
+    ever reach you).
+  - Where: Vercel → sagdi-site → Settings → Environment Variables → edit → redeploy (a changed
+    variable only applies to the next deployment) **(you)**
 - [ ] Link previews in Telegram and LinkedIn, en and ru. Preview URLs need a login, so bots can't
       read them: check on sagdi.com right after go-live **(go-live)**
 
@@ -108,10 +122,13 @@ pages in en, ru, uz). Decide for each below: blocker or Later **(you)**
       on-page heading; the Writing search description is the old long text
 - [ ] ru and uz: your review of the open judgment calls (Cyrillic name, ты/вы split, slogan), a
       native Uzbek proofread, and the new Work strings (they still mirror English)
-- [ ] Photo alt text: all empty (photo manager, alt box)
-- [ ] Subscribe on the live site shows "prototype · not wired to a backend yet" and "You're on the
-      list ✓ (prototype, nothing was actually sent)". Keep as is, or hide the band and the Subscribe
-      button until it works
+- [ ] Photo alt text: written 2026-11-05 for all 20 home items (19 photos, 1 video), English, in
+      `photos-src/home/set.json` (photo manager's file, order untouched; backup of the old file in
+      the session scratch folder). Not live yet: review them in the photo manager's alt boxes, then
+      press Publish. One alt per photo, so ru and uz pages show the English alt **(you)**
+- [ ] Subscribe: kept on the site (Sagdi, 2026-11-05). Emails are now saved (see D), but the text
+      still says "prototype · not wired to a backend yet" and "(prototype, nothing was actually
+      sent)" in en, ru, uz. "Not wired" is no longer true. Needs your words **(you)**
 
 ### 7. Speed, SEO and errors (production build, headless Chromium + WebKit, 2026-11-05)
 
@@ -193,7 +210,20 @@ Suggested (move up, keep or drop):
 
 ---
 
-## D. Subscribe: plan (researched 2026-11-05, not built)
+## D. Subscribe: plan (researched 2026-11-05)
+
+**Done first (2026-11-05): emails are saved.** The band posts the address to `/api/subscribe`
+(`src/app/api/subscribe/route.ts`), which saves it as a Resend contact (`POST /contacts`). Nothing
+is emailed. Honeypot field + the `/api/` rate-limit rule guard it. Optional `RESEND_SEGMENT_ID`
+env var: the segment new contacts join (without it they land in Resend → Contacts only). The band
+shows its confirmation line either way; failures go to the Vercel log as `[subscribe] ...`.
+Tested locally with every request answered by the test (nothing reached Resend).
+
+- [ ] After deploy: subscribe once with your own email, then check Resend → Contacts. If it isn't
+      there, the Vercel log shows why. My understanding is that an API key created with "sending
+      access" only can't create contacts; then make a "full access" key **(you)**
+- [ ] Before the first newsletter: people who signed up before double opt-in existed get one
+      "confirm you want this" email first
 
 **Pick: Resend**, already the contact form's email provider.
 
@@ -221,8 +251,8 @@ How it would work:
 3. New post: write a Broadcast in Resend (or paste the post link and a line), send it to the
    segment.
 
-You do once: create the segment, set the unsubscribe page in Resend, and add one secret env var in
-Vercel. Code: two small API routes, success and error text in en, ru, uz, remove the prototype
+You do once: verify `sagdi.com` in Resend (needed to email anyone but you, see section 5), create
+the segment, set the unsubscribe page in Resend, and add one secret env var in Vercel. Code: two small API routes, success and error text in en, ru, uz, remove the prototype
 notes, and one privacy line under the form ("Unsubscribe anytime. Your email is only used for
 this."). Later option: email new Notion posts automatically (needs an RSS feed or a scheduled job).
 
