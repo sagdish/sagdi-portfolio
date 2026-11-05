@@ -10,20 +10,20 @@
     "ogImageAlt": "Sagdi Formanov · building in public",
     "pages": {
       "building": {
-        "title": "What I'm making and working on.",
-        "description": "Product, software, AI, experiments, and the work behind them."
+        "title": "Projects: ReguSelf, Personal OS and more",
+        "description": "Products I'm building in public: ReguSelf, Personal OS, a practical guide to product management and more in progress. What each one does and where it stands."
       },
       "writing": {
-        "title": "Things I'm trying to understand.",
-        "description": "Psychology, technology, people, culture, and whatever keeps occupying my head long enough to become a thought worth writing down."
+        "title": "Essays on product, psychology and tech",
+        "description": "What I'm trying to understand about people, technology and culture, from product management to observations and personal notes. Subscribe for new posts."
       },
       "world": {
-        "title": "Everything else that makes up my world.",
-        "description": "Music, cinema, cars, photography, books, art, travel, nature, martial arts, and the things I'm currently drawn to."
+        "title": "My world: music, cinema, cars and more",
+        "description": "What fills my life outside work: music, cinema, cars, photography, books, art, travel, nature, family, martial arts and whatever I'm into right now."
       },
       "work": {
-        "title": "Let's build something.",
-        "description": "Right now I'm looking for a product role where I can build, not just manage. If that's the kind of person you're after, I'd like to talk."
+        "title": "Work with me: product roles and collaboration",
+        "description": "I'm looking for a product role where I can build, not just manage, or a project to build together. Professional Scrum Product Owner (PSPO I). Get in touch."
       }
     }
   },

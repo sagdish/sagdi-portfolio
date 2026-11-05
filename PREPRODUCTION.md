@@ -120,8 +120,12 @@ pages in en, ru, uz). Decide for each below: blocker or Later **(you)**
 - [x] Product texts: Sagdi decided 2026-11-05 they are enough for go-live. The open ones moved to
       Later (C). The Uzbek text of The Ultimate Guide to Product Management replaced with his words
       the same day
-- [ ] Search text per page (`meta.pages.*`, `meta.default` in `messages/*.json`) still mirrors the
-      on-page heading; the Writing search description is the old long text
+- [x] Search text per page (`meta.pages.*` in `messages/*.json`): written 2026-11-05 at Sagdi's
+      request for Building, Writing, World and Work in en, ru, uz. Each title says what the page
+      is, separate from the page heading; each description sums up what is on the page and is
+      under 160 characters. Checked in the dev server and a production build: title, description,
+      link-preview and Twitter text match on all 12 pages; page headings unchanged. Home
+      (`meta.default`) not touched
 - [ ] ru and uz: your review of the open judgment calls (Cyrillic name, ты/вы split, slogan) and a
       native Uzbek proofread
 - [x] Work page in ru and uz: Sagdi OK'd it as it is (2026-11-05), including the labels that stay in

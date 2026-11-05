@@ -10,20 +10,20 @@
     "ogImageAlt": "Sagdi Formanov · yaratish jarayonini ochiq ulashaman",
     "pages": {
       "building": {
-        "title": "Nimalar yaratyapman va nimalar ustida ishlayapman.",
-        "description": "Mahsulotlar, dasturlash, AI, tajribalar va ularning ortidagi mehnat."
+        "title": "Loyihalar: ReguSelf, Personal OS va boshqalar",
+        "description": "Yaratayotgan mahsulotlarim: ReguSelf, Personal OS, product management boʻyicha qoʻllanma va boshqalar. Har biri nima qiladi va hozir qaysi bosqichda."
       },
       "writing": {
-        "title": "Tushunishga urinayotgan mavzularim.",
-        "description": "Psixologiya, texnologiya, odamlar, madaniyat va xayolimda yetarlicha uzoq aylanib, yozishga arziydigan fikrga aylangan narsalar."
+        "title": "Maqolalar: product, psixologiya va texnologiya",
+        "description": "Odamlar, texnologiya va madaniyat haqidagi fikrlarim: product managementdan tortib kuzatuvlar va shaxsiy qaydlargacha. Yangi maqolalarga obuna boʻling."
       },
       "world": {
-        "title": "Dunyoyimni tashkil etuvchi qolgan barcha narsa.",
-        "description": "Musiqa, kino, avtomobillar, fotografiya, kitoblar, sanʼat, sayohat, tabiat, yakkakurash va ayni paytda meni qiziqtirayotgan narsalar."
+        "title": "Dunyom: musiqa, kino, mashinalar va boshqalar",
+        "description": "Ishdan tashqari hayotim: musiqa, kino, avtomobillar, fotografiya, kitoblar, sanʼat, sayohat, tabiat, oila, yakkakurash va hozir meni qiziqtirayotgan narsalar."
       },
       "work": {
-        "title": "Keling, birga nimadir yaratamiz.",
-        "description": "Hozir mahsulot jamoasida faqat boshqarish emas, nimadir yaratish ham mumkin boʻlgan rol izlayapman. Agar sizga shunday mutaxassis kerak boʻlsa, suhbatlashsak xursand boʻlaman."
+        "title": "Hamkorlik: product sohasida ish va loyihalar",
+        "description": "Mahsulot jamoasida faqat boshqarish emas, yaratish ham mumkin boʻlgan rol yoki birgalikdagi loyiha izlayapman. PSPO I sertifikatiga egaman. Menga yozing."
       }
     }
   },
