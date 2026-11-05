@@ -30,6 +30,14 @@ keys or private URLs here.
       filter from Production to Preview), and both scripts load with the new
       `X-Content-Type-Options: nosniff` header (locally they are 404 pages, so this can't be
       tested here) **(preview)**
+  - [x] Checked on sagdi.com right after go-live (2026-11-05) instead: both scripts load with
+        nosniff. Web Analytics from `/_vercel/insights/script.js`; Speed Insights from a path
+        Vercel gives this project (`/<id>/script.js`, sending to `/<id>/vitals`), set up by
+        Vercel itself, which also means Speed Insights is on. Both data addresses are answered by
+        Vercel (JSON), not caught by the site's language redirect
+  - [ ] A real visit shows up in Vercel → Analytics and Speed Insights (Production). Only a real
+        browser can prove it: both scripts send nothing when `navigator.webdriver` is set or the
+        browser says "Headless", so no automated test can **(you)**
 
 ### 2. Security
 
@@ -76,8 +84,10 @@ keys or private URLs here.
       Both fail quietly if a variable is wrong **(preview)**
   - [x] Posts: the preview build of `3f8ed77` (2026-11-05) generated the 3 post pages, so the
         Notion variables work on Preview. Build log: no errors or warnings
-  - [ ] Photos: open home on the preview. The build log can't show it (a failure falls back to
-        the sample frames quietly) **(you)**
+  - [x] Photos and posts on sagdi.com right after go-live (2026-11-05): home HTML has 80 R2 photo
+        addresses and no sample frames; Writing lists the 3 posts
+  - [x] Photos: open home on the preview. The build log can't show it (a failure falls back to
+        the sample frames quietly). Replaced by the sagdi.com check on the line above
   - Headless checks on the preview need a "Protection Bypass for Automation" secret, and the
     project has none. `vercel curl` would create one in the project settings: only with
     Sagdi's yes
@@ -219,6 +229,17 @@ pages in en, ru, uz). Decide for each below: blocker or Later **(you)**
    submit the sitemap and check the en/ru/uz pairs. Optional: to hide the old contact page
    sooner than Google's next visit, Search Console → Removals → `https://sagdi.com/contact`
    (plus `/ru/contact` and `/uz/contact`) **(you)**
+   - [x] Checked on sagdi.com 2026-11-05, production deployment of `cf129b0` (Ready, build log
+         clean, 53 static pages, 3 posts): every page 200 in en, ru, uz with the new titles;
+         Work `noindex, follow`, the rest `index, follow`; sitemap 33 entries, robots.txt;
+         all 18 old addresses reach a 200 page in one redirect (`/about` → home); www → sagdi.com;
+         security headers on, no `X-Powered-By`; real photos and 3 posts; form routes answer bad
+         input with 400 (no email sent, nothing saved); 40 WebKit runs clean; 40 Chromium runs
+         clean apart from the analytics script the test blocked on purpose. Layout shift under
+         0.1 everywhere (worst 0.057: Russian home, phone, first visit; see Later)
+   - [ ] Still yours: the phone pass on sagdi.com, a real visit in Vercel Analytics, Telegram and
+         LinkedIn previews, Search Console (sitemap, optional Removals), subscribe once and look
+         in Resend → Contacts (D) **(you)**
 6. If something breaks: Vercel → sagdi-site → Instant Rollback. On Hobby it goes back to the
    previous production deployment only. After a rollback, pushes to `main` don't go live until
    you press "Undo Rollback". The old code stays in `pre-nov-2026-version`; the exact old live
@@ -246,6 +267,10 @@ From Sagdi:
       ("Try again, or reach me on LinkedIn")
 
 Suggested (move up, keep or drop):
+
+- [ ] Russian home on a phone, first visit: the text shifts a little when the Russian font
+      arrives (layout shift 0.057 on sagdi.com, 2026-11-05; Google's limit is 0.1, so it passes).
+      Seen in the "Currently" card and the heading
 
 - [ ] Notion post images expire after 1 hour (signed links). Seen 2026-11-05: one load of
       `/writing/pspo` served an expired link and the image was broken until the page refreshed.
