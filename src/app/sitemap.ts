@@ -11,8 +11,6 @@ type Route = {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date()
-
   const routes: Route[] = [
     { path: "/", changeFrequency: "weekly", priority: 1 },
     { path: "/building", changeFrequency: "weekly", priority: 0.9 },
@@ -26,19 +24,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ]
 
-  // One entry per page (default-locale URL) carrying hreflang alternates for all locales.
-  const staticPages: MetadataRoute.Sitemap = routes.map((route) => {
+  // One entry per page per language, each listing every language version
+  // (itself included) plus x-default, as Google asks for hreflang in sitemaps.
+  // No lastModified: there is no real per-page date, and Google ignores
+  // lastmod that isn't accurate.
+  const staticPages: MetadataRoute.Sitemap = routes.flatMap((route) => {
     const languages: Record<string, string> = {}
     for (const locale of routing.locales) {
       languages[locale] = absoluteUrl(locale, route.path)
     }
-    return {
-      url: absoluteUrl(routing.defaultLocale, route.path),
-      lastModified: now,
+    languages["x-default"] = absoluteUrl(routing.defaultLocale, route.path)
+    return routing.locales.map((locale) => ({
+      url: absoluteUrl(locale, route.path),
       changeFrequency: route.changeFrequency,
       priority: route.priority,
       alternates: { languages },
-    }
+    }))
   })
 
   // Posts are language-agnostic → each listed once at its unprefixed URL.

@@ -7,7 +7,7 @@ import remarkBreaks from "remark-breaks"
 import rehypeRaw from "rehype-raw"
 import { BackLink } from "@/components/ui/back-link"
 import { formatPostDate, getPost, listPosts } from "@/lib/writing"
-import { SITE_URL, ogImages } from "@/lib/seo"
+import { SITE_URL, absoluteUrl, ogImages } from "@/lib/seo"
 import { routing } from "@/i18n/routing"
 import { JsonLd } from "@/components/seo/json-ld"
 
@@ -74,6 +74,9 @@ export default async function WritingPostPage({
     keywords: post.tags?.length ? post.tags.join(", ") : undefined,
     url: `${SITE_URL}/writing/${slug}`,
     mainEntityOfPage: `${SITE_URL}/writing/${slug}`,
+    // The post's link-preview image: a stable URL, unlike Notion's file links,
+    // which expire after an hour.
+    image: absoluteUrl(routing.defaultLocale, "/opengraph-image"),
   }
 
   return (

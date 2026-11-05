@@ -1755,8 +1755,10 @@
 .cform-status .err {
   color: var(--destructive);
 }
-/* Honeypot: off-screen rather than display:none, which bots skip. */
-.cform-hp {
+/* Honeypot: off-screen rather than display:none, which bots skip. Scoped to
+   .cform so it outranks `.cform input { width: 100% }`; at full width it stuck
+   out past the screen and the page could slide sideways. */
+.cform .cform-hp {
   position: absolute;
   width: 1px;
   height: 1px;

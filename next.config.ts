@@ -16,7 +16,19 @@ const REDIRECTS: [string, string][] = [
 // manifest.json from here; next/image needs the host allowlisted.
 const photosBase = process.env.PHOTOS_BASE_URL
 
+// Basic security headers on every response. No Content-Security-Policy yet: it
+// needs care so it doesn't block Next's own scripts, Vercel Analytics or fonts.
+const SECURITY_HEADERS = [
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "X-Frame-Options", value: "SAMEORIGIN" },
+]
+
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
+  async headers() {
+    return [{ source: "/:path*", headers: SECURITY_HEADERS }]
+  },
   images: photosBase
     ? {
         remotePatterns: [

@@ -354,8 +354,9 @@ work form, 404). Still waiting on Sagdi's review of the judgment calls at the bo
       every page, 2026-10-06)
 - [ ] New email subject "sagdi.com: New message from ..." seen in a real inbox
 - [ ] Real iPhone: photo full-screen view and the UI/UX pass
-- [ ] Work page scrolls sideways by 15px (phone and desktop): the contact form's hidden spam
-      field `.cform-hp` sticks out past the edge (found 2026-10-10)
+- [x] Work page scrolls sideways by 15px (phone and desktop): the contact form's hidden spam
+      field `.cform-hp` sticks out past the edge (found 2026-10-10). Fixed 2026-11-05 (see
+      Site health audit)
 - [x] /uz/writing: post dates render differently on server and browser ("okt, 2026" vs
       "2026 M10"), a React hydration error (found 2026-10-10). Fixed 2026-10-12: Chrome has
       no Uzbek month names, so the list's dates are now formatted on the server only
@@ -381,8 +382,9 @@ Production build of `ce79fd1` in a copy, Lighthouse 12 + headless Chromium/WebKi
       faster. `npm audit --omit=dev` still lists postcss inside next (fixed only in Next 16),
       plus source-map-js, nanoid, mdast-util-to-hast (`npm audit fix` can fix those, not done).
       `next lint` prints a deprecation notice (removed in Next 16), still works
-- [ ] `/apple-icon` (iPhone home-screen icon) returns 404: middleware rewrites it to
-      `/en/apple-icon` (matcher only skips paths with a dot)
+- [x] `/apple-icon` (iPhone home-screen icon) returns 404: middleware rewrites it to
+      `/en/apple-icon` (matcher only skips paths with a dot). Fixed: `apple-icon` added to the
+      matcher's skip list; now 200 image/png
 - [ ] Home on a phone (en): first photo shows at 5.8 s on a slow connection (Lighthouse, real
       throttling, 3 runs). The photos are already strip-sized (720px tall, 50 to 240 KB, blur
       placeholder); the cause is the first photo being lazy (its download starts at 1.5 s) and 4
@@ -391,16 +393,24 @@ Production build of `ce79fd1` in a copy, Lighthouse 12 + headless Chromium/WebKi
 - [ ] Photos come from `pub-…r2.dev`, which Cloudflare says is rate-limited and for development
       only; a custom domain needs sagdi.com's DNS moved from GoDaddy to Cloudflare. Sagdi: ignore
       for now (2026-11-05). UNVERIFIED: what Vercel production uses
-- [ ] Work page sideways scroll (above) still there: `.cform input { width: 100% }` beats
-      `.cform-hp`
+- [x] Work page sideways scroll (above): `.cform input { width: 100% }` beat `.cform-hp`.
+      Fixed: selector is now `.cform .cform-hp`; page width = screen at 390 and 1280 on /work,
+      /ru/work, /uz/work (Chromium + WebKit), field still 1x1 in the form
 - [ ] Notion post images are signed links that expire after 1 hour (`X-Amz-Expires=3600`);
       likely a dead image for the first visitor after a quiet hour (not seen, reasoning only).
       Sagdi: ignore for now, moving the images to Cloudflare (2026-11-05)
 - [ ] Small-text contrast under 4.5:1 in light mode: `--faint` (4.06 to 4.35) and the blue accent
       as text (3.12 to 3.57); token change, needs Sagdi's yes. Dark mode not measured
-- [ ] Sitemap: ru and uz URLs have no `<url>` of their own; `lastmod` is the build time
-- [ ] Small: BlogPosting has no `image`; ReguSelf link in home text has no underline (2.62:1 vs
-      text); PSPO image alt is its file name; no security headers, `X-Powered-By` sent
+- [x] Sitemap: ru and uz URLs have no `<url>` of their own; `lastmod` is the build time.
+      Fixed: 33 page entries (11 pages x en/ru/uz), each with en/ru/uz/x-default; no lastmod on
+      pages; the 3 posts keep their real date
+- [x] BlogPosting has no `image`. Fixed: the post's preview image (`/opengraph-image`)
+- [x] No security headers, `X-Powered-By` sent. Fixed: nosniff, Referrer-Policy, X-Frame-Options
+      SAMEORIGIN, no X-Powered-By. No CSP yet. UNVERIFIED on Vercel: Vercel Analytics script
+      still loads with nosniff (locally it's a 404 page, so the browser refuses it)
+- [ ] ReguSelf link in home text has no underline (2.62:1 vs text); visible change, needs
+      Sagdi's yes
+- [ ] PSPO image alt is its file name (`PSPO_I.jpg`, from Notion)
 
 ---
 
