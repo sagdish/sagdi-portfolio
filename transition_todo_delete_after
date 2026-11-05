@@ -373,8 +373,14 @@ Production build of `ce79fd1` in a copy, Lighthouse 12 + headless Chromium/WebKi
 - [x] typecheck, lint, build pass; 0 layout shift in 80 fast browser runs (0.033 at most on a
       slow connection); hreflang en/ru/uz/x-default complete and reciprocal on every page;
       0 `sample` chips on the 36 sitemap pages
-- [ ] Next.js 15.4.8 has 33 security advisories (3 critical); first fixed 15.x is 15.5.28
-      (live `main` is on the same version)
+- [x] Next.js 15.4.8 had 33 security advisories (3 critical): updated to 15.5.29 with
+      eslint-config-next 15.5.29 and sharp 0.35.5 (the image advisory needs sharp >= 0.35.5;
+      Next used a nested 0.34.5 before). Checked in a copy (2026-11-05): typecheck, lint, build
+      pass; search tags, JSON-LD, sitemap, robots, redirects, OG images and contact API identical
+      on all 36 pages; 80 browser runs same as before; throttled Lighthouse same or slightly
+      faster. `npm audit --omit=dev` still lists postcss inside next (fixed only in Next 16),
+      plus source-map-js, nanoid, mdast-util-to-hast (`npm audit fix` can fix those, not done).
+      `next lint` prints a deprecation notice (removed in Next 16), still works
 - [ ] `/apple-icon` (iPhone home-screen icon) returns 404: middleware rewrites it to
       `/en/apple-icon` (matcher only skips paths with a dot)
 - [ ] Home on a phone (en): first photo shows at 5.8 s on a slow connection (Lighthouse, real
