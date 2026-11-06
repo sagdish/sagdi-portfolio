@@ -69,7 +69,20 @@ export function TopPill() {
       <Link className="tb-home" href="/" aria-label={tn("home")}>
         <BrandMark />
       </Link>
-      <span className="tb-name">SAGDI</span>
+      {/* The name is a second, tap-only trigger for the same menu. Keyboard and
+          screen-reader users keep the one labeled ⋮ button. */}
+      <button
+        type="button"
+        className="tb-name"
+        tabIndex={-1}
+        aria-hidden="true"
+        onClick={(e) => {
+          e.stopPropagation()
+          setOpen((o) => !o)
+        }}
+      >
+        SAGDI
+      </button>
       <button
         ref={moreRef}
         type="button"

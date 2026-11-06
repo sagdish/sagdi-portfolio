@@ -54,7 +54,7 @@
     "intro": "I work on products, explore technology, and build things of my own.",
     "lede": "Figuring things out. I'm trying to understand things, build what matters, and keep learning",
     "photography": {
-      "label": "Photography",
+      "label": "Where I Look",
       "prev": "Previous photos",
       "next": "Next photos",
       "open": "Open photo",
@@ -67,9 +67,12 @@
       "label": "Latest writing"
     },
     "currently": {
-      "heading": "Currently",
-      "buildingText": "Building <reguself>ReguSelf</reguself>, developing my personal OS, and experimenting with AI-powered products.",
-      "exploringText": "A YouTube transcription and visualization tool."
+      "heading": "In progress / testing",
+      "more": "Show more",
+      "all": "See all projects",
+      "reguself": "<reguself>ReguSelf</reguself>: A tool for staying on track.",
+      "personalOs": "Personal OS: Building a system to manage my life.",
+      "ytSkill": "YouTube CC skill: Experimenting with transcription and visualization."
     },
     "elsewhere": {
       "label": "Elsewhere",

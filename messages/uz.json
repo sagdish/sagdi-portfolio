@@ -54,7 +54,7 @@
     "intro": "Product ustida ishlayman, texnologiyalarni o‘rganib o‘z loyihalarimni yarataman.",
     "lede": "Oʻz yoʻlimni topib, atrofdagi jarayonlarni anglashga, muhim narsalarni yaratishga va oʻrganishga intilyapman.",
     "photography": {
-      "label": "Fotografiya",
+      "label": "Mening nigohimda",
       "prev": "Oldingi suratlar",
       "next": "Keyingi suratlar",
       "open": "Suratni ochish",
@@ -67,9 +67,12 @@
       "label": "Soʻnggi yozuvlar"
     },
     "currently": {
-      "heading": "Hozirgi paytda",
-      "buildingText": "<reguself>ReguSelf</reguself>ni rivojlantiryapman, shaxsiy  OS yaratyapman va AI asosidagi mahsulotlarni sinab ko‘ryapman",
-      "exploringText": "YouTube videolarini matnga aylantirish va vizualizatsiya qilish skill"
+      "heading": "Jarayonda / sinovda",
+      "more": "Koʻproq koʻrsatish",
+      "all": "Barcha loyihalarni koʻrish",
+      "reguself": "<reguself>ReguSelf</reguself>: rejadan chiqib ketmaslikka yordam beradigan vosita.",
+      "personalOs": "Personal OS: hayotimni boshqarish uchun tizim quryapman.",
+      "ytSkill": "YouTube CC skill: transkripsiya va vizualizatsiya bilan tajriba oʻtkazyapman."
     },
     "elsewhere": {
       "label": "boshqa sahifalar",

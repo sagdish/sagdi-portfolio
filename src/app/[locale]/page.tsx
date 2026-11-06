@@ -5,6 +5,7 @@ import { ELSEWHERE, LINKS } from "@/content/links"
 import { listPhotos } from "@/lib/photos"
 import { listPosts } from "@/lib/writing"
 import { pageMetadata } from "@/lib/seo"
+import { CurrentlyCard } from "@/components/ui/currently-card"
 import { PhotoCarousel } from "@/components/ui/photo-carousel"
 import { Reveal } from "@/components/ui/reveal"
 
@@ -49,22 +50,22 @@ export default async function HomePage({
       )}
 
       <Reveal className="nowcard currently section">
-        <div className="cur-head">
-          <span className="livedot" />
-          <h2 className="lbl">{t("currently.heading")}</h2>
-        </div>
-        <ul className="cur-list">
-          <li>
-            {t.rich("currently.buildingText", {
+        <CurrentlyCard
+          heading={t("currently.heading")}
+          moreLabel={t("currently.more")}
+          allLabel={t("currently.all")}
+          items={[
+            t.rich("currently.reguself", {
               reguself: (chunks) => (
                 <a href="https://reguself.com" target="_blank" rel="noopener">
                   {chunks}
                 </a>
               ),
-            })}
-          </li>
-          <li>{t("currently.exploringText")}</li>
-        </ul>
+            }),
+            t("currently.personalOs"),
+            t("currently.ytSkill"),
+          ]}
+        />
       </Reveal>
 
       <Reveal className="section">

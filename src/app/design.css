@@ -56,6 +56,7 @@
 .railsub,
 .pcar-btn,
 .lang-btn,
+.cur-toggle,
 .btn-secondary {
   border: 1px solid var(--border);
   background: var(--field);
@@ -71,6 +72,7 @@
   .railsub:hover,
   .pcar-btn:hover:not(:disabled),
   .lang-btn:hover:not(:disabled),
+  .cur-toggle:hover,
   .btn-secondary:hover {
     border-color: var(--border-strong);
     background: var(--surface-hover);
@@ -454,13 +456,19 @@
   height: 26px;
   width: 26px;
 }
+/* Also opens / closes the menu (a tap target for the ⋮ menu); stretched to the
+   pill's full height so the whole strip is tappable, layout unchanged. */
 .tb-name {
+  align-self: stretch;
+  display: inline-flex;
+  align-items: center;
   font-family: var(--font-mono);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--text);
   user-select: none;
+  cursor: pointer;
 }
 .tb-more {
   margin-left: 2px;
@@ -535,10 +543,12 @@
   opacity: 0.6;
   cursor: default;
 }
-.lang-chev {
+.lang-chev,
+.cur-chev {
   transition: transform var(--dur-fast);
 }
-.lang-btn[aria-expanded="true"] .lang-chev {
+.lang-btn[aria-expanded="true"] .lang-chev,
+.cur-toggle[aria-expanded="true"] .cur-chev {
   transform: rotate(180deg);
 }
 .lang-menu {
@@ -875,6 +885,17 @@
 .cur-head .livedot {
   margin-top: 0;
 }
+/* Chevron at the right end of the heading row: shows / hides the rest of the
+   list. The negative block margin keeps the row at the label's height. */
+.cur-toggle {
+  height: 24px;
+  width: 24px;
+  margin: -4px 0 -4px auto;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  cursor: pointer;
+}
 /* Bullets sit in the live dot's column (8px dot + 10px gap = 18px), so each item's
    text starts where the heading text starts; wrapped lines hang under the text.
    A hairline separates the items. */
@@ -897,13 +918,51 @@
   border-radius: 50%;
   background: var(--faint);
 }
-.cur-list li + li {
+.cur-list li + li,
+.cur-more li {
   margin-top: 12px;
   padding-top: 12px;
   border-top: 1px solid var(--border);
 }
-.cur-list li + li::before {
+.cur-list li + li::before,
+.cur-more li::before {
   top: calc(12px + 0.8em - 2.5px);
+}
+/* The collapsible part (items 2+ and "See all projects"). Its height slides
+   open and shut (grid row 0fr ↔ 1fr): the one place a size animates, Sagdi's
+   yes on 2026-11-06. Closed, `visibility` hides it from taps, Tab and screen
+   readers, flipped only after the close finishes. */
+.cur-more {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition:
+    grid-template-rows var(--dur) var(--ease-out),
+    visibility 0s var(--dur);
+}
+.cur-more[data-open="true"] {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows var(--dur) var(--ease-out);
+}
+/* The clip box reaches 4px past the content on the sides and bottom (padding +
+   matching negative margin, so layout is unchanged): room for the link's focus
+   ring (2px outline + 2px offset). */
+.cur-more-in {
+  min-height: 0;
+  overflow: hidden;
+  margin: 0 -4px -4px;
+  padding: 0 4px;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+}
+.cur-more[data-open="true"] .cur-more-in {
+  opacity: 1;
+}
+.cur-all {
+  margin-top: 12px;
+  padding-bottom: 4px;
+  text-align: right;
 }
 
 /* ── Section headers ───────────────────────────────────────────────────────── */

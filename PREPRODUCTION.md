@@ -1,6 +1,6 @@
 # sagdi.com pre-production checklist
 
-Last updated: 2026-11-05. Live since 2026-11-05: `main` is the new site (it was `rewamp2026`); the
+Last updated: 2026-11-06. Live since 2026-11-05: `main` is the new site (it was `rewamp2026`); the
 old site is in branch `pre-nov-2026-version`.
 
 Legend: `[x]` checked and passing · `[ ]` open · **(you)** needs Sagdi · **(preview)** needs a Vercel
@@ -261,6 +261,10 @@ From Sagdi:
 - [ ] Verify `sagdi.com` in Resend (moved from A.5 on 2026-11-05): Resend → Domains → Add → DNS
       records into GoDaddy, then `CONTACT_FROM_EMAIL` on sagdi.com. Needed before Subscribe can
       email anyone but you
+- [ ] Home, 2026-11-06: card renamed "In progress / testing" (ReguSelf shown, Personal OS and
+      YouTube CC skill slide open under a chevron, with "See all projects →" to Projects) and the
+      photo label renamed "Through my lens". On phones, tapping SAGDI in the top pill also opens
+      the ⋮ menu. The ru and uz lines are my translations of your English: look them over **(you)**
 - [ ] Contact inbox (moved from A.5 on 2026-11-05, Sagdi: "okay for now"): `CONTACT_TO_EMAIL` has
       to be your Resend login email while the sender is on `resend.dev` (or verify sagdi.com, line
       above). If it isn't, Resend refuses every message and visitors see the form's error text
@@ -270,7 +274,7 @@ Suggested (move up, keep or drop):
 
 - [ ] Russian home on a phone, first visit: the text shifts a little when the Russian font
       arrives (layout shift 0.057 on sagdi.com, 2026-11-05; Google's limit is 0.1, so it passes).
-      Seen in the "Currently" card and the heading
+      Seen in the "Currently" card (renamed "In progress / testing" on 2026-11-06) and the heading
 
 - [ ] Notion post images expire after 1 hour (signed links). Seen 2026-11-05: one load of
       `/writing/pspo` served an expired link and the image was broken until the page refreshed.

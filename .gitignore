@@ -45,3 +45,6 @@ next-env.d.ts
 
 # local photo manager (see scripts/photos-sync.mjs)
 /photo-manager
+
+# session handoff notes (private, never committed)
+/HANDOFF.md
