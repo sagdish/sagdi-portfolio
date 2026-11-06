@@ -70,7 +70,7 @@ Next.js 15 App Router, React 19, Tailwind v4, next-intl (en unprefixed, `/ru`, `
 - Tokens in `src/app/globals.css` (`:root` / `.dark`): colors, `--r-*` radii, `--dur*` / `--ease-*`
   motion, `--focus-ring`. Component CSS in `src/app/design.css`. Use tokens, not raw values. The only
   raw values are one-off decorative details: OG/icon images, the rail cat, the rainbow glow, the
-  live-dot pulse, the 3px nav marker and the 2px flag corners.
+  card cursor blink, the 3px nav marker and the 2px flag corners.
 - Style with the classes in `design.css`. No `style={{}}` in pages; the only exception is per-item data such as `--ar`.
 - Reuse before adding a class:
   - the grouped selectors at the top of `design.css`: type roles (label, nav, meta), the bordered

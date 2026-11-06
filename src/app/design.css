@@ -845,25 +845,19 @@
   gap: 12px;
   align-items: flex-start;
 }
-.livedot {
-  height: 8px;
+/* Blinking block cursor before the card label, so the mono label reads like a
+   terminal prompt. Hard on / off about once a second, like a terminal; reduced
+   motion leaves it solid (global rule at the end of this file). */
+.cur-cursor {
+  height: 12px;
   width: 8px;
-  border-radius: 50%;
-  background: var(--live);
-  margin-top: 7px;
   flex-shrink: 0;
-  box-shadow: 0 0 0 0 color-mix(in srgb, var(--live) 70%, transparent);
-  animation: pulse 2.4s infinite;
+  background: var(--accent);
+  animation: cur-blink 1.06s steps(1, end) infinite;
 }
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--live) 55%, transparent);
-  }
-  70% {
-    box-shadow: 0 0 0 7px transparent;
-  }
-  100% {
-    box-shadow: 0 0 0 0 transparent;
+@keyframes cur-blink {
+  50% {
+    opacity: 0;
   }
 }
 .nowcard .lbl {
@@ -882,9 +876,6 @@
   gap: 10px;
   margin-bottom: 12px;
 }
-.cur-head .livedot {
-  margin-top: 0;
-}
 /* Chevron at the right end of the heading row: shows / hides the rest of the
    list. The negative block margin keeps the row at the label's height. */
 .cur-toggle {
@@ -896,7 +887,7 @@
   color: var(--muted);
   cursor: pointer;
 }
-/* Bullets sit in the live dot's column (8px dot + 10px gap = 18px), so each item's
+/* Bullets sit in the cursor's column (8px cursor + 10px gap = 18px), so each item's
    text starts where the heading text starts; wrapped lines hang under the text.
    A hairline separates the items. */
 .cur-list {

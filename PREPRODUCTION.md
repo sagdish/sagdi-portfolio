@@ -264,7 +264,8 @@ From Sagdi:
 - [ ] Home, 2026-11-06: card renamed "In progress / testing" (ReguSelf shown, Personal OS and
       YouTube CC skill slide open under a chevron, with "See all projects →" to Projects) and the
       photo label renamed "Through my lens". On phones, tapping SAGDI in the top pill also opens
-      the ⋮ menu. The ru and uz lines are my translations of your English: look them over **(you)**
+      the ⋮ menu. The card's green dot is now a blinking blue block cursor (solid with reduced
+      motion). The ru and uz lines are my translations of your English: look them over **(you)**
 - [ ] Contact inbox (moved from A.5 on 2026-11-05, Sagdi: "okay for now"): `CONTACT_TO_EMAIL` has
       to be your Resend login email while the sender is on `resend.dev` (or verify sagdi.com, line
       above). If it isn't, Resend refuses every message and visitors see the form's error text

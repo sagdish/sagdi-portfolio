@@ -31,7 +31,7 @@ export function CurrentlyCard({
   return (
     <>
       <div className="cur-head">
-        <span className="livedot" />
+        <span className="cur-cursor" aria-hidden />
         <h2 className="lbl">{heading}</h2>
         <button
           type="button"
