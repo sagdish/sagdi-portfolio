@@ -1,11 +1,15 @@
+import { readFile } from "node:fs/promises"
+import { join } from "node:path"
 import { ImageResponse } from "next/og"
 
-// Branded apple-touch-icon (replaces the old marketing PNG): the [S] mark on the
-// brand blue. Full-bleed square — iOS applies its own rounded mask.
+// iPhone home-screen icon: the SF logo (public/logo.png), full-bleed. The logo's
+// corners are transparent and iOS turns transparency black, so the square behind it
+// is the logo's own blue. iOS applies its own rounded mask.
 export const size = { width: 180, height: 180 }
 export const contentType = "image/png"
 
-export default function AppleIcon() {
+export default async function AppleIcon() {
+  const logo = await readFile(join(process.cwd(), "public/logo.png"))
   return new ImageResponse(
     (
       <div
@@ -13,16 +17,15 @@ export default function AppleIcon() {
           width: "100%",
           height: "100%",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "#4686eb",
-          color: "#ffffff",
-          fontSize: 116,
-          fontWeight: 700,
-          fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
+          background: "#288af3",
         }}
       >
-        S
+        <img
+          src={`data:image/png;base64,${logo.toString("base64")}`}
+          width={size.width}
+          height={size.height}
+          alt=""
+        />
       </div>
     ),
     { ...size }

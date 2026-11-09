@@ -21,7 +21,8 @@
   --font-sans:
     var(--font-hanken), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono:
-    var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+    var(--font-jetbrains-mono), "Mono Glyph Fallback", ui-monospace,
+    "SFMono-Regular", Menlo, monospace;
 
   /* Prototype tokens exposed as Tailwind color utilities. */
   --color-bg: var(--bg);
@@ -124,7 +125,8 @@
   --font-sans:
     var(--font-hanken), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono:
-    var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+    var(--font-jetbrains-mono), "Mono Glyph Fallback", ui-monospace,
+    "SFMono-Regular", Menlo, monospace;
 
   /* Frosted-glass dock / top-pill (alpha is intentional — a solid can't refract). */
   --glass: rgba(251, 250, 248, 0.5);
@@ -192,11 +194,36 @@
   --destructive: oklch(0.704 0.191 22.216);
 }
 
+/* The few characters JetBrains Mono doesn't have here (→ ↗ and Uzbek ʻ ʼ): Arial at
+   the size next/font gave them, so they look the same as before. Everything else
+   in mono falls through to the system monospace fonts while the real font loads. */
+@font-face {
+  font-family: "Mono Glyph Fallback";
+  src: local("Arial");
+  size-adjust: 134.59%;
+  ascent-override: 75.79%;
+  descent-override: 22.29%;
+  line-gap-override: 0%;
+  unicode-range: U+02BB, U+02BC, U+2190-21FF;
+}
+
 /* Hanken Grotesk has no basic Cyrillic, so Russian uses Onest for all its text
-   (loaded in [locale]/layout.tsx). Body reads var(--font-sans), so this one token does it. */
+   (loaded in [locale]/layout.tsx). Body reads var(--font-sans), so this one token does it.
+   "Onest Fallback" is what shows while Onest downloads: Arial sized to Onest's width at
+   its 93.5% (106.1% is next/font's own figure for Onest, x 0.935), so lines break the
+   same before and after and the page doesn't jump. */
+@font-face {
+  font-family: "Onest Fallback";
+  src: local("Arial");
+  size-adjust: 99.2%;
+  ascent-override: 91.42%;
+  descent-override: 28.75%;
+  line-gap-override: 0%;
+}
 html:lang(ru) {
   --font-sans:
-    var(--font-onest), ui-sans-serif, system-ui, -apple-system, sans-serif;
+    var(--font-onest), "Onest Fallback", ui-sans-serif, system-ui,
+    -apple-system, sans-serif;
 }
 
 /* ── Base ──────────────────────────────────────────────────────────────────── */

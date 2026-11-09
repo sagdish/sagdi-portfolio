@@ -1,6 +1,6 @@
 # sagdi.com pre-production checklist
 
-Last updated: 2026-11-06. Live since 2026-11-05: `main` is the new site (it was `rewamp2026`); the
+Last updated: 2026-11-09. Live since 2026-11-05: `main` is the new site (it was `rewamp2026`); the
 old site is in branch `pre-nov-2026-version`.
 
 Legend: `[x]` checked and passing · `[ ]` open · **(you)** needs Sagdi · **(preview)** needs a Vercel
@@ -273,9 +273,16 @@ From Sagdi:
 
 Suggested (move up, keep or drop):
 
-- [ ] Russian home on a phone, first visit: the text shifts a little when the Russian font
+- [x] Russian home on a phone, first visit: the text shifts a little when the Russian font
       arrives (layout shift 0.057 on sagdi.com, 2026-11-05; Google's limit is 0.1, so it passes).
-      Seen in the "Currently" card (renamed "In progress / testing" on 2026-11-06) and the heading
+      Seen in the "Currently" card (renamed "In progress / testing" on 2026-11-06) and the heading.
+      Fixed 2026-11-09, two causes: the stand-in for Onest was about 6% too wide, and the stand-in
+      for JetBrains Mono wrapped the hero name onto two lines (in all three languages). Local
+      production build, slow font simulated: Russian home at 390px went from 0.0425 to 0.0001, and
+      none of 2046 text positions moved once the fonts are in (42 page and width combinations).
+      Not checked on Android (no Arial there, so the stand-in sizing doesn't apply)
+- [ ] Russian home at 320px wide: the top bar (language, theme, Subscribe) runs 13px past the
+      screen edge, so the page can scroll sideways. Seen 2026-11-09
 
 - [ ] Notion post images expire after 1 hour (signed links). Seen 2026-11-05: one load of
       `/writing/pspo` served an expired link and the image was broken until the page refreshed.
@@ -292,7 +299,8 @@ Suggested (move up, keep or drop):
 - [ ] Error alerts, so you know when visitors hit errors
 - [ ] Next.js 16 (fixes the last postcss advisory); move `npm run lint` off `next lint`
       (deprecated in 15.5)
-- [ ] `apple-icon.tsx` still draws the old "S", not the SF logo
+- [x] `apple-icon.tsx` still draws the old "S", not the SF logo. Now the SF logo on its own blue
+      (2026-11-09; checked as an image from a local build, not yet on a real iPhone)
 - [ ] uz: the `ʻ` letter falls back to Arial (Hanken has no glyph); ru: the → arrow is shorter in
       Onest
 - [ ] Product screenshots on product pages (strip is built, no photos yet); Pomodoro Focus Dock

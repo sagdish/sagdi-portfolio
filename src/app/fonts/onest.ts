@@ -5,6 +5,8 @@ import localFont from "next/font/local"
  * Used through `html:lang(ru)` in globals.css; en and uz never reference it.
  * Onest draws its letters 6.5% taller than Hanken at the same px (x-height 527 vs 493
  * per 1000), so size-adjust scales it to 93.5% and Russian text matches English in size.
+ * The automatic stand-in font ignores that scaling, so it's off here and globals.css
+ * has its own ("Onest Fallback"), sized to match: text doesn't move when Onest arrives.
  */
 export const onest = localFont({
   src: "./Onest-Variable.woff2",
@@ -12,5 +14,6 @@ export const onest = localFont({
   variable: "--font-onest",
   display: "swap",
   preload: false,
+  adjustFontFallback: false,
   declarations: [{ prop: "size-adjust", value: "93.5%" }],
 })

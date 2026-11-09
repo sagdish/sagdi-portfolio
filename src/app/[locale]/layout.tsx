@@ -25,10 +25,14 @@ const hanken = Hanken_Grotesk({
   variable: "--font-hanken",
   display: "swap",
 })
+// adjustFontFallback off: the automatic stand-in is a stretched Arial, wide enough to
+// wrap the hero name onto two lines until the font lands. Without it, --font-mono's
+// system monospace fonts stand in, same character width, so nothing jumps.
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
   display: "swap",
+  adjustFontFallback: false,
 })
 
 export async function generateMetadata({
