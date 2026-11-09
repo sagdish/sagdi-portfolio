@@ -281,8 +281,13 @@ Suggested (move up, keep or drop):
       production build, slow font simulated: Russian home at 390px went from 0.0425 to 0.0001, and
       none of 2046 text positions moved once the fonts are in (42 page and width combinations).
       Not checked on Android (no Arial there, so the stand-in sizing doesn't apply)
-- [ ] Russian home at 320px wide: the top bar (language, theme, Subscribe) runs 13px past the
-      screen edge, so the page can scroll sideways. Seen 2026-11-09
+- [x] Russian home at 320px wide: the top bar (language, theme, Subscribe) runs 13px past the
+      screen edge, so the page can scroll sideways. Seen 2026-11-09. Fixed the same day: tighter
+      spacing below 360px. Also fixed: the language dropdown in that bar ran off the left edge on
+      phones up to 390px, in all three languages; it now opens rightward. Local production build,
+      855 page loads (every page, en/ru/uz, 320px to 1280px, Chromium and WebKit, before fonts
+      load and with the menus open): nothing past the screen edge except the photo strip, which
+      scrolls on purpose
 
 - [ ] Notion post images expire after 1 hour (signed links). Seen 2026-11-05: one load of
       `/writing/pspo` served an expired link and the image was broken until the page refreshed.

@@ -328,6 +328,24 @@
   align-items: center;
   gap: 10px;
 }
+/* Narrow phones: tighter spacing so the bar stays inside the page margins in every
+   language (Russian "Подписаться" is the longest). */
+@media (max-width: 359px) {
+  .util-bar {
+    gap: 8px;
+  }
+  .util-right {
+    gap: 4px;
+  }
+  .util-bar .railsub {
+    gap: 4px;
+    padding: 0 8px;
+  }
+  .util-bar .lang-btn {
+    gap: 4px;
+    padding: 0 6px;
+  }
+}
 /* Rail foot row 1: language picker + a narrowed Subscribe sharing one line. */
 .rail-foot-top {
   display: flex;

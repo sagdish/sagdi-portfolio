@@ -18,7 +18,9 @@ export function UtilBar() {
         <BrandMark />
       </Link>
       <div className="util-right">
-        <LanguageSwitcher />
+        {/* opens rightward: the button sits left in this bar, so a menu aligned to
+            its right edge would run off the left side of a phone screen */}
+        <LanguageSwitcher alignLeft />
         <ThemeControl />
         <SubscribeButton />
       </div>
